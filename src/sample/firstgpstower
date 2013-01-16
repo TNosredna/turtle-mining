@@ -1,0 +1,270 @@
+curSlot = 1
+h = 0
+tarHeight = 0
+-- track Coords for x,y,z,f
+pos = { 0, 0, 0, 0}
+
+function printUsage()
+  term.clear()
+  term.setCursorPos(1,1)  
+  print [[Do u have what I need?
+
+X is your material     +------------+
+F is the Floppy        | X  X  X  X |
+D is Disk Drive        | .  .  .  . |
+C is Consoles x4       | .  .  .  . |
+M is Modems x4         | F  D  C  M |
+                       +------------+
+                       
+y/n?]]
+
+    local ansA = io.read()
+    if ansA == "y" then
+        print("Proceeding!")
+    elseif ans == "n" then
+        print("Rebooting")
+        os.sleep(2)
+        os.reboot()
+    else
+        os.reboot()
+    end
+    
+    term.clear()
+    term.setCursorPos(1,1)
+    print("I need my current X Position.")
+    pos[1] = io.read()
+    print("Need my current Y position now.")
+    pos[2] = io.read()
+    tarHeight = 250 - pos[2]
+    print("and last is the Z position.")
+    pos[3] = io.read()
+    print("Where am I facing?")
+    print("valid answers are: north east south west")
+    local ansB = io.read()
+    
+    if ansB == "north" then
+        pos[4] = 0
+    elseif ansB == "east" then
+        pos[4] = 1
+    elseif ansB == "south" then
+        pos[4] = 2
+    elseif ansB == "west" then
+        pos[4] = 3
+    else
+        print("Not a valid answer!")
+        os.sleep(3)
+        os.reboot()
+    end
+    
+    local estConsumption = (tarHeight * 2) + 70
+    if turtle.getFuelLevel() < estConsumption then
+        amount = estConsumption - turtle.getFuelLevel()
+        print("Not enough fuel for the job!")
+        print("i need at least "..amount.." more!")
+        os.sleep(8)
+        os.reboot()
+    end
+    print("Enough fuel for job.")
+    print("Building at: "..pos[1].." "..pos[2].." "..pos[3])
+end
+
+function tryForward()
+    Moving = false
+    while not(Moving) do
+        Moving = turtle.forward()
+    end
+end
+
+function tryBack()
+    Moving = false
+    while not(Moving) do
+        Moving = turtle.back()
+    end
+end
+
+function right(times)
+    if times == nil then
+        times = 1
+    end
+
+    turtle.turnRight()
+    for i=1,times do
+        tryForward()
+        
+        if pos[4] == 0 then
+            pos[1] = pos[1] + 1
+        elseif pos[4] == 1 then
+            pos[3] = pos[3] + 1
+        elseif pos[4] == 2 then
+            pos[1] = pos[1] - 1
+        else
+            pos[3] = pos[3] - 1
+        end
+    end
+    turtle.turnLeft()
+end
+
+function left(times)
+    if times == nil then
+        times = 1
+    end
+    
+    turtle.turnLeft()
+    for i=1,times do
+        tryForward()
+        
+        if pos[4] == 0 then
+            pos[1] = pos[1] - 1
+        elseif pos[4] == 1 then
+            pos[3] = pos[3] - 1
+        elseif pos[4] == 2 then
+            pos[1] = pos[1] + 1
+        else
+            pos[3] = pos[3] + 1
+        end
+    end
+    turtle.turnRight()
+end
+
+function up()
+    turtle.up()
+    h = h + 1
+    pos[2] = pos[2] + 1
+end
+
+function down()
+    turtle.down()
+    h = h - 1
+    pos[2] = pos[2] - 1
+end
+
+function forward()
+    tryForward()
+    
+    if pos[4] == 0 then
+        pos[3] = pos[3] - 1
+    elseif pos[4] == 1 then
+        pos[1] = pos[1] + 1
+    elseif pos[4] == 2 then
+        pos[3] = pos[3] + 1
+    else
+        pos[1] = pos[1] - 1
+    end
+end
+
+function back()
+    tryBack()
+    
+    if pos[4] == 0 then
+        pos[3] = pos[3] + 1
+    elseif pos[4] == 1 then
+        pos[1] = pos[1] - 1
+    elseif pos[4] == 2 then
+        pos[3] = pos[3] - 1
+    else
+        pos[1] = pos[1] + 1
+    end
+end
+
+function checkInv()
+    if turtle.getItemCount(curSlot) < 1 then
+        curSlot = curSlot + 1
+        turtle.select(curSlot)
+    end
+end
+
+function fileWrite()
+    file = fs.open("disk/startup2","w")
+    file.writeLine("shell.run(\"".."gps\", \"host\", \""..pos[1].."\", \""..pos[2].."\", \""..pos[3].."\")")
+    file.close()
+end
+
+function activateGPS()
+    comp = peripheral.wrap("front")
+    up()
+    turtle.select(14)
+    turtle.place()
+    turtle.select(13)
+    turtle.drop()
+    fileWrite()
+    down()
+    comp.turnOn()
+    up()
+    turtle.suck()
+    turtle.select(14)
+    turtle.dig()
+    down()
+    os.sleep(2)
+    comp.reboot()
+    turtle.select(curSlot)
+end
+
+function placeGPS()
+    turtle.select(15)
+    turtle.place()
+    down()
+    down()
+    forward()
+    turtle.select(16)
+    turtle.placeUp()
+    back()
+    up()
+    up()
+    turtle.select(curSlot)
+    activateGPS()
+end
+
+function buildTower()
+    printUsage()
+    turtle.select(curSlot)
+    for i=1,tarHeight do
+        checkInv()
+        turtle.place()
+        up()
+    end
+    
+    for i=1,3 do
+        checkInv()
+        turtle.place()
+        right()
+    end
+    
+    placeGPS()
+    left(4)
+    for i=1,2 do
+        checkInv()
+        turtle.place()
+        left()
+    end
+    
+    placeGPS()
+    right(3)
+    
+    for i=1,2 do
+        up()
+        checkInv()
+        turtle.place()
+    end
+    up()
+
+    for i=1,3 do
+        forward()
+    end
+    placeGPS()
+
+    for i=1,5 do
+        back()
+        checkInv()
+        turtle.place()
+    end
+    
+    back()
+    placeGPS()
+
+    for i=1,h do
+        down()
+    end
+end
+
+buildTower()
+print("Finished!")

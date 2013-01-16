@@ -1,0 +1,288 @@
+function digDown()
+    if turtle.detectDown() == true then
+        turtle.digDown()
+    end
+end
+
+function digforward()
+    if turtle.detect() == true then
+        turtle.dig()
+    end
+end
+
+function digUp()
+    if turtle.detectUp() == true then
+        turtle.digUp()
+    end
+end
+
+function forward()
+    digDown()
+    digforward()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+end
+
+function line()
+    for x=1,8 do
+        forward()
+    end
+end
+
+function startingpos()
+    turtle.up()
+    sleep(0.5)
+    turtle.forward()
+end
+
+function layer()
+    line()
+    turtle.turnRight()
+    line()
+    turtle.turnRight()
+    line()
+    turtle.turnRight()
+    line()
+    turtle.turnRight()
+end
+
+function walls()
+    turtle.select(1)
+    layer()
+    digUp()
+    turtle.up()
+    layer()
+    digUp()
+    turtle.up()
+    turtle.select(2)
+    layer()
+    digUp()
+    turtle.up()
+    layer()
+    digUp()
+    turtle.up()
+    turtle.select(3)
+    layer()
+end
+
+function floorpos()
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnRight()
+    sleep(0.5)
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnLeft()
+    sleep(0.5)
+    for x=1,5 do
+        turtle.down()
+        sleep(0.5)
+    end
+end
+
+function floorline()
+    for x=1,6 do
+        digDown()
+        turtle.placeDown()
+        turtle.forward()
+        sleep(0.5)
+    end
+end
+
+function right()
+    turtle.turnRight()
+    digDown()
+    turtle.placeDown()
+    sleep(0.5)
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnRight()
+    sleep(0.5)
+end
+
+function left()
+    turtle.turnLeft()
+    digDown()
+    turtle.placeDown()
+    sleep(0.5)
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnLeft()
+    sleep(0.5)
+end
+
+function floor()
+    turtle.select(4)
+    floorline()
+    right()
+    floorline()
+    left()
+    floorline()
+    right()
+    floorline()
+    left()
+    floorline()
+    right()
+    floorline()
+    left()
+    floorline()
+end
+
+function roofpos()
+    digDown()
+    turtle.placeDown()
+    turtle.turnRight()
+    sleep(0.5)
+    turtle.turnRight()
+    sleep(0.5)
+    for x=1,5 do
+        turtle.up()
+        sleep(0.5)
+    end
+end
+
+function rooflineglass()
+    turtle.select(5)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+    turtle.select(6)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    turtle.select(6)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+    turtle.select(5)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    turtle.select(6)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+    turtle.select(6)
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+    turtle.select(5)
+    digDown()
+    turtle.placeDown()
+end
+
+function roofline()
+    for x=1,6 do
+        turtle.select(5)
+        digDown()
+        turtle.placeDown()
+        turtle.forward()
+        sleep(0.5)
+    end
+end
+
+function roof()
+    roofline()
+    right()
+    rooflineglass()
+    left()
+    rooflineglass()
+    right()
+    roofline()
+    left()
+    rooflineglass()
+    right()
+    rooflineglass()
+    left()
+    roofline()
+end
+
+function checkwalls()
+    if turtle.getItemCount(1) < 64 then
+        print("Not Enough Blocks In Slot 1")
+        error()
+    end
+
+    if turtle.getItemCount(2) < 64 then
+        print("Not Enough Blocks In Slot 2")
+        error()
+    end
+
+    if turtle.getItemCount(3) < 32 then
+        print("Not Enough Blocks In Slot 3")
+        error()
+    end
+end
+
+function checkfloor()
+    if turtle.getItemCount(4) < 49 then
+        print("Not Enought Blocks In SLot 4")
+        shell.exit()
+    end
+end
+
+function checkroof()
+    if turtle.getItemCount(5) < 33 then
+        print("Not Enough Blocks In Slot 5")
+        error()
+    end
+end
+
+function checkskylights()
+    if turtle.getItemCount(6) < 16 then
+        print("Not Enought Blocks In Slot 6")
+        error()
+    end
+end
+
+function checkblockcount()
+    checkwalls()
+    checkfloor()
+    checkroof()
+    checkskylights()
+end
+
+function gohome()
+    digDown()
+    turtle.placeDown()
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnRight()
+    sleep(0.5)
+    turtle.forward()
+    sleep(0.5)
+    turtle.turnLeft()
+    sleep(0.5)
+    turtle.forward()
+    sleep(0.5)
+    for x=1,5 do
+        turtle.down()
+    end
+    print("9x9 Complete!")
+end
+
+print("Walls = slots 1,2,3 (2.5 stacks)")
+print("Floor = slot 4 (49 blocks)")
+print("Roof = slot 5 (33 blocks)")
+print("Skylights = 6 (16 blocks)")
+--print("Press g to start")
+--while true do
+--	local event, param1 = os.pullEvent ("char") -- limit os.pullEvent to the char event
+--	if param1 == "g" then
+--		break
+--	end
+--end
+checkblockcount()
+
+startingpos()
+walls()
+floorpos()
+floor()
+roofpos()
+roof()
+gohome()

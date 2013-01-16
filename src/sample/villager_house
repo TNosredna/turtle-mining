@@ -1,0 +1,249 @@
+--[[
+A simple NPC Village expanding program. It requires a crafty turtle with the following in its inventory:
+Slot 1: a full stack (64) of building materials (cobblestone, etc)
+Slot 2: a half stack (32) of the same building materials as Slot 1
+*Note* not all of the materials will be used, but full and half stacks are easier to work with in my opinion. 
+My coding skills are relatively weak after several years away from it, and having a full stack in Slot 2 will 
+cause problems, so please stick to a half stack. All other inventory slots may have excess.
+Slot 4: 9 torches
+Slots 5, 6, 9, 10, 13, and 14: 14 wood planks (used to craft the doors)
+Slot 16: adequate coal or charcoal (3-5 is sufficient)
+The house built will be 11x3x5 with 14 doors with adequate interior and exterior lighting to prevent monster 
+spawns. This program currently cannot account for obstructions, so ensure the area being used for construction 
+is clear out to 15x5x9 to include tall grass and flowers, which prevent a turtle from moving. The turtle should be 
+placed on the ground with a chest directly behind it (similar to the excavate setup). The lower-left block of the 
+]]--
+
+--house's short face will be the block directly in front of the turtle.
+local step = 1 --used in buildFrame() to track construction stages
+
+--basic refueling function
+function fuel() 
+ if turtle.getFuelLevel() < 10 then
+  turtle.select(16)
+  turtle.refuel(1)
+ end
+end
+
+--assorted functions to shorten/tidy my actual code
+function left(reps)
+ for x=1,reps do
+  turtle.turnLeft()
+ end
+end
+
+function right(reps)
+ for x=1,reps do
+  turtle.turnRight()
+ end
+end
+
+function back(reps)
+ for x=1,reps do
+  fuel() 
+  turtle.back()
+ end
+end
+
+function forward(reps)
+ for x=1,reps do
+  fuel()
+  turtle.forward()
+ end
+end
+
+function up(reps)
+ for x=1,reps do
+  fuel()
+  turtle.up()
+ end
+end
+
+function down(reps)
+ for x=1,reps do
+  fuel()
+  turtle.down()
+ end
+end
+
+function pDown()
+ turtle.placeDown()
+end
+
+function pUp()
+ turtle.placeUp()
+end
+
+function place()
+ turtle.place()
+end
+
+function torch()
+ turtle.select(4)
+ turtle.place()
+end
+
+function wTorch()
+ right(1)
+ turtle.select(4)
+ place()
+ left(1)
+end
+
+function dTorch()
+ turtle.select(4)
+ pDown()
+end
+
+function corner()
+ forward(4)
+ right(1)
+ forward(4)
+end
+
+--used to build the walls/door frames of the house
+function buildFrame()
+ turtle.select(1)
+ if step == 1 then
+  pUp()
+  pDown()
+  back(1)
+  step = 2
+ else
+  pUp()
+  place()
+  back(1)   
+  step = 1
+ end
+end
+
+--used to craft and place the doors
+function buildDoor()
+ turtle.select(1)
+ turtle.craft()
+ place()
+ right(1)
+ forward(2)
+ left(1)
+end
+
+--used in conjunction with buildDoor() to navigate the corners of the house
+function orientDoor()
+ forward(2)
+ left(1)
+end
+
+--Turtle moves away from the chest and orients itself for the construction
+forward(1)
+up(1)
+right(2)
+
+--Turtle builds the house frame
+for x=1,2 do 
+ for y=1,10 do
+  buildFrame()
+ end
+ right(1)
+ for z=1,4 do
+  buildFrame()
+ end
+ right(1)
+end
+
+--Turtle places interior torch and prepares its inventory for crafting by depositing all additional building materials
+back(5)
+left(1)
+down(1)
+torch()
+left(1)
+back(7)
+left(1)
+turtle.select(1)
+turtle.drop()
+turtle.select(2)
+turtle.drop()
+turtle.select(4)
+turtle.drop()
+turtle.select(16)
+
+--Turtle ensures it has enough fuel for the door placement since it must have an empty inventory for turtle.craft() to return "true" and moves into position
+if turtle.getFuelLevel() < 40 then
+ turtle.refuel(1)
+end
+turtle.drop()
+right(1)
+forward(1)
+
+--Turtle crafts and places the doors
+for x=1,2 do
+ for y=1,2 do
+  buildDoor()
+ end
+ orientDoor()
+ for z=1,5 do
+  buildDoor()
+ end
+ orientDoor()
+end
+
+--Turtle retrieves its supplies to finish house construction
+back(1)
+left(1)
+turtle.select(1)
+turtle.suck()
+turtle.select(4)
+turtle.suck()
+turtle.select(16)
+turtle.suck()
+right(1)
+forward(1)
+up(3)
+forward(2)
+
+--Turtle builds the roof
+for x=1,3 do
+ for y=1,8 do
+  turtle.select(1)
+  pDown()
+  forward(1)
+ end
+ turtle.select(1)
+ pDown()
+ if step == 1 then
+  right(1)
+  forward(1)
+  right(1)
+  step = 2
+ else
+  left(1)
+  forward(1)
+  left(1)
+  step = 1
+ end
+end
+
+--Turtle places all exterior torches
+forward(1)
+right(1)
+back(2)
+down(1)
+torch()
+left(1)
+forward(6)
+wTorch()
+corner()
+wTorch()
+corner()
+wTorch()
+forward(6)
+wTorch()
+corner()
+right(1)
+torch()
+up(2)
+forward(4)
+dTorch()
+forward(6)
+dTorch()
+forward(4)
+down(4)

@@ -1,0 +1,25 @@
+term.clear();
+
+print("Torches -> Place 64 stack in slot 13");
+print("Filler Material -> Place 64 stack in slot 14");
+print("Ladders -> Place 64 stack in slot 15");
+print("Fuel Material -> Place in slot 16");
+print"Figure out how many 'z' blocks you want to dig downward."
+print("Digging initial shaft...");
+shell.run("digvertshaft");
+
+print("Wall Material -> Place 64 stack in slot 1");
+print("Wall Material -> Place 64 stack in slot 2");
+print("Wall Material -> Place 32 stack in slot 3");
+print("Floor Material -> Place 49 stack in slot 4");
+print("Roof Material -> Place 33 stack in slot 5");
+print("Skylight Material -> Place 16 stack in slot 6");
+print("Digging initial room...");
+shell.run("9x9");
+
+print("Torches -> Place chest containing torches on right of starting position");
+print("Fuel Material -> Place chest below starting position");
+print("Ignore Material -> Place chest on left of starting position");
+print("Mined Material -> Place chest behind starting position");
+print("Starting mining...");
+shell.run("digAndExcavate","-oneChest","-torches");

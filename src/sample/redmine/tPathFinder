@@ -1,0 +1,108 @@
+-- simply stores the way moved in arrays
+
+wayBack = {}
+wayTo = {}
+
+wayBack["scan"] = {}
+wayTo["scan"] = {}
+
+wayBack["main"] = {}
+wayTo["main"] = {}
+
+wayBack["side"] = {}
+wayTo["side"] = {}
+
+-- inverts given "waypoint" (back down forward etc )
+
+function invert(pArg)
+ if pArg == "up" then return "down"
+    elseif pArg == "down" then return "up"
+    elseif pArg == "turnLeft" then return "turnRight"
+    elseif pArg == "turnRight" then return "turnLeft"
+    elseif pArg == "forward" then return "back"
+    elseif pArg == "back" then return "forward"
+ end
+end
+
+function delete(pName)
+ local tempTo = wayTo[pName]
+ local tempBack = wayBack[pName]
+ 
+ table.remove(tempBack,1)
+ table.remove(tempTo,#tempTo)
+ 
+ wayTo[pName] = tempTo
+ wayBack[pName] = tempBack
+end
+
+-- adds an "waypoint"
+function add(pArg, pName)
+  if wayBack[pName] == nil then
+     wayBack[pName] = {}     
+  end
+  
+  if wayTo[pName] == nil then
+     wayTo[pName] = {}     
+  end
+  
+  local tempTo = wayTo[pName]
+  local tempBack = wayBack[pName]
+    
+  table.insert(tempBack,1,invert(pArg))    
+  table.insert(tempTo,pArg)
+  
+  wayTo[pName] = tempTo
+  wayBack[pName] = tempBack
+end
+
+-- inverts a table , first gets last and last gets first
+function invertTable(pTable)
+ local tempTable = {}
+ for i = #pTable, 1, -1 do
+  table.insert(tempTable,invert(pTable[i]))
+ end
+ return tempTable
+end
+
+-- step by step calling of saved way
+function goWayBack()
+ for k,v in pairs(wayBack["scan"]) do
+         local bSuccess = turtle[v]()
+ end
+ 
+ for k,v in pairs(wayBack["side"]) do
+         local bSuccess = turtle[v]()
+ end
+ 
+ for k,v in pairs(wayBack["main"]) do
+         local bSuccess = turtle[v]()
+ end
+end
+
+
+-- same as way back but "to" the recalling position
+function goWayTo()
+  local tempArray = {}
+  
+  tempArray = invertTable(wayBack["main"]) 
+  for k,v in pairs(tempArray) do
+         local bSuccess = turtle[v]()
+  end
+ 
+  tempArray = invertTable(wayBack["side"]) 
+  for k,v in pairs(tempArray) do
+         local bSuccess = turtle[v]()
+  end
+
+ tempArray = invertTable(wayBack["scan"]) 
+ for k,v in pairs(tempArray) do
+         local bSuccess = turtle[v]()
+ end
+end
+
+-- deletes all elements in array
+function flash(pName)
+  for i = 1,#wayBack[pName] do
+      delete(pName)
+  end
+end

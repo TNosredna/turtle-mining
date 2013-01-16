@@ -1,0 +1,42 @@
+-- some feat. i implement later, array saving
+function load(pfad)
+ local text=""
+ local char=""
+ local n=1
+ local temp={}
+
+ file = io.open (pfad,"r") 
+ if file==nil then 
+	return(nil) 
+ end
+ content = file:read("*a")
+ file:close() 
+
+ for i=1,string.len(content) do
+  char=(string.char(string.byte(content,i) ))
+  
+  if char~="|" then 
+    text=text..char
+  else
+   temp[n]=tonumber(text)
+   n=n+1
+   text=""
+  end
+ 
+ end
+
+ return(temp)
+end 
+
+function save(pfad,Array)
+ file = io.open (pfad,"w") 
+
+ for i=1, table.getn(Array) do
+  file:write(tostring(Array[i]).."|") 
+ end
+
+ file:close() 
+end
+
+  
+  

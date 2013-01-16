@@ -1,0 +1,9 @@
+rednet.open("top")
+command = ""
+
+while command ~= "exit" do
+ command = read()
+ rednet.broadcast(command)
+end
+
+rednet.close("top")

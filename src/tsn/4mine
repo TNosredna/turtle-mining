@@ -1,0 +1,8 @@
+term.clear();
+
+-- print("Torches -> right chest");
+-- print("Fuel Material -> bottom chest");
+-- print("Ignore Material -> left chest");
+-- print("Mined Material -> back chest");
+-- print("Starting mining...");
+shell.run("digAndExcavate","-oneChest","-torches","-numIgnore","4");

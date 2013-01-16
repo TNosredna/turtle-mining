@@ -1,0 +1,16 @@
+function remove(file)
+	shell.run("rm",file)
+end
+function get(paste,file)
+	remove(file)
+	shell.run("pastebin","get",paste,file)
+end
+
+get("mcEpZDQe","mineinstall")
+get("1dzpNV9y","digroom")
+get("EmRNH0Gu","direroom")
+get("ZAkvisSM","mymine")
+get("SUp30FTj","1gps")
+get("nB1KBwbw","gpstower")
+get("jA37n25Z","vhouse")
+get("dPKFCUXS","goto")

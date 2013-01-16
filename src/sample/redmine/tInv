@@ -1,0 +1,49 @@
+-- checks if at least one itemspace is free
+-- from pStart to pEnd present
+-- else from 5 to 9 to keep the compare blocks
+
+function hasSpace(pStart,pEnd)
+ if pStart == nil then pStart = 5 end -- standard value
+ if pEnd == nil then pEnd = 9 end -- standard value
+ local pReturn = false
+ for itemIndex = pStart, pEnd do
+     if turtle.getItemCount(itemIndex) == 0 then 
+            pReturn = true 
+     end 
+ end
+return pReturn
+end
+
+-- Drops everything but first (cobble)
+-- and 2 - 4 compare Blocks if not set with pEnd p Start
+
+function dropJunk(pStart, pEnd)
+ if pStart == nil then pStart = 2 end -- standard value
+ if pEnd == nil then pEnd = 4 end -- standard value
+ for itemIndex = pStart, pEnd do
+  turtle.select(itemIndex)
+  turtle.drop(turtle.getItemCount(itemIndex)-1)
+ end
+ for itemIndex = pEnd+1, 9 do
+  turtle.select(itemIndex)
+  turtle.drop()
+ end
+ turtle.select(1)
+end
+
+
+-- not used yet
+function fillWithCobble(pIndex)
+ if pIndex == nil then pIndex = 1 end -- standard value
+ if turtle.compare(pIndex) == false then 
+  turtle.select(pIndex)
+  turtle.drop()
+ end
+ if turtle.compare(pIndex) or turtle.getItemCount(pIndex) == 0 then
+  while turtle.getItemCount(pIndex) < 62 do
+   turtle.dig()
+   turtle.sleep(0.5)
+  end
+ else return false
+ end 
+end
