@@ -1,8 +1,12 @@
---
--- Created by IntelliJ IDEA.
--- User: randerson
--- Date: 1/16/13
--- Time: 10:20 AM
--- To change this template use File | Settings | File Templates.
---
+shell.run("prepareTurtle");
 
+print ("How many blocks down should the turtle station floor be located?");
+z = io.read();
+z = tonumber(z);
+shell.run("digTurtleStationShaft", z);
+
+print("Where am I facing? ('north' 'east' 'south' 'west')");
+direction = io.read();
+shell.run("digTurtleStation", direction);
+
+--shell.run("prepareTurtleStation");
