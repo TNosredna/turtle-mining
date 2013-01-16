@@ -1,0 +1,157 @@
+smallChestPos = 7;
+largeChestPos = 8;
+redstoneEnginePos = 9;
+woodenPipePos = 10;
+stonePipePos = 11;
+redstoneTorchPos = 12;
+
+curSlot = 1
+h = 0
+
+pos = { 0, 0, 0, 0}
+
+local args={... };
+local ansB = args[1];
+
+function tryForward()
+    Moving = false
+    while not(Moving) do
+        Moving = turtle.forward()
+    end
+end
+
+function tryBack()
+    Moving = false
+    while not(Moving) do
+        Moving = turtle.back()
+    end
+end
+
+function right(times)
+    if times == nil then
+        times = 1
+    end
+
+    turtle.turnRight()
+    for i=1,times do
+        tryForward()
+
+        if pos[4] == 0 then
+            pos[1] = pos[1] + 1
+        elseif pos[4] == 1 then
+            pos[3] = pos[3] + 1
+        elseif pos[4] == 2 then
+            pos[1] = pos[1] - 1
+        else
+            pos[3] = pos[3] - 1
+        end
+    end
+    turtle.turnLeft()
+end
+
+function left(times)
+    if times == nil then
+        times = 1
+    end
+
+    turtle.turnLeft()
+    for i=1,times do
+        tryForward()
+
+        if pos[4] == 0 then
+            pos[1] = pos[1] - 1
+        elseif pos[4] == 1 then
+            pos[3] = pos[3] - 1
+        elseif pos[4] == 2 then
+            pos[1] = pos[1] + 1
+        else
+            pos[3] = pos[3] + 1
+        end
+    end
+    turtle.turnRight()
+end
+
+function up()
+    turtle.up()
+    h = h + 1
+    pos[2] = pos[2] + 1
+end
+
+function down()
+    turtle.down()
+    h = h - 1
+    pos[2] = pos[2] - 1
+end
+
+function forward()
+    tryForward()
+
+    if pos[4] == 0 then
+        pos[3] = pos[3] - 1
+    elseif pos[4] == 1 then
+        pos[1] = pos[1] + 1
+    elseif pos[4] == 2 then
+        pos[3] = pos[3] + 1
+    else
+        pos[1] = pos[1] - 1
+    end
+end
+
+function back()
+    tryBack()
+
+    if pos[4] == 0 then
+        pos[3] = pos[3] + 1
+    elseif pos[4] == 1 then
+        pos[1] = pos[1] - 1
+    elseif pos[4] == 2 then
+        pos[3] = pos[3] - 1
+    else
+        pos[1] = pos[1] + 1
+    end
+end
+
+function checkInv()
+    if turtle.getItemCount(curSlot) < 1 then
+        curSlot = curSlot + 1
+        turtle.select(curSlot)
+    end
+end
+
+function buildStation()
+    forward(4);
+    up();
+    turtle.dig();
+    select ()
+end
+
+function init()
+    if ansB == "north" then
+        pos[4] = 0
+    elseif ansB == "east" then
+        pos[4] = 1
+    elseif ansB == "south" then
+        pos[4] = 2
+    elseif ansB == "west" then
+        pos[4] = 3
+    else
+        print("Not a valid answer!")
+        os.sleep(3)
+        os.reboot()
+    end
+
+    if pos[4] == 0 then
+        pos[3] = pos[3] - 1
+    elseif pos[4] == 1 then
+        pos[1] = pos[1] + 1
+    elseif pos[4] == 2 then
+        pos[3] = pos[3] + 1
+    else
+        pos[1] = pos[1] - 1
+    end
+
+    pos[2] = pos[2] - 1
+end
+
+init();
+buildStation();
