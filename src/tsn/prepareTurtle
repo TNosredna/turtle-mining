@@ -1,0 +1,77 @@
+function remove(file)
+    shell.run("rm",file)
+end
+function get(paste,file)
+    remove(file)
+    shell.run("pastebin","get",paste,file)
+end
+
+function downloadTsnScrtips()
+    get("XXX", "prepareTurtle");
+    get("XXX", "digTurtleStationShaft");
+    get("XXX", "prepareTurtleStationShaft");
+    get("XXX", "digTurtleStation");
+    get("XXX", "prepareTurtleStation");
+    get("XXX", "beginMining");
+end
+
+function downloadScripts()
+    get("mcEpZDQe", "mlgUpdater");
+    downloadTsnScrtips();
+end
+
+downloadScripts();
+shell.run("mlgUpdater");
+
+term.clear();
+term.setCursorPos(1,1);
+print [[Configure the turtle as follows:
+
+For the Station Room
+ +----------------+
+ | 01  02  03  04 |
+ | 05  06  xx  xx |
+ | xx  xx  xx  xx |
+ | xx  xx  xx  xx |
+ +----------------+
+01 = Wall Filler (64 stack)
+02 = Wall Filler (64 stack)
+03 = Wall Filler (32 stack)
+04 = Floor Filler (49 stack)
+05 = Roof Filler (33 stack)
+06 = Skylight Filler (16 stack)
+
+For the Station
+ +----------------+
+ | xx  xx  xx  xx |
+ | xx  xx  07  08 |
+ | 09  10  11  12 |
+ | xx  xx  xx  xx |
+ +----------------+
+07 = Small Chest (4-16 stack)
+08 = Large Chest (1 stack)
+09 = Redstone Engine (1-4 stack)
+10 = Wooden Pipe (1-4 stack)
+11 = Stone Pipe (64 stack)
+12 = Redstone Torch (2-8 stack)
+
+For the Station Shaft
+ +----------------+
+ | xx  xx  xx  xx |
+ | xx  xx  xx  xx |
+ | xx  xx  xx  xx |
+ | 13  14  15  16 |
+ +----------------+
+13 = Torches (64 stack)
+14 = Wall Filler (64 stack)
+15 = Ladders (64 stack)
+16 = Fuel
+
+Take with you to fill the chest once everything is ready ->
+* Stone (1)
+* Cobblestone (1)
+* Dirt (1)
+* Gravel (1)
+* Torches
+* Fuel
+]]
