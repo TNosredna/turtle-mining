@@ -1,27 +1,30 @@
-function remove(file)
-    shell.run("rm",file)
+local function generateLatestFile(filename)
+    local file = io.open(filename, "w+"); -- opens file, all previous data is erased
+    local fileContents = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" + filename);
+    file:write(fileContents);
+    file:flush();
 end
-function get(paste,file)
+
+local function remove(file)
+end
+local function get(paste,file)
     remove(file)
-    shell.run("pastebin","get",paste,file)
 end
 
-function downloadTsnScrtips()
-    get("XXX", "prepareTurtle");
-    get("XXX", "digTurtleStationShaft");
-    get("XXX", "prepareTurtleStationShaft");
-    get("XXX", "digTurtleStation");
-    get("XXX", "prepareTurtleStation");
-    get("XXX", "beginMining");
-end
-
-function downloadScripts()
-    get("mcEpZDQe", "mlgUpdater");
-    downloadTsnScrtips();
+local function downloadScripts()
+    generateLatestFile("prepareTurtle");
+    generateLatestFile("digTurtleStationShaft");
+    generateLatestFile("prepareTurtleStationShaft");
+    generateLatestFile("digTurtleStation");
+    generateLatestFile("prepareTurtleStation");
+    generateLatestFile("beginMining");
+    -- Use MLG's Circular Mining Programs for doing the actual mining.  His scripts rock!!
+    shell.run("rm",file) ;
+    shell.run("pastebin","get","mcEpZDQe","mlgUpdater");
+    shell.run("mlgUpdater");
 end
 
 downloadScripts();
-shell.run("mlgUpdater");
 
 term.clear();
 term.setCursorPos(1,1);
