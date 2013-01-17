@@ -101,30 +101,39 @@ function placeTorch()
             return false
         end
     end
-    glow = glow - glow;
+    glow = 0;
 end
 
 local args={... };
 z = args[1];
 
+turtle.turnRight();
+turtle.turnRight();
 turtle.select(largeChestPos);
-turtle.turnRight();
-turtle.turnRight();
 turtle.place();
+turtle.turnLeft();
+turtle.turnLeft();
+
 for i = 1, z do
     turtle.digDown();
     turtle.down();
     glow = glow + 1
     turtle.dig();
-    placeStonePipe();
+    if not placeLadder() then
+        --break
+    end
+
     turtle.turnLeft();
     if glow >= 6 then
         turtle.dig();
         placeTorch();
     end
+
     turtle.turnLeft();
-    if not placeLadder() then
-        --break
-    end
+    turtle.dig();
+    placeStonePipe();
+
+    turtle.turnRight();
+    turtle.turnRight();
     refuel()
 end

@@ -91,7 +91,7 @@
       <file leaf-file-name="digTurtleStationShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStationShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="0" selection-start="1827" selection-end="1827" vertical-scroll-proportion="1.3304094">
+            <state line="97" column="81" selection-start="1995" selection-end="1995" vertical-scroll-proportion="0.34210527">
               <folding />
             </state>
           </provider>
@@ -117,8 +117,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
-    <option name="y" value="22" />
+    <option name="x" value="2244" />
+    <option name="y" value="63" />
     <option name="width" value="1204" />
     <option name="height" value="1174" />
   </component>
@@ -473,11 +473,15 @@
       <created>1358393625016</created>
       <updated>1358393625016</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed bugs in torch placement and logic">
+      <created>1358407374025</created>
+      <updated>1358407374025</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="22" width="1204" height="1174" extended-state="6" />
+    <frame x="2244" y="63" width="1204" height="1174" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -543,7 +547,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing script" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs in torch placement and logic" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -559,6 +563,7 @@
     <MESSAGE value="cleaning up old cruft" />
     <MESSAGE value="Improved the update process so it gets the code from GitHub instead of pastebin." />
     <MESSAGE value="Testing script" />
+    <MESSAGE value="Fixed bugs in torch placement and logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -619,7 +624,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStationShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="0" selection-start="1827" selection-end="1827" vertical-scroll-proportion="1.3304094">
+        <state line="97" column="81" selection-start="1995" selection-end="1995" vertical-scroll-proportion="0.34210527">
           <folding />
         </state>
       </provider>
