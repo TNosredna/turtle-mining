@@ -5,11 +5,6 @@ fuelPos = 16;
 stonePipePos = 11;
 largeChestPos = 8;
 
--- LOAD FUNCTIONS FROM THE OTHER FILES
-os.loadAPI("api_sharedFunctions")
-
-glow = 0;
-
 function moveForward()
     repeat
         turtle.dig();
@@ -65,38 +60,6 @@ function selectDirt()
     end
 end
 
-function placeRight()
-    turtle.turnRight();
-    local success = turtle.place();
-    turtle.turnLeft();
-    return success;
-end
-
-function placeBack()
-    turtle.turnRight();
-    turtle.turnRight();
-    local success = turtle.place();
-    turtle.turnLeft();
-    turtle.turnLeft();
-    return success;
-end
-
-function digRight()
-    turtle.turnRight();
-    local success = turtle.dig();
-    turtle.turnLeft();
-    return success;
-end
-
-function digBack()
-    turtle.turnRight();
-    turtle.turnRight();
-    local success = turtle.dig();
-    turtle.turnLeft();
-    turtle.turnLeft();
-    return success;
-end
-
 function placeLadder()
     selectLadder()
     if not turtle.place() then
@@ -113,60 +76,55 @@ end
 
 function placeStonePipe()
     selectStonePipe();
-    if not placeBack() then
-        turtle.turnLeft();
-        turtle.turnLeft();
-        moveForward();
+    if not turtle.place() then
         selectDirt();
+        moveForward();
         turtle.place()
         turtle.back()
-        turtle.turnRight();
-        turtle.turnRight();
         selectStonePipe()
-        if not placeBack() then
+        if not turtle.place() then
             return false
         end
     end
 end
 
+glow = 0;
 function placeTorch()
-    if glow == 6 then
+    turtle.select(torchPos)
+    if not turtle.place() then
+        selectDirt()
+        moveForward()
+        turtle.place()
+        turtle.back()
         turtle.select(torchPos)
-        digRight()
-        if not placeRight() then
-            turtle.turnRight();
-            moveForward()
-            selectDirt()
-            turtle.place()
-            turtle.back()
-            turtle.turnLeft();
-            turtle.select(torchPos)
-            if not placeRight() then
-                return false
-            end
+        if not turtle.place() then
+            return false
         end
-        glow = glow - glow;
     end
+    glow = glow - glow;
 end
 
 local args={... };
 z = args[1];
 
+turtle.select(largeChestPos);
+turtle.turnRight();
+turtle.turnRight();
+turtle.place();
 for i = 1, z do
-    turtle.select(largeChestPos);
-    placeBack();
     turtle.digDown();
     turtle.down();
     glow = glow + 1
     turtle.dig();
-    digBack();
-    digRight();
-    placeTorch()
+    placeStonePipe();
+    turtle.turnLeft();
+    if glow >= 6 then
+        turtle.dig();
+        placeTorch();
+    end
+    turtle.turnLeft();
     if not placeLadder() then
         --break
     end
-    placeStonePipe();
-
-    glow = glow + 1
     refuel()
 end
