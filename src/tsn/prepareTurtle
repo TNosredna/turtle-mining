@@ -1,33 +1,34 @@
 local function generateLatestFile(filename)
-    local file = io.open(filename, "w+"); -- opens file, all previous data is erased
-    local fileContents = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" + filename);
-    file:write(fileContents);
-    file:flush();
-end
-
-local function remove(file)
-end
-local function get(paste,file)
-    remove(file)
+    local content = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. filename);
+    print("Creating file: " .. filename);
+    local file = fs.open(filename, "w"); -- opens file, all previous data is erased
+    local line;
+    repeat
+        line = content.readLine();
+        if (line == nil) then break end
+        file.writeLine(line);
+    until false
+    file.close();
 end
 
 local function downloadScripts()
-    generateLatestFile("prepareTurtle");
+    generateLatestFile("buildTurtleMine");
     generateLatestFile("digTurtleStationShaft");
     generateLatestFile("prepareTurtleStationShaft");
     generateLatestFile("digTurtleStation");
     generateLatestFile("prepareTurtleStation");
     generateLatestFile("beginMining");
     -- Use MLG's Circular Mining Programs for doing the actual mining.  His scripts rock!!
-    shell.run("rm",file) ;
-    shell.run("pastebin","get","mcEpZDQe","mlgUpdater");
+    shell.run("rm", "mlgUpdater") ;
+    shell.run("pastebin", "get", "mcEpZDQe", "mlgUpdater");
     shell.run("mlgUpdater");
 end
 
 downloadScripts();
 
 term.clear();
-term.setCursorPos(1,1);
+term.setCursorPos(1, 1);
+
 print [[Configure the turtle as follows:
 
 For the Station Room
@@ -43,7 +44,12 @@ For the Station Room
 04 = Floor Filler (49 stack)
 05 = Roof Filler (33 stack)
 06 = Skylight Filler (16 stack)
+]]
 
+print("Press any key to continue...");
+direction = io.read();
+
+print [[
 For the Station
  +----------------+
  | xx  xx  xx  xx |
@@ -57,7 +63,12 @@ For the Station
 10 = Wooden Pipe (1-4 stack)
 11 = Stone Pipe (64 stack)
 12 = Redstone Torch (2-8 stack)
+]]
 
+print("Press any key to continue...");
+direction = io.read();
+
+print [[
 For the Station Shaft
  +----------------+
  | xx  xx  xx  xx |
@@ -69,7 +80,12 @@ For the Station Shaft
 14 = Wall Filler (64 stack)
 15 = Ladders (64 stack)
 16 = Fuel
+]]
 
+print("Press any key to continue...");
+direction = io.read();
+
+print [[
 Take with you to fill the chest once everything is ready ->
 * Stone (1)
 * Cobblestone (1)

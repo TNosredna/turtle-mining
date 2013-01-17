@@ -1,10 +1,11 @@
 print ("How many blocks down should the turtle station floor be located?");
 z = io.read();
 z = tonumber(z);
-shell.run("digTurtleStationShaft", z);
 
 print("Where am I facing? ('north' 'east' 'south' 'west')");
 direction = io.read();
+
+shell.run("digTurtleStationShaft", z);
 shell.run("digTurtleStation", direction);
 
 -- shell.run("prepareTurtleStation");
