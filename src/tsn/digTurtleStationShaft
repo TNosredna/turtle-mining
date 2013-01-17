@@ -123,17 +123,17 @@ for i = 1, z do
         --break
     end
 
-    turtle.turnLeft();
+    turtle.turnRight();
     if glow >= 6 then
         turtle.dig();
         placeTorch();
     end
 
-    turtle.turnLeft();
+    turtle.turnRight();
     turtle.dig();
     placeStonePipe();
 
-    turtle.turnRight();
-    turtle.turnRight();
+    turtle.turnLeft();
+    turtle.turnLeft();
     refuel()
 end
