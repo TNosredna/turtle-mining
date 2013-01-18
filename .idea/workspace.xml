@@ -4,7 +4,6 @@
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/beginMining" afterPath="$PROJECT_DIR$/src/tsn/beginMining" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digTurtleStation" afterPath="$PROJECT_DIR$/src/tsn/digTurtleStation" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,10 +70,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="beginMining" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="beginMining" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="84" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
+            <state line="10" column="102" selection-start="671" selection-end="671" vertical-scroll-proportion="0.16483517">
               <folding />
             </state>
           </provider>
@@ -107,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digTurtleStation" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="23" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.36013985">
+            <state line="52" column="23" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -132,16 +131,16 @@
         <option value="$PROJECT_DIR$/src/tsn/buildTurtleMine" />
         <option value="$PROJECT_DIR$/src/tsn/prepareTurtle" />
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStationShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/beginMining" />
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStation" />
+        <option value="$PROJECT_DIR$/src/tsn/beginMining" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1200" />
-    <option name="y" value="-212" />
+    <option name="x" value="-1911" />
+    <option name="y" value="120" />
     <option name="width" value="1200" />
-    <option name="height" value="1600" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -506,11 +505,15 @@
       <created>1358411646471</created>
       <updated>1358411646471</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Fixed bugs in torch placement and logic">
+      <created>1358492821396</created>
+      <updated>1358492821396</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1200" y="-212" width="1200" height="1600" extended-state="6" />
+    <frame x="-1911" y="120" width="1200" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -644,20 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="35" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="84" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="0" selection-start="206" selection-end="318" vertical-scroll-proportion="0.0">
@@ -667,7 +656,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="23" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.36013985">
+        <state line="52" column="23" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="35" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="102" selection-start="671" selection-end="671" vertical-scroll-proportion="0.16483517">
           <folding />
         </state>
       </provider>
