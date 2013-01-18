@@ -4,4 +4,8 @@ term.clear();
 -- Fuel Material -> bottom chest  -- 1=fuel
 -- Ignore Material -> left chest -- 1=1 Stone,2=1 Cobblestone,3=1 Dirt,4=1 Gravel
 -- Mined Material -> back chest
-shell.run("digAndExcavate","-oneChest","-torches","-numIgnore","4");
+
+--shell.run("digAndExcavate","-oneChest","-torches","-numIgnore","4","-itemD","back",-fuelS,"down","-sides","true");
+--shell.run("digTunnels","-oneChest","-torches","-numIgnore","4","-itemD","back",-fuelS,"down","-sides","true");
+--shell.run("digShafts","-oneChest","-torches","-numIgnore","4","-itemD","back",-fuelS,"down","-sides","true");
+shell.run("digOres","-oneChest","-torches","-numIgnore","4","-itemD","back","-fuelS","down","-sides","true");
