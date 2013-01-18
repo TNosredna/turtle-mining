@@ -5,6 +5,14 @@ floorFillerPos = 4;
 roofFillerPos = 5;
 skylightFillerPos = 6;
 
+up = "up";
+down = "down";
+forward = "forward";
+right = "right";
+left = "left";
+back = "back";
+
+-- look in slots 1-12 if selected slot if empty
 function select(slot)
     turtle.select(slot)
     if turtle.getItemCount(slot) == 1 then
@@ -17,27 +25,28 @@ function select(slot)
     end
 end
 
+-- dig if can't move
 function move(direction, steps, attempts)
     steps = steps or 1
     attempts = attempts or 10
     for i = 1, steps do
         local tries = 1
         while (((attempts == 0) or (tries <= attempts))) do
-            if direction == "up" then
+            if direction == up then
                 if turtle.up() then
                     break;
                 else
                     turtle.digUp()
                 end
             end
-            if direction == "down" then
+            if direction == down then
                 if turtle.down() then
                     break;
                 else
                     turtle.digDown()
                 end
             end
-            if direction == "forward" then
+            if direction == forward then
                 if turtle.forward() then
                     break;
                 else
@@ -51,64 +60,252 @@ function move(direction, steps, attempts)
     end
 end
 
-function place(direction, slot)
-    local needToMoveBack = false;
-    select(slot);
-    if direction == "up" then
-        if not turtle.placeUp() then
-            repeat
+-- Move if requested and if it can dig
+function dig(direction, steps, attempts)
+    steps = steps or 0
+    attempts = attempts or 10
+    repeat
+        local tries = 1
+        while (((attempts == 0) or (tries <= attempts))) do
+            if direction == up then
                 turtle.digUp();
-                until turtle.up()
-            needToMoveBack = true;
-            place(direction, slot);
-        end
-        if needToMoveBack then turtle.down() end
-        return turtle.placeUp();
-    end
-    if direction == "down" then
-        if not turtle.placeDown() then
-            repeat
+                if steps > 0 and turtle.up() then break end;
+            end
+
+            if direction == down then
                 turtle.digDown();
-                until turtle.down()
-            needToMoveBack = true;
-            place(direction, slot);
-        end
-        if needToMoveBack then turtle.up() end
-        return turtle.placeDown();
-    end
-    if direction == "forward" then
-        if not turtle.place() then
-            repeat
+                if steps > 0 and turtle.down() then break end;
+            end
+
+            if direction == forward then
                 turtle.dig();
-                until turtle.forward()
-            needToMoveBack = true;
-            place(direction, slot);
+                if steps > 0 and turtle.forward() then break end;
+            end
+
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries + 1, attempts + 1);
+            sleep(0);
         end
-        if needToMoveBack then turtle.back() end
-        return turtle.place();
+        steps = steps - 1;
+    until steps <= 0;
+end
+
+-- move if can't replace.
+function replace(direction, slot, attempts)
+    local moveBackCounter = 0;
+    attempts = attempts or 10
+    select(slot);
+
+    if direction == up then
+        while (((attempts==0) or (tries<=attempts)) and not turtle.placeUp()) do
+            if turtle.detectUp() then
+                 turtle.digUp();
+            else
+                turtle.up();
+                moveBackCounter = moveBackCounter + 1;
+            end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries+1, attempts+1);
+            sleep(0);
+        end
+        for i = 1,moveBackCounter do
+            turtle.down();
+        end
+    end
+    if direction == down then
+        while (((attempts==0) or (tries<=attempts)) and not turtle.placeDown()) do
+            if turtle.detectDown() then
+                turtle.digDown();
+            else
+                turtle.down();
+                moveBackCounter = moveBackCounter + 1;
+            end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries+1, attempts+1);
+            sleep(0);
+        end
+        for i = 1,moveBackCounter do
+            turtle.up();
+        end
+    end
+    if direction == forward then
+        while (((attempts==0) or (tries<=attempts)) and not turtle.place()) do
+            if turtle.detect() then
+                turtle.dig();
+            else
+                turtle.forward();
+                moveBackCounter = moveBackCounter + 1;
+            end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries+1, attempts+1);
+            sleep(0);
+        end
+        for i = 1,moveBackCounter do
+            turtle.back();
+        end
     end
 end
 
--- move from starting position to corner of room where the room anchor will be built
-move("down", 6);
-turtle.turnLeft();
-move("forward", 5);
-turtle.turnRight();
-move("forward", 4);
-move("up", 4);
+function singleLine(moveDirection, height)
+    local middleFillSlot = wallFiller1Pos;
+    height = height or 2; -- 2 = actual height minus 1 for floor and minus 1 for the ceiling
+    if moveDirection == up then
+        placeDirection = down
+        firstFillSlot = floorFillerPos;
+        lastFillSlot = roofFillerPos;
+    end
+    if moveDirection == down then
+        placeDirection = up;
+        firstFillSlot = roofFillerPos;
+        lastFillSlot = floorFillerPos;
+    end
 
-function upwardsAnchor()
+    move(moveDirection, 1);
+    replace(placeDirection, firstFillSlot);
+    for i = 1,height do
+        move(moveDirection, 1);
+        replace(placeDirection, middleFillSlot);
+    end
+    move(moveDirection, 1);
+    replace(placeDirection, lastFillSlot);
 end
 
-function downwardsAnchor()
+function doubleLine(moveDirection, height)
+    local middleFillSlot = wallFiller1Pos;
+    height = height or 2; -- 2 = actual height minus 1 for floor and minus 1 for the ceiling
+    if moveDirection == up then
+        placeDirection = down
+        firstFillSlot = floorFillerPos;
+        lastFillSlot = roofFillerPos;
+    end
+    if moveDirection == down then
+        placeDirection = up;
+        firstFillSlot = roofFillerPos;
+        lastFillSlot = floorFillerPos;
+    end
+
+    replace(forward, firstFillSlot);
+    move(moveDirection, 1);
+    replace(placeDirection, firstFillSlot);
+    for i = 1,height do
+        replace(forward, middleFillSlot);
+        move(moveDirection, 1);
+        replace(placeDirection, middleFillSlot);
+    end
+    replace(forward, lastFillSlot);
+    move(moveDirection, 1);
+    replace(placeDirection, lastFillSlot);
 end
 
-function upwardsDoubleLine()
+function lineTransition(numberOfLinesToJump, moveDirection)
+    turtle.right();
+    turtle.right();
+    move(forward, numberOfLinesToJump);
+    turtle.left();
+    turtle.left();
+    move(moveDirection, 1);
 end
 
-function downwardsDoubleLine()
+function floorAndCeilingBlock(moveDirection, height)
+    height = height or 5;
+    if moveDirection == up then
+        firstPlaceDirection = down;
+        lastPlaceDirection = up;
+        firstFillSlot = floorFillerPos;
+        lastFillSlot = roofFillerPos;
+    end
+    if moveDirection == down then
+        firstPlaceDirection = up;
+        lastPlaceDirection = down;
+        firstFillSlot = roofFillerPos;
+        lastFillSlot = floorFillerPos;
+    end
+
+    replace(firstPlaceDirection, firstFillSlot);
+    dig(moveDirection, height-4);
+    replace(lastPlaceDirection, lastFillSlot);
 end
 
+-- Starting 'up'
+function floorAndCeilingLine(turnDirection, length)
+    length = length or 8;
+    for i = 1,length/2 do
+        floorAndCeilingBlock(down);
+        dig(forward);
+        floorAndCeilingBlock(up);
+        dig(forward);
+    end
+    if turnDirection == right then
+        turtle.turnRight();
+        dig(forward, 1);
+        turtle.turnRight();
+    end
 
+    if turnDirection == left then
+        turtle.turnLeft();
+        dig(forward, 1);
+        turtle.turnLeft();
+    end
+end
 
+function floorAndCeilingRoom(width)
+    width = width or 8;
+    for i = 1,width/2 do
+        floorAndCeilingLine(right);
+        floorAndCeilingLine(left);
+    end
+end
 
+function moveToStartingPosition()
+    -- move from starting position to corner of room where the room anchor will be built
+    move(down, 6);
+    turtle.turnLeft();
+    move(forward, 5);
+    turtle.turnRight();
+    move(forward, 4);
+    move(up, 1);
+end
+
+function buildWalls()
+    singleLine(up);
+    for i = 1,3 do
+        if i%2==0 then
+            direction1 = up;
+            direction2 = down;
+        else
+            direction1 = down;
+            direction2 = up;
+        end
+
+        lineTransition(2, direction1);
+        doubleLine(direction1);
+        lineTransition(2, direction2);
+        doubleLine(direction2);
+        lineTransition(2, direction1);
+        doubleLine(direction1);
+        lineTransition(2, direction2);
+        doubleLine(direction2);
+        lineTransition(2, direction1);
+        doubleLine(direction1);
+        turtle.turnLeft();
+    end
+
+    lineTransition(2, up);
+    doubleLine(up);
+    lineTransition(2, down);
+    doubleLine(down);
+    lineTransition(2, up);
+    doubleLine(up);
+    lineTransition(2, down);
+    doubleLine(down);
+    lineTransition(1, up);
+    singleLine(up);
+end
+
+function buildFloorAndCeiling()
+    floorAndCeilingRoom();
+end
+
+moveToStartingPosition()
+buildWalls();
+buildFloorAndCeiling();
