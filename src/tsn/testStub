@@ -87,7 +87,7 @@ function dig(direction, steps, attempts)
             sleep(0);
         end
         steps = steps - 1;
-    until steps <= 0;
+        until steps <= 0;
 end
 
 -- move if can't replace.
@@ -99,7 +99,7 @@ function replace(direction, slot, attempts)
     if direction == up then
         while (((attempts==0) or (tries<=attempts)) and not turtle.placeUp()) do
             if turtle.detectUp() then
-                 turtle.digUp();
+                turtle.digUp();
             else
                 turtle.up();
                 moveBackCounter = moveBackCounter + 1;
@@ -307,6 +307,4 @@ function buildFloorAndCeiling()
     floorAndCeilingRoom();
 end
 
-moveToStartingPosition()
-buildWalls();
-buildFloorAndCeiling();
+replace(forward,wallFiller1Pos);

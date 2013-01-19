@@ -12,6 +12,7 @@ local function generateLatestFile(filename)
 end
 
 local function downloadScripts()
+    generateLatestFile("testStub");
     generateLatestFile("buildTurtleMine");
     generateLatestFile("digTurtleStationShaft");
     generateLatestFile("prepareTurtleStationShaft");
