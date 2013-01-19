@@ -198,11 +198,11 @@ function doubleLine(moveDirection, height)
 end
 
 function lineTransition(numberOfLinesToJump, moveDirection)
-    turtle.right();
-    turtle.right();
+    turtle.turnRight();
+    turtle.turnRight();
     move(forward, numberOfLinesToJump);
-    turtle.left();
-    turtle.left();
+    turtle.turnLeft();
+    turtle.turnLeft();
     move(moveDirection, 1);
 end
 
