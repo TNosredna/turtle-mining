@@ -257,7 +257,7 @@ function floorAndCeilingRoom(width)
 end
 
 function moveToStartingPosition()
-    -- this would normally be z=13
+    -- this would normally start at z=11 and facing 90 degrees to the right of pipe
     -- move from starting position to corner of room where the room anchor will be built
     move(down, 6);
     turtle.turnLeft();
@@ -307,4 +307,4 @@ function buildFloorAndCeiling()
     floorAndCeilingRoom();
 end
 
-replace(forward,wallFiller1Pos);
+singleLine(down);
