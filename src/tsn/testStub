@@ -94,6 +94,7 @@ end
 function replace(direction, slot, attempts)
     local moveBackCounter = 0;
     attempts = attempts or 10
+    local tries = 1
     select(slot);
 
     if direction == up then
@@ -257,7 +258,7 @@ function floorAndCeilingRoom(width)
 end
 
 function moveToStartingPosition()
-    -- this would normally start at z=11 and facing 90 degrees to the right of pipe
+    -- this would normally be z=13
     -- move from starting position to corner of room where the room anchor will be built
     move(down, 6);
     turtle.turnLeft();
@@ -307,4 +308,4 @@ function buildFloorAndCeiling()
     floorAndCeilingRoom();
 end
 
-singleLine(down);
+singleLine(up);
