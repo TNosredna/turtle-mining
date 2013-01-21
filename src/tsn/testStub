@@ -1,15 +1,11 @@
+-- Must allow for 1 available block above ceiling and 1 available block below floor
+
 upTick = 0;
 downTick = 1;
 leftTick = 0;
 rightTick = 1;
 forwardTick = 0;
 backTick = 1;
-
-function testCode()
-    floorAndCeilingRow(downTick);
-end
-
--- Must allow for 1 available block above ceiling and 1 available block below floor
 
 wallFiller1Pos = 1;
 wallFiller2Pos = 2;
@@ -249,20 +245,20 @@ function floorAndCeilingColumn(currentDirection, numberBlocks)
     replace(endingPlaceDirection, endingFillSlot);
 end
 
-function floorAndCeilingRow(currentDirectionTick, numberColumns)
+function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
     numberColumns = numberColumns or 9;
 
     for i = 1,numberColumns do
-        if (currentDirectionTick%2 == 0) then
+        if (currentUpDownDirectionTick%2 == 0) then
             floorAndCeilingColumn(up);
         else
             floorAndCeilingColumn(down);
-        end;
-        currentDirectionTick = currentDirectionTick + 1;
+        end
+        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
 
         if (i < numberColumns) then
             move(forward, 1)
-        end;
+        end
     end
 end
 
@@ -277,9 +273,9 @@ function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirect
                 transitionOverAnd180Degrees(left);
             else
                 transitionOverAnd180Degrees(right);
-            end;
+            end
             currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
-        end;
+        end
     end
 end
 
@@ -319,7 +315,7 @@ function buildWalls()
         else
             lineTransition(1, direction1);
             singleLine(direction1);
-        end;
+        end
         turtle.turnLeft();
     end
 
@@ -330,7 +326,10 @@ function buildWalls()
     turtle.turnLeft();
 end
 
-testCode();
+function testCode()
+    floorAndCeilingRow(downTick,9);
+end
+
 -- moveToStartingPosition();
 -- buildWalls();
 -- buildFloorAndCeiling();
