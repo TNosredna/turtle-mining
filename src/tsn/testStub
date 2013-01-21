@@ -19,6 +19,13 @@ right = "right";
 left = "left";
 back = "back";
 
+upTick = 0;
+downTick = 1;
+leftTick = 0;
+rightTick = 1;
+forwardTick = 0;
+backTick = 1;
+
 function transitionOverAnd180Degrees(turnDirection, steps)
     steps = steps or 1;
     if (turnDirection == left) then turtle.turnLeft() end;
@@ -228,50 +235,57 @@ function lineTransition(numberOfLinesToJump, moveDirection)
     move(moveDirection, 1);
 end
 
-function floorAndCeilingColumn(moveDirection, numberBlocks)
+function floorAndCeilingColumn(currentDirection, numberBlocks)
     numberBlocks = numberBlocks or 5;
-    if moveDirection == up then
-        firstPlaceDirection = down;
-        lastPlaceDirection = up;
-        firstFillSlot = floorFillerPos;
-        lastFillSlot = roofFillerPos;
+    if currentDirection == up then
+        initialPlaceDirection = down;
+        endingPlaceDirection = up;
+        initialFillSlot = floorFillerPos;
+        endingFillSlot = roofFillerPos;
     end
-    if moveDirection == down then
-        firstPlaceDirection = up;
-        lastPlaceDirection = down;
-        firstFillSlot = roofFillerPos;
+    if currentDirection == down then
+        initialPlaceDirection = up;
+        endingPlaceDirection = down;
+        initialFillSlot = roofFillerPos;
         lastFillSlot = floorFillerPos;
     end
 
-    replace(firstPlaceDirection, firstFillSlot);
-    move(moveDirection, numberBlocks -4);
-    replace(lastPlaceDirection, lastFillSlot);
+    replace(initialPlaceDirection, initialFillSlot);
+    move(currentDirection, numberBlocks -4);
+    replace(endingPlaceDirection, endingFillSlot);
 end
 
--- Starting 'up'
-function floorAndCeilingRow(numberColumns)
+function floorAndCeilingRow(currentDirectionTick, numberColumns)
     numberColumns = numberColumns or 9;
-    numberRepetitions = round(numberColumns/2);
 
-    for i = 1,numberRepetitions do
-        floorAndCeilingColumn(down);
-
-        if (i <= numberColumns/2) then
-            move(forward, 1);
-            floorAndCeilingColumn(up)
+    for i = 1,numberColumns do
+        if (currentDirectionTick%2 == 0) then
+            floorAndCeilingColumn(up);
+        else
+            floorAndCeilingColumn(down);
         end;
-        if (i < numberRepetitions) then move(forward, 1) end;   -- reached the end, so don't transition to next column
+        currentDirectionTick = currentDirectionTick + 1;
+
+        if (i < numberColumns) then
+            move(forward, 1)
+        end;
     end
 end
 
-function buildFloorAndCeiling(numberRows)
+function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
     numberRows = numberRows or 9;
-    numberRows = numberRows/2;
+
     for i = 1,numberRows do
-        floorAndCeilingRow();
-        transitionOverAnd180Degrees(right);
-        floorAndCeilingRow();
-        transitionOverAnd180Degrees(left);
+        floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
+        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
+        if (i < numberRows) then
+            if (currentLeftRightDirectionTick%2 == 0) then
+                transitionOverAnd180Degrees(left);
+            else
+                transitionOverAnd180Degrees(right);
+            end;
+            currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
+        end;
     end
 end
 
@@ -288,7 +302,7 @@ end
 
 function buildWalls()
     singleLine(up);
-    for i = 1,3 do
+    for i = 1,4 do
         if i%2==0 then
             direction1 = up;
             direction2 = down;
@@ -305,21 +319,15 @@ function buildWalls()
         doubleLine(direction1);
         lineTransition(2, direction2);
         doubleLine(direction2);
-        lineTransition(2, direction1);
-        doubleLine(direction1);
+        if (i<4) then
+            lineTransition(2, direction1);
+            doubleLine(direction1);
+        else
+            lineTransition(1, direction1);
+            singleLine(direction1);
+        end;
         turtle.turnLeft();
     end
-
-    lineTransition(2, up);
-    doubleLine(up);
-    lineTransition(2, down);
-    doubleLine(down);
-    lineTransition(2, up);
-    doubleLine(up);
-    lineTransition(2, down);
-    doubleLine(down);
-    lineTransition(1, up);
-    singleLine(up);
 
     -- Get into position to build the ceiling/floor
     turtle.turnLeft();
@@ -329,3 +337,6 @@ function buildWalls()
 end
 
 testCode();
+-- moveToStartingPosition();
+-- buildWalls();
+-- buildFloorAndCeiling();
