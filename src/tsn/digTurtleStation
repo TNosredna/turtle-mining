@@ -231,20 +231,21 @@ end
 function floorAndCeilingLine(turnDirection, length)
     length = length or 8;
     for i = 1,length/2 do
-        dig(forward);
         floorAndCeilingBlock(down);
-        dig(forward);
+        dig(forward, 1);
         floorAndCeilingBlock(up);
-        if turnDirection == right then
-            turtle.turnRight();
-            dig(forward, 1);
-            turtle.turnRight();
-        end
-        if turnDirection == left then
-            turtle.turnLeft();
-            dig(forward, 1);
-            turtle.turnLeft();
-        end
+        dig(forward, 1);
+    end
+    if turnDirection == right then
+        turtle.turnRight();
+        dig(forward, 1);
+        turtle.turnRight();
+    end
+
+    if turnDirection == left then
+        turtle.turnLeft();
+        dig(forward, 1);
+        turtle.turnLeft();
     end
 end
 

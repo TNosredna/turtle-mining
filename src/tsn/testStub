@@ -2,8 +2,8 @@
 
 
 function testCode()
-    floorAndCeilingBlock(up);
-    --floorAndCeilingLine(right);
+    --floorAndCeilingBlock(up);
+    floorAndCeilingLine(right);
 end
 
 wallFiller1Pos = 1;
