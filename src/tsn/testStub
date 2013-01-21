@@ -22,7 +22,7 @@ left = "left";
 back = "back";
 
 function log(line)
-    local file = fs.open("log.log", "w+");
+    local file = fs.open("log", "w");
     file.writeLine(line);
     file.close();
 end
