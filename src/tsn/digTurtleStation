@@ -214,8 +214,7 @@ function floorAndCeilingBlock(moveDirection, height)
         lastPlaceDirection = up;
         firstFillSlot = floorFillerPos;
         lastFillSlot = roofFillerPos;
-    end
-    if moveDirection == down then
+    else
         firstPlaceDirection = up;
         lastPlaceDirection = down;
         firstFillSlot = roofFillerPos;
@@ -302,6 +301,12 @@ function buildWalls()
     doubleLine(down);
     lineTransition(1, up);
     singleLine(up);
+end
+
+local function log(line)
+    local file = fs.open("log.log", "w+");
+    file.writeLine(line);
+    file.close();
 end
 
 moveToStartingPosition()

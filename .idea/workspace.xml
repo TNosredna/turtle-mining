@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digTurtleStation" afterPath="$PROJECT_DIR$/src/tsn/digTurtleStation" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
@@ -64,7 +65,7 @@
       <file leaf-file-name="prepareTurtle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="120" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.0">
+            <state line="12" column="0" selection-start="0" selection-end="448" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -118,7 +119,7 @@
       <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="309" column="0" selection-start="8492" selection-end="8555" vertical-scroll-proportion="0.0">
+            <state line="310" column="0" selection-start="8459" selection-end="8575" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,7 +128,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="280" column="20" selection-start="8770" selection-end="8770" vertical-scroll-proportion="0.856546">
+            <state line="274" column="23" selection-start="8282" selection-end="8282" vertical-scroll-proportion="0.770195">
               <folding />
             </state>
           </provider>
@@ -595,7 +596,11 @@
       <created>1358753835283</created>
       <updated>1358753835283</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Testing various logic errors">
+      <created>1358754776285</created>
+      <updated>1358754776285</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -747,13 +752,6 @@
         <state line="12" column="0" selection-start="105" selection-end="196" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="120" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/sample/mlg/api_digOres">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="194" selection-end="228" vertical-scroll-proportion="-3.409091">
@@ -768,16 +766,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="0" selection-end="448" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="309" column="0" selection-start="8492" selection-end="8555" vertical-scroll-proportion="0.0">
+        <state line="310" column="0" selection-start="8459" selection-end="8575" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="280" column="20" selection-start="8770" selection-end="8770" vertical-scroll-proportion="0.856546">
+        <state line="274" column="23" selection-start="8282" selection-end="8282" vertical-scroll-proportion="0.770195">
           <folding />
         </state>
       </provider>

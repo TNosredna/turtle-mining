@@ -225,15 +225,15 @@ function lineTransition(numberOfLinesToJump, moveDirection)
     move(moveDirection, 1);
 end
 
-function floorAndCeilingColumn(currentDirection, numberBlocks)
+function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    log("1) currentUpDownDirection="..currentUpDownDirection);
     numberBlocks = numberBlocks or 5;
-    if currentDirection == up then
+    if currentUpDownDirection == up then
         initialPlaceDirection = down;
         endingPlaceDirection = up;
         initialFillSlot = floorFillerPos;
         endingFillSlot = roofFillerPos;
-    end
-    if currentDirection == down then
+    else
         initialPlaceDirection = up;
         endingPlaceDirection = down;
         initialFillSlot = roofFillerPos;
@@ -241,7 +241,7 @@ function floorAndCeilingColumn(currentDirection, numberBlocks)
     end
 
     replace(initialPlaceDirection, initialFillSlot);
-    move(currentDirection, numberBlocks -4);
+    move(currentUpDownDirection, numberBlocks -4);
     replace(endingPlaceDirection, endingFillSlot);
 end
 
@@ -264,21 +264,18 @@ end
 
 function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
     numberRows = numberRows or 9;
-    print("1) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
     for i = 1,numberRows do
         floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
-        print("2) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
-        print("3) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         if (i < numberRows) then
             if (currentLeftRightDirectionTick%2 == 0) then
+                log("2a turningLeft");
                 transitionOverAnd180Degrees(left);
             else
+                log("2b turningRight");
                 transitionOverAnd180Degrees(right);
             end
-            print("4) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
             currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
-            print("5) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         end
     end
 end
@@ -328,6 +325,12 @@ function buildWalls()
     move(forward);
     move(down, 2);
     turtle.turnLeft();
+end
+
+local function log(line)
+    local file = fs.open("log.log", "w+");
+    file.writeLine(line);
+    file.close();
 end
 
 --floorAndCeilingRow(upTick,9);
