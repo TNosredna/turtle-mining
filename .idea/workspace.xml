@@ -118,7 +118,7 @@
       <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="239" column="22" selection-start="6732" selection-end="7158" vertical-scroll-proportion="0.0">
+            <state line="252" column="0" selection-start="7163" selection-end="7200" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="19" selection-start="7557" selection-end="7557" vertical-scroll-proportion="5.4108634">
+            <state line="254" column="110" selection-start="7663" selection-end="7663" vertical-scroll-proportion="5.3064065">
               <folding />
             </state>
           </provider>
@@ -547,7 +547,11 @@
       <created>1358742009718</created>
       <updated>1358742009718</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Testing various logic errors">
+      <created>1358744200345</created>
+      <updated>1358744200345</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -617,7 +621,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a logic bug in the retry logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing various logic errors" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -637,6 +641,7 @@
     <MESSAGE value="Created draft 1 of digTurtleStation" />
     <MESSAGE value="adding debug file to help" />
     <MESSAGE value="Fixed a logic bug in the retry logic" />
+    <MESSAGE value="Testing various logic errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -705,13 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="239" column="22" selection-start="6732" selection-end="7158" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/sample/mlg/api_digOres">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="194" selection-end="228" vertical-scroll-proportion="-3.409091">
@@ -726,9 +724,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="0" selection-start="7163" selection-end="7200" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="259" column="19" selection-start="7557" selection-end="7557" vertical-scroll-proportion="5.4108634">
+        <state line="254" column="110" selection-start="7663" selection-end="7663" vertical-scroll-proportion="5.3064065">
           <folding />
         </state>
       </provider>

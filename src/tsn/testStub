@@ -225,7 +225,7 @@ function lineTransition(numberOfLinesToJump, moveDirection)
 end
 
 function floorAndCeilingColumn(moveDirection, columnHeight)
-    height = height or 5;
+    columnHeight = columnHeight or 5;
     if moveDirection == up then
         firstPlaceDirection = down;
         lastPlaceDirection = up;
@@ -240,24 +240,25 @@ function floorAndCeilingColumn(moveDirection, columnHeight)
     end
 
     replace(firstPlaceDirection, firstFillSlot);
-    move(moveDirection, height-4);
+    move(moveDirection, columnHeight-4);
     replace(lastPlaceDirection, lastFillSlot);
 end
 
 -- Starting 'up'
-function floorAndCeilingRow(lineLength)
-    lineLength = lineLength/2 or 4.5;
-    for i = 1,length do
+function floorAndCeilingRow(rowLength)
+    rowLength = rowLength/2 or 4.5;
+    for i = 1,rowLength do
         floorAndCeilingColumn(down);
         move(forward, 1);
+        if (i >= rowLength and not rowLength%2==0) then break end;  -- get in that last column on an odd numbered length
         floorAndCeilingColumn(up);
-        if (i < length) then move(forward, 1);
+        if (i < rowLength) then move(forward, 1) end;   -- reached the end, so don't transition to next column
     end
 end
 
-function floorAndCeilingRoom(width)
-    width = width/2 or 4.5;
-    for i = 1,width do
+function buildFloorAndCeiling(numberRows)
+    numberRows = numberRows/2 or 4.5;
+    for i = 1,numberRows do
         floorAndCeilingRow();
         transitionOverAnd180Degrees(right);
         floorAndCeilingRow();
@@ -310,10 +311,12 @@ function buildWalls()
     doubleLine(down);
     lineTransition(1, up);
     singleLine(up);
-end
 
-function buildFloorAndCeiling()
-    floorAndCeilingRoom();
+    -- Get into position to build the ceiling/floor
+    turtle.turnLeft();
+    move(forward);
+    move(down, 2);
+    turtle.turnLeft();
 end
 
 testCode();
