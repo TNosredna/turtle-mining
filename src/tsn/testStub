@@ -226,7 +226,6 @@ function lineTransition(numberOfLinesToJump, moveDirection)
 end
 
 function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
-    print("1) currentUpDownDirection="..currentUpDownDirection);
     numberBlocks = numberBlocks or 5;
     if currentUpDownDirection == up then
         initialPlaceDirection = down;
@@ -246,16 +245,15 @@ function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
 end
 
 function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
-    local udt = currentUpDownDirectionTick;
     numberColumns = numberColumns or 9;
 
     for i = 1,numberColumns do
-        if (udt%2 == 0) then
+        if (currentUpDownDirectionTick%2 == 0) then
             floorAndCeilingColumn(up);
         else
             floorAndCeilingColumn(down);
         end
-        udt = udt + 1;
+        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
 
         if (i < numberColumns) then
             move(forward, 1)
@@ -264,21 +262,16 @@ function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
 end
 
 function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
-    local lrt = currentLeftRightDirectionTick;
-    local udt = currentUpDownDirectionTick;
     numberRows = numberRows or 9;
     for i = 1,numberRows do
-        floorAndCeilingRow(udt, numberRows);
-        udt = udt + 1;
+        floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
         if (i < numberRows) then
-            if (lrt%2 == 0) then
-                print("2a turningLeft");
+            if (currentLeftRightDirectionTick%2 == 0) then
                 transitionOverAnd180Degrees(left);
             else
-                print("2b turningRight");
                 transitionOverAnd180Degrees(right);
             end
-            lrt = lrt + 1;
+            currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
         end
     end
 end
