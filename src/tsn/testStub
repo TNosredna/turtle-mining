@@ -237,7 +237,7 @@ function floorAndCeilingColumn(currentDirection, numberBlocks)
         initialPlaceDirection = up;
         endingPlaceDirection = down;
         initialFillSlot = roofFillerPos;
-        lastFillSlot = floorFillerPos;
+        endingFillSlot = floorFillerPos;
     end
 
     replace(initialPlaceDirection, initialFillSlot);
