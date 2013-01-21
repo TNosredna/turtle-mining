@@ -76,7 +76,7 @@ local function dig(digDirection)
     local digDirection = digDirection or forward;
 
     if (digDirection == forward) then
-        if (turtle.digForward()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
+        if (turtle.dig()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
     elseif (digDirection == up) then
         if (turtle.digUp()) then log(fine, "dug: up"); return success;  else log(debug, "failed to dig: up"); return failure;  end;
     elseif (digDirection == down) then
@@ -102,7 +102,7 @@ local function place(placeDirection)
     local actionFailed = false;
 
     if (placeDirection == forward) then
-        if (turtle.placeForward()) then
+        if (turtle.place()) then
             log(fine, "placed: forward");
         else
             actionFailed = true;
