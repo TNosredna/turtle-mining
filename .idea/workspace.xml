@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digTurtleStation" afterPath="$PROJECT_DIR$/src/tsn/digTurtleStation" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/beginMining" afterPath="$PROJECT_DIR$/src/tsn/beginMining" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,10 +70,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="beginMining" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="beginMining" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="52" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
+            <state line="10" column="18" selection-start="697" selection-end="697" vertical-scroll-proportion="0.2016129">
               <folding />
             </state>
           </provider>
@@ -115,10 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digTurtleStation" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="325" column="0" selection-start="9476" selection-end="9476" vertical-scroll-proportion="0.8185484">
+            <state line="325" column="0" selection-start="9476" selection-end="9476" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -167,9 +167,9 @@
         <option value="$PROJECT_DIR$/src/tsn/buildTurtleMine" />
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStationShaft" />
         <option value="$PROJECT_DIR$/src/tsn/prepareTurtle" />
-        <option value="$PROJECT_DIR$/src/tsn/beginMining" />
         <option value="$PROJECT_DIR$/src/tsn/testStub" />
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStation" />
+        <option value="$PROJECT_DIR$/src/tsn/beginMining" />
       </list>
     </option>
   </component>
@@ -631,7 +631,11 @@
       <created>1358757681334</created>
       <updated>1358757681334</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Ironed out the bugs in digStation">
+      <created>1358758078206</created>
+      <updated>1358758078206</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -701,7 +705,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing various logic errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ironed out the bugs in digStation" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -722,6 +726,7 @@
     <MESSAGE value="adding debug file to help" />
     <MESSAGE value="Fixed a logic bug in the retry logic" />
     <MESSAGE value="Testing various logic errors" />
+    <MESSAGE value="Ironed out the bugs in digStation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -771,13 +776,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="52" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/sample/mlg/api_digOres">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="194" selection-end="228" vertical-scroll-proportion="-3.409091">
@@ -813,7 +811,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="325" column="0" selection-start="9476" selection-end="9476" vertical-scroll-proportion="0.8185484">
+        <state line="325" column="0" selection-start="9476" selection-end="9476" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/beginMining">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="18" selection-start="697" selection-end="697" vertical-scroll-proportion="0.2016129">
           <folding />
         </state>
       </provider>

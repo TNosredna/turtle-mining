@@ -5,7 +5,7 @@ term.clear();
 -- Ignore Material -> left chest -- 1=1 Stone,2=1 Cobblestone,3=1 Dirt,4=1 Gravel
 -- Mined Material -> back chest
 
-shell.run("digAndExcavate","-oneChest","-torches","-numT","1","-numS","6","-numL","3","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
---shell.run("digTunnels","-oneChest","-torches","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
---shell.run("digShafts","-oneChest","-torches","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
---shell.run("digOres","-oneChest","-torches","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
+--shell.run("digAndExcavate","-oneChest","-torches","-numT","1","-numS","6","-numL","3","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
+--shell.run("digTunnels","-oneChest","-torches","-numT","1","-numS","6","-numL","3","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
+--shell.run("digShafts","-oneChest","-torches","-numT","1","-numS","6","-numL","3","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
+shell.run("digOres","-oneChest","-torches","-numT","1","-numS","6","-numL","3","-numIgnore","4","-itemD","back","-fuelS","down","-sides");
