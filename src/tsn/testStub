@@ -223,17 +223,18 @@ local function replace(direction, slot, attempts)
     local slot = slot;
 
     selectWithOverflow(slot);
-    while (((attempts==0) or (tries<=attempts))) do
-        local successCode = place(direction);
+    local successCode = place(direction);
+    while (not successCode == 0 and ((attempts==0) or (tries<=attempts))) do
         if (successCode==blockAlreadyPresent) then
             dig(direction);
         elseif (successCode==notEnoughInventory) then
             criticalError = true;
             break;
-        elseif (successCode==blockPlaced) then
+        else
             move(direction);
             moveBackCounter = moveBackCounter + 1;
         end
+        successCode = place(direction);
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
