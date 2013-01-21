@@ -338,11 +338,11 @@ local function buildWalls(startingUpDownDirection, numberColumns)
         for i=1,numberColumns do
             currentDirection = wallColumn(getOppositeDirection(currentDirection));
             log(debug, "i="..i.." numberColumns="..numberColumns);
-            if (not i>=numberColumns) then
+            if (i < numberColumns) then
                 moveWithDig(forward);
             end;
         end;
-        if (not x>=numberWalls) then
+        if (x < numberWalls) then
             turn(left);
             moveWithDig(forward);
         end;
