@@ -326,9 +326,7 @@ function buildWalls()
     turtle.turnLeft();
 end
 
-function testCode()
-    floorAndCeilingRow(downTick,9);
-end
+floorAndCeilingRow(downTick,9);
 
 -- moveToStartingPosition();
 -- buildWalls();
