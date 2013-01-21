@@ -249,11 +249,14 @@ function floorAndCeilingRow(rowLength)
     rowLength = rowLength or 9;
     rowLength = rowLength/2;
     for i = 1,rowLength do
+        print ("1) i="..i.." and rowLength="..rowLength);
         floorAndCeilingColumn(down);
-        move(forward, 1);
         if (i >= rowLength and not rowLength%2==0) then break end;  -- get in that last column on an odd numbered length
+        print ("2) i="..i.." and rowLength="..rowLength);
+        move(forward, 1);
         floorAndCeilingColumn(up);
         if (i < rowLength) then move(forward, 1) end;   -- reached the end, so don't transition to next column
+        print ("3) i="..i.." and rowLength="..rowLength);
     end
 end
 
