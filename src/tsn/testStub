@@ -1,10 +1,9 @@
--- Must allow for 1 available block above ceiling and 1 available block below floor
-local debug = args[1] or 0;
-
 function testCode()
     --floorAndCeilingBlock(up);
-    floorAndCeilingLine(left);
+    floorAndCeilingRow();
 end
+
+-- Must allow for 1 available block above ceiling and 1 available block below floor
 
 wallFiller1Pos = 1;
 wallFiller2Pos = 2;
@@ -19,6 +18,16 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
+
+function transitionOverAnd180Degrees(turnDirection, steps)
+    steps = steps or 1;
+    if (turnDirection == left) then turtle.turnLeft() end;
+    if (turnDirection == right) then turtle.turnRight() end;
+    move(forward, steps);
+    if (turnDirection == left) then turtle.turnLeft() end;
+    if (turnDirection == right) then turtle.turnRight() end;
+end
+
 
 -- look in slots 1-12 if selected slot if empty
 function select(slot)
@@ -215,8 +224,7 @@ function lineTransition(numberOfLinesToJump, moveDirection)
     move(moveDirection, 1);
 end
 
-function floorAndCeilingBlock(moveDirection, height)
-    if debug==1 then print("Beginning building floorAndCeilingBlock") end;
+function floorAndCeilingColumn(moveDirection, columnHeight)
     height = height or 5;
     if moveDirection == up then
         firstPlaceDirection = down;
@@ -232,40 +240,28 @@ function floorAndCeilingBlock(moveDirection, height)
     end
 
     replace(firstPlaceDirection, firstFillSlot);
-    dig(moveDirection, height-4);
+    move(moveDirection, height-4);
     replace(lastPlaceDirection, lastFillSlot);
-    if debug==1 then print("Ending building floorAndCeilingBlock") end;
 end
 
 -- Starting 'up'
-function floorAndCeilingLine(turnDirection, length)
-    if debug==1 then print("Beginning building floorAndCeilingLine") end;
-    length = length or 8;
-    for i = 1,length/2 do
-        floorAndCeilingBlock(down);
-        dig(forward, 1);
-        floorAndCeilingBlock(up);
-        dig(forward, 1);
+function floorAndCeilingRow(lineLength)
+    lineLength = lineLength/2 or 4.5;
+    for i = 1,length do
+        floorAndCeilingColumn(down);
+        move(forward, 1);
+        floorAndCeilingColumn(up);
+        if (i < length) then move(forward, 1);
     end
-    if turnDirection == right then
-        turtle.turnRight();
-        dig(forward, 1);
-        turtle.turnRight();
-    end
-
-    if turnDirection == left then
-        turtle.turnLeft();
-        dig(forward, 1);
-        turtle.turnLeft();
-    end
-    if debug==1 then print("Ending building floorAndCeilingLine") end;
 end
 
 function floorAndCeilingRoom(width)
-    width = width or 8;
-    for i = 1,width/2 do
-        floorAndCeilingLine(right);
-        floorAndCeilingLine(left);
+    width = width/2 or 4.5;
+    for i = 1,width do
+        floorAndCeilingRow();
+        transitionOverAnd180Degrees(right);
+        floorAndCeilingRow();
+        transitionOverAnd180Degrees(left);
     end
 end
 
