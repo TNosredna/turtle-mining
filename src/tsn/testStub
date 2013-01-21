@@ -20,11 +20,6 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
-local file = fs.open("log", "w");
-
-function log(line)
-    file.writeLine(line);
-end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
     steps = steps or 1;
@@ -231,7 +226,7 @@ function lineTransition(numberOfLinesToJump, moveDirection)
 end
 
 function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
-    log("1) currentUpDownDirection="..currentUpDownDirection);
+    print("1) currentUpDownDirection="..currentUpDownDirection);
     numberBlocks = numberBlocks or 5;
     if currentUpDownDirection == up then
         initialPlaceDirection = down;
@@ -274,10 +269,10 @@ function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirect
         currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
         if (i < numberRows) then
             if (currentLeftRightDirectionTick%2 == 0) then
-                log("2a turningLeft");
+                print("2a turningLeft");
                 transitionOverAnd180Degrees(left);
             else
-                log("2b turningRight");
+                print("2b turningRight");
                 transitionOverAnd180Degrees(right);
             end
             currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
@@ -338,4 +333,3 @@ end
 -- moveToStartingPosition();
 -- buildWalls();
 buildFloorAndCeiling(leftTick,upTick,4);
-file.close();
