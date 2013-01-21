@@ -22,9 +22,7 @@ left = "left";
 back = "back";
 
 function log(line)
-    local file = fs.open("log", "w");
     file.writeLine(line);
-    file.close();
 end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
@@ -334,8 +332,10 @@ function buildWalls()
 end
 
 
+local file = fs.open("log", "w");
 --floorAndCeilingRow(upTick,9);
 
 -- moveToStartingPosition();
 -- buildWalls();
 buildFloorAndCeiling(leftTick,upTick,4);
+file.close();

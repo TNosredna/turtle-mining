@@ -61,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="prepareTurtle" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="prepareTurtle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="0" selection-end="448" vertical-scroll-proportion="0.24193548">
+            <state line="14" column="43" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testStub" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="29" selection-start="438" selection-end="438" vertical-scroll-proportion="-13.846154">
+            <state line="311" column="115" selection-start="9212" selection-end="9212" vertical-scroll-proportion="0.26880223">
               <folding />
             </state>
           </provider>
@@ -607,7 +607,11 @@
       <created>1358756218360</created>
       <updated>1358756218361</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Testing various logic errors">
+      <created>1358756312520</created>
+      <updated>1358756312520</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -780,16 +784,16 @@
         <state line="12" column="0" selection-start="105" selection-end="196" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="29" selection-start="438" selection-end="438" vertical-scroll-proportion="-13.846154">
+        <state line="14" column="43" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareTurtle">
+    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="0" selection-end="448" vertical-scroll-proportion="0.24193548">
+        <state line="311" column="115" selection-start="9212" selection-end="9212" vertical-scroll-proportion="0.26880223">
           <folding />
         </state>
       </provider>
