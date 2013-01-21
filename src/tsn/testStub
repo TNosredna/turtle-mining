@@ -28,6 +28,10 @@ function transitionOverAnd180Degrees(turnDirection, steps)
     if (turnDirection == right) then turtle.turnRight() end;
 end
 
+function round(n, mult)
+    mult = mult or 1
+    return math.floor((n + mult/2)/mult) * mult
+end
 
 -- look in slots 1-12 if selected slot if empty
 function select(slot)
@@ -224,8 +228,8 @@ function lineTransition(numberOfLinesToJump, moveDirection)
     move(moveDirection, 1);
 end
 
-function floorAndCeilingColumn(moveDirection, columnHeight)
-    columnHeight = columnHeight or 5;
+function floorAndCeilingColumn(moveDirection, numberBlocks)
+    numberBlocks = numberBlocks or 5;
     if moveDirection == up then
         firstPlaceDirection = down;
         lastPlaceDirection = up;
@@ -240,26 +244,23 @@ function floorAndCeilingColumn(moveDirection, columnHeight)
     end
 
     replace(firstPlaceDirection, firstFillSlot);
-    move(moveDirection, columnHeight-4);
+    move(moveDirection, numberBlocks -4);
     replace(lastPlaceDirection, lastFillSlot);
 end
 
 -- Starting 'up'
-function floorAndCeilingRow(rowLength)
-    rowLength = rowLength or 9;
-    if rowLength%2 == 0 then
-        rowLength = rowLength/2;
-    else
-        rowLength = rowLength/2 + 1;
-        lastOpIsHalf = true;
-    end
+function floorAndCeilingRow(numberColumns)
+    numberColumns = numberColumns or 9;
+    numberRepetitions = round(numberColumns/2);
 
-    for i = 1,rowLength do
+    for i = 1,numberRepetitions do
         floorAndCeilingColumn(down);
-        if (i >= rowLength and not rowLength%2==0) then break end;  -- get in that last column on an odd numbered length
-        move(forward, 1);
-        floorAndCeilingColumn(up);
-        if (i < rowLength) then move(forward, 1) end;   -- reached the end, so don't transition to next column
+
+        if (i <= numberColumns/2) then
+            move(forward, 1);
+            floorAndCeilingColumn(up)
+        end;
+        if (i < numberRepetitions) then move(forward, 1) end;   -- reached the end, so don't transition to next column
     end
 end
 
