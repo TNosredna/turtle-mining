@@ -249,7 +249,7 @@ function floorAndCeilingLine(turnDirection, length)
     end
 end
 
-function floorAndCeilingRoom(width)
+function buildFloorAndCeiling(width)
     width = width or 8;
     for i = 1,width/2 do
         floorAndCeilingLine(right);
@@ -302,10 +302,6 @@ function buildWalls()
     doubleLine(down);
     lineTransition(1, up);
     singleLine(up);
-end
-
-function buildFloorAndCeiling()
-    floorAndCeilingRoom();
 end
 
 moveToStartingPosition()

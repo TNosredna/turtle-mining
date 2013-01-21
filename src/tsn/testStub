@@ -1,3 +1,11 @@
+-- Must allow for 1 available block above ceiling and 1 available block below floor
+
+
+function testCode()
+    floorAndCeilingBlock(up);
+    --floorAndCeilingLine(right);
+end
+
 wallFiller1Pos = 1;
 wallFiller2Pos = 2;
 wallFiller3Pos = 3;
@@ -258,8 +266,8 @@ function floorAndCeilingRoom(width)
 end
 
 function moveToStartingPosition()
-    -- this would normally be z=13
-    -- move from starting position to corner of room where the room anchor will be built
+    -- turtle should start at z=13 or higher
+    -- this moves turtle from starting position to corner of room where the room anchor column will be built
     move(down, 6);
     turtle.turnLeft();
     move(forward, 5);
@@ -308,4 +316,4 @@ function buildFloorAndCeiling()
     floorAndCeilingRoom();
 end
 
-singleLine(up);
+testCode();
