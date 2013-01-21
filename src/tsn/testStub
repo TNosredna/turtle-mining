@@ -1,9 +1,5 @@
 -- Must allow for 1 available block above ceiling and 1 available block below floor
 
-local function testCode()
-    buildWalls("up",5);
-end;
-
 local upTick = 0;
 local downTick = 1;
 local leftTick = 0;
@@ -370,8 +366,10 @@ local function moveToStartingPositionForWalls()
     return currentDirection;
 end
 
+buildWalls(up,5);
+
+
 --local currentDirection = moveToStartingPositionForWalls();
 --currentDirection = buildWalls(currentDirection, 11);
 --moveToStartingPositionForCeilingFloor(left);
 --buildFloorAndCeiling(right, currentDirection);
-testCode();
