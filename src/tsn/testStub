@@ -21,10 +21,10 @@ local right = "right";
 local left = "left";
 local back = "back";
 
-local error = "0";
-local coarse = "1";
-local fine = "2";
-local debug = "3";
+local error = 0;
+local coarse = 1;
+local fine = 2;
+local debug = 3;
 local currentLogLevel = debug;
 
 local currentSlotNum = 1;
