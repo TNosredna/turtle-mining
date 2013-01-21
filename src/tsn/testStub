@@ -264,17 +264,21 @@ end
 
 function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
     numberRows = numberRows or 9;
-
+    print("1) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
     for i = 1,numberRows do
         floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
+        print("2) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
+        print("3) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         if (i < numberRows) then
             if (currentLeftRightDirectionTick%2 == 0) then
                 transitionOverAnd180Degrees(left);
             else
                 transitionOverAnd180Degrees(right);
             end
+            print("4) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
             currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
+            print("5) leftRight="..currentLeftRightDirectionTick.." and upDown="..currentUpDownDirectionTick);
         end
     end
 end
@@ -330,4 +334,4 @@ end
 
 -- moveToStartingPosition();
 -- buildWalls();
-buildFloorAndCeiling(leftTick,upTick,2);
+buildFloorAndCeiling(leftTick,upTick,4);
