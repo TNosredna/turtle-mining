@@ -307,7 +307,8 @@ local function moveToStartingPositionForCeilingFloor(turnDirection)
 end;
 
 local function wallColumn(currentDirection, height)
-    local height = height - 2;
+    local height = height or 5;
+    height = height - 2;
     local currentDirection = currentDirection;
     local initialFillSlot;
     local middleFillSlot = wallFiller1Pos;
