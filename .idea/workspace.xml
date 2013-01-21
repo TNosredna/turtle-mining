@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digTurtleStation" afterPath="$PROJECT_DIR$/src/tsn/digTurtleStation" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
@@ -128,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="274" column="23" selection-start="8282" selection-end="8282" vertical-scroll-proportion="0.770195">
+            <state line="29" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="-1.0445683">
               <folding />
             </state>
           </provider>
@@ -600,7 +599,11 @@
       <created>1358754776285</created>
       <updated>1358754776285</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Testing various logic errors">
+      <created>1358756062322</created>
+      <updated>1358756062322</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -782,7 +785,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="274" column="23" selection-start="8282" selection-end="8282" vertical-scroll-proportion="0.770195">
+        <state line="29" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="-1.0445683">
           <folding />
         </state>
       </provider>

@@ -21,6 +21,12 @@ right = "right";
 left = "left";
 back = "back";
 
+function log(line)
+    local file = fs.open("log.log", "w+");
+    file.writeLine(line);
+    file.close();
+end
+
 function transitionOverAnd180Degrees(turnDirection, steps)
     steps = steps or 1;
     if (turnDirection == left) then turtle.turnLeft() end;
@@ -327,11 +333,6 @@ function buildWalls()
     turtle.turnLeft();
 end
 
-local function log(line)
-    local file = fs.open("log.log", "w+");
-    file.writeLine(line);
-    file.close();
-end
 
 --floorAndCeilingRow(upTick,9);
 
