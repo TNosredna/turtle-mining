@@ -171,7 +171,8 @@ local function moveWithDig(direction, steps, attempts)
     local direction = direction;
 
     for i = 1,steps do
-        while (((attempts == 0) or (tries <= attempts))) do
+        local tries = 1;
+        while ((attempts == 0) or (tries <= attempts)) do
             if direction == up then
                 if move(up) then
                     break;

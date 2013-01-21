@@ -127,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="310" column="20" selection-start="10538" selection-end="10538" vertical-scroll-proportion="-0.4516129">
+            <state line="180" column="47" selection-start="6152" selection-end="6152" vertical-scroll-proportion="-0.7741935">
               <folding />
             </state>
           </provider>
@@ -656,7 +656,11 @@
       <created>1358805040538</created>
       <updated>1358805040539</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Ironed out the bugs in digStation">
+      <created>1358805166122</created>
+      <updated>1358805166123</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -839,7 +843,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="20" selection-start="10538" selection-end="10538" vertical-scroll-proportion="-0.4516129">
+        <state line="180" column="47" selection-start="6152" selection-end="6152" vertical-scroll-proportion="-0.7741935">
           <folding />
         </state>
       </provider>
