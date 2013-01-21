@@ -166,6 +166,7 @@ end
 
 -- dig if can't move
 local function moveWithDig(direction, steps, attempts)
+    log (fine, "Entering moveWithDig()");
     local steps = steps or 1
     local attempts = attempts or 10
     local direction = direction;
@@ -199,15 +200,7 @@ local function moveWithDig(direction, steps, attempts)
             sleep(0)
         end
     end
-end
-
-local function transitionOverAnd180Degrees(turnDirection, steps)
-    local steps = steps or 1;
-    local turnDirection = turnDirection;
-
-    turn(turnDirection);
-    moveWithDig(forward, steps);
-    turn(turnDirection);
+    log (fine, "Exiting moveWithDig()");
 end
 
 local function getOppositeDirection(currentDirection)
@@ -222,6 +215,7 @@ end
 
 -- move if can't replace. empty anchor protection
 local function replace(direction, slot, attempts)
+    log (fine, "Entering replace()");
     local moveBackCounter = 0;
     local attempts = attempts or 10;
     local tries = 1;
@@ -249,11 +243,25 @@ local function replace(direction, slot, attempts)
     end
     if (criticalError) then
         log(error, "Critical Error - Exiting program to avoid running amok!");
+        log (fine, "Exiting replace()");
         shell.exit();
     end;
+    log (fine, "Exiting replace()");
+end
+
+local function transitionOverAnd180Degrees(turnDirection, steps)
+    log (fine, "Entering transitionOverAnd180Degrees()");
+    local steps = steps or 1;
+    local turnDirection = turnDirection;
+
+    turn(turnDirection);
+    moveWithDig(forward, steps);
+    turn(turnDirection);
+    log (fine, "Exiting transitionOverAnd180Degrees()");
 end
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    log (fine, "Entering floorAndCeilingColumn()");
     local numberBlocks = numberBlocks or 5;
     local currentUpDownDirection = currentUpDownDirection;
     local initialFillSlot;
@@ -271,10 +279,12 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     moveWithDig(currentUpDownDirection, numberBlocks-4);
     replace(currentUpDownDirection, endingFillSlot);
 
+    log (fine, "Exiting floorAndCeilingColumn()");
     return currentUpDownDirection;
 end
 
 local function floorAndCeilingRow(currentDirection, numberColumns)
+    log (fine, "Entering floorAndCeilingRow()");
     local numberColumns = numberColumns or 9;
     local currentDirection = getOppositeDirection(currentDirection);
 
@@ -284,10 +294,12 @@ local function floorAndCeilingRow(currentDirection, numberColumns)
             moveWithDig(forward, 1)
         end
     end
+    log (fine, "Exiting floorAndCeilingRow()");
     return currentDirection;
 end
 
 local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows)
+    log (fine, "Entering buildFloorAndCeiling()");
     local numberRows = numberRows or 9;
     local numberColumns = numberRows;
     local currentUpDownDirection = getOppositeDirection(currentUpDownDirection);
@@ -299,15 +311,19 @@ local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDire
             currentLeftRightDirection = transitionOverAnd180Degrees(getOppositeDirection(currentLeftRightDirection));
         end
     end
+    log (fine, "Exiting buildFloorAndCeiling()");
 end
 
 local function moveToStartingPositionForCeilingFloor(turnDirection)
+    log (fine, "Entering moveToStartingPositionForWalls()");
     local turnDirection = turnDirection;
     transitionOverAnd180Degrees(turnDirection);
     moveWithDig(forward);
+    log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
 end;
 
 local function wallColumn(currentDirection, height)
+    log (fine, "Entering wallColumn()");
     local height = height or 5;
     height = height - 2;
     local currentDirection = currentDirection;
@@ -333,10 +349,12 @@ local function wallColumn(currentDirection, height)
     moveWithDig(currentDirection, 1);
     replace(getOppositeDirection(currentDirection), endingFillSlot);
 
+    log (fine, "Exiting wallColumn()");
     return currentDirection;
 end
 
 local function buildWalls(startingUpDownDirection, numberColumns)
+    log (fine, "Entering buildWalls()");
     local currentDirection = getOppositeDirection(startingUpDownDirection);
     local numberColumns = numberColumns;
     local numberWalls = 4;
@@ -353,10 +371,12 @@ local function buildWalls(startingUpDownDirection, numberColumns)
             moveWithDig(forward);
         end;
     end;
+    log (fine, "Exiting buildWalls()");
     return currentDirection;
 end;
 
 local function moveToStartingPositionForWalls()
+    log (fine, "Entering moveToStartingPositionForWalls()");
     local currentDirection = up;
     -- turtle should start at z=13 or higher
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
@@ -365,6 +385,7 @@ local function moveToStartingPositionForWalls()
     moveWithDig(forward, 5);
     turn(right);
     moveWithDig(forward, 4);
+    log (fine, "Exiting moveToStartingPositionForWalls()");
     return currentDirection;
 end
 
