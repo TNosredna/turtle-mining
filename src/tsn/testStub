@@ -1,7 +1,7 @@
 -- Must allow for 1 available block above ceiling and 1 available block below floor
 
 local function testCode()
-    buildWalls(up,5);
+    buildWalls("up",5);
 end;
 
 local upTick = 0;
