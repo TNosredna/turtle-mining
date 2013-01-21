@@ -86,19 +86,13 @@ end;
 
 local function select(slot)
     local slot = slot;
-    local actionFailed = false;
 
-    if (turtle.select(slot)) then
-        log(fine, "selected: "..slot);
-        currentSlotNum = slot;
-    else
-        actionFailed = true;
-        log(debug, "failed to select: "..slot);
-    end;
+    turtle.select(slot);
+    log(fine, "selected: "..slot);
+    currentSlotNum = slot;
     if (currentLogLevel == debug) then
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
-    if (actionFailed) then return failure; else return success; end;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
