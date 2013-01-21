@@ -1,74 +1,197 @@
+buildWalls(up,5);
 -- Must allow for 1 available block above ceiling and 1 available block below floor
 
-upTick = 0;
-downTick = 1;
-leftTick = 0;
-rightTick = 1;
-forwardTick = 0;
-backTick = 1;
+local upTick = 0;
+local downTick = 1;
+local leftTick = 0;
+local rightTick = 1;
+local forwardTick = 0;
+local backTick = 1;
 
-wallFiller1Pos = 1;
-wallFiller2Pos = 2;
-wallFiller3Pos = 3;
-floorFillerPos = 4;
-roofFillerPos = 5;
-skylightFillerPos = 6;
+local wallFiller1Pos = 1;
+local wallFiller2Pos = 2;
+local wallFiller3Pos = 3;
+local floorFillerPos = 4;
+local roofFillerPos = 5;
+local skylightFillerPos = 6;
 
-up = "up";
-down = "down";
-forward = "forward";
-right = "right";
-left = "left";
-back = "back";
+local up = "up";
+local down = "down";
+local forward = "forward";
+local right = "right";
+local left = "left";
+local back = "back";
 
-function transitionOverAnd180Degrees(turnDirection, steps)
-    steps = steps or 1;
-    if (turnDirection == left) then turtle.turnLeft() end;
-    if (turnDirection == right) then turtle.turnRight() end;
-    move(forward, steps);
-    if (turnDirection == left) then turtle.turnLeft() end;
-    if (turnDirection == right) then turtle.turnRight() end;
+local error = "0";
+local coarse = "1";
+local fine = "2";
+local debug = "3";
+local currentLogLevel = debug;
+
+local currentSlotNum = 1;
+
+local success = true;
+local failure = false;
+local blockPlaced = 0;
+local blockAlreadyPresent = 1;
+local notEnoughInventory = 2;
+
+local criticalError = false;
+
+local function log(logLevel, line)
+    local logLevel = logLevel or coarse;
+    if (logLevel <= currentLogLevel) then
+        local line = line;
+        local filename = os.computerID()..".log";
+        local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
+        file.writeLine(os.time().." ["..logLevel.."] - "..line);
+        file.close();
+    end;
 end
 
+local function turn(turnDirection)
+    local turnDirection = turnDirection;
+
+    if (turnDirection == left) then
+        if (turtle.turnLeft()) then log(fine, "turned: left"); return success;  else log(debug, "failed to turn: left"); return failure;  end;
+    elseif (turnDirection == right) then
+        if (turtle.turnRight()) then log(fine, "turned: right"); return success;  else log(debug, "failed to turn: right"); return failure;  end;
+    end;
+end;
+
+local function move(moveDirection)
+    local moveDirection = moveDirection or forward;
+
+    if (moveDirection == forward) then
+        if (turtle.forward()) then log(fine, "moved: forward"); return success;  else log(debug, "failed to move: forward"); return failure;  end;
+    elseif (moveDirection == back) then
+        if (turtle.back()) then log(fine, "moved: back"); return success;  else log(debug, "failed to move: back"); return failure;  end;
+    elseif (moveDirection == up) then
+        if (turtle.up()) then log(fine, "moved: up"); return success;  else log(debug, "failed to move: up"); return failure;  end;
+    elseif (moveDirection == down) then
+        if (turtle.down()) then log(fine, "moved: down"); return success;  else log(debug, "failed to move: down"); return failure;  end;
+    end;
+end;
+
+local function dig(digDirection)
+    local digDirection = digDirection or forward;
+
+    if (digDirection == forward) then
+        if (turtle.digForward()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
+    elseif (digDirection == up) then
+        if (turtle.digUp()) then log(fine, "dug: up"); return success;  else log(debug, "failed to dig: up"); return failure;  end;
+    elseif (digDirection == down) then
+        if (turtle.digDown()) then log(fine, "dug: down"); return success;  else log(debug, "failed to dig: down"); return failure;  end;
+    end;
+end;
+
+local function select(slot)
+    local slot = slot;
+    local actionFailed = false;
+
+    if (turtle.select(slot)) then
+        log(fine, "selected: "..slot);
+        currentSlotNum = slot;
+    else
+        actionFailed = true;
+        log(debug, "failed to select: "..slot);
+    end;
+    if (currentLogLevel == debug) then
+        log(debug, "    items left in slot "..slot": "..turtle.getItemCount(slot));
+    end;
+    if (actionFailed) then return failure; else return success; end;
+end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+local function place(placeDirection)
+    local placeDirection = placeDirection or forward;
+    local slot = currentSlotNum;
+    local actionFailed = false;
+
+    if (placeDirection == forward) then
+        if (turtle.placeForward()) then
+            log(fine, "placed: forward");
+        else
+            actionFailed = true;
+            log(debug, "failed to place: forward");
+        end;
+    elseif (placeDirection == up) then
+        if (turtle.placeUp()) then
+            log(fine, "placed: up");
+        else
+            actionFailed = true;
+            log(debug, "failed to place: up");
+        end;
+    elseif (placeDirection == down) then
+        if (turtle.placeDown()) then
+            log(fine, "placed: down");
+        else
+            actionFailed = true;
+            log(debug, "failed to place: down");
+        end;
+    end;
+    if (currentLogLevel == debug and actionFailed) then
+        if (turtle.getItemCount(slot) > 0) then
+            log(debug, "    a block is already present at target location");
+            return blockAlreadyPresent;
+        else
+            log(debug, "    no items left in slot "..slot.." to place");
+            return notEnoughInventory;
+        end;
+    end;
+    return blockPlaced;
+end;
+
 -- look in slots 1-12 if selected slot if empty
-function select(slot)
-    turtle.select(slot)
+local function selectWithOverflow(slot, attempts)
+    local attempts = attempts or 10
+    local slot = slot;
+
+    select(slot)
     if turtle.getItemCount(slot) == 1 then
-        turtle.select(1)
-        while not turtle.compareTo(slot) do
-            for i = 1, 12 do
-                turtle.select(i)
+        select(1)
+        local tries = 1
+        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
+            for i = 1,12 do
+                select(i);
+                if (turtle.compareTo(slot)) then
+                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
+                    break;
+                end;
             end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries + 1, attempts + 1)
         end
     end
 end
 
 -- dig if can't move
-function move(direction, steps, attempts)
-    steps = steps or 1
-    attempts = attempts or 10
-    for i = 1, steps do
-        local tries = 1
+local function moveWithDig(direction, steps, attempts)
+    local steps = steps or 1
+    local attempts = attempts or 10
+    local direction = direction;
+
+    for i = 1,steps do
         while (((attempts == 0) or (tries <= attempts))) do
             if direction == up then
-                if turtle.up() then
+                if move(up) then
                     break;
                 else
-                    turtle.digUp()
+                    dig(up);
                 end
             end
             if direction == down then
-                if turtle.down() then
+                if move(down) then
                     break;
                 else
-                    turtle.digDown()
+                    dig(down)
                 end
             end
             if direction == forward then
-                if turtle.forward() then
+                if move(forward) then
                     break;
                 else
-                    turtle.dig()
+                    dig(forward)
                 end
             end
             -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
@@ -78,254 +201,173 @@ function move(direction, steps, attempts)
     end
 end
 
--- Move if requested and if it can dig
-function dig(direction, steps, attempts)
-    steps = steps or 0
-    attempts = attempts or 10
-    repeat
-        local tries = 1
-        while (((attempts == 0) or (tries <= attempts))) do
-            if direction == up then
-                turtle.digUp();
-                if steps > 0 and turtle.up() then break end;
-            end
+local function transitionOverAnd180Degrees(turnDirection, steps)
+    local steps = steps or 1;
+    local turnDirection = turnDirection;
 
-            if direction == down then
-                turtle.digDown();
-                if steps > 0 and turtle.down() then break end;
-            end
-
-            if direction == forward then
-                turtle.dig();
-                if steps > 0 and turtle.forward() then break end;
-            end
-
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries + 1, attempts + 1);
-            sleep(0);
-        end
-        steps = steps - 1;
-        until steps <= 0;
+    turn(turnDirection);
+    moveWithDig(forward, steps);
+    turn(turnDirection);
 end
 
--- move if can't replace.
-function replace(direction, slot, attempts)
+local function getOppositeDirection(currentDirection)
+    local currentDirection = currentDirection;
+    if (currentDirection == up) then return down; end;
+    if (currentDirection == down) then return up; end;
+    if (currentDirection == left) then return right; end;
+    if (currentDirection == right) then return left; end;
+    if (currentDirection == forward) then return back; end;
+    if (currentDirection == back) then return forward; end;
+end
+
+-- move if can't replace. empty anchor protection
+local function replace(direction, slot, attempts)
     local moveBackCounter = 0;
-    attempts = attempts or 10
-    local tries = 1
-    select(slot);
+    local attempts = attempts or 10;
+    local tries = 1;
+    local direction = direction;
+    local slot = slot;
 
-    if direction == up then
-        while (((attempts==0) or (tries<=attempts)) and not turtle.placeUp()) do
-            if turtle.detectUp() then
-                turtle.digUp();
-            else
-                turtle.up();
-                moveBackCounter = moveBackCounter + 1;
-            end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries+1, attempts+1);
-            sleep(0);
+    selectWithOverflow(slot);
+    while (((attempts==0) or (tries<=attempts))) do
+        local successCode = place(direction);
+        if (successCode==blockAlreadyPresent) then
+            dig(direction);
+        elseif (successCode==notEnoughInventory) then
+            criticalError = true;
+            break;
+        elseif (successCode==blockPlaced) then
+            move(direction);
+            moveBackCounter = moveBackCounter + 1;
         end
-        for i = 1,moveBackCounter do
-            turtle.down();
-        end
+        -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+        tries = math.min(tries+1, attempts+1);
+        sleep(0);
     end
-    if direction == down then
-        while (((attempts==0) or (tries<=attempts)) and not turtle.placeDown()) do
-            if turtle.detectDown() then
-                turtle.digDown();
-            else
-                turtle.down();
-                moveBackCounter = moveBackCounter + 1;
-            end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries+1, attempts+1);
-            sleep(0);
-        end
-        for i = 1,moveBackCounter do
-            turtle.up();
-        end
+    for i = 1,moveBackCounter do
+        move(getOppositeDirection(direction));
     end
-    if direction == forward then
-        while (((attempts==0) or (tries<=attempts)) and not turtle.place()) do
-            if turtle.detect() then
-                turtle.dig();
-            else
-                turtle.forward();
-                moveBackCounter = moveBackCounter + 1;
-            end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries+1, attempts+1);
-            sleep(0);
-        end
-        for i = 1,moveBackCounter do
-            turtle.back();
-        end
-    end
+    if (criticalError) then
+        log(error, "Critical Error - Exiting program to avoid running amok!");
+        shell.exit();
+    end;
 end
 
-function singleLine(moveDirection, height)
-    local middleFillSlot = wallFiller1Pos;
-    height = height or 2; -- 2 = actual height minus 1 for floor and minus 1 for the ceiling
-    if moveDirection == up then
-        placeDirection = down
-        firstFillSlot = floorFillerPos;
-        lastFillSlot = roofFillerPos;
-    end
-    if moveDirection == down then
-        placeDirection = up;
-        firstFillSlot = roofFillerPos;
-        lastFillSlot = floorFillerPos;
-    end
+local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    local numberBlocks = numberBlocks or 5;
+    local currentUpDownDirection = currentUpDownDirection;
+    local initialFillSlot;
+    local endingFillSlot;
 
-    move(moveDirection, 1);
-    replace(placeDirection, firstFillSlot);
-    for i = 1,height do
-        move(moveDirection, 1);
-        replace(placeDirection, middleFillSlot);
-    end
-    move(moveDirection, 1);
-    replace(placeDirection, lastFillSlot);
-end
-
-function doubleLine(moveDirection, height)
-    local middleFillSlot = wallFiller1Pos;
-    height = height or 2; -- 2 = actual height minus 1 for floor and minus 1 for the ceiling
-    if moveDirection == up then
-        placeDirection = down
-        firstFillSlot = floorFillerPos;
-        lastFillSlot = roofFillerPos;
-    end
-    if moveDirection == down then
-        placeDirection = up;
-        firstFillSlot = roofFillerPos;
-        lastFillSlot = floorFillerPos;
-    end
-
-    replace(forward, firstFillSlot);
-    move(moveDirection, 1);
-    replace(placeDirection, firstFillSlot);
-    for i = 1,height do
-        replace(forward, middleFillSlot);
-        move(moveDirection, 1);
-        replace(placeDirection, middleFillSlot);
-    end
-    replace(forward, lastFillSlot);
-    move(moveDirection, 1);
-    replace(placeDirection, lastFillSlot);
-end
-
-function lineTransition(numberOfLinesToJump, moveDirection)
-    turtle.turnRight();
-    turtle.turnRight();
-    move(forward, numberOfLinesToJump);
-    turtle.turnLeft();
-    turtle.turnLeft();
-    move(moveDirection, 1);
-end
-
-function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
-    numberBlocks = numberBlocks or 5;
     if currentUpDownDirection == up then
-        initialPlaceDirection = down;
-        endingPlaceDirection = up;
         initialFillSlot = floorFillerPos;
         endingFillSlot = roofFillerPos;
     else
-        initialPlaceDirection = up;
-        endingPlaceDirection = down;
         initialFillSlot = roofFillerPos;
         endingFillSlot = floorFillerPos;
     end
 
-    replace(initialPlaceDirection, initialFillSlot);
-    move(currentUpDownDirection, numberBlocks -4);
-    replace(endingPlaceDirection, endingFillSlot);
+    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
+    moveWithDig(currentUpDownDirection, numberBlocks-4);
+    replace(currentUpDownDirection, endingFillSlot);
+
+    return currentUpDownDirection;
 end
 
-function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
-    numberColumns = numberColumns or 9;
+local function floorAndCeilingRow(currentDirection, numberColumns)
+    local numberColumns = numberColumns or 9;
+    local currentDirection = getOppositeDirection(currentDirection);
 
     for i = 1,numberColumns do
-        if (currentUpDownDirectionTick%2 == 0) then
-            floorAndCeilingColumn(up);
-        else
-            floorAndCeilingColumn(down);
-        end
-        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
-
+        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection));
         if (i < numberColumns) then
-            move(forward, 1)
+            moveWithDig(forward, 1)
         end
     end
+    return currentDirection;
 end
 
-function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
-    numberRows = numberRows or 9;
+local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows)
+    local numberRows = numberRows or 9;
+    local numberColumns = numberRows;
+    local currentUpDownDirection = getOppositeDirection(currentUpDownDirection);
+    local currentLeftRightDirection = getOppositeDirection(currentLeftRightDirection);
+
     for i = 1,numberRows do
-        floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
+        currentUpDownDirection = floorAndCeilingRow(getOppositeDirection(currentUpDownDirection), numberColumns);
         if (i < numberRows) then
-            if (currentLeftRightDirectionTick%2 == 0) then
-                transitionOverAnd180Degrees(left);
-            else
-                transitionOverAnd180Degrees(right);
-            end
-            currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
+            currentLeftRightDirection = transitionOverAnd180Degrees(getOppositeDirection(currentLeftRightDirection));
         end
     end
 end
 
-function moveToStartingPosition()
+local function moveToStartingPositionForCeilingFloor(turnDirection)
+    local turnDirection = turnDirection;
+    transitionOverAnd180Degrees(turnDirection);
+    moveWithDig(forward);
+end;
+
+local function wallColumn(currentDirection, height)
+    local height = height - 2;
+    local currentDirection = currentDirection;
+    local initialFillSlot;
+    local middleFillSlot = wallFiller1Pos;
+    local endingFillSlot;
+
+    if currentDirection == up then
+        initialFillSlot = floorFillerPos;
+        endingFillSlot = roofFillerPos;
+    end
+    if currentDirection == down then
+        initialFillSlot = roofFillerPos;
+        endingFillSlot = floorFillerPos;
+    end
+
+    moveWithDig(currentDirection, 2);
+    replace(getOppositeDirection(currentDirection), initialFillSlot);
+    for i = 1,height do
+        moveWithDig(currentDirection, 1);
+        replace(getOppositeDirection(currentDirection), middleFillSlot);
+    end
+    moveWithDig(currentDirection, 1);
+    replace(getOppositeDirection(currentDirection), endingFillSlot);
+
+    return currentDirection;
+end
+
+local function buildWalls(startingUpDownDirection, numberColumns)
+    local currentDirection = getOppositeDirection(startingUpDownDirection);
+    local numberColumns = numberColumns;
+    local numberWalls = 4;
+
+    for x=1,numberWalls do
+        for i = 1,numberColumns do
+            currentDirection = wallColumn(getOppositeDirection(currentDirection));
+            if (not i==numberColumns) then
+                moveWithDig(forward);
+            end;
+        end;
+        if (not x==numberWalls) then
+            turn(left);
+            moveWithDig(forward);
+        end;
+    end;
+    return currentDirection;
+end;
+
+local function moveToStartingPositionForWalls()
+    local currentDirection = up;
     -- turtle should start at z=13 or higher
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
-    move(down, 6);
-    turtle.turnLeft();
-    move(forward, 5);
-    turtle.turnRight();
-    move(forward, 4);
-    move(up, 1);
+    moveWithDig(down, 6);
+    turn(left);
+    moveWithDig(forward, 5);
+    turn(right);
+    moveWithDig(forward, 4);
+    return currentDirection;
 end
 
-function buildWalls()
-    singleLine(up);
-    for i = 1,4 do
-        if i%2==0 then
-            direction1 = up;
-            direction2 = down;
-        else
-            direction1 = down;
-            direction2 = up;
-        end
-
-        lineTransition(2, direction1);
-        doubleLine(direction1);
-        lineTransition(2, direction2);
-        doubleLine(direction2);
-        lineTransition(2, direction1);
-        doubleLine(direction1);
-        lineTransition(2, direction2);
-        doubleLine(direction2);
-        if (i<4) then
-            lineTransition(2, direction1);
-            doubleLine(direction1);
-        else
-            lineTransition(1, direction1);
-            singleLine(direction1);
-        end
-        turtle.turnLeft();
-    end
-
-    -- Get into position to build the ceiling/floor
-    turtle.turnLeft();
-    move(forward);
-    move(down, 2);
-    turtle.turnLeft();
-end
-
-
---floorAndCeilingRow(upTick,9);
-
--- moveToStartingPosition();
--- buildWalls();
-buildFloorAndCeiling(leftTick,upTick,4);
+--local currentDirection = moveToStartingPositionForWalls();
+--currentDirection = buildWalls(currentDirection, 11);
+--moveToStartingPositionForCeilingFloor(left);
+--buildFloorAndCeiling(right, currentDirection);
