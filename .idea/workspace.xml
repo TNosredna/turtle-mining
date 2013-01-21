@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digTurtleStation" afterPath="$PROJECT_DIR$/src/tsn/digTurtleStation" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
@@ -116,19 +115,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digTurtleStation" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="22" selection-start="6901" selection-end="6901" vertical-scroll-proportion="0.5467836">
+            <state line="239" column="22" selection-start="6732" selection-end="7158" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testStub" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="257" column="0" selection-start="7330" selection-end="7330" vertical-scroll-proportion="0.0">
+            <state line="5" column="28" selection-start="166" selection-end="166" vertical-scroll-proportion="0.07309941">
               <folding />
             </state>
           </provider>
@@ -160,8 +159,8 @@
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStationShaft" />
         <option value="$PROJECT_DIR$/src/tsn/prepareTurtle" />
         <option value="$PROJECT_DIR$/src/tsn/beginMining" />
-        <option value="$PROJECT_DIR$/src/tsn/testStub" />
         <option value="$PROJECT_DIR$/src/tsn/digTurtleStation" />
+        <option value="$PROJECT_DIR$/src/tsn/testStub" />
       </list>
     </option>
   </component>
@@ -527,7 +526,11 @@
       <created>1358739966794</created>
       <updated>1358739966794</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Fixed a logic bug in the retry logic">
+      <created>1358740529687</created>
+      <updated>1358740529687</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -690,16 +693,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="257" column="0" selection-start="7330" selection-end="7330" vertical-scroll-proportion="0.0">
+        <state line="239" column="22" selection-start="6732" selection-end="7158" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="22" selection-start="6901" selection-end="6901" vertical-scroll-proportion="0.5467836">
+        <state line="5" column="28" selection-start="166" selection-end="166" vertical-scroll-proportion="0.07309941">
           <folding />
         </state>
       </provider>

@@ -3,7 +3,7 @@
 
 function testCode()
     --floorAndCeilingBlock(up);
-    floorAndCeilingLine(right);
+    floorAndCeilingLine(left);
 end
 
 wallFiller1Pos = 1;
@@ -240,9 +240,9 @@ function floorAndCeilingLine(turnDirection, length)
     length = length or 8;
     for i = 1,length/2 do
         floorAndCeilingBlock(down);
-        dig(forward);
+        dig(forward, 1);
         floorAndCeilingBlock(up);
-        dig(forward);
+        dig(forward, 1);
     end
     if turnDirection == right then
         turtle.turnRight();
