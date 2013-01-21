@@ -1,5 +1,5 @@
 -- Must allow for 1 available block above ceiling and 1 available block below floor
-
+local debug = args[1] or 0;
 
 function testCode()
     --floorAndCeilingBlock(up);
@@ -216,6 +216,7 @@ function lineTransition(numberOfLinesToJump, moveDirection)
 end
 
 function floorAndCeilingBlock(moveDirection, height)
+    if debug==1 then print("Beginning building floorAndCeilingBlock") end;
     height = height or 5;
     if moveDirection == up then
         firstPlaceDirection = down;
@@ -233,10 +234,12 @@ function floorAndCeilingBlock(moveDirection, height)
     replace(firstPlaceDirection, firstFillSlot);
     dig(moveDirection, height-4);
     replace(lastPlaceDirection, lastFillSlot);
+    if debug==1 then print("Ending building floorAndCeilingBlock") end;
 end
 
 -- Starting 'up'
 function floorAndCeilingLine(turnDirection, length)
+    if debug==1 then print("Beginning building floorAndCeilingLine") end;
     length = length or 8;
     for i = 1,length/2 do
         floorAndCeilingBlock(down);
@@ -255,6 +258,7 @@ function floorAndCeilingLine(turnDirection, length)
         dig(forward, 1);
         turtle.turnLeft();
     end
+    if debug==1 then print("Ending building floorAndCeilingLine") end;
 end
 
 function floorAndCeilingRoom(width)
