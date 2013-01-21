@@ -1,6 +1,12 @@
+upTick = 0;
+downTick = 1;
+leftTick = 0;
+rightTick = 1;
+forwardTick = 0;
+backTick = 1;
+
 function testCode()
-    --floorAndCeilingBlock(up);
-    floorAndCeilingRow();
+    floorAndCeilingRow(downTick);
 end
 
 -- Must allow for 1 available block above ceiling and 1 available block below floor
@@ -19,13 +25,6 @@ right = "right";
 left = "left";
 back = "back";
 
-upTick = 0;
-downTick = 1;
-leftTick = 0;
-rightTick = 1;
-forwardTick = 0;
-backTick = 1;
-
 function transitionOverAnd180Degrees(turnDirection, steps)
     steps = steps or 1;
     if (turnDirection == left) then turtle.turnLeft() end;
@@ -33,11 +32,6 @@ function transitionOverAnd180Degrees(turnDirection, steps)
     move(forward, steps);
     if (turnDirection == left) then turtle.turnLeft() end;
     if (turnDirection == right) then turtle.turnRight() end;
-end
-
-function round(n, mult)
-    mult = mult or 1
-    return math.floor((n + mult/2)/mult) * mult
 end
 
 -- look in slots 1-12 if selected slot if empty
