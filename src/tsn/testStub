@@ -335,13 +335,14 @@ local function buildWalls(startingUpDownDirection, numberColumns)
     local numberWalls = 4;
 
     for x=1,numberWalls do
-        for i = 1,numberColumns do
+        for i=1,numberColumns do
             currentDirection = wallColumn(getOppositeDirection(currentDirection));
-            if (not i==numberColumns) then
+            print(debug, "i="..i.." numberColumns="..numberColumns);
+            if (not i>=numberColumns) then
                 moveWithDig(forward);
             end;
         end;
-        if (not x==numberWalls) then
+        if (not x>=numberWalls) then
             turn(left);
             moveWithDig(forward);
         end;

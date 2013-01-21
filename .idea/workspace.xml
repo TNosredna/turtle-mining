@@ -127,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="0" selection-start="5889" selection-end="5889" vertical-scroll-proportion="0.53038675">
+            <state line="339" column="68" selection-start="11969" selection-end="11969" vertical-scroll-proportion="0.73480666">
               <folding />
             </state>
           </provider>
@@ -684,7 +684,11 @@
       <created>1358808337205</created>
       <updated>1358808337205</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Debugging">
+      <created>1358808981680</created>
+      <updated>1358808981680</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -868,7 +872,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="0" selection-start="5889" selection-end="5889" vertical-scroll-proportion="0.53038675">
+        <state line="339" column="68" selection-start="11969" selection-end="11969" vertical-scroll-proportion="0.73480666">
           <folding />
         </state>
       </provider>
