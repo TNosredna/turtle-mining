@@ -1,3 +1,12 @@
+-- Must allow for 1 available block above ceiling and 1 available block below floor
+
+upTick = 0;
+downTick = 1;
+leftTick = 0;
+rightTick = 1;
+forwardTick = 0;
+backTick = 1;
+
 wallFiller1Pos = 1;
 wallFiller2Pos = 2;
 wallFiller3Pos = 3;
@@ -11,6 +20,15 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
+
+function transitionOverAnd180Degrees(turnDirection, steps)
+    steps = steps or 1;
+    if (turnDirection == left) then turtle.turnLeft() end;
+    if (turnDirection == right) then turtle.turnRight() end;
+    move(forward, steps);
+    if (turnDirection == left) then turtle.turnLeft() end;
+    if (turnDirection == right) then turtle.turnRight() end;
+end
 
 -- look in slots 1-12 if selected slot if empty
 function select(slot)
@@ -87,7 +105,7 @@ function dig(direction, steps, attempts)
             sleep(0);
         end
         steps = steps - 1;
-    until steps <= 0;
+        until steps <= 0;
 end
 
 -- move if can't replace.
@@ -100,7 +118,7 @@ function replace(direction, slot, attempts)
     if direction == up then
         while (((attempts==0) or (tries<=attempts)) and not turtle.placeUp()) do
             if turtle.detectUp() then
-                 turtle.digUp();
+                turtle.digUp();
             else
                 turtle.up();
                 moveBackCounter = moveBackCounter + 1;
@@ -207,58 +225,60 @@ function lineTransition(numberOfLinesToJump, moveDirection)
     move(moveDirection, 1);
 end
 
-function floorAndCeilingBlock(moveDirection, height)
-    height = height or 5;
-    if moveDirection == up then
-        firstPlaceDirection = down;
-        lastPlaceDirection = up;
-        firstFillSlot = floorFillerPos;
-        lastFillSlot = roofFillerPos;
+function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    numberBlocks = numberBlocks or 5;
+    if currentUpDownDirection == up then
+        initialPlaceDirection = down;
+        endingPlaceDirection = up;
+        initialFillSlot = floorFillerPos;
+        endingFillSlot = roofFillerPos;
     else
-        firstPlaceDirection = up;
-        lastPlaceDirection = down;
-        firstFillSlot = roofFillerPos;
-        lastFillSlot = floorFillerPos;
+        initialPlaceDirection = up;
+        endingPlaceDirection = down;
+        initialFillSlot = roofFillerPos;
+        endingFillSlot = floorFillerPos;
     end
 
-    replace(firstPlaceDirection, firstFillSlot);
-    dig(moveDirection, height-4);
-    replace(lastPlaceDirection, lastFillSlot);
+    replace(initialPlaceDirection, initialFillSlot);
+    move(currentUpDownDirection, numberBlocks -4);
+    replace(endingPlaceDirection, endingFillSlot);
 end
 
--- Starting 'up'
-function floorAndCeilingLine(turnDirection, length)
-    length = length or 8;
-    for i = 1,length/2 do
-        floorAndCeilingBlock(down);
-        dig(forward, 1);
-        floorAndCeilingBlock(up);
-        dig(forward, 1);
-    end
-    if turnDirection == right then
-        turtle.turnRight();
-        dig(forward, 1);
-        turtle.turnRight();
-    end
+function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
+    numberColumns = numberColumns or 9;
 
-    if turnDirection == left then
-        turtle.turnLeft();
-        dig(forward, 1);
-        turtle.turnLeft();
+    for i = 1,numberColumns do
+        if (currentUpDownDirectionTick%2 == 0) then
+            floorAndCeilingColumn(up);
+        else
+            floorAndCeilingColumn(down);
+        end
+        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
+
+        if (i < numberColumns) then
+            move(forward, 1)
+        end
     end
 end
 
-function buildFloorAndCeiling(width)
-    width = width or 8;
-    for i = 1,width/2 do
-        floorAndCeilingLine(right);
-        floorAndCeilingLine(left);
+function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
+    numberRows = numberRows or 9;
+    for i = 1,numberRows do
+        floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
+        if (i < numberRows) then
+            if (currentLeftRightDirectionTick%2 == 0) then
+                transitionOverAnd180Degrees(left);
+            else
+                transitionOverAnd180Degrees(right);
+            end
+            currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
+        end
     end
 end
 
 function moveToStartingPosition()
-    -- this would normally be z=13
-    -- move from starting position to corner of room where the room anchor will be built
+    -- turtle should start at z=13 or higher
+    -- this moves turtle from starting position to corner of room where the room anchor column will be built
     move(down, 6);
     turtle.turnLeft();
     move(forward, 5);
@@ -269,7 +289,7 @@ end
 
 function buildWalls()
     singleLine(up);
-    for i = 1,3 do
+    for i = 1,4 do
         if i%2==0 then
             direction1 = up;
             direction2 = down;
@@ -286,27 +306,21 @@ function buildWalls()
         doubleLine(direction1);
         lineTransition(2, direction2);
         doubleLine(direction2);
-        lineTransition(2, direction1);
-        doubleLine(direction1);
+        if (i<4) then
+            lineTransition(2, direction1);
+            doubleLine(direction1);
+        else
+            lineTransition(1, direction1);
+            singleLine(direction1);
+        end
         turtle.turnLeft();
     end
 
-    lineTransition(2, up);
-    doubleLine(up);
-    lineTransition(2, down);
-    doubleLine(down);
-    lineTransition(2, up);
-    doubleLine(up);
-    lineTransition(2, down);
-    doubleLine(down);
-    lineTransition(1, up);
-    singleLine(up);
-end
-
-local function log(line)
-    local file = fs.open("log.log", "w+");
-    file.writeLine(line);
-    file.close();
+    -- Get into position to build the ceiling/floor
+    turtle.turnLeft();
+    move(forward);
+    move(down, 2);
+    turtle.turnLeft();
 end
 
 moveToStartingPosition()
