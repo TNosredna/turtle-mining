@@ -20,6 +20,7 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
+local file = fs.open("log", "w");
 
 function log(line)
     file.writeLine(line);
@@ -332,7 +333,6 @@ function buildWalls()
 end
 
 
-local file = fs.open("log", "w");
 --floorAndCeilingRow(upTick,9);
 
 -- moveToStartingPosition();
