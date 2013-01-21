@@ -160,35 +160,15 @@ end
 
 -- dig if can't move
 local function moveWithDig(direction, steps, attempts)
-    log (fine, "Entering moveWithDig()");
+    log (fine, "Entering moveWithDig("..direction..")");
     local steps = steps or 1
     local attempts = attempts or 10
     local direction = direction;
 
     for i = 1,steps do
         local tries = 1;
-        while ((attempts == 0) or (tries <= attempts)) do
-            if direction == up then
-                if move(up) then
-                    break;
-                else
-                    dig(up);
-                end
-            end
-            if direction == down then
-                if move(down) then
-                    break;
-                else
-                    dig(down)
-                end
-            end
-            if direction == forward then
-                if move(forward) then
-                    break;
-                else
-                    dig(forward)
-                end
-            end
+        while (not move(direction) and ((attempts == 0) or (tries <= attempts))) do
+            dig(direction);
             -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
             tries = math.min(tries + 1, attempts + 1)
             sleep(0)

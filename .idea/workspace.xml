@@ -118,7 +118,7 @@
       <file leaf-file-name="digTurtleStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="47" selection-start="0" selection-end="12520" vertical-scroll-proportion="0.0">
+            <state line="227" column="66" selection-start="7632" selection-end="7632" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="13" selection-start="4760" selection-end="4760" vertical-scroll-proportion="0.28618786">
+            <state line="171" column="0" selection-start="5889" selection-end="5889" vertical-scroll-proportion="0.53038675">
               <folding />
             </state>
           </provider>
@@ -680,7 +680,11 @@
       <created>1358807245414</created>
       <updated>1358807245415</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Debugging">
+      <created>1358808337205</created>
+      <updated>1358808337205</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -857,14 +861,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digTurtleStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="47" selection-start="0" selection-end="12520" vertical-scroll-proportion="0.0">
+        <state line="227" column="66" selection-start="7632" selection-end="7632" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="13" selection-start="4760" selection-end="4760" vertical-scroll-proportion="0.28618786">
+        <state line="171" column="0" selection-start="5889" selection-end="5889" vertical-scroll-proportion="0.53038675">
           <folding />
         </state>
       </provider>
