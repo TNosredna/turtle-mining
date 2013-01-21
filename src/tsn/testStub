@@ -96,7 +96,7 @@ local function select(slot)
         log(debug, "failed to select: "..slot);
     end;
     if (currentLogLevel == debug) then
-        log(debug, "    items left in slot "..slot": "..turtle.getItemCount(slot));
+        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
     if (actionFailed) then return failure; else return success; end;
 end;
