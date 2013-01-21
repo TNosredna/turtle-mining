@@ -246,15 +246,16 @@ function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
 end
 
 function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
+    local udt = currentUpDownDirectionTick;
     numberColumns = numberColumns or 9;
 
     for i = 1,numberColumns do
-        if (currentUpDownDirectionTick%2 == 0) then
+        if (udt%2 == 0) then
             floorAndCeilingColumn(up);
         else
             floorAndCeilingColumn(down);
         end
-        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
+        udt = udt + 1;
 
         if (i < numberColumns) then
             move(forward, 1)
@@ -263,19 +264,21 @@ function floorAndCeilingRow(currentUpDownDirectionTick, numberColumns)
 end
 
 function buildFloorAndCeiling(currentLeftRightDirectionTick, currentUpDownDirectionTick, numberRows)
+    local lrt = currentLeftRightDirectionTick;
+    local udt = currentUpDownDirectionTick;
     numberRows = numberRows or 9;
     for i = 1,numberRows do
-        floorAndCeilingRow(currentUpDownDirectionTick, numberRows);
-        currentUpDownDirectionTick = currentUpDownDirectionTick + 1;
+        floorAndCeilingRow(udt, numberRows);
+        udt = udt + 1;
         if (i < numberRows) then
-            if (currentLeftRightDirectionTick%2 == 0) then
+            if (lrt%2 == 0) then
                 print("2a turningLeft");
                 transitionOverAnd180Degrees(left);
             else
                 print("2b turningRight");
                 transitionOverAnd180Degrees(right);
             end
-            currentLeftRightDirectionTick = currentLeftRightDirectionTick + 1;
+            lrt = lrt + 1;
         end
     end
 end
