@@ -387,7 +387,7 @@ local function buildWalls(startingUpDownDirection, numberColumns)
     log (fine, "Entering buildWalls()");
     currentLogIndent = currentLogIndent + 1;
     local currentDirection = getOppositeDirection(startingUpDownDirection);
-    local numberColumns = numberColumns;
+    local numberColumns = numberColumns - 1;     -- diificult to communicate this number. misleading -> 10 leaves 9 inner spaces
     local numberWalls = 4;
 
     for x=1,numberWalls do
@@ -425,6 +425,6 @@ local function moveToStartingPositionForWalls()
 end
 
 local currentDirection = moveToStartingPositionForWalls();
-currentDirection = buildWalls(currentDirection, 4);  -- misleading -> 10 leaves 9 inner spaces
+currentDirection = buildWalls(currentDirection, 11);
 moveToStartingPositionForCeilingFloor(left);
-buildFloorAndCeiling(left, down, 3);
+buildFloorAndCeiling(left, down, 9);

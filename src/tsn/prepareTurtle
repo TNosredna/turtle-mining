@@ -43,8 +43,7 @@ For the Station Room
 02 = Wall Filler (64 stack)
 03 = Wall Filler (32 stack)
 04 = Floor Filler (49 stack)
-05 = Roof Filler (33 stack)
-06 = Skylight Filler (16 stack)
+05 = Roof Filler (49 stack)
 ]]
 
 print("Press any key to continue...");
