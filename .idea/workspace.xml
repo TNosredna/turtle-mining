@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -748,7 +747,11 @@
       <created>1358838024437</created>
       <updated>1358838024438</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Debugging">
+      <created>1358838211557</created>
+      <updated>1358838211558</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="ToolWindowManager">
