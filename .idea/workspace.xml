@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="368" column="24" selection-start="12843" selection-end="12843" vertical-scroll-proportion="0.8508287">
+            <state line="286" column="0" selection-start="9910" selection-end="9999" vertical-scroll-proportion="0.68508285">
               <folding />
             </state>
           </provider>
@@ -707,7 +708,15 @@
       <created>1358811199184</created>
       <updated>1358811199184</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Debugging">
+      <created>1358811550500</created>
+      <updated>1358811550500</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Debugging">
+      <created>1358812322549</created>
+      <updated>1358812322549</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -891,7 +900,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="368" column="24" selection-start="12843" selection-end="12843" vertical-scroll-proportion="0.8508287">
+        <state line="286" column="0" selection-start="9910" selection-end="9999" vertical-scroll-proportion="0.68508285">
           <folding />
         </state>
       </provider>

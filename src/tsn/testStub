@@ -281,9 +281,10 @@ local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDire
     local currentLeftRightDirection = currentLeftRightDirection;
 
     for i = 1,numberRows do
-        currentUpDownDirection = floorAndCeilingRow(getOppositeDirection(currentUpDownDirection), numberColumns);
+        currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns);
         if (i < numberRows) then
-            currentLeftRightDirection = transitionOverAnd180Degrees(getOppositeDirection(currentLeftRightDirection));
+            currentLeftRightDirection = getOppositeDirection(currentLeftRightDirection);
+            transitionOverAnd180Degrees(currentLeftRightDirection);
         end
     end
     log (fine, "Exiting buildFloorAndCeiling()");
@@ -294,6 +295,7 @@ local function moveToStartingPositionForCeilingFloor(turnDirection)
     local turnDirection = turnDirection;
     transitionOverAnd180Degrees(turnDirection);
     moveWithDig(forward);
+    moveWithDig(up, 2);
     log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
 end;
 
