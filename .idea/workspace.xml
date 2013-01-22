@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,7 +127,7 @@
       <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="2" selection-start="6615" selection-end="6615" vertical-scroll-proportion="0.78828514">
+            <state line="427" column="49" selection-start="15841" selection-end="15841" vertical-scroll-proportion="0.915314">
               <folding />
             </state>
           </provider>
@@ -751,7 +752,11 @@
       <created>1358838211557</created>
       <updated>1358838211558</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Debugging">
+      <created>1358838476188</created>
+      <updated>1358838476189</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -935,7 +940,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="2" selection-start="6615" selection-end="6615" vertical-scroll-proportion="0.78828514">
+        <state line="427" column="49" selection-start="15841" selection-end="15841" vertical-scroll-proportion="0.915314">
           <folding />
         </state>
       </provider>
