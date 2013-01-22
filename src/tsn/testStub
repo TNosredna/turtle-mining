@@ -153,32 +153,32 @@ local function place(placeDirection)
             log(debug, "failed to place: down");
         end;
     end;
-log(debug, "1) got here");
+--log(debug, "1) got here");
     if (actionFailed) then
-log(debug, "1) got here");
+--log(debug, "2) got here");
         if (turtle.getItemCount(slot) > 0) then
-log(debug, "1) got here");
+--log(debug, "3) got here");
             if (detect(placeDirection)) then
-log(debug, "1) got here");
+--log(debug, "4) got here");
                 log(debug, "    a block is already present at target location");
                 return blockAlreadyPresent;
             else
-log(debug, "1) got here");
+--log(debug, "5) got here");
                 log(debug, "    no anchor blocks present at target location");
                 return noAnchorBlocks;
             end;
-log(debug, "1) got here");
+--log(debug, "6) got here");
         else
-log(debug, "1) got here");
+--log(debug, "7) got here");
             log(debug, "    no items left in slot "..slot.." to place");
             return notEnoughInventory;
         end;
-log(debug, "1) got here");
+--log(debug, "8) got here");
     else
-log(debug, "1) got here");
+--log(debug, "9) got here");
         return blockPlaced;
     end;
-log(debug, "1) got here");
+--log(debug, "10) got here");
 end;
 
 -- look in slots 1-12 if selected slot if empty
