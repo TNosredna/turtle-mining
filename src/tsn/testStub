@@ -31,9 +31,11 @@ local currentSlotNum = 1;
 
 local success = true;
 local failure = false;
+
 local blockPlaced = 0;
 local blockAlreadyPresent = 1;
 local notEnoughInventory = 2;
+local noAnchorBlocks = 3;
 
 local criticalError = false;
 
@@ -84,6 +86,30 @@ local function dig(digDirection)
     end;
 end;
 
+local function detect(detectDirection)
+    local detectDirection = detectDirection or forward;
+
+    if (detectDirection == forward) then
+        if (turtle.detect()) then log(fine, "detected: forward"); return success; else log(debug, "failed to detect: forward"); return failure; end;
+    elseif (detectDirection == up) then
+        if (turtle.detectUp()) then log(fine, "detected: up"); return success;  else log(debug, "failed to detect: up"); return failure;  end;
+    elseif (detectDirection == down) then
+        if (turtle.detectDown()) then log(fine, "detected: down"); return success;  else log(debug, "failed to detect: down"); return failure;  end;
+    end;
+end;
+
+local function attack(attackDirection)
+    local attackDirection = attackDirection or forward;
+
+    if (attackDirection == forward) then
+        if (turtle.attack()) then log(fine, "attacked: forward"); return success; else log(debug, "failed to atack: forward"); return failure; end;
+    elseif (attackDirection == up) then
+        if (turtle.attackUp()) then log(fine, "attacked: up"); return success;  else log(debug, "failed to attack: up"); return failure;  end;
+    elseif (attackDirection == down) then
+        if (turtle.attackDown()) then log(fine, "attacked: down"); return success;  else log(debug, "failed to attack: down"); return failure;  end;
+    end;
+end;
+
 local function select(slot)
     local slot = slot;
 
@@ -123,16 +149,22 @@ local function place(placeDirection)
             log(debug, "failed to place: down");
         end;
     end;
-    if (currentLogLevel == debug and actionFailed) then
+    if (actionFailed) then
         if (turtle.getItemCount(slot) > 0) then
-            log(debug, "    a block is already present at target location");
-            return blockAlreadyPresent;
+            if (detect(placeDirection)) then
+                log(debug, "    a block is already present at target location");
+                return blockAlreadyPresent;
+            else
+                log(debug, "    no anchor blocks present at target location");
+                return noAnchorBlocks;
+            end;
         else
             log(debug, "    no items left in slot "..slot.." to place");
             return notEnoughInventory;
         end;
+    else
+        return blockPlaced;
     end;
-    return blockPlaced;
 end;
 
 -- look in slots 1-12 if selected slot if empty
@@ -198,23 +230,22 @@ local function replace(direction, slot, attempts)
 
     selectWithOverflow(slot);
     local successCode = place(direction);
-    while (not successCode == 0 and ((attempts==0) or (tries<=attempts))) do
+    log (debug, "successCode="..successCode);
+    while (not successCode==blockPlaced and ((attempts==0) or (tries<=attempts))) do
         if (successCode==blockAlreadyPresent) then
             dig(direction);
         elseif (successCode==notEnoughInventory) then
             criticalError = true;
             break;
-        else
+        elseif (successCode==noAnchorBlocks) then
             move(direction);
-            moveBackCounter = moveBackCounter + 1;
+            replace(direction);
+            move(getOppositeDirection(direction));
         end
         successCode = place(direction);
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
-    end
-    for i = 1,moveBackCounter do
-        move(getOppositeDirection(direction));
     end
     if (criticalError) then
         log(error, "Critical Error - Exiting program to avoid running amok!");
