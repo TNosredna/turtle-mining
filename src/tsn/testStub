@@ -230,8 +230,8 @@ local function replace(direction, slot, attempts)
 
     selectWithOverflow(slot);
     local successCode = place(direction);
-    log (debug, "successCode="..successCode);
-    while (not successCode==blockPlaced and ((attempts==0) or (tries<=attempts))) do
+    log (debug, "successCode="..successCode..", tries="..tries..", attempts="..attempts);
+    while ((not successCode==blockPlaced) and ((attempts==0) or (tries<=attempts))) do
         if (successCode==blockAlreadyPresent) then
             dig(direction);
         elseif (successCode==notEnoughInventory) then
