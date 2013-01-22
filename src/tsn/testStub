@@ -222,17 +222,17 @@ end
 -- move if can't replace. empty anchor protection
 local function replace(direction, slot, attempts)
     log (fine, "Entering replace()");
-    local moveBackCounter = 0;
     local attempts = attempts or 10;
     local tries = 1;
     local direction = direction;
     local slot = slot;
 
     selectWithOverflow(slot);
-    local successCode = place(direction);
-    log (debug, "successCode="..successCode..", tries="..tries..", attempts="..attempts);
-    while ((not successCode==blockPlaced) and ((attempts==0) or (tries<=attempts))) do
-        if (successCode==blockAlreadyPresent) then
+    while ((attempts==0) or (tries<=attempts)) do
+        local successCode = place(direction);
+        if (successCode==blockPlaced) then
+            break;
+        elseif (successCode==blockAlreadyPresent) then
             dig(direction);
         elseif (successCode==notEnoughInventory) then
             criticalError = true;
