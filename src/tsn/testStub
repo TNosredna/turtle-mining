@@ -228,30 +228,31 @@ local function replace(direction, slot, attempts)
     local slot = slot;
 
     selectWithOverflow(slot);
+    local successCode = place(direction);
+    log(debug, "successCode="..successCode);
     while ((attempts==0) or (tries<=attempts)) do
-        local successCode = place(direction);
         if (successCode==blockPlaced) then
+            log(debug, "Block was succesfully placed, continueing on.");
             break;
         elseif (successCode==blockAlreadyPresent) then
+            log(debug, "Block was succesfully placed, continueing on.");
             dig(direction);
         elseif (successCode==notEnoughInventory) then
-            criticalError = true;
-            break;
+            log(error, "Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
+            log (fine, "Exiting replace()");
+            shell.exit();
         elseif (successCode==noAnchorBlocks) then
+            log(debug, "No anchor blocks found to attach to, moving forward one in an attempt to find one.");
             move(direction);
             replace(direction);
             move(getOppositeDirection(direction));
         end
         successCode = place(direction);
+        log(debug, "successCode="..successCode.."[attempt #"..tries"]");
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
     end
-    if (criticalError) then
-        log(error, "Critical Error - Exiting program to avoid running amok!");
-        log (fine, "Exiting replace()");
-        shell.exit();
-    end;
     log (fine, "Exiting replace()");
 end
 
