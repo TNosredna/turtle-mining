@@ -37,15 +37,19 @@ local blockAlreadyPresent = 1;
 local notEnoughInventory = 2;
 local noAnchorBlocks = 3;
 
-local criticalError = false;
+local currentLogIndent = 0;
 
 local function log(logLevel, line)
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local line = line;
+        local entry = os.time().." ["..logLevel.."] -\t";
+        for i=1,currentLogIndent do
+            entry = entry.."  ";
+        end;
+        entry = entry..line;
         local filename = os.computerID()..".log";
         local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
-        file.writeLine(os.time().." ["..logLevel.."] - "..line);
+        file.writeLine(entry);
         file.close();
     end;
 end
@@ -192,6 +196,7 @@ end
 
 -- dig if can't move
 local function moveWithDig(direction, steps, attempts)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering moveWithDig("..direction..")");
     local steps = steps or 1
     local attempts = attempts or 10
@@ -207,6 +212,7 @@ local function moveWithDig(direction, steps, attempts)
         end
     end
     log (fine, "Exiting moveWithDig()");
+    currentLogIndent = currentLogIndent - 1;
 end
 
 local function getOppositeDirection(currentDirection)
@@ -221,6 +227,7 @@ end
 
 -- move if can't replace. empty anchor protection
 local function replace(direction, slot, attempts)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering replace()");
     local attempts = attempts or 10;
     local tries = 1;
@@ -229,34 +236,37 @@ local function replace(direction, slot, attempts)
 
     selectWithOverflow(slot);
     local successCode = place(direction);
-    log(debug, "successCode="..successCode);
+    log(debug, "    successCode="..successCode);
     while ((attempts==0) or (tries<=attempts)) do
         if (successCode==blockPlaced) then
-            log(debug, "Block was succesfully placed, continueing on.");
+            log(debug, "    Block was succesfully placed, continueing on.");
             break;
         elseif (successCode==blockAlreadyPresent) then
-            log(debug, "Block was succesfully placed, continueing on.");
+            log(debug, "    Block was succesfully placed, continueing on.");
             dig(direction);
         elseif (successCode==notEnoughInventory) then
-            log(error, "Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
+            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
             log (fine, "Exiting replace()");
+            currentLogIndent = currentLogIndent - 1;
             shell.exit();
         elseif (successCode==noAnchorBlocks) then
-            log(debug, "No anchor blocks found to attach to, moving forward one in an attempt to find one.");
+            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.");
             move(direction);
             replace(direction);
             move(getOppositeDirection(direction));
         end
         successCode = place(direction);
-        log(debug, "successCode="..successCode.."[attempt #"..tries"]");
+        log(debug, "    successCode="..successCode.."[attempt #"..tries"]");
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
     end
     log (fine, "Exiting replace()");
+    currentLogIndent = currentLogIndent - 1;
 end
 
 local function transitionOverAnd180Degrees(turnDirection, steps)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering transitionOverAnd180Degrees()");
     local steps = steps or 1;
     local turnDirection = turnDirection;
@@ -265,9 +275,11 @@ local function transitionOverAnd180Degrees(turnDirection, steps)
     moveWithDig(forward, steps);
     turn(turnDirection);
     log (fine, "Exiting transitionOverAnd180Degrees()");
+    currentLogIndent = currentLogIndent - 1;
 end
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering floorAndCeilingColumn()");
     local numberBlocks = numberBlocks or 5;
     local currentUpDownDirection = currentUpDownDirection;
@@ -287,10 +299,12 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     replace(currentUpDownDirection, endingFillSlot);
 
     log (fine, "Exiting floorAndCeilingColumn()");
+    currentLogIndent = currentLogIndent - 1;
     return currentUpDownDirection;
 end
 
 local function floorAndCeilingRow(currentDirection, numberColumns)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering floorAndCeilingRow()");
     local numberColumns = numberColumns or 9;
     local currentDirection = currentDirection;
@@ -302,10 +316,12 @@ local function floorAndCeilingRow(currentDirection, numberColumns)
         end
     end
     log (fine, "Exiting floorAndCeilingRow()");
+    currentLogIndent = currentLogIndent - 1;
     return currentDirection;
 end
 
 local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering buildFloorAndCeiling()");
     local numberRows = numberRows or 9;
     local numberColumns = numberRows;
@@ -320,18 +336,22 @@ local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDire
         end
     end
     log (fine, "Exiting buildFloorAndCeiling()");
+    currentLogIndent = currentLogIndent - 1;
 end
 
 local function moveToStartingPositionForCeilingFloor(turnDirection)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering moveToStartingPositionForCeilingFloor()");
     local turnDirection = turnDirection;
     transitionOverAnd180Degrees(turnDirection);
     moveWithDig(forward);
     moveWithDig(up, 2);
     log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
+    currentLogIndent = currentLogIndent - 1;
 end;
 
 local function wallColumn(currentDirection, height)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering wallColumn()");
     local height = height or 5;
     height = height - 2;
@@ -359,10 +379,12 @@ local function wallColumn(currentDirection, height)
     replace(getOppositeDirection(currentDirection), endingFillSlot);
 
     log (fine, "Exiting wallColumn()");
+    currentLogIndent = currentLogIndent - 1;
     return currentDirection;
 end
 
 local function buildWalls(startingUpDownDirection, numberColumns)
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering buildWalls()");
     local currentDirection = getOppositeDirection(startingUpDownDirection);
     local numberColumns = numberColumns;
@@ -382,10 +404,12 @@ local function buildWalls(startingUpDownDirection, numberColumns)
         end;
     end;
     log (fine, "Exiting buildWalls()");
+    currentLogIndent = currentLogIndent - 1;
     return currentDirection;
 end;
 
 local function moveToStartingPositionForWalls()
+    currentLogIndent = currentLogIndent + 1;
     log (fine, "Entering moveToStartingPositionForWalls()");
     local currentDirection = up;
     -- turtle should start at z=13 or higher
@@ -396,6 +420,7 @@ local function moveToStartingPositionForWalls()
     turn(right);
     moveWithDig(forward, 4);
     log (fine, "Exiting moveToStartingPositionForWalls()");
+    currentLogIndent = currentLogIndent - 1;
     return currentDirection;
 end
 
