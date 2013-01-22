@@ -256,7 +256,7 @@ local function replace(direction, slot, attempts)
             move(getOppositeDirection(direction));
         end
         successCode = place(direction);
-        log(debug, "    successCode="..successCode.."[attempt #"..tries"]");
+        log(debug, "    successCode="..successCode.."[attempt #"..tries.."]");
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
