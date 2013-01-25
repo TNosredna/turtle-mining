@@ -13,12 +13,12 @@ end
 
 local function downloadScripts()
     generateLatestFile("testStub");
-    generateLatestFile("buildTurtleMine");
-    generateLatestFile("digTurtleStationShaft");
+    generateLatestFile("buildMine");
+    generateLatestFile("digShaft");
     generateLatestFile("prepareTurtleStationShaft");
-    generateLatestFile("digTurtleStation");
+    generateLatestFile("digStation");
     generateLatestFile("prepareTurtleStation");
-    generateLatestFile("beginMining");
+    generateLatestFile("begin");
     -- Use MLG's Circular Mining Programs for doing the actual mining.  His scripts rock!!
     shell.run("rm", "mlgUpdater") ;
     shell.run("pastebin", "get", "mcEpZDQe", "mlgUpdater");

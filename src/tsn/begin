@@ -1,0 +1,37 @@
+term.clear();
+
+-- -numL <num>      => nr. of levels
+-- -numT <num>      => nr. of tunnels
+-- -numS <num>      => nr. of shafts
+-- -skipL <num>     => skip # levels
+-- -skipT <num>     => skip # tunnels
+-- -skipS <num>     => skip # shafts
+-- -dirNextL <dir>  => next lev. U/D
+-- -dirNextT <dir>  => next tun. L/R
+-- -height <num>    => level height 2/3
+-- -betw <num>      => blocks betw shafts
+-- -firstOffs <num> => first shaft offset
+-- -evenOffs <num>  => even level offset
+-- -torches         => place torches
+-- -oneChest        => single drop chest
+-- -rad <num>       => center radius
+-- -sides           => dig out the sides
+-- -numIgnore <num> => num ignore blocks
+-- -noFuel          => no need for fuel
+-- -depFuel <num>   => departure fuel
+-- -retFuel <num>   => return fuel
+-- -fuelS <dir>     => fuel suck dir
+-- -fuelD <dir>     => fuel drop dir
+-- -torchS <dir>    => torch suck dir
+-- -itemD <dir>     => item drop dir
+-- -ignoreS <dir>   => ignore block dir
+
+-- Torches -> right chest -- 1=64 torches, 2=64 torches, 3=64 torches
+-- Fuel Material -> bottom chest  -- 1=fuel
+-- Ignore Material -> left chest -- 1=1 Stone,2=1 Cobblestone,3=1 Dirt,4=1 Gravel
+-- Mined Material -> back chest
+
+--shell.run("digTunnels","-numT","2","-numS","6","-numL","9","-rad","5","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+--shell.run("digShafts","-numT","2","-numS","6","-numL","9","-rad","5","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+--shell.run("digOres","-numT","2","-numS","6","-numL","9","-rad","5","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+shell.run("digAndExcavate","-numT","2","-numS","6","-numL","9","-rad","5","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");

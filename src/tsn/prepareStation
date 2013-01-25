@@ -153,5 +153,24 @@ function init()
     pos[2] = pos[2] - 1
 end
 
-init();
-buildStation();
+local function moveToStartingPositionForWalls()
+    log (fine, "Entering moveToStartingPositionForWalls()");
+    currentLogIndent = currentLogIndent + 1;
+    local currentDirection = up;
+    -- turtle should start at z=13 or higher
+    -- this moves turtle from starting position to corner of room where the room anchor column will be built
+    moveWithDig(down, 6);
+    turn(left);
+    moveWithDig(forward, 5);
+    turn(right);
+    moveWithDig(forward, 4);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting moveToStartingPositionForWalls()");
+    return currentDirection;
+end
+
+fs.delete(logFileName);
+local currentDirection = moveToStartingPositionForWalls();
+currentDirection = buildWalls(currentDirection, 11);
+moveToStartingPositionForCeilingFloor(left);
+buildFloorAndCeiling(left, down, 9);
