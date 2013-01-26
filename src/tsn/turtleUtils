@@ -1,20 +1,20 @@
 -- Slot Assignments
-local wallFiller1Slot = 1;      -- digStation
-local wallFiller2Slot = 2;      -- digStation
-local wallFiller3Slot = 3;      -- digStation
-local wallFiller4Slot = 4;      -- digShaft
-local extraSlot = 5;            -- none
-local extraSlot = 6;            -- none
-local floorFillerSlot = 7;      -- digStation
-local roofFillerSlot = 8;       -- digStation
-local smallChestSlot = 9;       -- prepareStation
-local redstoneEngineSlot = 10;  -- prepareStation
-local woodenPipeSlot = 11;      -- prepareStation
-local stonePipeSlot = 12;       -- prepareStation
-local redstoneTorchSlot = 13;   -- prepareStation
-local torchSlot = 14;           -- digShaft
-local ladderSlot = 15;          -- digShaft
-local fuelSlot = 16;            -- digShaft
+local wallFiller1Slot = 1;     -- digStation (64)
+local wallFiller2Slot = 2;     -- digStation (64)
+local wallFiller3Slot = 3;     -- digStation (32)
+local wallFiller4Slot = 4;     -- digShaft (64)
+local floorFillerSlot = 5;     -- digStation (49)
+local roofFillerSlot = 6;      -- digStation (49)
+local stonePipeSlot = 7;       -- prepareShaft (64)
+local stonePipeSlot = 8;       -- prepareStation (2-8)
+local redWireSlot = 9;         -- prepareShaft (64)
+local smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (1)
+local redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
+local woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
+local redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
+local torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
+local ladderSlot = 15;         -- digShaft (64)
+local fuelSlot = 16;           -- digShaft
 
 
 local up = "up";
@@ -42,6 +42,7 @@ local noAnchorBlocks = 3;
 
 local currentLogIndent = 0;
 local logFileName = os.computerID()..".log";
+local darkness = 0;
 
 local function log(logLevel, line)
     local logLevel = logLevel or coarse;
@@ -58,27 +59,32 @@ local function log(logLevel, line)
     end;
 end
 
-local function turn(turnDirection)
+local function turn(turnDirection, repeatCount)
     local turnDirection = turnDirection;
+    local repeatCount = repeatCount or 1;
 
-    if (turnDirection == left) then
-        if (turtle.turnLeft()) then log(fine, "turned: left"); return success;  else log(debug, "failed to turn: left"); return failure;  end;
-    elseif (turnDirection == right) then
-        if (turtle.turnRight()) then log(fine, "turned: right"); return success;  else log(debug, "failed to turn: right"); return failure;  end;
+    for i = 1,repeatCount do
+        if (turnDirection == left) then
+            if (turtle.turnLeft()) then log(fine, "turned: left"); else log(debug, "failed to turn: left"); return failure;  end;
+        elseif (turnDirection == right) then
+            if (turtle.turnRight()) then log(fine, "turned: right"); else log(debug, "failed to turn: right"); return failure;  end;
+        end;
     end;
+
+    return success;
 end;
 
 local function move(moveDirection)
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
-        if (turtle.forward()) then log(fine, "moved: forward"); return success;  else log(debug, "failed to move: forward"); return failure;  end;
+        if (turtle.forward()) then log(fine, "moved: forward"); darkness = darkness + 1; return success;  else log(debug, "failed to move: forward"); return failure;  end;
     elseif (moveDirection == back) then
-        if (turtle.back()) then log(fine, "moved: back"); return success;  else log(debug, "failed to move: back"); return failure;  end;
+        if (turtle.back()) then log(fine, "moved: back"); darkness = darkness + 1; return success;  else log(debug, "failed to move: back"); return failure;  end;
     elseif (moveDirection == up) then
-        if (turtle.up()) then log(fine, "moved: up"); return success;  else log(debug, "failed to move: up"); return failure;  end;
+        if (turtle.up()) then log(fine, "moved: up"); darkness = darkness + 1; return success;  else log(debug, "failed to move: up"); return failure;  end;
     elseif (moveDirection == down) then
-        if (turtle.down()) then log(fine, "moved: down"); return success;  else log(debug, "failed to move: down"); return failure;  end;
+        if (turtle.down()) then log(fine, "moved: down"); darkness = darkness + 1; return success;  else log(debug, "failed to move: down"); return failure;  end;
     end;
 end;
 
@@ -123,18 +129,42 @@ local function select(slot)
 
     turtle.select(slot);
     log(fine, "selected: "..slot);
-    currentSlotNum = slot;
+    currentSlotNum = slot;  -- set the global slot value
     if (currentLogLevel == debug) then
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
 end;
 
+-- look in slots 1-12 if selected slot if empty
+local function selectWithOverflow(slot, attempts)
+    local attempts = attempts or 10
+    local slot = slot;
+
+    select(slot)
+    if turtle.getItemCount(slot) <= 1 then
+        select(1)
+        local tries = 1
+        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
+            for i = 1,12 do
+                select(i);
+                if (turtle.compareTo(slot)) then
+                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
+                    break;
+                end;
+            end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries + 1, attempts + 1)
+        end
+    end
+end
+
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-local function place(placeDirection)
+local function place(placeDirection, slot)
     local placeDirection = placeDirection or forward;
-    local slot = currentSlotNum;
+    local slot = slot or currentSlotNum;
     local actionFailed = false;
 
+    selectWithOverflow(slot);
     if (placeDirection == forward) then
         if (turtle.place()) then
             log(fine, "placed: forward");
@@ -175,29 +205,6 @@ local function place(placeDirection)
     end;
 end;
 
--- look in slots 1-12 if selected slot if empty
-local function selectWithOverflow(slot, attempts)
-    local attempts = attempts or 10
-    local slot = slot;
-
-    select(slot)
-    if turtle.getItemCount(slot) <= 1 then
-        select(1)
-        local tries = 1
-        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
-            for i = 1,12 do
-                select(i);
-                if (turtle.compareTo(slot)) then
-                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
-                    break;
-                end;
-            end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries + 1, attempts + 1)
-        end
-    end
-end
-
 -- dig if can't move
 local function moveWithDig(direction, steps, attempts)
     log (fine, "Entering moveWithDig("..direction..")");
@@ -230,13 +237,14 @@ local function getOppositeDirection(currentDirection)
 end
 
 -- move if can't replace. empty anchor protection
-local function replace(direction, slot, attempts)
+local function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     log (fine, "Entering replace()");
     currentLogIndent = currentLogIndent + 1;
     local attempts = attempts or 10;
     local tries = 1;
     local direction = direction;
     local slot = slot;
+    local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
 
     selectWithOverflow(slot);
     local successCode = place(direction);
@@ -245,7 +253,7 @@ local function replace(direction, slot, attempts)
         if (successCode==blockPlaced) then
             log(debug, "    Block was succesfully placed, continueing on.");
             break;
-        elseif (successCode==blockAlreadyPresent) then
+        elseif (successCode==blockAlreadyPresent and isAlwaysRemoveAndAdd) then
             log(debug, "    Block already present.");
             dig(direction);
         elseif (successCode==notEnoughInventory) then

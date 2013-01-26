@@ -1,44 +1,108 @@
 os.loadAPI("turtleUtils")
 
-local args={... };
+--    Level 63      Level 62-13
+--  |------|---|    |----|-----|
+--  |   C  |   |    |    |     |
+--  |------|---|    |----|-----|
+--  | Tu/W | E |    |  S | R/T |
+--  |------|---|    |----|-----|
+--  |      |   |    |    |  L  |
+--  |------|---|    |----|-----|
+--  C  = Chest
+--  W  = Wood Pipe
+--  E  = Redstone Engine
+--  Tu = Turtle Starting Position
+
+--  S  = Stone Pipe
+--  Tu = Turtle Shaft
+--  T  = Torches
+--  L  = Ladder
+
+local args={...};
 local z = args[1];
-local darkness = 0;
 
-local function mineShaft()
-    for i = 1, z do
-        moveWithDig(down);
-        darkness = darkness + 1
-        dig(forward);
-        if not placeLadder() then
-            --break
-        end
-
-        turn(right);
-        if darkness >= 6 then
-            dig(forward);
-            selectWithOverflow(torchSlot)
-            place(forward)
-        end
-
-        turn(right);
-        dig(forward);
-        selectWithOverflow(stonePipeSlot);
-        place(forward);
-
-        turn(left);
-        turn(left);
-        refuel()
-    end
-end;
-
-local function moveToStartOfShaft()
-    turn(right);
-    turn(right);
-    selectWithOverflow(smallChestSlot);
+-- start while turtle facing East to place Engine
+local function prepareTopOfShaft()
+    selectWithOverflow(redstoneEngineSlot);
     place(forward);
     turn(left);
-    turn(left);
+    selectWithOverflow(smallChestSlot);
+    place(forward);
+    moveWithDig(down);
+    selectWithOverflow(woodenPipeSlot);
+    place(up);
 end;
 
-moveToStartOfShaft();
+local function digShaftLayer()
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+
+    moveWithDig(forward)
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(right, 2);
+    moveWithDig(forward)
+    replace(forward, wallFiller1Slot, false);
+    turn(right);
+    replace(forward, wallFiller1Slot, false);
+    turn(right, 2);
+    replace(forward, wallFiller1Slot, false);
+end;
+
+local function prepareShaftLayer()
+    turn(right);
+    move(back);
+    place(forward, ladderSlot);
+    turn(left);
+    move(back);
+    place(forward, redWireSlot);
+    if (darkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
+        darkness = 0;
+    end
+    turn(left);
+    moveWithDig(down);
+    place(up, stonePipeSlot);
+end;
+
+local function prepareBottomOfShaft()
+    for i=1,3 do
+        replace(forward, wallFiller1Slot, false);
+        turn(left);
+        replace(forward, wallFiller1Slot, false);
+        turn(left);
+
+        moveWithDig(forward);
+        turn(right);
+    end;
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    turn(left);
+    place(forward, ladderSlot, false);
+    turn(left);
+    move(back);
+    place(forward, redstoneTorchSlot, false);
+    turn(left);
+    move(back);
+    place(forward, smallChestSlot, false);
+end;
+
+local function mineShaft()
+    prepareTopOfShaft();
+
+    for i = 1,(z-1) do
+        digShaftLayer();
+        prepareShaftLayer();
+        refuel()
+    end;
+
+    prepareBottomOfShaft();
+end;
+
 mineShaft();

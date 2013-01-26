@@ -1,7 +1,18 @@
-print ("How many blocks down should the turtle station floor be located?");
+os.loadAPI("turtleUtils")
+
+fs.delete(logFileName);
+print ("How many blocks down should the station roof be located? (Z - 13 is normal)");
 z = io.read();
 z = tonumber(z);
 
+print ("What diameter of station should be built? (5 is normal)");
+d = io.read();
+d = tonumber(d);
+
+print ("What height of station should be built? (3 is normal)");
+h = io.read();
+h = tonumber(h);
+
 shell.run("digShaft", z);
-shell.run("digStation");
--- shell.run("prepareStation");
+shell.run("digStation", d, h);
+shell.run("prepareStation", d, h);

@@ -1,171 +1,195 @@
 os.loadAPI("turtleUtils")
 
-curSlot = 1
-h = 0
+local args={...};
+local radius = args[1] or 5;
+local height = args[2] or 5;
 
-pos = { 0, 0, 0, 0}
-
-local args={... };
-local ansB = args[1];
-
-function tryForward()
-    Moving = false
-    while not(Moving) do
-        Moving = turtle.forward()
-    end
+function dropoffAndRestock(configuration, ignoreBlocks, restockIgnore, dropTorches, dropIgnore)
+    dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
+    restock(configuration, ignoreBlocks, restockIgnore)
 end
 
-function tryBack()
-    Moving = false
-    while not(Moving) do
-        Moving = turtle.back()
-    end
-end
 
-function right(times)
-    if times == nil then
-        times = 1
-    end
-
-    turtle.turnRight()
-    for i=1,times do
-        tryForward()
-
-        if pos[4] == 0 then
-            pos[1] = pos[1] + 1
-        elseif pos[4] == 1 then
-            pos[3] = pos[3] + 1
-        elseif pos[4] == 2 then
-            pos[1] = pos[1] - 1
-        else
-            pos[3] = pos[3] - 1
+-- EMPTIES THE INVENTORY
+function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
+    -- DROP THE TORCHES
+    turtle.select(1)
+    local torchSlot=0
+    if configuration.placeTorches then
+        torchSlot=1
+        if dropTorches then
+            api_turtleExt.drop(configuration.torchSuckDir)
         end
     end
-    turtle.turnLeft()
-end
-
-function left(times)
-    if times == nil then
-        times = 1
+    -- DROP THE EXTRAS OF THE IGNORE BLOCKS
+    api_turtleExt.turnTo(configuration.itemDropDir)
+    for i=1+torchSlot,torchSlot+ignoreBlocks do
+        turtle.select(i)
+        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), math.max(turtle.getItemCount(i)-1, 0))
     end
-
-    turtle.turnLeft()
-    for i=1,times do
-        tryForward()
-
-        if pos[4] == 0 then
-            pos[1] = pos[1] - 1
-        elseif pos[4] == 1 then
-            pos[3] = pos[3] - 1
-        elseif pos[4] == 2 then
-            pos[1] = pos[1] + 1
-        else
-            pos[3] = pos[3] + 1
+    -- DROP THE OTHER ITEMS
+    for i=torchSlot+ignoreBlocks+1,16 do
+        turtle.select(i)
+        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), turtle.getItemCount(i))
+    end
+    api_turtleExt.turnFrom(configuration.itemDropDir)
+    turtle.select(1)
+    -- DROP THE IGNORE BLOCKS
+    if dropIgnore then
+        api_turtleExt.turnTo(configuration.ignoreDir)
+        for i=1+torchSlot,torchSlot+ignoreBlocks do
+            turtle.select(i)
+            api_turtleExt.drop(api_turtleExt.turnedDir(configuration.ignoreDir), 1)
         end
+        api_turtleExt.turnFrom(configuration.ignoreDir)
     end
-    turtle.turnRight()
 end
 
-function up()
-    turtle.up()
-    h = h + 1
-    pos[2] = pos[2] + 1
-end
 
-function down()
-    turtle.down()
-    h = h - 1
-    pos[2] = pos[2] - 1
-end
-
-function forward()
-    tryForward()
-
-    if pos[4] == 0 then
-        pos[3] = pos[3] - 1
-    elseif pos[4] == 1 then
-        pos[1] = pos[1] + 1
-    elseif pos[4] == 2 then
-        pos[3] = pos[3] + 1
+-- RESTOCKS THE TORCHES
+function restockTorches(configuration)
+    turtle.select(1)
+    local dispMsg=true
+    local firstEmpty=2
+    -- CALCULATE THE FIRST EMPTY SLOT
+    while ((turtle.getItemCount(firstEmpty)>0) and (firstEmpty<16)) do
+        firstEmpty = firstEmpty+1
+    end
+    -- ALIGN WITH THE TORCH CHEST AND SUCK A STACK
+    api_turtleExt.turnTo(configuration.torchSuckDir)
+    local tDir=api_turtleExt.turnedDir(configuration.torchSuckDir)
+    while turtle.getItemCount(firstEmpty)==0 do
+        if not api_turtleExt.suck(tDir) then
+            if dispMsg then
+                term.clear()
+                term.setCursorPos(1,1)
+                print("---------------------------------")
+                print("Please place some torches in a chest")
+                print("Chest Direction:  "..configuration.torchSuckDir)
+                print("Torches Required: "..(turtle.getItemSpace(1)+1))
+                print("---------------------------------")
+                dispMsg=false
+            end
+        else
+            dispMsg=true
+        end
+        sleep(0)
+    end
+    term.clear()
+    -- CHECK IF THERE ARE ACTUALLY TORCHES IN SLOT 1 AND DUMP ANY EXCESS TORCHES
+    if turtle.compareTo(firstEmpty) then
+        turtle.select(firstEmpty)
+        api_turtleExt.drop(tDir)
+        api_turtleExt.turnFrom(configuration.torchSuckDir)
     else
-        pos[1] = pos[1] - 1
+        turtle.select(firstEmpty)
+        api_turtleExt.drop(tDir)
+        turtle.select(1)
+        api_turtleExt.turnFrom(configuration.torchSuckDir)
+        api_turtleExt.drop(configuration.itemDropDir)
+        restockTorches(configuration)
     end
+    turtle.select(1)
 end
 
-function back()
-    tryBack()
 
-    if pos[4] == 0 then
-        pos[3] = pos[3] + 1
-    elseif pos[4] == 1 then
-        pos[1] = pos[1] - 1
-    elseif pos[4] == 2 then
-        pos[3] = pos[3] - 1
-    else
-        pos[1] = pos[1] + 1
+-- RESTOCKS THE INVENTORY
+function restock(configuration, ignoreBlocks, restockIgnore)
+    turtle.select(1)
+    local torchSlot=0
+    -- RESTOCK THE TORCHES
+    if configuration.placeTorches then
+        torchSlot=1
+        restockTorches(configuration)
     end
+    -- RESTOCK THE IGNORE BLOCKS
+    if restockIgnore then
+        api_turtleExt.turnTo(configuration.ignoreDir)
+        local tDir=api_turtleExt.turnedDir(configuration.ignoreDir)
+        for i=1+torchSlot,ignoreBlocks+torchSlot do
+            turtle.select(i)
+            api_turtleExt.suck(tDir)
+        end
+        api_turtleExt.turnFrom(configuration.ignoreDir)
+    end
+    turtle.select(1)
 end
 
-function checkInv()
-    if turtle.getItemCount(curSlot) < 1 then
-        curSlot = curSlot + 1
-        turtle.select(curSlot)
-    end
-end
+local function waitForInventoryToArriveInChest()
+    --detect chest up
+    --drop off excess inv
+    --wait until desired inv is present then take
+end;
 
-function buildStation()
-    forward(4);
-    up();
-    turtle.dig();
-    select ()
-end
-
-function init()
-    if ansB == "north" then
-        pos[4] = 0
-    elseif ansB == "east" then
-        pos[4] = 1
-    elseif ansB == "south" then
-        pos[4] = 2
-    elseif ansB == "west" then
-        pos[4] = 3
-    else
-        print("Not a valid answer!")
-        os.sleep(3)
-        os.reboot()
-    end
-
-    if pos[4] == 0 then
-        pos[3] = pos[3] - 1
-    elseif pos[4] == 1 then
-        pos[1] = pos[1] + 1
-    elseif pos[4] == 2 then
-        pos[3] = pos[3] + 1
-    else
-        pos[1] = pos[1] - 1
-    end
-
-    pos[2] = pos[2] - 1
-end
-
-local function moveToStartingPositionForWalls()
-    log (fine, "Entering moveToStartingPositionForWalls()");
-    currentLogIndent = currentLogIndent + 1;
-    local currentDirection = up;
-    -- turtle should start at z=13 or higher
-    -- this moves turtle from starting position to corner of room where the room anchor column will be built
-    moveWithDig(down, 6);
-    turn(left);
-    moveWithDig(forward, 5);
+local function prepareStation()
     turn(right);
-    moveWithDig(forward, 4);
+    moveWithDig(forward);
+    moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
+    turn(right, 2);
+    dig(forward); -- destroy woodenpipe
+    place(forward, stonePipeSlot, false);
+    move(down);
+    place(up, stonePipeSlot, false); -- plenum
+    move(down);
+    place(up, stonePipeSlot, false); -- in ceiling
+    move(down);
+    place(up, stonePipeSlot, false); -- in ceiling
+    move(forward);
+    dig(up);
+    place(up, stonePipeSlot, false);
+    move(down);
+    place(up, stonePipeSlot, false);
+    move(down);
+    place(up, stonePipeSlot, false);
+    dig(down);
+    place(down, stonePipeSlot, false);
+    move(back);
+    place(forward, stonePipeSlot, false);
+    dig(down);
+    place(down, stonePipeSlot, false);
+    move(back);
+    place(down, stonePipeSlot, false);
+    move(back);
+    place(down, stonePipeSlot, false);
+    move(back);
+    place(down, woodenPipeSlot, false);
+    turn(right, 2);
+    moveWithDig(forward);
+    dig(down);
+    place(down, smallChestSlot, false);
+    turn(left);
+    dig(forward);
+    place(forward, smallChestSlot, false);
+    dig(up);
+    place(up, smallChestSlot, false);
+    turn(right, 2);
+    moveWithDig(forward);
+    turn(left);
+    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
+    dig(down);
+    place(down, redstoneTorch, false);
+    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
+    move(back);
+    place(forward, smallChestSlot, false);
+    dig(down);
+    place(down, redstoneEngine, false);
+    place(forward, redstoneTorch, false);
+end;
+
+local function moveToStartingPosition(radius)
+    local radius = radius;
+    log (fine, "Entering moveToStartingPosition()");
+    currentLogIndent = currentLogIndent + 1;
+    turn(left);
+    move(radius - 1);
+    turn(left);
+    move(radius - 1);
+    moveWithDig(up);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPositionForWalls()");
-    return currentDirection;
 end
 
-fs.delete(logFileName);
-local currentDirection = moveToStartingPositionForWalls();
-currentDirection = buildWalls(currentDirection, 11);
-moveToStartingPositionForCeilingFloor(left);
-buildFloorAndCeiling(left, down, 9);
+--fs.delete(logFileName);
+moveToStartingPosition(radius);
+waitForInventoryToArriveInChest();
+prepareStation();

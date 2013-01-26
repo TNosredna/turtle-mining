@@ -1,32 +1,9 @@
 -- Must allow for 1 available block above ceiling and 1 available block below floor
 os.loadAPI("turtleUtils");
 
-local up = "up";
-local down = "down";
-local forward = "forward";
-local right = "right";
-local left = "left";
-local back = "back";
-
-local error = 0;
-
-local coarse = 1;
-local fine = 2;
-local debug = 3;
-local currentLogLevel = debug;
-
-local currentSlotNum = 1;
-
-local success = true;
-local failure = false;
-
-local blockPlaced = 0;
-local blockAlreadyPresent = 1;
-local notEnoughInventory = 2;
-local noAnchorBlocks = 3;
-
-local currentLogIndent = 0;
-local logFileName = os.computerID()..".log";
+local args={...};
+local radius = args[1] or 5;
+local height = args[2] or 5;
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     log(fine, "Entering floorAndCeilingColumn()");
@@ -53,14 +30,15 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     return currentUpDownDirection;
 end
 
-local function floorAndCeilingRow(currentDirection, numberColumns)
+local function floorAndCeilingRow(currentDirection, numberColumns, height)
     log (fine, "Entering floorAndCeilingRow()");
     currentLogIndent = currentLogIndent + 1;
     local numberColumns = numberColumns or 9;
+    local height = height or 5;
     local currentDirection = currentDirection;
 
     for i = 1,numberColumns do
-        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection));
+        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection), height);
         if (i < numberColumns) then
             moveWithDig(forward, 1)
         end
@@ -70,16 +48,17 @@ local function floorAndCeilingRow(currentDirection, numberColumns)
     return currentDirection;
 end
 
-local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows)
+local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows, height)
     log (fine, "Entering buildFloorAndCeiling()");
     currentLogIndent = currentLogIndent + 1;
     local numberRows = numberRows or 9;
     local numberColumns = numberRows;
+    local hieght = height or 5;
     local currentUpDownDirection = currentUpDownDirection;
     local currentLeftRightDirection = currentLeftRightDirection;
 
     for i = 1,numberRows do
-        currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns);
+        currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns, height);
         if (i < numberRows) then
             currentLeftRightDirection = getOppositeDirection(currentLeftRightDirection);
             transitionOverAnd180Degrees(currentLeftRightDirection);
@@ -133,7 +112,7 @@ local function wallColumn(currentDirection, height)
     return currentDirection;
 end
 
-local function buildWalls(startingUpDownDirection, numberColumns)
+local function buildWalls(startingUpDownDirection, numberColumns, height)
     log (fine, "Entering buildWalls()");
     currentLogIndent = currentLogIndent + 1;
     local currentDirection = getOppositeDirection(startingUpDownDirection);
@@ -142,7 +121,7 @@ local function buildWalls(startingUpDownDirection, numberColumns)
 
     for x=1,numberWalls do
         for i=1,numberColumns do
-            currentDirection = wallColumn(getOppositeDirection(currentDirection));
+            currentDirection = wallColumn(getOppositeDirection(currentDirection), height);
             if (i < numberColumns) then
                 moveWithDig(forward);
             end;
@@ -157,24 +136,25 @@ local function buildWalls(startingUpDownDirection, numberColumns)
     return currentDirection;
 end;
 
-local function moveToStartingPositionForWalls()
+local function moveToStartingPositionForWalls(radius, height)
     log (fine, "Entering moveToStartingPositionForWalls()");
     currentLogIndent = currentLogIndent + 1;
     local currentDirection = up;
     -- turtle should start at z=13 or higher
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
-    moveWithDig(down, 6);
-    turn(left);
-    moveWithDig(forward, 5);
+    moveWithDig(down, height + 1);
+    moveWithDig(forward, radius + 1);
     turn(right);
-    moveWithDig(forward, 4);
+    moveWithDig(forward, radius);
+    turn(right);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPositionForWalls()");
     return currentDirection;
 end
 
-fs.delete(logFileName);
+--fs.delete(logFileName);
+local diameter = radius * 2;
 local currentDirection = moveToStartingPositionForWalls();
-currentDirection = buildWalls(currentDirection, 11);
+currentDirection = buildWalls(currentDirection, (diameter +1), height);
 moveToStartingPositionForCeilingFloor(left);
-buildFloorAndCeiling(left, down, 9);
+buildFloorAndCeiling(left, down, (diameter - 1), height);
