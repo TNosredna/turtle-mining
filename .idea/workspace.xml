@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digShaft" afterPath="$PROJECT_DIR$/src/tsn/digShaft" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digStation" afterPath="$PROJECT_DIR$/src/tsn/digStation" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareStation" afterPath="$PROJECT_DIR$/src/tsn/prepareStation" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="80" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.53416747">
+            <state line="46" column="0" selection-start="0" selection-end="1228" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,10 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testStub" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="7" selection-start="4345" selection-end="4345" vertical-scroll-proportion="0.0">
+            <state line="45" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.641635">
               <folding />
             </state>
           </provider>
@@ -810,7 +806,11 @@
       <created>1359237958739</created>
       <updated>1359237958739</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Fixed bug in including external source">
+      <created>1359239191095</created>
+      <updated>1359239191095</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -880,7 +880,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug in including external source" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -907,6 +907,7 @@
     <MESSAGE value="Refactoring the code" />
     <MESSAGE value="Finished engineering digShaft, not tested&#10;Added prepare station&#10;" />
     <MESSAGE value="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;" />
+    <MESSAGE value="Fixed bug in including external source" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -993,16 +994,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="7" selection-start="4345" selection-end="4345" vertical-scroll-proportion="0.0">
+        <state line="46" column="0" selection-start="0" selection-end="1228" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="80" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.53416747">
+        <state line="45" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.641635">
           <folding />
         </state>
       </provider>
