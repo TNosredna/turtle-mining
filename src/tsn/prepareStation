@@ -1,9 +1,4 @@
-smallChestPos = 7;
-largeChestPos = 8;
-redstoneEnginePos = 9;
-woodenPipePos = 10;
-stonePipePos = 11;
-redstoneTorchPos = 12;
+os.loadAPI("turtleUtils")
 
 curSlot = 1
 h = 0

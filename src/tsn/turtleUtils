@@ -1,3 +1,22 @@
+-- Slot Assignments
+local wallFiller1Slot = 1;      -- digStation
+local wallFiller2Slot = 2;      -- digStation
+local wallFiller3Slot = 3;      -- digStation
+local wallFiller4Slot = 4;      -- digShaft
+local extraSlot = 5;            -- none
+local extraSlot = 6;            -- none
+local floorFillerSlot = 7;      -- digStation
+local roofFillerSlot = 8;       -- digStation
+local smallChestSlot = 9;       -- prepareStation
+local redstoneEngineSlot = 10;  -- prepareStation
+local woodenPipeSlot = 11;      -- prepareStation
+local stonePipeSlot = 12;       -- prepareStation
+local redstoneTorchSlot = 13;   -- prepareStation
+local torchSlot = 14;           -- digShaft
+local ladderSlot = 15;          -- digShaft
+local fuelSlot = 16;            -- digShaft
+
+
 local up = "up";
 local down = "down";
 local forward = "forward";
@@ -162,7 +181,7 @@ local function selectWithOverflow(slot, attempts)
     local slot = slot;
 
     select(slot)
-    if turtle.getItemCount(slot) == 1 then
+    if turtle.getItemCount(slot) <= 1 then
         select(1)
         local tries = 1
         while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
@@ -261,4 +280,11 @@ local function transitionOverAnd180Degrees(turnDirection, steps)
     turn(turnDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting transitionOverAnd180Degrees()");
+end
+
+local function refuel()
+    if turtle.getFuelLevel() <= 5 then
+        turtle.select(fuelSlot);
+        turtle.refuel(1);
+    end
 end

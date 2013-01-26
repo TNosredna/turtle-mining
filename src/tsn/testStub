@@ -7,11 +7,11 @@ local rightTick = 1;
 local forwardTick = 0;
 local backTick = 1;
 
-local wallFiller1Pos = 1;
-local wallFiller2Pos = 2;
-local wallFiller3Pos = 3;
-local floorFillerPos = 4;
-local roofFillerPos = 5;
+local wallFiller1Slot = 1;
+local wallFiller2Slot = 2;
+local wallFiller3Slot = 3;
+local floorFillerSlot = 4;
+local roofFillerSlot = 5;
 local skylightFillerPos = 6;
 
 local up = "up";
@@ -287,11 +287,11 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     local endingFillSlot;
 
     if currentUpDownDirection == up then
-        initialFillSlot = floorFillerPos;
-        endingFillSlot = roofFillerPos;
+        initialFillSlot = floorFillerSlot;
+        endingFillSlot = roofFillerSlot;
     else
-        initialFillSlot = roofFillerPos;
-        endingFillSlot = floorFillerPos;
+        initialFillSlot = roofFillerSlot;
+        endingFillSlot = floorFillerSlot;
     end
 
     replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
@@ -357,16 +357,16 @@ local function wallColumn(currentDirection, height)
     height = height - 2;
     local currentDirection = currentDirection;
     local initialFillSlot;
-    local middleFillSlot = wallFiller1Pos;
+    local middleFillSlot = wallFiller1Slot;
     local endingFillSlot;
 
     if currentDirection == up then
-        initialFillSlot = floorFillerPos;
-        endingFillSlot = roofFillerPos;
+        initialFillSlot = floorFillerSlot;
+        endingFillSlot = roofFillerSlot;
     end
     if currentDirection == down then
-        initialFillSlot = roofFillerPos;
-        endingFillSlot = floorFillerPos;
+        initialFillSlot = roofFillerSlot;
+        endingFillSlot = floorFillerSlot;
     end
 
     moveWithDig(currentDirection, 2);

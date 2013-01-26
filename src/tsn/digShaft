@@ -1,139 +1,44 @@
-torchPos = 13;
-wallFiller4Pos = 14;
-ladderPos = 15;
-fuelPos = 16;
-stonePipePos = 11;
-largeChestPos = 8;
-
-function moveForward()
-    repeat
-        turtle.dig();
-        until turtle.forward()
-end
-
-function mineUp()
-    repeat
-        turtle.digUp()
-        until turtle.up()
-end
-
-function refuel()
-    if turtle.getFuelLevel() <= 5 then
-        turtle.select(fuelPos);
-        turtle.refuel(1);
-    end
-end
-
-function selectLadder()
-    turtle.select(ladderPos)
-    if turtle.getItemCount(ladderPos) == 1 then
-        turtle.select(1)
-        while not turtle.compareTo(ladderPos) do
-            for i = 1, 12 do
-                turtle.select(i)
-            end
-        end
-    end
-end
-
-function selectStonePipe()
-    turtle.select(stonePipePos)
-    if turtle.getItemCount(stonePipePos) == 1 then
-        turtle.select(1)
-        while not turtle.compareTo(stonePipePos) do
-            for i = 1, 12 do
-                turtle.select(i)
-            end
-        end
-    end
-end
-
-function selectDirt()
-    turtle.select(wallFiller4Pos)
-    if turtle.getItemCount(wallFiller4Pos) == 1 then
-        turtle.select(1)
-        while not turtle.compareTo(wallFiller4Pos) do
-            for i = 1, 12 do
-                turtle.select(i)
-            end
-        end
-    end
-end
-
-function placeLadder()
-    selectLadder()
-    if not turtle.place() then
-        selectDirt()
-        moveForward()
-        turtle.place()
-        turtle.back()
-        selectLadder()
-        if not turtle.place() then
-            return false
-        end
-    end
-end
-
-function placeStonePipe()
-    selectStonePipe();
-    if not turtle.place() then
-        selectDirt();
-        moveForward();
-        turtle.place()
-        turtle.back()
-        selectStonePipe()
-        if not turtle.place() then
-            return false
-        end
-    end
-end
-
-glow = 0;
-function placeTorch()
-    turtle.select(torchPos)
-    if not turtle.place() then
-        selectDirt()
-        moveForward()
-        turtle.place()
-        turtle.back()
-        turtle.select(torchPos)
-        if not turtle.place() then
-            return false
-        end
-    end
-    glow = 0;
-end
+os.loadAPI("turtleUtils")
 
 local args={... };
-z = args[1];
+local z = args[1];
+local darkness = 0;
 
-turtle.turnRight();
-turtle.turnRight();
-turtle.select(largeChestPos);
-turtle.place();
-turtle.turnLeft();
-turtle.turnLeft();
+local function mineShaft()
+    for i = 1, z do
+        moveWithDig(down);
+        darkness = darkness + 1
+        dig(forward);
+        if not placeLadder() then
+            --break
+        end
 
-for i = 1, z do
-    turtle.digDown();
-    turtle.down();
-    glow = glow + 1
-    turtle.dig();
-    if not placeLadder() then
-        --break
+        turn(right);
+        if darkness >= 6 then
+            dig(forward);
+            selectWithOverflow(torchSlot)
+            place(forward)
+        end
+
+        turn(right);
+        dig(forward);
+        selectWithOverflow(stonePipeSlot);
+        place(forward);
+
+        turn(left);
+        turn(left);
+        refuel()
     end
+end;
 
-    turtle.turnRight();
-    if glow >= 6 then
-        turtle.dig();
-        placeTorch();
-    end
+local function moveToStartOfShaft()
+    turn(right);
+    turn(right);
+    selectWithOverflow(smallChestSlot);
+    place(forward);
+    turn(left);
+    turn(left);
+end;
 
-    turtle.turnRight();
-    turtle.dig();
-    placeStonePipe();
-
-    turtle.turnLeft();
-    turtle.turnLeft();
-    refuel()
-end
+moveToStartOfShaft();
+mineShaft();
