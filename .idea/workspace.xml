@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="Tweaking and testing">
+    <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
@@ -61,19 +61,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="40" selection-start="9458" selection-end="9458" vertical-scroll-proportion="0.0">
+            <state line="138" column="30" selection-start="5909" selection-end="5909" vertical-scroll-proportion="-0.5303176">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="digShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="25" selection-start="4453" selection-end="4453" vertical-scroll-proportion="0.13022813">
+            <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -838,7 +838,11 @@
       <created>1359243211772</created>
       <updated>1359243211772</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Tweaking and testing">
+      <created>1359243482724</created>
+      <updated>1359243482725</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1023,16 +1027,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="40" selection-start="9458" selection-end="9458" vertical-scroll-proportion="0.0">
+        <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="25" selection-start="4453" selection-end="4453" vertical-scroll-proportion="0.13022813">
+        <state line="138" column="30" selection-start="5909" selection-end="5909" vertical-scroll-proportion="-0.5303176">
           <folding />
         </state>
       </provider>

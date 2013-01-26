@@ -126,7 +126,7 @@ end;
 
 function select(slot)
     local slot = slot;
-    log (fine, "Entering selectWithOverflow("..slot..")");
+    log (fine, "Entering select("..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
     turtle.select(slot);
@@ -136,7 +136,7 @@ function select(slot)
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
     currentLogIndent = currentLogIndent + 1;
-    log (fine, "Exiting selectWithOverflow("..slot..")");
+    log (fine, "Exiting select("..slot..")");
 end;
 
 -- look in slots 1-12 if selected slot if empty
