@@ -1,10 +1,13 @@
-os.loadAPI("turtleUtils")
+os.loadAPI("turtleUtils");
 
 -- Wall Filler (64) -> Slot 4
--- Redstone Wire (64) -> Slot 9
+-- Stone Pipe (64) -> Slot 7
+-- Red Wire (64) -> Slot 9
 -- Small Chest (2) -> Slot 10
 -- Redstone Engine (1) -> Slot 11
 -- Wooden Pipe (1) -> Slot 12
+-- Redstone Torch (1) -> Slot 13
+-- Torch (11) -> Slot 14
 -- Ladder (64) -> Slot 15
 --
 --    Level 63      Level 62-13
@@ -24,6 +27,7 @@ os.loadAPI("turtleUtils")
 --  Tu = Turtle Shaft
 --  T  = Torches
 --  L  = Ladder
+--  R  = Red Wire
 
 local args={...};
 local depth = args[1];

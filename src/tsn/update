@@ -5,9 +5,9 @@ local function generateLatestFile(filename)
     local line;
     repeat
         line = content.readLine();
-        if (line == nil) then break end
+        if (line == nil) then break end;
         file.writeLine(line);
-    until false
+    until false;
     file.close();
 end
 

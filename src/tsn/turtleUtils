@@ -24,11 +24,11 @@ local right = "right";
 local left = "left";
 local back = "back";
 
-local error = 0;
-local coarse = 1;
-local fine = 2;
-local debug = 3;
-local currentLogLevel = debug;
+error = 0;
+coarse = 1;
+fine = 2;
+debug = 3;
+currentLogLevel = debug;
 
 local currentSlotNum = 1;
 
@@ -40,11 +40,11 @@ local blockAlreadyPresent = 1;
 local notEnoughInventory = 2;
 local noAnchorBlocks = 3;
 
-local currentLogIndent = 0;
-local logFileName = os.computerID()..".log";
+currentLogIndent = 0;
+logFileName = os.computerID()..".log";
 local darkness = 0;
 
-local function log(logLevel, line)
+function log(logLevel, line)
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
         local entry = os.time().." \t["..logLevel.."] - ";

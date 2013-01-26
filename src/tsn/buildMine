@@ -1,4 +1,4 @@
-os.loadAPI("turtleUtils")
+os.loadAPI("turtleUtils");
 
 fs.delete(logFileName);
 print ("How many blocks down should the station roof be located? (Z - 13 is normal)");
