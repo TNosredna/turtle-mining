@@ -122,71 +122,71 @@ local function waitForInventoryToArriveInChest()
 end;
 
 local function prepareStation()
-    turn(right);
-    moveWithDig(forward);
-    moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
-    turn(right, 2);
-    dig(forward); -- destroy woodenpipe
-    place(forward, stonePipeSlot, false);
-    move(down);
-    place(up, stonePipeSlot, false); -- plenum
-    move(down);
-    place(up, stonePipeSlot, false); -- in ceiling
-    move(down);
-    place(up, stonePipeSlot, false); -- in ceiling
-    move(forward);
-    dig(up);
-    place(up, stonePipeSlot, false);
-    move(down);
-    place(up, stonePipeSlot, false);
-    move(down);
-    place(up, stonePipeSlot, false);
-    dig(down);
-    place(down, stonePipeSlot, false);
-    move(back);
-    place(forward, stonePipeSlot, false);
-    dig(down);
-    place(down, stonePipeSlot, false);
-    move(back);
-    place(down, stonePipeSlot, false);
-    move(back);
-    place(down, stonePipeSlot, false);
-    move(back);
-    place(down, woodenPipeSlot, false);
-    turn(right, 2);
-    moveWithDig(forward);
-    dig(down);
-    place(down, smallChestSlot, false);
-    turn(left);
-    dig(forward);
-    place(forward, smallChestSlot, false);
-    dig(up);
-    place(up, smallChestSlot, false);
-    turn(right, 2);
-    moveWithDig(forward);
-    turn(left);
+    turtleUtils.turn(right);
+    turtleUtils.moveWithDig(forward);
+    turtleUtils.moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
+    turtleUtils.turn(right, 2);
+    turtleUtils.dig(forward); -- destroy woodenpipe
+    turtleUtils.place(forward, stonePipeSlot, false);
+    turtleUtils.move(down);
+    turtleUtils.place(up, stonePipeSlot, false); -- plenum
+    turtleUtils.move(down);
+    turtleUtils.place(up, stonePipeSlot, false); -- in ceiling
+    turtleUtils.move(down);
+    turtleUtils.place(up, stonePipeSlot, false); -- in ceiling
+    turtleUtils.move(forward);
+    turtleUtils.dig(up);
+    turtleUtils.place(up, stonePipeSlot, false);
+    turtleUtils.move(down);
+    turtleUtils.place(up, stonePipeSlot, false);
+    turtleUtils.move(down);
+    turtleUtils.place(up, stonePipeSlot, false);
+    turtleUtils.dig(down);
+    turtleUtils.place(down, stonePipeSlot, false);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, stonePipeSlot, false);
+    turtleUtils.dig(down);
+    turtleUtils.place(down, stonePipeSlot, false);
+    turtleUtils.move(back);
+    turtleUtils.place(down, stonePipeSlot, false);
+    turtleUtils.move(back);
+    turtleUtils.place(down, stonePipeSlot, false);
+    turtleUtils.move(back);
+    turtleUtils.place(down, woodenPipeSlot, false);
+    turtleUtils.turn(right, 2);
+    turtleUtils.moveWithDig(forward);
+    turtleUtils.dig(down);
+    turtleUtils.place(down, smallChestSlot, false);
+    turtleUtils.turn(left);
+    turtleUtils.dig(forward);
+    turtleUtils.place(forward, smallChestSlot, false);
+    turtleUtils.dig(up);
+    turtleUtils.place(up, smallChestSlot, false);
+    turtleUtils.turn(right, 2);
+    turtleUtils.moveWithDig(forward);
+    turtleUtils.turn(left);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    dig(down);
-    place(down, redstoneTorch, false);
+    turtleUtils.dig(down);
+    turtleUtils.place(down, redstoneTorch, false);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    move(back);
-    place(forward, smallChestSlot, false);
-    dig(down);
-    place(down, redstoneEngine, false);
-    place(forward, redstoneTorch, false);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, smallChestSlot, false);
+    turtleUtils.dig(down);
+    turtleUtils.place(down, redstoneEngine, false);
+    turtleUtils.place(forward, redstoneTorch, false);
 end;
 
 local function moveToStartingPosition(radius)
     local radius = radius;
-    log (fine, "Entering moveToStartingPosition()");
+    turtleUtils.log (fine, "Entering moveToStartingPosition()");
     currentLogIndent = currentLogIndent + 1;
-    turn(left);
-    move(radius - 1);
-    turn(left);
-    move(radius - 1);
-    moveWithDig(up);
+    turtleUtils.turn(left);
+    turtleUtils.move(radius - 1);
+    turtleUtils.turn(left);
+    turtleUtils.move(radius - 1);
+    turtleUtils.moveWithDig(up);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveToStartingPositionForWalls()");
+    turtleUtils.log (fine, "Exiting moveToStartingPositionForWalls()");
 end
 
 if ((radius == nil or radius=="") or (height == nil or height=="")) then

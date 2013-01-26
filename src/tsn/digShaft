@@ -34,94 +34,94 @@ local depth = args[1];
 
 -- start while turtle facing East to place Engine
 local function prepareTopOfShaft()
-    log (fine, "Entering prepareTopOfShaft()");
+    turtleUtils.log (fine, "Entering prepareTopOfShaft()");
     currentLogIndent = currentLogIndent + 1;
-    selectWithOverflow(redstoneEngineSlot);
-    place(forward);
-    turn(left);
-    selectWithOverflow(smallChestSlot);
-    place(forward);
-    moveWithDig(down);
-    selectWithOverflow(woodenPipeSlot);
-    place(up);
+    turtleUtils.selectWithOverflow(redstoneEngineSlot);
+    turtleUtils.place(forward);
+    turtleUtils.turn(left);
+    turtleUtils.selectWithOverflow(smallChestSlot);
+    turtleUtils.place(forward);
+    turtleUtils.moveWithDig(down);
+    turtleUtils.selectWithOverflow(woodenPipeSlot);
+    turtleUtils.place(up);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting prepareTopOfShaft()");
+    turtleUtils.log (fine, "Exiting prepareTopOfShaft()");
 end;
 
 local function digShaftLayer()
-    log (fine, "Entering digShaftLayer()");
+    turtleUtils.log (fine, "Entering digShaftLayer()");
     currentLogIndent = currentLogIndent + 1;
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
 
-    moveWithDig(forward)
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
-    replace(forward, wallFiller1Slot, false);
-    turn(right, 2);
-    moveWithDig(forward)
-    replace(forward, wallFiller1Slot, false);
-    turn(right);
-    replace(forward, wallFiller1Slot, false);
-    turn(right, 2);
-    replace(forward, wallFiller1Slot, false);
+    turtleUtils.moveWithDig(forward)
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(right, 2);
+    turtleUtils.moveWithDig(forward)
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(right);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(right, 2);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting digShaftLayer()");
+    turtleUtils.log (fine, "Exiting digShaftLayer()");
 end;
 
 local function prepareShaftLayer()
-    log (fine, "Entering prepareShaftLayer()");
+    turtleUtils.log (fine, "Entering prepareShaftLayer()");
     currentLogIndent = currentLogIndent + 1;
-    turn(right);
-    move(back);
-    place(forward, ladderSlot);
-    turn(left);
-    move(back);
-    place(forward, redWireSlot);
+    turtleUtils.turn(right);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, ladderSlot);
+    turtleUtils.turn(left);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, redWireSlot);
     if (darkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
         darkness = 0;
     end
-    turn(left);
-    moveWithDig(down);
-    place(up, stonePipeSlot);
+    turtleUtils.turn(left);
+    turtleUtils.moveWithDig(down);
+    turtleUtils.place(up, stonePipeSlot);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting prepareShaftLayer()");
+    turtleUtils.log (fine, "Exiting prepareShaftLayer()");
 end;
 
 local function prepareBottomOfShaft()
-    log (fine, "Entering prepareBottomOfShaft()");
+    turtleUtils.log (fine, "Entering prepareBottomOfShaft()");
     currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
-        replace(forward, wallFiller1Slot, false);
-        turn(left);
-        replace(forward, wallFiller1Slot, false);
-        turn(left);
+        turtleUtils.replace(forward, wallFiller1Slot, false);
+        turtleUtils.turn(left);
+        turtleUtils.replace(forward, wallFiller1Slot, false);
+        turtleUtils.turn(left);
 
-        moveWithDig(forward);
-        turn(right);
+        turtleUtils.moveWithDig(forward);
+        turtleUtils.turn(right);
     end;
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
-    replace(forward, wallFiller1Slot, false);
-    turn(left);
-    turn(left);
-    place(forward, ladderSlot, false);
-    turn(left);
-    move(back);
-    place(forward, redstoneTorchSlot, false);
-    turn(left);
-    move(back);
-    place(forward, smallChestSlot, false);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
+    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.turn(left);
+    turtleUtils.turn(left);
+    turtleUtils.place(forward, ladderSlot, false);
+    turtleUtils.turn(left);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, redstoneTorchSlot, false);
+    turtleUtils.turn(left);
+    turtleUtils.move(back);
+    turtleUtils.place(forward, smallChestSlot, false);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting prepareBottomOfShaft()");
+    turtleUtils.log (fine, "Exiting prepareBottomOfShaft()");
 end;
 
 local function digMineShaft(depth)
-    log (fine, "Entering digMineShaft()");
+    turtleUtils.log (fine, "Entering digMineShaft()");
     currentLogIndent = currentLogIndent + 1;
     local depth = depth;
     prepareTopOfShaft();
@@ -129,12 +129,12 @@ local function digMineShaft(depth)
     for i = 1,(depth-1) do
         digShaftLayer();
         prepareShaftLayer();
-        refuel()
+        turtleUtils.refuel()
     end;
 
     prepareBottomOfShaft();
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting digMineShaft()");
+    turtleUtils.log (fine, "Exiting digMineShaft()");
 end;
 
 if (depth == nil or depth=="") then
