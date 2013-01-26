@@ -1,5 +1,12 @@
 os.loadAPI("turtleUtils")
 
+-- Wall Filler (64) -> Slot 4
+-- Redstone Wire (64) -> Slot 9
+-- Small Chest (2) -> Slot 10
+-- Redstone Engine (1) -> Slot 11
+-- Wooden Pipe (1) -> Slot 12
+-- Ladder (64) -> Slot 15
+--
 --    Level 63      Level 62-13
 --  |------|---|    |----|-----|
 --  |   C  |   |    |    |     |
@@ -19,10 +26,12 @@ os.loadAPI("turtleUtils")
 --  L  = Ladder
 
 local args={...};
-local z = args[1];
+local depth = args[1];
 
 -- start while turtle facing East to place Engine
 local function prepareTopOfShaft()
+    log (fine, "Entering prepareTopOfShaft()");
+    currentLogIndent = currentLogIndent + 1;
     selectWithOverflow(redstoneEngineSlot);
     place(forward);
     turn(left);
@@ -31,9 +40,13 @@ local function prepareTopOfShaft()
     moveWithDig(down);
     selectWithOverflow(woodenPipeSlot);
     place(up);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareTopOfShaft()");
 end;
 
 local function digShaftLayer()
+    log (fine, "Entering digShaftLayer()");
+    currentLogIndent = currentLogIndent + 1;
     replace(forward, wallFiller1Slot, false);
     turn(left);
     replace(forward, wallFiller1Slot, false);
@@ -52,9 +65,13 @@ local function digShaftLayer()
     replace(forward, wallFiller1Slot, false);
     turn(right, 2);
     replace(forward, wallFiller1Slot, false);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting digShaftLayer()");
 end;
 
 local function prepareShaftLayer()
+    log (fine, "Entering prepareShaftLayer()");
+    currentLogIndent = currentLogIndent + 1;
     turn(right);
     move(back);
     place(forward, ladderSlot);
@@ -67,9 +84,13 @@ local function prepareShaftLayer()
     turn(left);
     moveWithDig(down);
     place(up, stonePipeSlot);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareShaftLayer()");
 end;
 
 local function prepareBottomOfShaft()
+    log (fine, "Entering prepareBottomOfShaft()");
+    currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
         replace(forward, wallFiller1Slot, false);
         turn(left);
@@ -91,18 +112,32 @@ local function prepareBottomOfShaft()
     turn(left);
     move(back);
     place(forward, smallChestSlot, false);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareBottomOfShaft()");
 end;
 
-local function mineShaft()
+local function digMineShaft(depth)
+    log (fine, "Entering digMineShaft()");
+    currentLogIndent = currentLogIndent + 1;
+    local depth = depth;
     prepareTopOfShaft();
 
-    for i = 1,(z-1) do
+    for i = 1,(depth-1) do
         digShaftLayer();
         prepareShaftLayer();
         refuel()
     end;
 
     prepareBottomOfShaft();
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting digMineShaft()");
 end;
 
-mineShaft();
+if (depth == nil or depth=="") then
+    fs.delete(logFileName);
+    print ("How many blocks down should the station roof be located? (depth - 13 is normal)");
+    depth = io.read();
+    depth = tonumber(depth);
+end;
+
+digMineShaft(depth);

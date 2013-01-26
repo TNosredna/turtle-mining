@@ -152,9 +152,19 @@ local function moveToStartingPositionForWalls(radius, height)
     return currentDirection;
 end
 
---fs.delete(logFileName);
+if ((radius == nil or radius=="") or (height == nil or height=="")) then
+    fs.delete(logFileName);
+    print ("What is the desired radius of the station? (5 is normal)");
+    radius = io.read();
+    radius = tonumber(radius);
+
+    print ("What is the desired height, including floor and ceiling layers, of the station? (5 is normal)");
+    height = io.read();
+    height = tonumber(height);
+end;
+
 local diameter = radius * 2;
-local currentDirection = moveToStartingPositionForWalls();
+local currentDirection = moveToStartingPositionForWalls(radius, height);
 currentDirection = buildWalls(currentDirection, (diameter +1), height);
 moveToStartingPositionForCeilingFloor(left);
 buildFloorAndCeiling(left, down, (diameter - 1), height);

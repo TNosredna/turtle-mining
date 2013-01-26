@@ -1,430 +1,143 @@
--- Must allow for 1 available block above ceiling and 1 available block below floor
+os.loadAPI("turtleUtils")
 
-local upTick = 0;
-local downTick = 1;
-local leftTick = 0;
-local rightTick = 1;
-local forwardTick = 0;
-local backTick = 1;
+-- Wall Filler (64) -> Slot 4
+-- Redstone Wire (64) -> Slot 9
+-- Small Chest (2) -> Slot 10
+-- Redstone Engine (1) -> Slot 11
+-- Wooden Pipe (1) -> Slot 12
+-- Ladder (64) -> Slot 15
+--
+--    Level 63      Level 62-13
+--  |------|---|    |----|-----|
+--  |   C  |   |    |    |     |
+--  |------|---|    |----|-----|
+--  | Tu/W | E |    |  S | R/T |
+--  |------|---|    |----|-----|
+--  |      |   |    |    |  L  |
+--  |------|---|    |----|-----|
+--  C  = Chest
+--  W  = Wood Pipe
+--  E  = Redstone Engine
+--  Tu = Turtle Starting Position
 
-local wallFiller1Slot = 1;
-local wallFiller2Slot = 2;
-local wallFiller3Slot = 3;
-local floorFillerSlot = 4;
-local roofFillerSlot = 5;
-local skylightFillerPos = 6;
+--  S  = Stone Pipe
+--  Tu = Turtle Shaft
+--  T  = Torches
+--  L  = Ladder
 
-local up = "up";
-local down = "down";
-local forward = "forward";
-local right = "right";
-local left = "left";
-local back = "back";
+local args={...};
+local depth = args[1];
 
-local error = 0;
-local coarse = 1;
-local fine = 2;
-local debug = 3;
-local currentLogLevel = debug;
-
-local currentSlotNum = 1;
-
-local success = true;
-local failure = false;
-
-local blockPlaced = 0;
-local blockAlreadyPresent = 1;
-local notEnoughInventory = 2;
-local noAnchorBlocks = 3;
-
-local currentLogIndent = 0;
-
-local function log(logLevel, line)
-    local logLevel = logLevel or coarse;
-    if (logLevel <= currentLogLevel) then
-        local entry = os.time().." \t["..logLevel.."] - ";
-        for i=1,currentLogIndent do
-            entry = entry.."  ";
-        end;
-        entry = entry..line;
-        local filename = os.computerID()..".log";
-        local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
-        file.writeLine(entry);
-        file.close();
-    end;
-end
-
-local function turn(turnDirection)
-    local turnDirection = turnDirection;
-
-    if (turnDirection == left) then
-        if (turtle.turnLeft()) then log(fine, "turned: left"); return success;  else log(debug, "failed to turn: left"); return failure;  end;
-    elseif (turnDirection == right) then
-        if (turtle.turnRight()) then log(fine, "turned: right"); return success;  else log(debug, "failed to turn: right"); return failure;  end;
-    end;
-end;
-
-local function move(moveDirection)
-    local moveDirection = moveDirection or forward;
-
-    if (moveDirection == forward) then
-        if (turtle.forward()) then log(fine, "moved: forward"); return success;  else log(debug, "failed to move: forward"); return failure;  end;
-    elseif (moveDirection == back) then
-        if (turtle.back()) then log(fine, "moved: back"); return success;  else log(debug, "failed to move: back"); return failure;  end;
-    elseif (moveDirection == up) then
-        if (turtle.up()) then log(fine, "moved: up"); return success;  else log(debug, "failed to move: up"); return failure;  end;
-    elseif (moveDirection == down) then
-        if (turtle.down()) then log(fine, "moved: down"); return success;  else log(debug, "failed to move: down"); return failure;  end;
-    end;
-end;
-
-local function dig(digDirection)
-    local digDirection = digDirection or forward;
-
-    if (digDirection == forward) then
-        if (turtle.dig()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
-    elseif (digDirection == up) then
-        if (turtle.digUp()) then log(fine, "dug: up"); return success;  else log(debug, "failed to dig: up"); return failure;  end;
-    elseif (digDirection == down) then
-        if (turtle.digDown()) then log(fine, "dug: down"); return success;  else log(debug, "failed to dig: down"); return failure;  end;
-    end;
-end;
-
-local function detect(detectDirection)
-    local detectDirection = detectDirection or forward;
-
-    if (detectDirection == forward) then
-        if (turtle.detect()) then log(fine, "detected: forward"); return success; else log(debug, "failed to detect: forward"); return failure; end;
-    elseif (detectDirection == up) then
-        if (turtle.detectUp()) then log(fine, "detected: up"); return success;  else log(debug, "failed to detect: up"); return failure;  end;
-    elseif (detectDirection == down) then
-        if (turtle.detectDown()) then log(fine, "detected: down"); return success;  else log(debug, "failed to detect: down"); return failure;  end;
-    end;
-end;
-
-local function attack(attackDirection)
-    local attackDirection = attackDirection or forward;
-
-    if (attackDirection == forward) then
-        if (turtle.attack()) then log(fine, "attacked: forward"); return success; else log(debug, "failed to atack: forward"); return failure; end;
-    elseif (attackDirection == up) then
-        if (turtle.attackUp()) then log(fine, "attacked: up"); return success;  else log(debug, "failed to attack: up"); return failure;  end;
-    elseif (attackDirection == down) then
-        if (turtle.attackDown()) then log(fine, "attacked: down"); return success;  else log(debug, "failed to attack: down"); return failure;  end;
-    end;
-end;
-
-local function select(slot)
-    local slot = slot;
-
-    turtle.select(slot);
-    log(fine, "selected: "..slot);
-    currentSlotNum = slot;
-    if (currentLogLevel == debug) then
-        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
-    end;
-end;
-
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-local function place(placeDirection)
-    local placeDirection = placeDirection or forward;
-    local slot = currentSlotNum;
-    local actionFailed = false;
-
-    if (placeDirection == forward) then
-        if (turtle.place()) then
-            log(fine, "placed: forward");
-        else
-            actionFailed = true;
-            log(debug, "failed to place: forward");
-        end;
-    elseif (placeDirection == up) then
-        if (turtle.placeUp()) then
-            log(fine, "placed: up");
-        else
-            actionFailed = true;
-            log(debug, "failed to place: up");
-        end;
-    elseif (placeDirection == down) then
-        if (turtle.placeDown()) then
-            log(fine, "placed: down");
-        else
-            actionFailed = true;
-            log(debug, "failed to place: down");
-        end;
-    end;
-    if (actionFailed) then
-        if (turtle.getItemCount(slot) > 0) then
-            if (detect(placeDirection)) then
-                log(debug, "    a block is already present at target location");
-                return blockAlreadyPresent;
-            else
-                log(debug, "    no anchor blocks present at target location");
-                return noAnchorBlocks;
-            end;
-        else
-            log(debug, "    no items left in slot "..slot.." to place");
-            return notEnoughInventory;
-        end;
-    else
-        return blockPlaced;
-    end;
-end;
-
--- look in slots 1-12 if selected slot if empty
-local function selectWithOverflow(slot, attempts)
-    local attempts = attempts or 10
-    local slot = slot;
-
-    select(slot)
-    if turtle.getItemCount(slot) == 1 then
-        select(1)
-        local tries = 1
-        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
-            for i = 1,12 do
-                select(i);
-                if (turtle.compareTo(slot)) then
-                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
-                    break;
-                end;
-            end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries + 1, attempts + 1)
-        end
-    end
-end
-
--- dig if can't move
-local function moveWithDig(direction, steps, attempts)
-    log (fine, "Entering moveWithDig("..direction..")");
+-- start while turtle facing East to place Engine
+local function prepareTopOfShaft()
+    log (fine, "Entering prepareTopOfShaft()");
     currentLogIndent = currentLogIndent + 1;
-    local steps = steps or 1
-    local attempts = attempts or 10
-    local direction = direction;
-
-    for i = 1,steps do
-        local tries = 1;
-        while (not move(direction) and ((attempts == 0) or (tries <= attempts))) do
-            dig(direction);
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries + 1, attempts + 1)
-            sleep(0)
-        end
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveWithDig()");
-end
-
-local function getOppositeDirection(currentDirection)
-    local currentDirection = currentDirection;
-    if (currentDirection == up) then return down; end;
-    if (currentDirection == down) then return up; end;
-    if (currentDirection == left) then return right; end;
-    if (currentDirection == right) then return left; end;
-    if (currentDirection == forward) then return back; end;
-    if (currentDirection == back) then return forward; end;
-end
-
--- move if can't replace. empty anchor protection
-local function replace(direction, slot, attempts)
-    log (fine, "Entering replace()");
-    currentLogIndent = currentLogIndent + 1;
-    local attempts = attempts or 10;
-    local tries = 1;
-    local direction = direction;
-    local slot = slot;
-
-    selectWithOverflow(slot);
-    local successCode = place(direction);
-    log(debug, "    successCode="..successCode);
-    while ((attempts==0) or (tries<=attempts)) do
-        if (successCode==blockPlaced) then
-            log(debug, "    Block was succesfully placed, continueing on.");
-            break;
-        elseif (successCode==blockAlreadyPresent) then
-            log(debug, "    Block was succesfully placed, continueing on.");
-            dig(direction);
-        elseif (successCode==notEnoughInventory) then
-            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
-            currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting replace()");
-            shell.exit();
-        elseif (successCode==noAnchorBlocks) then
-            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.");
-            move(direction);
-            replace(direction);
-            move(getOppositeDirection(direction));
-        end
-        successCode = place(direction);
-        log(debug, "    successCode="..successCode.."[attempt #"..tries.."]");
-        -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-        tries = math.min(tries+1, attempts+1);
-        sleep(0);
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting replace()");
-end
-
-local function transitionOverAnd180Degrees(turnDirection, steps)
-    log (fine, "Entering transitionOverAnd180Degrees()");
-    currentLogIndent = currentLogIndent + 1;
-    local steps = steps or 1;
-    local turnDirection = turnDirection;
-
-    turn(turnDirection);
-    moveWithDig(forward, steps);
-    turn(turnDirection);
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting transitionOverAnd180Degrees()");
-end
-
-local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
-    log (fine, "Entering floorAndCeilingColumn()");
-    currentLogIndent = currentLogIndent + 1;
-    local numberBlocks = numberBlocks or 5;
-    local currentUpDownDirection = currentUpDownDirection;
-    local initialFillSlot;
-    local endingFillSlot;
-
-    if currentUpDownDirection == up then
-        initialFillSlot = floorFillerSlot;
-        endingFillSlot = roofFillerSlot;
-    else
-        initialFillSlot = roofFillerSlot;
-        endingFillSlot = floorFillerSlot;
-    end
-
-    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
-    moveWithDig(currentUpDownDirection, numberBlocks-4);
-    replace(currentUpDownDirection, endingFillSlot);
-
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting floorAndCeilingColumn()");
-    return currentUpDownDirection;
-end
-
-local function floorAndCeilingRow(currentDirection, numberColumns)
-    log (fine, "Entering floorAndCeilingRow()");
-    currentLogIndent = currentLogIndent + 1;
-    local numberColumns = numberColumns or 9;
-    local currentDirection = currentDirection;
-
-    for i = 1,numberColumns do
-        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection));
-        if (i < numberColumns) then
-            moveWithDig(forward, 1)
-        end
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting floorAndCeilingRow()");
-    return currentDirection;
-end
-
-local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows)
-    log (fine, "Entering buildFloorAndCeiling()");
-    currentLogIndent = currentLogIndent + 1;
-    local numberRows = numberRows or 9;
-    local numberColumns = numberRows;
-    local currentUpDownDirection = currentUpDownDirection;
-    local currentLeftRightDirection = currentLeftRightDirection;
-
-    for i = 1,numberRows do
-        currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns);
-        if (i < numberRows) then
-            currentLeftRightDirection = getOppositeDirection(currentLeftRightDirection);
-            transitionOverAnd180Degrees(currentLeftRightDirection);
-        end
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting buildFloorAndCeiling()");
-end
-
-local function moveToStartingPositionForCeilingFloor(turnDirection)
-    log (fine, "Entering moveToStartingPositionForCeilingFloor()");
-    currentLogIndent = currentLogIndent + 1;
-    local turnDirection = turnDirection;
-    transitionOverAnd180Degrees(turnDirection);
-    moveWithDig(forward);
-    moveWithDig(up, 2);
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
-end;
-
-local function wallColumn(currentDirection, height)
-    log (fine, "Entering wallColumn()");
-    currentLogIndent = currentLogIndent + 1;
-    local height = height or 5;
-    height = height - 2;
-    local currentDirection = currentDirection;
-    local initialFillSlot;
-    local middleFillSlot = wallFiller1Slot;
-    local endingFillSlot;
-
-    if currentDirection == up then
-        initialFillSlot = floorFillerSlot;
-        endingFillSlot = roofFillerSlot;
-    end
-    if currentDirection == down then
-        initialFillSlot = roofFillerSlot;
-        endingFillSlot = floorFillerSlot;
-    end
-
-    moveWithDig(currentDirection, 2);
-    replace(getOppositeDirection(currentDirection), initialFillSlot);
-    for i = 1,height do
-        moveWithDig(currentDirection, 1);
-        replace(getOppositeDirection(currentDirection), middleFillSlot);
-    end
-    moveWithDig(currentDirection, 1);
-    replace(getOppositeDirection(currentDirection), endingFillSlot);
-
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting wallColumn()");
-    return currentDirection;
-end
-
-local function buildWalls(startingUpDownDirection, numberColumns)
-    log (fine, "Entering buildWalls()");
-    currentLogIndent = currentLogIndent + 1;
-    local currentDirection = getOppositeDirection(startingUpDownDirection);
-    local numberColumns = numberColumns - 1;     -- diificult to communicate this number. misleading -> 10 leaves 9 inner spaces
-    local numberWalls = 4;
-
-    for x=1,numberWalls do
-        for i=1,numberColumns do
-            currentDirection = wallColumn(getOppositeDirection(currentDirection));
-            log(debug, "i="..i.." numberColumns="..numberColumns);
-            if (i < numberColumns) then
-                moveWithDig(forward);
-            end;
-        end;
-        if (x < numberWalls) then
-            turn(left);
-            moveWithDig(forward);
-        end;
-    end;
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting buildWalls()");
-    return currentDirection;
-end;
-
-local function moveToStartingPositionForWalls()
-    log (fine, "Entering moveToStartingPositionForWalls()");
-    currentLogIndent = currentLogIndent + 1;
-    local currentDirection = up;
-    -- turtle should start at z=13 or higher
-    -- this moves turtle from starting position to corner of room where the room anchor column will be built
-    moveWithDig(down, 6);
+    selectWithOverflow(redstoneEngineSlot);
+    place(forward);
     turn(left);
-    moveWithDig(forward, 5);
-    turn(right);
-    moveWithDig(forward, 4);
+    selectWithOverflow(smallChestSlot);
+    place(forward);
+    moveWithDig(down);
+    selectWithOverflow(woodenPipeSlot);
+    place(up);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveToStartingPositionForWalls()");
-    return currentDirection;
-end
+    log (fine, "Exiting prepareTopOfShaft()");
+end;
 
-local currentDirection = moveToStartingPositionForWalls();
-currentDirection = buildWalls(currentDirection, 11);
-moveToStartingPositionForCeilingFloor(left);
-buildFloorAndCeiling(left, down, 9);
+local function digShaftLayer()
+    log (fine, "Entering digShaftLayer()");
+    currentLogIndent = currentLogIndent + 1;
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+
+    moveWithDig(forward)
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(right, 2);
+    moveWithDig(forward)
+    replace(forward, wallFiller1Slot, false);
+    turn(right);
+    replace(forward, wallFiller1Slot, false);
+    turn(right, 2);
+    replace(forward, wallFiller1Slot, false);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting digShaftLayer()");
+end;
+
+local function prepareShaftLayer()
+    log (fine, "Entering prepareShaftLayer()");
+    currentLogIndent = currentLogIndent + 1;
+    turn(right);
+    move(back);
+    place(forward, ladderSlot);
+    turn(left);
+    move(back);
+    place(forward, redWireSlot);
+    if (darkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
+        darkness = 0;
+    end
+    turn(left);
+    moveWithDig(down);
+    place(up, stonePipeSlot);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareShaftLayer()");
+end;
+
+local function prepareBottomOfShaft()
+    log (fine, "Entering prepareBottomOfShaft()");
+    currentLogIndent = currentLogIndent + 1;
+    for i=1,3 do
+        replace(forward, wallFiller1Slot, false);
+        turn(left);
+        replace(forward, wallFiller1Slot, false);
+        turn(left);
+
+        moveWithDig(forward);
+        turn(right);
+    end;
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    replace(forward, wallFiller1Slot, false);
+    turn(left);
+    turn(left);
+    place(forward, ladderSlot, false);
+    turn(left);
+    move(back);
+    place(forward, redstoneTorchSlot, false);
+    turn(left);
+    move(back);
+    place(forward, smallChestSlot, false);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareBottomOfShaft()");
+end;
+
+local function digMineShaft(depth)
+    log (fine, "Entering digMineShaft()");
+    currentLogIndent = currentLogIndent + 1;
+    local depth = depth;
+    prepareTopOfShaft();
+
+    for i = 1,(depth-1) do
+        digShaftLayer();
+        prepareShaftLayer();
+        refuel()
+    end;
+
+    prepareBottomOfShaft();
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting digMineShaft()");
+end;
+
+if (depth == nil or depth=="") then
+    fs.delete(logFileName);
+    print ("How many blocks down should the station roof be located? (depth - 13 is normal)");
+    depth = io.read();
+    depth = tonumber(depth);
+end;
+
+digMineShaft(depth);

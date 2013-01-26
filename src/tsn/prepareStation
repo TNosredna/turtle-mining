@@ -189,7 +189,17 @@ local function moveToStartingPosition(radius)
     log (fine, "Exiting moveToStartingPositionForWalls()");
 end
 
---fs.delete(logFileName);
+if ((radius == nil or radius=="") or (height == nil or height=="")) then
+    fs.delete(logFileName);
+    print ("What is the radius of the station? (5 is normal)");
+    radius = io.read();
+    radius = tonumber(radius);
+
+    print ("What is the height, including floor and ceiling layers, of the station? (5 is normal)");
+    height = io.read();
+    height = tonumber(height);
+end;
+
 moveToStartingPosition(radius);
 waitForInventoryToArriveInChest();
 prepareStation();
