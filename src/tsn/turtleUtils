@@ -125,9 +125,9 @@ function attack(attackDirection)
 end;
 
 function select(slot)
+    local slot = slot;
     log (fine, "Entering selectWithOverflow("..slot..")");
     currentLogIndent = currentLogIndent + 1;
-    local slot = slot;
 
     turtle.select(slot);
     log(fine, "selected: "..slot);
@@ -141,10 +141,10 @@ end;
 
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
-    log (fine, "Entering selectWithOverflow("..slot..")");
-    currentLogIndent = currentLogIndent + 1;
     local attempts = attempts or 10
     local slot = slot;
+    log (fine, "Entering selectWithOverflow("..slot..")");
+    currentLogIndent = currentLogIndent + 1;
 
     select(slot)
     if turtle.getItemCount(slot) <= 1 then
@@ -168,11 +168,11 @@ end
 
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection)
-    log (fine, "Entering place("..placeDirection..")");
-    currentLogIndent = currentLogIndent + 1;
     local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
+    log (fine, "Entering place("..placeDirection..")");
+    currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
         if (turtle.place()) then
@@ -220,10 +220,10 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
-    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
-    currentLogIndent = currentLogIndent + 1;
     local slot = slot;
     local placeDirection = placeDirection;
+    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     selectWithOverflow(slot);
     place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
@@ -232,10 +232,10 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, slot)
-    log (fine, "Entering place("..placeDirection..","..slot..")");
-    currentLogIndent = currentLogIndent + 1;
     local slot = slot;
     local placeDirection = placeDirection;
+    log (fine, "Entering place("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     select(slot);
     place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
@@ -244,11 +244,11 @@ end;
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
-    log (fine, "Entering moveWithDig("..direction..")");
-    currentLogIndent = currentLogIndent + 1;
     local steps = steps or 1
     local attempts = attempts or 10
     local direction = direction;
+    log (fine, "Entering moveWithDig("..direction..")");
+    currentLogIndent = currentLogIndent + 1;
 
     for i = 1,steps do
         local tries = 1;
@@ -275,13 +275,13 @@ end
 
 -- move if can't replace. empty anchor protection
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
-    log (fine, "Entering replace("..direction..","..slot..","..isAlwaysRemoveAndAdd..")");
-    currentLogIndent = currentLogIndent + 1;
     local attempts = attempts or 10;
     local tries = 1;
     local direction = direction;
     local slot = slot;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
+    log (fine, "Entering replace("..direction..","..slot..","..isAlwaysRemoveAndAdd..")");
+    currentLogIndent = currentLogIndent + 1;
 
     selectWithOverflow(slot);
     local successCode = place(direction);
@@ -315,10 +315,10 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
 end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
-    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
-    currentLogIndent = currentLogIndent + 1;
     local steps = steps or 1;
     local turnDirection = turnDirection;
+    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
+    currentLogIndent = currentLogIndent + 1;
 
     turn(turnDirection);
     moveWithDig(forward, steps);
