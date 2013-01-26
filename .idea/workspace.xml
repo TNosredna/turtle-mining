@@ -61,19 +61,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="30" selection-start="5909" selection-end="5909" vertical-scroll-proportion="-0.5303176">
+            <state line="239" column="17" selection-start="9576" selection-end="9576" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digShaft" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.0">
+            <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.7290875">
               <folding />
             </state>
           </provider>
@@ -842,7 +842,11 @@
       <created>1359243482724</created>
       <updated>1359243482725</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Tweaking and testing">
+      <created>1359243805821</created>
+      <updated>1359243805821</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1027,16 +1031,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.0">
+        <state line="239" column="17" selection-start="9576" selection-end="9576" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="30" selection-start="5909" selection-end="5909" vertical-scroll-proportion="-0.5303176">
+        <state line="125" column="18" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.7290875">
           <folding />
         </state>
       </provider>

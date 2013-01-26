@@ -167,11 +167,11 @@ function selectWithOverflow(slot, attempts)
 end
 
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function place(placeDirection)
+function private_place(placeDirection)
     local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering place("..placeDirection..")");
+    log (fine, "Entering placeInt("..placeDirection..")");
     currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
@@ -201,7 +201,7 @@ function place(placeDirection)
             if (detect(placeDirection)) then
                 log(debug, "    a block is already present at target location");
                 currentLogIndent = currentLogIndent - 1;
-                log (fine, "Exiting place()");
+                log (fine, "Exiting private_place()");
                 return blockAlreadyPresent;
             else
                 log(debug, "    no anchor blocks present at target location");
@@ -215,7 +215,7 @@ function place(placeDirection)
         return blockPlaced;
     end;
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting place()");
+    log (fine, "Exiting private_place()");
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
@@ -225,7 +225,7 @@ function placeWithOverflow(placeDirection, slot)
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
     selectWithOverflow(slot);
-    place(placeDirection);
+    private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeWithOverflow()");
 end;
@@ -237,7 +237,7 @@ function place(placeDirection, slot)
     log (fine, "Entering place("..placeDirection..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
     select(slot);
-    place(placeDirection);
+    private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting place()");
 end;
