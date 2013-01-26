@@ -157,24 +157,9 @@ function selectWithOverflow(slot, attempts)
     end
 end
 
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function placeWithOverflow(placeDirection, slot)
-    local slot = slot;
-    local placeDirection = placeDirection;
-    selectWithOverflow(slot);
-    place(placeDirection);
-end;
-
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function place(placeDirection, slot)
-    local slot = slot;
-    local placeDirection = placeDirection;
-    select(slot);
-    place(placeDirection);
-end;
-
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection)
+    local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
 
@@ -217,6 +202,23 @@ function place(placeDirection)
         return blockPlaced;
     end;
 end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function placeWithOverflow(placeDirection, slot)
+    local slot = slot;
+    local placeDirection = placeDirection;
+    selectWithOverflow(slot);
+    place(placeDirection);
+end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function place(placeDirection, slot)
+    local slot = slot;
+    local placeDirection = placeDirection;
+    select(slot);
+    place(placeDirection);
+end;
+
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
