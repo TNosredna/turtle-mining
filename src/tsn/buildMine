@@ -1,4 +1,4 @@
-local logFileName = os.computerID()..".log";
+local logFileName = os.computerID().."-buildMine"..".log";
 
 os.loadAPI("turtleUtils");
 

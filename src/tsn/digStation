@@ -42,7 +42,6 @@ local notEnoughInventory = 2;
 local noAnchorBlocks = 3;
 
 local currentLogIndent = 0;
-local logFileName = os.computerID()..".log";
 local darkness = 0;
 
 os.loadAPI("turtleUtils");
@@ -50,6 +49,7 @@ os.loadAPI("turtleUtils");
 local args={...};
 local radius = args[1] or 5;
 local height = args[2] or 5;
+local logFileName = os.computerID().."-digStation"..".log";
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     turtleUtils.log(fine, "Entering floorAndCeilingColumn()");

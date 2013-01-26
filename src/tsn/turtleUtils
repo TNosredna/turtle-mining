@@ -40,10 +40,11 @@ local notEnoughInventory = 2;
 local noAnchorBlocks = 3;
 
 local currentLogIndent = 0;
-local logFileName = os.computerID()..".log";
 local darkness = 0;
 
-function log(logLevel, line)
+local logFileName = os.computerID().."-turtleUtils"..".log";
+function log(logLevel, line, currentLogIndent)
+    local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
         local entry = os.time().." \t["..logLevel.."] - ";
@@ -124,6 +125,8 @@ function attack(attackDirection)
 end;
 
 function select(slot)
+    log (fine, "Entering selectWithOverflow("..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     local slot = slot;
 
     turtle.select(slot);
@@ -132,10 +135,14 @@ function select(slot)
     if (currentLogLevel == debug) then
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
+    currentLogIndent = currentLogIndent + 1;
+    log (fine, "Exiting selectWithOverflow("..slot..")");
 end;
 
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
+    log (fine, "Entering selectWithOverflow("..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     local attempts = attempts or 10
     local slot = slot;
 
@@ -155,10 +162,14 @@ function selectWithOverflow(slot, attempts)
             tries = math.min(tries + 1, attempts + 1)
         end
     end
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting selectWithOverflow()");
 end
 
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection)
+    log (fine, "Entering place("..placeDirection..")");
+    currentLogIndent = currentLogIndent + 1;
     local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
@@ -189,6 +200,8 @@ function place(placeDirection)
         if (turtle.getItemCount(slot) > 0) then
             if (detect(placeDirection)) then
                 log(debug, "    a block is already present at target location");
+                currentLogIndent = currentLogIndent - 1;
+                log (fine, "Exiting place()");
                 return blockAlreadyPresent;
             else
                 log(debug, "    no anchor blocks present at target location");
@@ -201,24 +214,33 @@ function place(placeDirection)
     else
         return blockPlaced;
     end;
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting place()");
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
+    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     local slot = slot;
     local placeDirection = placeDirection;
     selectWithOverflow(slot);
     place(placeDirection);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting placeWithOverflow()");
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, slot)
+    log (fine, "Entering place("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
     local slot = slot;
     local placeDirection = placeDirection;
     select(slot);
     place(placeDirection);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting place()");
 end;
-
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
@@ -253,7 +275,7 @@ end
 
 -- move if can't replace. empty anchor protection
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
-    log (fine, "Entering replace()");
+    log (fine, "Entering replace("..direction..","..slot..","..isAlwaysRemoveAndAdd..")");
     currentLogIndent = currentLogIndent + 1;
     local attempts = attempts or 10;
     local tries = 1;
@@ -293,7 +315,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
 end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
-    log (fine, "Entering transitionOverAnd180Degrees()");
+    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
     currentLogIndent = currentLogIndent + 1;
     local steps = steps or 1;
     local turnDirection = turnDirection;
