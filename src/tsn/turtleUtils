@@ -280,7 +280,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     local direction = direction;
     local slot = slot;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
-    log (fine, "Entering replace("..direction..","..slot..","..isAlwaysRemoveAndAdd..")");
+    log (fine, "Entering replace("..direction..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
     selectWithOverflow(slot);
