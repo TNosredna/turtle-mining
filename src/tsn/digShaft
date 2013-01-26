@@ -1,3 +1,48 @@
+-- Slot Assignments
+local wallFiller1Slot = 1;     -- digStation (64)
+local wallFiller2Slot = 2;     -- digStation (64)
+local wallFiller3Slot = 3;     -- digStation (32)
+local wallFiller4Slot = 4;     -- digShaft (64)
+local floorFillerSlot = 5;     -- digStation (49)
+local roofFillerSlot = 6;      -- digStation (49)
+local stonePipe1Slot = 7;       -- prepareShaft (64)
+local stonePipe2Slot = 8;       -- prepareStation (2-8)
+local redWireSlot = 9;         -- prepareShaft (64)
+local smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
+local redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
+local woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
+local redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
+local torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
+local ladderSlot = 15;         -- digShaft (64)
+local fuelSlot = 16;           -- digShaft
+
+local up = "up";
+local down = "down";
+local forward = "forward";
+local right = "right";
+local left = "left";
+local back = "back";
+
+local error = 0;
+local coarse = 1;
+local fine = 2;
+local debug = 3;
+local currentLogLevel = debug;
+
+local currentSlotNum = 1;
+
+local success = true;
+local failure = false;
+
+local blockPlaced = 0;
+local blockAlreadyPresent = 1;
+local notEnoughInventory = 2;
+local noAnchorBlocks = 3;
+
+local currentLogIndent = 0;
+local logFileName = os.computerID()..".log";
+local darkness = 0;
+
 os.loadAPI("turtleUtils");
 
 -- Wall Filler (64) -> Slot 4
@@ -36,14 +81,11 @@ local depth = args[1];
 local function prepareTopOfShaft()
     turtleUtils.log (fine, "Entering prepareTopOfShaft()");
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.selectWithOverflow(redstoneEngineSlot);
-    turtleUtils.place(forward);
+    turtleUtils.place(forward, redstoneEngineSlot);
     turtleUtils.turn(left);
-    turtleUtils.selectWithOverflow(smallChestSlot);
-    turtleUtils.place(forward);
+    turtleUtils.place(forward, smallChestSlot);
     turtleUtils.moveWithDig(down);
-    turtleUtils.selectWithOverflow(woodenPipeSlot);
-    turtleUtils.place(up);
+    turtleUtils.place(up, woodenPipeSlot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareTopOfShaft()");
 end;
@@ -109,13 +151,13 @@ local function prepareBottomOfShaft()
     turtleUtils.replace(forward, wallFiller1Slot, false);
     turtleUtils.turn(left);
     turtleUtils.turn(left);
-    turtleUtils.place(forward, ladderSlot, false);
+    turtleUtils.place(forward, ladderSlot);
     turtleUtils.turn(left);
     turtleUtils.move(back);
-    turtleUtils.place(forward, redstoneTorchSlot, false);
+    turtleUtils.place(forward, redstoneTorchSlot);
     turtleUtils.turn(left);
     turtleUtils.move(back);
-    turtleUtils.place(forward, smallChestSlot, false);
+    turtleUtils.place(forward, smallChestSlot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareBottomOfShaft()");
 end;

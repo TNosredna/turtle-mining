@@ -158,12 +158,26 @@ function selectWithOverflow(slot, attempts)
 end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function placeWithOverflow(placeDirection, slot)
+    local slot = slot;
+    local placeDirection = placeDirection;
+    selectWithOverflow(slot);
+    place(placeDirection);
+end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, slot)
+    local slot = slot;
+    local placeDirection = placeDirection;
+    select(slot);
+    place(placeDirection);
+end;
+
+    -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function place(placeDirection)
     local placeDirection = placeDirection or forward;
-    local slot = slot or currentSlotNum;
     local actionFailed = false;
 
-    selectWithOverflow(slot);
     if (placeDirection == forward) then
         if (turtle.place()) then
             log(fine, "placed: forward");

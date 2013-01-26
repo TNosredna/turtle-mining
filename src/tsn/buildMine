@@ -1,3 +1,5 @@
+local logFileName = os.computerID()..".log";
+
 os.loadAPI("turtleUtils");
 
 fs.delete(logFileName);
