@@ -67,7 +67,7 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
         endingFillSlot = floorFillerSlot;
     end
 
-    turtleUtils.replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentUpDownDirection), initialFillSlot);
     turtleUtils.moveWithDig(currentUpDownDirection, numberBlocks-4);
     turtleUtils.replace(currentUpDownDirection, endingFillSlot);
 
@@ -84,7 +84,7 @@ local function floorAndCeilingRow(currentDirection, numberColumns, height)
     local currentDirection = currentDirection;
 
     for i = 1,numberColumns do
-        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection), height);
+        currentDirection = floorAndCeilingColumn(turtleUtils.getOppositeDirection(currentDirection), height);
         if (i < numberColumns) then
             turtleUtils.moveWithDig(forward, 1)
         end
@@ -145,13 +145,13 @@ local function wallColumn(currentDirection, height)
     end
 
     turtleUtils.moveWithDig(currentDirection, 2);
-    turtleUtils.replace(getOppositeDirection(currentDirection), initialFillSlot);
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), initialFillSlot);
     for i = 1,height do
         turtleUtils.moveWithDig(currentDirection, 1);
-        turtleUtils.replace(getOppositeDirection(currentDirection), middleFillSlot);
+        turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), middleFillSlot);
     end
     turtleUtils.moveWithDig(currentDirection, 1);
-    turtleUtils.replace(getOppositeDirection(currentDirection), endingFillSlot);
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), endingFillSlot);
 
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting wallColumn()");
@@ -167,7 +167,7 @@ local function buildWalls(startingUpDownDirection, numberColumns, height)
 
     for x=1,numberWalls do
         for i=1,numberColumns do
-            currentDirection = wallColumn(getOppositeDirection(currentDirection), height);
+            currentDirection = wallColumn(turtleUtils.getOppositeDirection(currentDirection), height);
             if (i < numberColumns) then
                 turtleUtils.moveWithDig(forward);
             end;

@@ -172,30 +172,30 @@ local function prepareStation()
     turtleUtils.moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
     turtleUtils.turn(right, 2);
     turtleUtils.dig(forward); -- destroy woodenpipe
-    turtleUtils.place(forward, stonePipeSlot);
+    turtleUtils.place(forward, stonePipe1Slot);
     turtleUtils.move(down);
-    turtleUtils.place(up, stonePipeSlot); -- plenum
+    turtleUtils.place(up, stonePipe1Slot); -- plenum
     turtleUtils.move(down);
-    turtleUtils.place(up, stonePipeSlot); -- in ceiling
+    turtleUtils.place(up, stonePipe1Slot); -- in ceiling
     turtleUtils.move(down);
-    turtleUtils.place(up, stonePipeSlot); -- in ceiling
+    turtleUtils.place(up, stonePipe1Slot); -- in ceiling
     turtleUtils.move(forward);
     turtleUtils.dig(up);
-    turtleUtils.place(up, stonePipeSlot);
+    turtleUtils.place(up, stonePipe1Slot);
     turtleUtils.move(down);
-    turtleUtils.place(up, stonePipeSlot);
+    turtleUtils.place(up, stonePipe1Slot);
     turtleUtils.move(down);
-    turtleUtils.place(up, stonePipeSlot);
+    turtleUtils.place(up, stonePipe1Slot);
     turtleUtils.dig(down);
-    turtleUtils.place(down, stonePipeSlot);
+    turtleUtils.place(down, stonePipe1Slot);
     turtleUtils.move(back);
-    turtleUtils.place(forward, stonePipeSlot);
+    turtleUtils.place(forward, stonePipe1Slot);
     turtleUtils.dig(down);
-    turtleUtils.place(down, stonePipeSlot);
+    turtleUtils.place(down, stonePipe1Slot);
     turtleUtils.move(back);
-    turtleUtils.place(down, stonePipeSlot);
+    turtleUtils.place(down, stonePipe1Slot);
     turtleUtils.move(back);
-    turtleUtils.place(down, stonePipeSlot);
+    turtleUtils.place(down, stonePipe1Slot);
     turtleUtils.move(back);
     turtleUtils.place(down, woodenPipeSlot);
     turtleUtils.turn(right, 2);
@@ -212,13 +212,13 @@ local function prepareStation()
     turtleUtils.turn(left);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
     turtleUtils.dig(down);
-    turtleUtils.place(down, redstoneTorch);
+    turtleUtils.place(down, redstoneTorchSlot);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
     turtleUtils.move(back);
     turtleUtils.place(forward, smallChestSlot);
     turtleUtils.dig(down);
-    turtleUtils.place(down, redstoneEngine);
-    turtleUtils.place(forward, redstoneTorch);
+    turtleUtils.place(down, redstoneEngineSlot);
+    turtleUtils.place(forward, redstoneTorchSlot);
 end;
 
 local function moveToStartingPosition(radius)

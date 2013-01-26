@@ -129,7 +129,7 @@ local function prepareShaftLayer()
     end
     turtleUtils.turn(left);
     turtleUtils.moveWithDig(down);
-    turtleUtils.place(up, stonePipeSlot);
+    turtleUtils.place(up, stonePipe1Slot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareShaftLayer()");
 end;
