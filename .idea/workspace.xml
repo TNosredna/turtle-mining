@@ -4,6 +4,7 @@
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,10 +62,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="0" selection-end="1228" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,10 +116,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="testStub" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.641635">
+            <state line="44" column="0" selection-start="1450" selection-end="1450" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -156,10 +157,10 @@
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
         <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
-        <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
         <option value="$PROJECT_DIR$/src/tsn/digStation" />
         <option value="$PROJECT_DIR$/src/tsn/digShaft" />
         <option value="$PROJECT_DIR$/src/tsn/testStub" />
+        <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
       </list>
     </option>
   </component>
@@ -810,7 +811,11 @@
       <created>1359239191095</created>
       <updated>1359239191095</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Tweaking and testing">
+      <created>1359239320114</created>
+      <updated>1359239320114</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -880,7 +885,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug in including external source" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tweaking and testing" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -908,6 +913,7 @@
     <MESSAGE value="Finished engineering digShaft, not tested&#10;Added prepare station&#10;" />
     <MESSAGE value="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;" />
     <MESSAGE value="Fixed bug in including external source" />
+    <MESSAGE value="Tweaking and testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -973,16 +979,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="3" selection-start="4105" selection-end="4105" vertical-scroll-proportion="0.0">
+        <state line="63" column="11" selection-start="2529" selection-end="2529" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="11" selection-start="2529" selection-end="2529" vertical-scroll-proportion="0.0">
+        <state line="125" column="3" selection-start="4105" selection-end="4105" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -994,16 +1000,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="0" selection-end="1228" vertical-scroll-proportion="0.0">
+        <state line="44" column="0" selection-start="1450" selection-end="1450" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.641635">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

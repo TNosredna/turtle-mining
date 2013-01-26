@@ -1,48 +1,47 @@
 -- Slot Assignments
-wallFiller1Slot = 1;     -- digStation (64)
-wallFiller2Slot = 2;     -- digStation (64)
-wallFiller3Slot = 3;     -- digStation (32)
-wallFiller4Slot = 4;     -- digShaft (64)
-floorFillerSlot = 5;     -- digStation (49)
-roofFillerSlot = 6;      -- digStation (49)
-stonePipeSlot = 7;       -- prepareShaft (64)
-stonePipeSlot = 8;       -- prepareStation (2-8)
-redWireSlot = 9;         -- prepareShaft (64)
-smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
-redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
-woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
-redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
-torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
-ladderSlot = 15;         -- digShaft (64)
-fuelSlot = 16;           -- digShaft
+local wallFiller1Slot = 1;     -- digStation (64)
+local wallFiller2Slot = 2;     -- digStation (64)
+local wallFiller3Slot = 3;     -- digStation (32)
+local wallFiller4Slot = 4;     -- digShaft (64)
+local floorFillerSlot = 5;     -- digStation (49)
+local roofFillerSlot = 6;      -- digStation (49)
+local stonePipe1Slot = 7;       -- prepareShaft (64)
+local stonePipe2Slot = 8;       -- prepareStation (2-8)
+local redWireSlot = 9;         -- prepareShaft (64)
+local smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
+local redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
+local woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
+local redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
+local torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
+local ladderSlot = 15;         -- digShaft (64)
+local fuelSlot = 16;           -- digShaft
 
+local up = "up";
+local down = "down";
+local forward = "forward";
+local right = "right";
+local left = "left";
+local back = "back";
 
-up = "up";
-down = "down";
-forward = "forward";
-right = "right";
-left = "left";
-back = "back";
+local error = 0;
+local coarse = 1;
+local fine = 2;
+local debug = 3;
+local currentLogLevel = debug;
 
-error = 0;
-coarse = 1;
-fine = 2;
-debug = 3;
-currentLogLevel = debug;
+local currentSlotNum = 1;
 
-currentSlotNum = 1;
+local success = true;
+local failure = false;
 
-success = true;
-failure = false;
+local blockPlaced = 0;
+local blockAlreadyPresent = 1;
+local notEnoughInventory = 2;
+local noAnchorBlocks = 3;
 
-blockPlaced = 0;
-blockAlreadyPresent = 1;
-notEnoughInventory = 2;
-noAnchorBlocks = 3;
-
-currentLogIndent = 0;
-logFileName = os.computerID()..".log";
-darkness = 0;
+local currentLogIndent = 0;
+local logFileName = os.computerID()..".log";
+local darkness = 0;
 
 function log(logLevel, line)
     local logLevel = logLevel or coarse;
