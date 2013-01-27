@@ -42,7 +42,7 @@ currentSlotNum = 1;
 currentLogIndent = 0;
 currentDarkness = 0;
 
-local logFileName = os.computerID()..".log";
+logFileName = os.computerID()..".log";
 
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;

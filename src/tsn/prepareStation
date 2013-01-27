@@ -40,7 +40,7 @@ end
 function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
     -- DROP THE TORCHES
     turtle.select(1)
-    local turtleUtils.torchSlot=0
+    local torchSlot=0
     if configuration.placeTorches then
         turtleUtils.torchSlot=1
         if dropTorches then
