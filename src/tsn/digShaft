@@ -195,7 +195,7 @@ end;
 function placeWithOverflow(placeDirection, slot)
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
-    selectWithOverflow(slot);
+    slot = selectWithOverflow(slot);
     local successCode = private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeWithOverflow()");
@@ -253,7 +253,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     log (fine, "Entering replace("..direction..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
-    selectWithOverflow(slot);
+    slot = selectWithOverflow(slot);
     local successCode = place(direction, slot);
     log(debug, "    successCode="..successCode);
     while ((attempts==0) or (tries<=attempts)) do
@@ -271,7 +271,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
         elseif (successCode==noAnchorBlocks) then
             log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.");
             move(direction);
-            replace(direction);
+            replace(direction, slot);
             move(getOppositeDirection(direction));
         end
         successCode = place(direction);

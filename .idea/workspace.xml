@@ -73,7 +73,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="46" selection-start="7628" selection-end="7628" vertical-scroll-proportion="0.22865854">
+            <state line="255" column="29" selection-start="10895" selection-end="10913" vertical-scroll-proportion="0.33267522">
               <folding />
             </state>
           </provider>
@@ -865,7 +865,11 @@
       <created>1359253014721</created>
       <updated>1359253014721</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="Tweaking and testing">
+      <created>1359253144125</created>
+      <updated>1359253144126</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -966,7 +970,18 @@
     <MESSAGE value="Tweaking and testing" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/src/tsn/digShaft</url>
+          <line>252</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="lua-line">
+          <url>file://$PROJECT_DIR$/src/tsn/digShaft</url>
+          <line>273</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1059,7 +1074,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="46" selection-start="7628" selection-end="7628" vertical-scroll-proportion="0.22865854">
+        <state line="255" column="29" selection-start="10895" selection-end="10913" vertical-scroll-proportion="0.33267522">
           <folding />
         </state>
       </provider>
