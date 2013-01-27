@@ -93,24 +93,24 @@ end;
 local function digShaftLayer()
     turtleUtils.log (fine, "Entering digShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
 
     turtleUtils.moveWithDig(forward)
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(right, 2);
     turtleUtils.moveWithDig(forward)
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(right);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(right, 2);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting digShaftLayer()", currentLogIndent);
 end;
@@ -138,17 +138,17 @@ local function prepareBottomOfShaft()
     turtleUtils.log (fine, "Entering prepareBottomOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
-        turtleUtils.replace(forward, wallFiller1Slot, false);
+        turtleUtils.replace(forward, wallFiller4Slot, false);
         turtleUtils.turn(left);
-        turtleUtils.replace(forward, wallFiller1Slot, false);
+        turtleUtils.replace(forward, wallFiller4Slot, false);
         turtleUtils.turn(left);
 
         turtleUtils.moveWithDig(forward);
         turtleUtils.turn(right);
     end;
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller1Slot, false);
+    turtleUtils.replace(forward, wallFiller4Slot, false);
     turtleUtils.turn(left);
     turtleUtils.turn(left);
     turtleUtils.place(forward, ladderSlot);

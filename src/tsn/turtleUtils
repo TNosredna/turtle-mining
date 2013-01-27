@@ -139,6 +139,7 @@ function select(slot)
     log (fine, "Exiting select("..slot..")");
 end;
 
+--Todo: fix bug where we need to skip over the currently selected number when evaluating
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
     local attempts = attempts or 10
@@ -148,7 +149,6 @@ function selectWithOverflow(slot, attempts)
 
     select(slot)
     if turtle.getItemCount(slot) <= 1 then
-        select(1)
         local tries = 1
         while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
             for i = 1,12 do
