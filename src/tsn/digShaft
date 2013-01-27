@@ -161,7 +161,7 @@ local function digMineShaft(depth)
 end;
 
 if (depth == nil or depth=="") then
-    fs.delete(logFileName);
+    fs.delete(turtleUtils.logFileName);
     print ("How many blocks down should the station roof be located? (depth - 13 is normal)");
     depth = io.read();
     depth = tonumber(depth);
