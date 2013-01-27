@@ -122,7 +122,7 @@ end
 -- RESTOCKS THE INVENTORY
 function restock(configuration, ignoreBlocks, restockIgnore)
     turtle.select(1)
-    local turtleUtils.torchSlot=0
+    local torchSlot=0
     -- RESTOCK THE TORCHES
     if configuration.placeTorches then
         turtleUtils.torchSlot=1

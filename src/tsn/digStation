@@ -1,3 +1,5 @@
+-- Must allow for 1 available block above ceiling and 1 available block below floor
+
 up = "up";
 down = "down";
 forward = "forward";
@@ -29,203 +31,168 @@ os.loadAPI("turtleUtils");
 local args={...};
 local radius = args[1] or 5;
 local height = args[2] or 5;
+local logFileName = os.computerID().."-digStation"..".log";
 
-function dropoffAndRestock(configuration, ignoreBlocks, restockIgnore, dropTorches, dropIgnore)
-    dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
-    restock(configuration, ignoreBlocks, restockIgnore)
-end
-
-
--- EMPTIES THE INVENTORY
-function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
-    -- DROP THE TORCHES
-    turtle.select(1)
-    local turtleUtils.torchSlot=0
-    if configuration.placeTorches then
-        turtleUtils.torchSlot=1
-        if dropTorches then
-            api_turtleExt.drop(configuration.torchSuckDir)
-        end
-    end
-    -- DROP THE EXTRAS OF THE IGNORE BLOCKS
-    api_turtleExt.turnTo(configuration.itemDropDir)
-    for i=1+turtleUtils.torchSlot,turtleUtils.torchSlot+ignoreBlocks do
-        turtle.select(i)
-        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), math.max(turtle.getItemCount(i)-1, 0))
-    end
-    -- DROP THE OTHER ITEMS
-    for i=turtleUtils.torchSlot+ignoreBlocks+1,16 do
-        turtle.select(i)
-        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), turtle.getItemCount(i))
-    end
-    api_turtleExt.turnFrom(configuration.itemDropDir)
-    turtle.select(1)
-    -- DROP THE IGNORE BLOCKS
-    if dropIgnore then
-        api_turtleExt.turnTo(configuration.ignoreDir)
-        for i=1+turtleUtils.torchSlot,turtleUtils.torchSlot+ignoreBlocks do
-            turtle.select(i)
-            api_turtleExt.drop(api_turtleExt.turnedDir(configuration.ignoreDir), 1)
-        end
-        api_turtleExt.turnFrom(configuration.ignoreDir)
-    end
-end
-
-
--- RESTOCKS THE TORCHES
-function restockTorches(configuration)
-    turtle.select(1)
-    local dispMsg=true
-    local firstEmpty=2
-    -- CALCULATE THE FIRST EMPTY SLOT
-    while ((turtle.getItemCount(firstEmpty)>0) and (firstEmpty<16)) do
-        firstEmpty = firstEmpty+1
-    end
-    -- ALIGN WITH THE TORCH CHEST AND SUCK A STACK
-    api_turtleExt.turnTo(configuration.torchSuckDir)
-    local tDir=api_turtleExt.turnedDir(configuration.torchSuckDir)
-    while turtle.getItemCount(firstEmpty)==0 do
-        if not api_turtleExt.suck(tDir) then
-            if dispMsg then
-                term.clear()
-                term.setCursorPos(1,1)
-                print("---------------------------------")
-                print("Please place some torches in a chest")
-                print("Chest Direction:  "..configuration.torchSuckDir)
-                print("Torches Required: "..(turtle.getItemSpace(1)+1))
-                print("---------------------------------")
-                dispMsg=false
-            end
-        else
-            dispMsg=true
-        end
-        sleep(0)
-    end
-    term.clear()
-    -- CHECK IF THERE ARE ACTUALLY TORCHES IN SLOT 1 AND DUMP ANY EXCESS TORCHES
-    if turtle.compareTo(firstEmpty) then
-        turtle.select(firstEmpty)
-        api_turtleExt.drop(tDir)
-        api_turtleExt.turnFrom(configuration.torchSuckDir)
-    else
-        turtle.select(firstEmpty)
-        api_turtleExt.drop(tDir)
-        turtle.select(1)
-        api_turtleExt.turnFrom(configuration.torchSuckDir)
-        api_turtleExt.drop(configuration.itemDropDir)
-        restockTorches(configuration)
-    end
-    turtle.select(1)
-end
-
-
--- RESTOCKS THE INVENTORY
-function restock(configuration, ignoreBlocks, restockIgnore)
-    turtle.select(1)
-    local turtleUtils.torchSlot=0
-    -- RESTOCK THE TORCHES
-    if configuration.placeTorches then
-        turtleUtils.torchSlot=1
-        restockTorches(configuration)
-    end
-    -- RESTOCK THE IGNORE BLOCKS
-    if restockIgnore then
-        api_turtleExt.turnTo(configuration.ignoreDir)
-        local tDir=api_turtleExt.turnedDir(configuration.ignoreDir)
-        for i=1+turtleUtils.torchSlot,ignoreBlocks+turtleUtils.torchSlot do
-            turtle.select(i)
-            api_turtleExt.suck(tDir)
-        end
-        api_turtleExt.turnFrom(configuration.ignoreDir)
-    end
-    turtle.select(1)
-end
-
-local function waitForInventoryToArriveInChest()
-    --detect chest up
-    --drop off excess inv
-    --wait until desired inv is present then take
-end;
-
-local function prepareStation()
-    turtleUtils.turn(turtleUtils.right);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.moveWithDig(turtleUtils.up, 2); -- destroy redstone signal powering woodenpipe, then one wire
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.dig(turtleUtils.forward); -- destroy woodenpipe
-    turtleUtils.place(turtleUtils.forward, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- plenum
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- in ceiling
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- in ceiling
-    turtleUtils.move(turtleUtils.forward);
-    turtleUtils.dig(turtleUtils.up);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.stonePipe1Slot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.woodenPipeSlot);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.smallChestSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.dig(turtleUtils.forward);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
-    turtleUtils.dig(turtleUtils.up);
-    turtleUtils.place(turtleUtils.up, turtleUtils.smallChestSlot);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.turn(turtleUtils.left);
-    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.redstoneTorchSlot);
-    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.redstoneEngineSlot);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneTorchSlot);
-end;
-
-local function moveToStartingPosition(radius)
-    local radius = radius;
-    turtleUtils.log (fine, "Entering moveToStartingPosition()");
+local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
+    turtleUtils.log(fine, "Entering floorAndCeilingColumn()");
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(radius - 1);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(radius - 1);
-    turtleUtils.moveWithDig(turtleUtils.up);
+    local numberBlocks = numberBlocks or 5;
+    local currentUpDownDirection = currentUpDownDirection;
+    local initialFillSlot;
+    local endingFillSlot;
+
+    if currentUpDownDirection == up then
+        initialFillSlot = floorFillerSlot;
+        endingFillSlot = roofFillerSlot;
+    else
+        initialFillSlot = roofFillerSlot;
+        endingFillSlot = floorFillerSlot;
+    end
+
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentUpDownDirection), initialFillSlot);
+    turtleUtils.moveWithDig(currentUpDownDirection, numberBlocks-4);
+    turtleUtils.replace(currentUpDownDirection, endingFillSlot);
+
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting floorAndCeilingColumn()");
+    return currentUpDownDirection;
+end
+
+local function floorAndCeilingRow(currentDirection, numberColumns, height)
+    turtleUtils.log (fine, "Entering floorAndCeilingRow()");
+    currentLogIndent = currentLogIndent + 1;
+    local numberColumns = numberColumns or 9;
+    local height = height or 5;
+    local currentDirection = currentDirection;
+
+    for i = 1,numberColumns do
+        currentDirection = floorAndCeilingColumn(turtleUtils.getOppositeDirection(currentDirection), height);
+        if (i < numberColumns) then
+            turtleUtils.moveWithDig(forward, 1)
+        end
+    end
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting floorAndCeilingRow()");
+    return currentDirection;
+end
+
+local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows, height)
+    turtleUtils.log (fine, "Entering buildFloorAndCeiling()");
+    currentLogIndent = currentLogIndent + 1;
+    local numberRows = numberRows or 9;
+    local numberColumns = numberRows;
+    local hieght = height or 5;
+    local currentUpDownDirection = currentUpDownDirection;
+    local currentLeftRightDirection = currentLeftRightDirection;
+
+    for i = 1,numberRows do
+        currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns, height);
+        if (i < numberRows) then
+            currentLeftRightDirection = turtleUtils.getOppositeDirection(currentLeftRightDirection);
+            turtleUtils.transitionOverAnd180Degrees(currentLeftRightDirection);
+        end
+    end
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting buildFloorAndCeiling()");
+end
+
+local function moveToStartingPositionForCeilingFloor(turnDirection)
+    turtleUtils.log (fine, "Entering moveToStartingPositionForCeilingFloor()");
+    currentLogIndent = currentLogIndent + 1;
+    local turnDirection = turnDirection;
+    turtleUtils.transitionOverAnd180Degrees(turnDirection);
+    turtleUtils.moveWithDig(forward);
+    turtleUtils.moveWithDig(up, 2);
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
+end;
+
+local function wallColumn(currentDirection, height)
+    turtleUtils.log (fine, "Entering wallColumn()");
+    currentLogIndent = currentLogIndent + 1;
+    local height = height or 5;
+    height = height - 2;
+    local currentDirection = currentDirection;
+    local initialFillSlot;
+    local middleFillSlot = wallFiller1Slot;
+    local endingFillSlot;
+
+    if currentDirection == up then
+        initialFillSlot = floorFillerSlot;
+        endingFillSlot = roofFillerSlot;
+    end
+    if currentDirection == down then
+        initialFillSlot = roofFillerSlot;
+        endingFillSlot = floorFillerSlot;
+    end
+
+    turtleUtils.moveWithDig(currentDirection, 2);
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), initialFillSlot);
+    for i = 1,height do
+        turtleUtils.moveWithDig(currentDirection, 1);
+        turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), middleFillSlot);
+    end
+    turtleUtils.moveWithDig(currentDirection, 1);
+    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), endingFillSlot);
+
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting wallColumn()");
+    return currentDirection;
+end
+
+local function buildWalls(startingUpDownDirection, numberColumns, height)
+    turtleUtils.log (fine, "Entering buildWalls()");
+    currentLogIndent = currentLogIndent + 1;
+    local currentDirection = turtleUtils.getOppositeDirection(startingUpDownDirection);
+    local numberColumns = numberColumns - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
+    local numberWalls = 4;
+
+    for x=1,numberWalls do
+        for i=1,numberColumns do
+            currentDirection = wallColumn(turtleUtils.getOppositeDirection(currentDirection), height);
+            if (i < numberColumns) then
+                turtleUtils.moveWithDig(forward);
+            end;
+        end;
+        if (x < numberWalls) then
+            turtleUtils.turn(left);
+            turtleUtils.moveWithDig(forward);
+        end;
+    end;
+    currentLogIndent = currentLogIndent - 1;
+    turtleUtils.log (fine, "Exiting buildWalls()");
+    return currentDirection;
+end;
+
+local function moveToStartingPositionForWalls(radius, height)
+    turtleUtils.log (fine, "Entering moveToStartingPositionForWalls()");
+    currentLogIndent = currentLogIndent + 1;
+    local currentDirection = up;
+    -- turtle should start at z=13 or higher
+    -- this moves turtle from starting position to corner of room where the room anchor column will be built
+    turtleUtils.moveWithDig(down, height + 1);
+    turtleUtils.moveWithDig(forward, radius + 1);
+    turtleUtils.turn(right);
+    turtleUtils.moveWithDig(forward, radius);
+    turtleUtils.turn(right);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting moveToStartingPositionForWalls()");
+    return currentDirection;
 end
 
 if ((radius == nil or radius=="") or (height == nil or height=="")) then
-    fs.delete(turtleUtils.logFileName);
-    print ("What is the radius of the station? (5 is normal)");
+    fs.delete(logFileName);
+    print ("What is the desired radius of the station? (5 is normal)");
     radius = io.read();
     radius = tonumber(radius);
 
-    print ("What is the height, including floor and ceiling layers, of the station? (5 is normal)");
+    print ("What is the desired height, including floor and ceiling layers, of the station? (5 is normal)");
     height = io.read();
     height = tonumber(height);
 end;
 
-moveToStartingPosition(radius);
-waitForInventoryToArriveInChest();
-prepareStation();
+local diameter = radius * 2;
+local currentDirection = moveToStartingPositionForWalls(radius, height);
+currentDirection = buildWalls(currentDirection, (diameter +1), height);
+moveToStartingPositionForCeilingFloor(left);
+buildFloorAndCeiling(left, down, (diameter - 1), height);
