@@ -35,6 +35,7 @@ function log(logLevel, line, currentLogIndent)
 end
 
 function turn(turnDirection, repeatCount)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local repeatCount = repeatCount or 1;
 
     for i = 1,repeatCount do
@@ -49,6 +50,7 @@ function turn(turnDirection, repeatCount)
 end;
 
 function move(moveDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
@@ -63,6 +65,7 @@ function move(moveDirection)
 end;
 
 function dig(digDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local digDirection = digDirection or forward;
 
     if (digDirection == forward) then
@@ -75,6 +78,7 @@ function dig(digDirection)
 end;
 
 function detect(detectDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local detectDirection = detectDirection or forward;
 
     if (detectDirection == forward) then
@@ -87,6 +91,7 @@ function detect(detectDirection)
 end;
 
 function attack(attackDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attackDirection = attackDirection or forward;
 
     if (attackDirection == forward) then
@@ -99,6 +104,7 @@ function attack(attackDirection)
 end;
 
 function select(slot)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering select("..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -115,8 +121,9 @@ end;
 --Todo: fix bug where we need to skip over the currently selected number when evaluating
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attempts = attempts or 10
-    log (fine, "Entering selectWithOverflow("..slot..")");
+    log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     select(slot);
@@ -136,15 +143,16 @@ function selectWithOverflow(slot, attempts)
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting selectWithOverflow()");
+    log (fine, "Exiting selectWithOverflow()", currentLogIndent);
     return slot;
 end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function private_place(placeDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering private_place("..placeDirection..")");
+    log (fine, "Entering private_place("..placeDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
@@ -174,7 +182,7 @@ function private_place(placeDirection)
             if (detect(placeDirection)) then
                 log(debug, "    a  "..currentSlotNum.."  is already present at target location");
                 currentLogIndent = currentLogIndent - 1;
-                log (fine, "Exiting private_place()");
+                log (fine, "Exiting private_place()", currentLogIndent);
                 return blockAlreadyPresent;
             else
                 log(debug, "    no anchor blocks present at target location");
@@ -186,40 +194,43 @@ function private_place(placeDirection)
         end;
     else
         currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting private_place()");
+        log (fine, "Exiting private_place()", currentLogIndent);
         return blockPlaced;
     end;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
-    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
+    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     slot = selectWithOverflow(slot);
     local successCode = private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting placeWithOverflow()");
+    log (fine, "Exiting placeWithOverflow()", currentLogIndent);
     return successCode;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, slot)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local slot = slot or currentSlotNum;
     local placeDirection = placeDirection or forward;
-    log (fine, "Entering place("..placeDirection..","..slot..")");
+    log (fine, "Entering place("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     if (not slot == currentSlotNum) then select(slot); end;
     local successCode = private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting place()");
+    log (fine, "Exiting place()", currentLogIndent);
     return successCode;
 end;
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local steps = steps or 1
     local attempts = attempts or 10
-    log (fine, "Entering moveWithDig("..direction..")");
+    log (fine, "Entering moveWithDig("..direction..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,steps do
@@ -232,10 +243,11 @@ function moveWithDig(direction, steps, attempts)
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveWithDig()");
+    log (fine, "Exiting moveWithDig()", currentLogIndent);
 end
 
 function getOppositeDirection(currentDirection)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local currentDirection = currentDirection;
     if (currentDirection == up) then return down; end;
     if (currentDirection == down) then return up; end;
@@ -247,10 +259,11 @@ end
 
 -- move if can't replace. empty anchor protection
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attempts = attempts or 10;
     local tries = 1;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
-    log (fine, "Entering replace("..direction..","..slot..")");
+    log (fine, "Entering replace("..direction..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     slot = selectWithOverflow(slot);
@@ -281,22 +294,24 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
         sleep(0);
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting replace()");
+    log (fine, "Exiting replace()", currentLogIndent);
 end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local steps = steps or 1;
-    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
+    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     turn(turnDirection);
     moveWithDig(forward, steps);
     turn(turnDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting transitionOverAnd180Degrees()");
+    log (fine, "Exiting transitionOverAnd180Degrees()", currentLogIndent);
 end
 
 function refuel()
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     if turtle.getFuelLevel() <= 5 then
         turtle.select(fuelSlot);
         turtle.refuel(1);
@@ -373,6 +388,7 @@ local depth = args[1];
 
 -- start while turtle facing East to place Engine
 local function prepareTopOfShaft()
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering prepareTopOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     place(forward, redstoneEngineSlot);
@@ -385,6 +401,7 @@ local function prepareTopOfShaft()
 end;
 
 local function digShaftLayer()
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering digShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     replace(forward, wallFiller4Slot, false);
@@ -410,6 +427,7 @@ local function digShaftLayer()
 end;
 
 local function prepareShaftLayer()
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering prepareShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     turn(right);
@@ -429,6 +447,7 @@ local function prepareShaftLayer()
 end;
 
 local function prepareBottomOfShaft()
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering prepareBottomOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
@@ -457,6 +476,7 @@ local function prepareBottomOfShaft()
 end;
 
 local function digMineShaft(depth)
+    log (debug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering digMineShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     local depth = depth;
