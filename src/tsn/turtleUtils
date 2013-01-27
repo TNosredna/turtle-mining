@@ -1,48 +1,7 @@
 -- Slot Assignments
-local wallFiller1Slot = 1;     -- digStation (64)
-local wallFiller2Slot = 2;     -- digStation (64)
-local wallFiller3Slot = 3;     -- digStation (32)
-local wallFiller4Slot = 4;     -- digShaft (64)
-local floorFillerSlot = 5;     -- digStation (49)
-local roofFillerSlot = 6;      -- digStation (49)
-local stonePipe1Slot = 7;       -- prepareShaft (64)
-local stonePipe2Slot = 8;       -- prepareStation (2-8)
-local redWireSlot = 9;         -- prepareShaft (64)
-local smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
-local redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
-local woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
-local redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
-local torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
-local ladderSlot = 15;         -- digShaft (64)
-local fuelSlot = 16;           -- digShaft
-
-local up = "up";
-local down = "down";
-local forward = "forward";
-local right = "right";
-local left = "left";
-local back = "back";
-
-local error = 0;
-local coarse = 1;
-local fine = 2;
-local debug = 3;
-local currentLogLevel = debug;
-
-local currentSlotNum = 1;
-
-local success = true;
-local failure = false;
-
-local blockPlaced = 0;
-local blockAlreadyPresent = 1;
-local notEnoughInventory = 2;
-local noAnchorBlocks = 3;
-
-local currentLogIndent = 0;
-local darkness = 0;
 
 local logFileName = os.computerID().."-turtleUtils"..".log";
+
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
@@ -147,9 +106,9 @@ function selectWithOverflow(slot, attempts)
     log (fine, "Entering selectWithOverflow("..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
-    select(slot)
+    select(slot);
     if turtle.getItemCount(slot) <= 1 then
-        local tries = 1
+        local tries = 1;
         while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
             for i = 1,12 do
                 select(i);
@@ -165,7 +124,7 @@ function selectWithOverflow(slot, attempts)
     end
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting selectWithOverflow()");
-    return currentSlotNum;
+    return slot;
 end
 
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
@@ -173,35 +132,35 @@ function private_place(placeDirection)
     local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering place("..placeDirection..")");
+    log (fine, "Entering private_place("..placeDirection..")");
     currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
         if (turtle.place()) then
-            log(fine, "placed: forward");
+            log(fine, "placed: "..slot.." forward");
         else
             actionFailed = true;
-            log(debug, "failed to place: forward");
+            log(debug, "failed to place "..slot.." forward");
         end;
     elseif (placeDirection == up) then
         if (turtle.placeUp()) then
-            log(fine, "placed: up");
+            log(fine, "placed "..slot.." up");
         else
             actionFailed = true;
-            log(debug, "failed to place: up");
+            log(debug, "failed to place "..slot.." up");
         end;
     elseif (placeDirection == down) then
         if (turtle.placeDown()) then
-            log(fine, "placed: down");
+            log(fine, "placed "..slot.." down");
         else
             actionFailed = true;
-            log(debug, "failed to place: down");
+            log(debug, "failed to place "..slot.." down");
         end;
     end;
     if (actionFailed) then
         if (turtle.getItemCount(slot) > 0) then
             if (detect(placeDirection)) then
-                log(debug, "    a block is already present at target location");
+                log(debug, "    a  "..slot.."  is already present at target location");
                 currentLogIndent = currentLogIndent - 1;
                 log (fine, "Exiting private_place()");
                 return blockAlreadyPresent;
@@ -214,10 +173,10 @@ function private_place(placeDirection)
             return notEnoughInventory;
         end;
     else
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting private_place()");
         return blockPlaced;
     end;
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting private_place()");
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
