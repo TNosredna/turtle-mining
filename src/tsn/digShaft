@@ -1,35 +1,9 @@
--- Slot Assignments
-wallFiller1Slot = 1;     -- digStation (64)
-wallFiller2Slot = 2;     -- digStation (64)
-wallFiller3Slot = 3;     -- digStation (32)
-wallFiller4Slot = 4;     -- digShaft (64)
-floorFillerSlot = 5;     -- digStation (49)
-roofFillerSlot = 6;      -- digStation (49)
-stonePipe1Slot = 7;       -- prepareShaft (64)
-stonePipe2Slot = 8;       -- prepareStation (2-8)
-redWireSlot = 9;         -- prepareShaft (64)
-smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
-redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
-woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
-redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
-torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
-ladderSlot = 15;         -- digShaft (64)
-fuelSlot = 16;           -- digShaft
-
 up = "up";
 down = "down";
 forward = "forward";
 right = "right";
 left = "left";
 back = "back";
-
-error = 0;
-coarse = 1;
-fine = 2;
-debug = 3;
-currentLogLevel = debug;
-
-currentSlotNum = 1;
 
 success = true;
 failure = false;
@@ -39,8 +13,16 @@ blockAlreadyPresent = 1;
 notEnoughInventory = 2;
 noAnchorBlocks = 3;
 
+error = 0;
+coarse = 1;
+fine = 2;
+debug = 3;
+
+
+currentLogLevel = debug;
+currentSlotNum = 1;
 currentLogIndent = 0;
-darkness = 0;
+currentDarkness = 0;
 
 os.loadAPI("turtleUtils");
 
@@ -75,17 +57,16 @@ os.loadAPI("turtleUtils");
 
 local args={...};
 local depth = args[1];
-local logFileName = os.computerID().."-digShaft"..".log";
 
 -- start while turtle facing East to place Engine
 local function prepareTopOfShaft()
     turtleUtils.log (fine, "Entering prepareTopOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.place(forward, redstoneEngineSlot);
-    turtleUtils.turn(left);
-    turtleUtils.place(forward, smallChestSlot);
-    turtleUtils.moveWithDig(down);
-    turtleUtils.place(up, woodenPipeSlot);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneEngineSlot);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
+    turtleUtils.moveWithDig(turtleUtils.down);
+    turtleUtils.place(turtleUtils.up, turtleUtils.woodenPipeSlot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareTopOfShaft()", currentLogIndent);
 end;
@@ -93,24 +74,24 @@ end;
 local function digShaftLayer()
     turtleUtils.log (fine, "Entering digShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
 
-    turtleUtils.moveWithDig(forward)
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(right, 2);
-    turtleUtils.moveWithDig(forward)
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(right);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(right, 2);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
+    turtleUtils.moveWithDig(turtleUtils.forward)
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.right, 2);
+    turtleUtils.moveWithDig(turtleUtils.forward)
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.right);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.right, 2);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting digShaftLayer()", currentLogIndent);
 end;
@@ -118,18 +99,18 @@ end;
 local function prepareShaftLayer()
     turtleUtils.log (fine, "Entering prepareShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.turn(right);
-    turtleUtils.move(back);
-    turtleUtils.place(forward, ladderSlot);
-    turtleUtils.turn(left);
-    turtleUtils.move(back);
-    turtleUtils.place(forward, redWireSlot);
-    if (darkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
-        darkness = 0;
+    turtleUtils.turn(turtleUtils.right);
+    turtleUtils.move(turtleUtils.back);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.ladderSlot);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.move(turtleUtils.back);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.redWireSlot);
+    if (currentDarkness >= 6) and (place(turtleUtils.forward, turtleUtils.torchSlot) == blockPlaced) then
+        currentDarkness = 0;
     end
-    turtleUtils.turn(left);
-    turtleUtils.moveWithDig(down);
-    turtleUtils.place(up, stonePipe1Slot);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.moveWithDig(turtleUtils.down);
+    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareShaftLayer()", currentLogIndent);
 end;
@@ -138,26 +119,26 @@ local function prepareBottomOfShaft()
     turtleUtils.log (fine, "Entering prepareBottomOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
-        turtleUtils.replace(forward, wallFiller4Slot, false);
-        turtleUtils.turn(left);
-        turtleUtils.replace(forward, wallFiller4Slot, false);
-        turtleUtils.turn(left);
+        turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+        turtleUtils.turn(turtleUtils.left);
+        turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+        turtleUtils.turn(turtleUtils.left);
 
-        turtleUtils.moveWithDig(forward);
-        turtleUtils.turn(right);
+        turtleUtils.moveWithDig(turtleUtils.forward);
+        turtleUtils.turn(turtleUtils.right);
     end;
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
-    turtleUtils.replace(forward, wallFiller4Slot, false);
-    turtleUtils.turn(left);
-    turtleUtils.turn(left);
-    turtleUtils.place(forward, ladderSlot);
-    turtleUtils.turn(left);
-    turtleUtils.move(back);
-    turtleUtils.place(forward, redstoneTorchSlot);
-    turtleUtils.turn(left);
-    turtleUtils.move(back);
-    turtleUtils.place(forward, smallChestSlot);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.ladderSlot);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.move(turtleUtils.back);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneTorchSlot);
+    turtleUtils.turn(turtleUtils.left);
+    turtleUtils.move(turtleUtils.back);
+    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
     currentLogIndent = currentLogIndent - 1;
     turtleUtils.log (fine, "Exiting prepareBottomOfShaft()", currentLogIndent);
 end;
