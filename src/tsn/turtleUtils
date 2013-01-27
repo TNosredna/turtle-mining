@@ -136,7 +136,7 @@ function select(slot)
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
     end;
     currentLogIndent = currentLogIndent + 1;
-    log (fine, "Exiting select("..slot..")");
+    log (fine, "Exiting select()");
 end;
 
 --Todo: fix bug where we need to skip over the currently selected number when evaluating
@@ -154,6 +154,7 @@ function selectWithOverflow(slot, attempts)
             for i = 1,12 do
                 select(i);
                 if (turtle.compareTo(slot)) then
+                    currentSlotNum = slot;
                     log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
                     break;
                 end;
@@ -164,6 +165,7 @@ function selectWithOverflow(slot, attempts)
     end
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting selectWithOverflow()");
+    return currentSlotNum;
 end
 
     -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
@@ -233,11 +235,11 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, slot)
-    local slot = slot;
+    local slot = slot or currentSlotNum;
     local placeDirection = placeDirection or forward;
     log (fine, "Entering place("..placeDirection..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
-    select(slot);
+    if (not slot == currentSlotNum) then select(slot); end;
     local successCode = private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting place()");
@@ -286,7 +288,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     currentLogIndent = currentLogIndent + 1;
 
     selectWithOverflow(slot);
-    local successCode = place(direction);
+    local successCode = place(direction, slot);
     log(debug, "    successCode="..successCode);
     while ((attempts==0) or (tries<=attempts)) do
         if (successCode==blockPlaced) then

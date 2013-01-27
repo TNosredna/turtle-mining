@@ -64,7 +64,7 @@
       <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="23" selection-start="9840" selection-end="9840" vertical-scroll-proportion="0.7883212">
+            <state line="241" column="12" selection-start="9754" selection-end="9754" vertical-scroll-proportion="0.28467155">
               <folding />
             </state>
           </provider>
@@ -866,7 +866,11 @@
       <created>1359246110237</created>
       <updated>1359246110237</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Tweaking and testing">
+      <created>1359247367505</created>
+      <updated>1359247367505</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1060,7 +1064,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="23" selection-start="9840" selection-end="9840" vertical-scroll-proportion="0.7883212">
+        <state line="241" column="12" selection-start="9754" selection-end="9754" vertical-scroll-proportion="0.28467155">
           <folding />
         </state>
       </provider>
