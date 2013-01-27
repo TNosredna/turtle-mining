@@ -1,3 +1,326 @@
+function log(logLevel, line, currentLogIndent)
+    local currentLogIndent = currentLogIndent or 0;
+    local logLevel = logLevel or coarse;
+    if (logLevel <= currentLogLevel) then
+        local entry = os.time().." \t["..logLevel.."] - ";
+        for i=1,currentLogIndent do
+            entry = entry.."  ";
+        end;
+        entry = entry..line;
+        local filename = logFileName;
+        local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
+        file.writeLine(entry);
+        file.close();
+    end;
+end
+
+function turn(turnDirection, repeatCount)
+    local turnDirection = turnDirection;
+    local repeatCount = repeatCount or 1;
+
+    for i = 1,repeatCount do
+        if (turnDirection == left) then
+            if (turtle.turnLeft()) then log(fine, "turned: left"); else log(debug, "failed to turn: left"); return failure;  end;
+        elseif (turnDirection == right) then
+            if (turtle.turnRight()) then log(fine, "turned: right"); else log(debug, "failed to turn: right"); return failure;  end;
+        end;
+    end;
+
+    return success;
+end;
+
+function move(moveDirection)
+    local moveDirection = moveDirection or forward;
+
+    if (moveDirection == forward) then
+        if (turtle.forward()) then log(fine, "moved: forward"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: forward"); return failure;  end;
+    elseif (moveDirection == back) then
+        if (turtle.back()) then log(fine, "moved: back"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: back"); return failure;  end;
+    elseif (moveDirection == up) then
+        if (turtle.up()) then log(fine, "moved: up"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: up"); return failure;  end;
+    elseif (moveDirection == down) then
+        if (turtle.down()) then log(fine, "moved: down"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: down"); return failure;  end;
+    end;
+end;
+
+function dig(digDirection)
+    local digDirection = digDirection or forward;
+
+    if (digDirection == forward) then
+        if (turtle.dig()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
+    elseif (digDirection == up) then
+        if (turtle.digUp()) then log(fine, "dug: up"); return success;  else log(debug, "failed to dig: up"); return failure;  end;
+    elseif (digDirection == down) then
+        if (turtle.digDown()) then log(fine, "dug: down"); return success;  else log(debug, "failed to dig: down"); return failure;  end;
+    end;
+end;
+
+function detect(detectDirection)
+    local detectDirection = detectDirection or forward;
+
+    if (detectDirection == forward) then
+        if (turtle.detect()) then log(fine, "detected: forward"); return success; else log(debug, "failed to detect: forward"); return failure; end;
+    elseif (detectDirection == up) then
+        if (turtle.detectUp()) then log(fine, "detected: up"); return success;  else log(debug, "failed to detect: up"); return failure;  end;
+    elseif (detectDirection == down) then
+        if (turtle.detectDown()) then log(fine, "detected: down"); return success;  else log(debug, "failed to detect: down"); return failure;  end;
+    end;
+end;
+
+function attack(attackDirection)
+    local attackDirection = attackDirection or forward;
+
+    if (attackDirection == forward) then
+        if (turtle.attack()) then log(fine, "attacked: forward"); return success; else log(debug, "failed to atack: forward"); return failure; end;
+    elseif (attackDirection == up) then
+        if (turtle.attackUp()) then log(fine, "attacked: up"); return success;  else log(debug, "failed to attack: up"); return failure;  end;
+    elseif (attackDirection == down) then
+        if (turtle.attackDown()) then log(fine, "attacked: down"); return success;  else log(debug, "failed to attack: down"); return failure;  end;
+    end;
+end;
+
+function select(slot)
+    local slot = slot;
+    log (fine, "Entering select("..slot..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    turtle.select(slot);
+    log(fine, "selected: "..slot);
+    currentSlotNum = slot;  -- set the global slot value
+    if (currentLogLevel == debug) then
+        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
+    end;
+    currentLogIndent = currentLogIndent + 1;
+    log (fine, "Exiting select()");
+end;
+
+--Todo: fix bug where we need to skip over the currently selected number when evaluating
+-- look in slots 1-12 if selected slot if empty
+function selectWithOverflow(slot, attempts)
+    local attempts = attempts or 10
+    local slot = slot;
+    log (fine, "Entering selectWithOverflow("..slot..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    select(slot);
+    if turtle.getItemCount(slot) <= 1 then
+        local tries = 1;
+        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
+            for i = 1,12 do
+                select(i);
+                if (turtle.compareTo(slot)) then
+                    currentSlotNum = slot;
+                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
+                    break;
+                end;
+            end
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries + 1, attempts + 1)
+        end
+    end
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting selectWithOverflow()");
+    return slot;
+end
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function private_place(placeDirection)
+    local slot = currentSlotNum;
+    local placeDirection = placeDirection or forward;
+    local actionFailed = false;
+    log (fine, "Entering private_place("..placeDirection..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    if (placeDirection == forward) then
+        if (turtle.place()) then
+            log(fine, "placed: "..slot.." forward");
+        else
+            actionFailed = true;
+            log(debug, "failed to place "..slot.." forward");
+        end;
+    elseif (placeDirection == up) then
+        if (turtle.placeUp()) then
+            log(fine, "placed "..slot.." up");
+        else
+            actionFailed = true;
+            log(debug, "failed to place "..slot.." up");
+        end;
+    elseif (placeDirection == down) then
+        if (turtle.placeDown()) then
+            log(fine, "placed "..slot.." down");
+        else
+            actionFailed = true;
+            log(debug, "failed to place "..slot.." down");
+        end;
+    end;
+    if (actionFailed) then
+        if (turtle.getItemCount(slot) > 0) then
+            if (detect(placeDirection)) then
+                log(debug, "    a  "..slot.."  is already present at target location");
+                currentLogIndent = currentLogIndent - 1;
+                log (fine, "Exiting private_place()");
+                return blockAlreadyPresent;
+            else
+                log(debug, "    no anchor blocks present at target location");
+                return noAnchorBlocks;
+            end;
+        else
+            log(debug, "    no items left in slot "..slot.." to place");
+            return notEnoughInventory;
+        end;
+    else
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting private_place()");
+        return blockPlaced;
+    end;
+end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function placeWithOverflow(placeDirection, slot)
+    local slot = slot;
+    local placeDirection = placeDirection;
+    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
+    selectWithOverflow(slot);
+    local successCode = private_place(placeDirection);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting placeWithOverflow()");
+    return successCode;
+end;
+
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function place(placeDirection, slot)
+    local slot = slot or currentSlotNum;
+    local placeDirection = placeDirection or forward;
+    log (fine, "Entering place("..placeDirection..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
+    if (not slot == currentSlotNum) then select(slot); end;
+    local successCode = private_place(placeDirection);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting place()");
+    return successCode;
+end;
+
+-- dig if can't move
+function moveWithDig(direction, steps, attempts)
+    local steps = steps or 1
+    local attempts = attempts or 10
+    local direction = direction;
+    log (fine, "Entering moveWithDig("..direction..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    for i = 1,steps do
+        local tries = 1;
+        while (not move(direction) and ((attempts == 0) or (tries <= attempts))) do
+            dig(direction);
+            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+            tries = math.min(tries + 1, attempts + 1)
+            sleep(0)
+        end
+    end
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting moveWithDig()");
+end
+
+function getOppositeDirection(currentDirection)
+    local currentDirection = currentDirection;
+    if (currentDirection == up) then return down; end;
+    if (currentDirection == down) then return up; end;
+    if (currentDirection == left) then return right; end;
+    if (currentDirection == right) then return left; end;
+    if (currentDirection == forward) then return back; end;
+    if (currentDirection == back) then return forward; end;
+end
+
+-- move if can't replace. empty anchor protection
+function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
+    local attempts = attempts or 10;
+    local tries = 1;
+    local direction = direction;
+    local slot = slot;
+    local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
+    log (fine, "Entering replace("..direction..","..slot..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    selectWithOverflow(slot);
+    local successCode = place(direction, slot);
+    log(debug, "    successCode="..successCode);
+    while ((attempts==0) or (tries<=attempts)) do
+        if (successCode==blockPlaced) then
+            log(debug, "    Block was succesfully placed, continueing on.");
+            break;
+        elseif (successCode==blockAlreadyPresent and isAlwaysRemoveAndAdd) then
+            log(debug, "    Block already present.");
+            dig(direction);
+        elseif (successCode==notEnoughInventory) then
+            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
+            currentLogIndent = currentLogIndent - 1;
+            log (fine, "Exiting replace()");
+            shell.exit();
+        elseif (successCode==noAnchorBlocks) then
+            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.");
+            move(direction);
+            replace(direction);
+            move(getOppositeDirection(direction));
+        end
+        successCode = place(direction);
+        log(debug, "    successCode="..successCode.."[retry #"..tries.."]");
+        -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
+        tries = math.min(tries+1, attempts+1);
+        sleep(0);
+    end
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting replace()");
+end
+
+function transitionOverAnd180Degrees(turnDirection, steps)
+    local steps = steps or 1;
+    local turnDirection = turnDirection;
+    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    turn(turnDirection);
+    moveWithDig(forward, steps);
+    turn(turnDirection);
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting transitionOverAnd180Degrees()");
+end
+
+function refuel()
+    if turtle.getFuelLevel() <= 5 then
+        turtle.select(fuelSlot);
+        turtle.refuel(1);
+    end
+end
+
+-- Slot Assignments
+wallFiller1Slot = 1;     -- digStation (64)
+wallFiller2Slot = 2;     -- digStation (64)
+wallFiller3Slot = 3;     -- digStation (32)
+wallFiller4Slot = 4;     -- digShaft (64)
+floorFillerSlot = 5;     -- digStation (49)
+roofFillerSlot = 6;      -- digStation (49)
+stonePipe1Slot = 7;       -- prepareShaft (64)
+stonePipe2Slot = 8;       -- prepareStation (2-8)
+redWireSlot = 9;         -- prepareShaft (64)
+smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
+redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
+woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
+redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
+torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
+ladderSlot = 15;         -- digShaft (64)
+fuelSlot = 16;           -- digShaft
+
+logFileName = os.computerID()..".log";
+
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+--      Start of Local Script
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+
 up = "up";
 down = "down";
 forward = "forward";
@@ -60,91 +383,91 @@ local depth = args[1];
 
 -- start while turtle facing East to place Engine
 local function prepareTopOfShaft()
-    turtleUtils.log (fine, "Entering prepareTopOfShaft()", currentLogIndent);
+    log (fine, "Entering prepareTopOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneEngineSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
-    turtleUtils.moveWithDig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.woodenPipeSlot);
+    place(forward, redstoneEngineSlot);
+    turn(left);
+    place(forward, smallChestSlot);
+    moveWithDig(down);
+    place(up, woodenPipeSlot);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting prepareTopOfShaft()", currentLogIndent);
+    log (fine, "Exiting prepareTopOfShaft()", currentLogIndent);
 end;
 
 local function digShaftLayer()
-    turtleUtils.log (fine, "Entering digShaftLayer()", currentLogIndent);
+    log (fine, "Entering digShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
 
-    turtleUtils.moveWithDig(turtleUtils.forward)
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.moveWithDig(turtleUtils.forward)
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.right);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
+    moveWithDig(forward)
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
+    replace(forward, wallFiller4Slot, false);
+    turn(right, 2);
+    moveWithDig(forward)
+    replace(forward, wallFiller4Slot, false);
+    turn(right);
+    replace(forward, wallFiller4Slot, false);
+    turn(right, 2);
+    replace(forward, wallFiller4Slot, false);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting digShaftLayer()", currentLogIndent);
+    log (fine, "Exiting digShaftLayer()", currentLogIndent);
 end;
 
 local function prepareShaftLayer()
-    turtleUtils.log (fine, "Entering prepareShaftLayer()", currentLogIndent);
+    log (fine, "Entering prepareShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.turn(turtleUtils.right);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.ladderSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.redWireSlot);
-    if (currentDarkness >= 6) and (place(turtleUtils.forward, turtleUtils.torchSlot) == blockPlaced) then
+    turn(right);
+    move(back);
+    place(forward, ladderSlot);
+    turn(left);
+    move(back);
+    place(forward, redWireSlot);
+    if (currentDarkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
         currentDarkness = 0;
     end
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.moveWithDig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
+    turn(left);
+    moveWithDig(down);
+    place(up, stonePipe1Slot);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting prepareShaftLayer()", currentLogIndent);
+    log (fine, "Exiting prepareShaftLayer()", currentLogIndent);
 end;
 
 local function prepareBottomOfShaft()
-    turtleUtils.log (fine, "Entering prepareBottomOfShaft()", currentLogIndent);
+    log (fine, "Entering prepareBottomOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     for i=1,3 do
-        turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-        turtleUtils.turn(turtleUtils.left);
-        turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-        turtleUtils.turn(turtleUtils.left);
+        replace(forward, wallFiller4Slot, false);
+        turn(left);
+        replace(forward, wallFiller4Slot, false);
+        turn(left);
 
-        turtleUtils.moveWithDig(turtleUtils.forward);
-        turtleUtils.turn(turtleUtils.right);
+        moveWithDig(forward);
+        turn(right);
     end;
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.replace(turtleUtils.forward, turtleUtils.wallFiller4Slot, false);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.ladderSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneTorchSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
+    replace(forward, wallFiller4Slot, false);
+    turn(left);
+    turn(left);
+    place(forward, ladderSlot);
+    turn(left);
+    move(back);
+    place(forward, redstoneTorchSlot);
+    turn(left);
+    move(back);
+    place(forward, smallChestSlot);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting prepareBottomOfShaft()", currentLogIndent);
+    log (fine, "Exiting prepareBottomOfShaft()", currentLogIndent);
 end;
 
 local function digMineShaft(depth)
-    turtleUtils.log (fine, "Entering digMineShaft()", currentLogIndent);
+    log (fine, "Entering digMineShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     local depth = depth;
     prepareTopOfShaft();
@@ -152,16 +475,16 @@ local function digMineShaft(depth)
     for i = 1,(depth-1) do
         digShaftLayer();
         prepareShaftLayer();
-        turtleUtils.refuel()
+        refuel()
     end;
 
     prepareBottomOfShaft();
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting digMineShaft()", currentLogIndent);
+    log (fine, "Exiting digMineShaft()", currentLogIndent);
 end;
 
 if (depth == nil or depth=="") then
-    fs.delete(turtleUtils.logFileName);
+    fs.delete(logFileName);
     print ("How many blocks down should the station roof be located? (depth - 13 is normal)");
     depth = io.read();
     depth = tonumber(depth);

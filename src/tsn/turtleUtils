@@ -37,12 +37,12 @@ torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
 ladderSlot = 15;         -- digShaft (64)
 fuelSlot = 16;           -- digShaft
 
+logFileName = os.computerID()..".log";
+
 currentLogLevel = debug;
 currentSlotNum = 1;
 currentLogIndent = 0;
 currentDarkness = 0;
-
-logFileName = os.computerID()..".log";
 
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
