@@ -218,7 +218,7 @@ function place(placeDirection, slot)
     local placeDirection = placeDirection or forward;
     log (fine, "Entering place("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if (not slot == currentSlotNum) then select(slot); end;
+    if (slot ~= currentSlotNum) then select(slot); end;
     local successCode = private_place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting place()", currentLogIndent);
