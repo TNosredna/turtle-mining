@@ -73,7 +73,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="8" selection-start="12172" selection-end="12172" vertical-scroll-proportion="0.64461994">
+            <state line="492" column="7" selection-start="24202" selection-end="24205" vertical-scroll-proportion="0.76307994">
               <folding />
             </state>
           </provider>
@@ -877,7 +877,11 @@
       <created>1359255571942</created>
       <updated>1359255571942</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="Tweaking and testing">
+      <created>1359256304525</created>
+      <updated>1359256304525</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -978,14 +982,7 @@
     <MESSAGE value="Tweaking and testing" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="lua-line">
-          <url>file://$PROJECT_DIR$/src/tsn/digShaft</url>
-          <line>221</line>
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <breakpoint-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1078,7 +1075,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="8" selection-start="12172" selection-end="12172" vertical-scroll-proportion="0.64461994">
+        <state line="492" column="7" selection-start="24202" selection-end="24205" vertical-scroll-proportion="0.76307994">
           <folding />
         </state>
       </provider>
