@@ -149,30 +149,30 @@ function private_place(placeDirection)
 
     if (placeDirection == forward) then
         if (turtle.place()) then
-            log(fine, "placed: "..slot.." forward");
+            log(fine, "placed: "..currentSlotNum.." forward");
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." forward");
+            log(debug, "failed to place "..currentSlotNum.." forward");
         end;
     elseif (placeDirection == up) then
         if (turtle.placeUp()) then
-            log(fine, "placed "..slot.." up");
+            log(fine, "placed "..currentSlotNum.." up");
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." up");
+            log(debug, "failed to place "..currentSlotNum.." up");
         end;
     elseif (placeDirection == down) then
         if (turtle.placeDown()) then
-            log(fine, "placed "..slot.." down");
+            log(fine, "placed "..currentSlotNum.." down");
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." down");
+            log(debug, "failed to place "..currentSlotNum.." down");
         end;
     end;
     if (actionFailed) then
-        if (turtle.getItemCount(slot) > 0) then
+        if (turtle.getItemCount(currentSlotNum) > 0) then
             if (detect(placeDirection)) then
-                log(debug, "    a  "..slot.."  is already present at target location");
+                log(debug, "    a  "..currentSlotNum.."  is already present at target location");
                 currentLogIndent = currentLogIndent - 1;
                 log (fine, "Exiting private_place()");
                 return blockAlreadyPresent;
@@ -181,7 +181,7 @@ function private_place(placeDirection)
                 return noAnchorBlocks;
             end;
         else
-            log(debug, "    no items left in slot "..slot.." to place");
+            log(debug, "    no items left in slot "..currentSlotNum.." to place");
             return notEnoughInventory;
         end;
     else

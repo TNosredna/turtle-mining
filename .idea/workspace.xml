@@ -73,7 +73,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="886" selection-end="886" vertical-scroll-proportion="-5.625">
+            <state line="172" column="46" selection-start="7628" selection-end="7628" vertical-scroll-proportion="0.22865854">
               <folding />
             </state>
           </provider>
@@ -861,7 +861,11 @@
       <created>1359252646387</created>
       <updated>1359252646387</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Tweaking and testing">
+      <created>1359253014721</created>
+      <updated>1359253014721</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1055,7 +1059,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="886" selection-end="886" vertical-scroll-proportion="-5.625">
+        <state line="172" column="46" selection-start="7628" selection-end="7628" vertical-scroll-proportion="0.22865854">
           <folding />
         </state>
       </provider>
