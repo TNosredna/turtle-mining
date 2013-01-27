@@ -114,7 +114,7 @@ function select(slot)
     if (currentLogLevel == debug) then
         log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
     end;
-    currentLogIndent = currentLogIndent + 1;
+    currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting select()", currentLogIndent);
 end;
 
@@ -148,11 +148,11 @@ function selectWithOverflow(slot, attempts)
 end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function private_place(placeDirection)
+function place(placeDirection)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering private_place("..placeDirection..")", currentLogIndent);
+    log (fine, "Entering place("..placeDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
@@ -182,7 +182,7 @@ function private_place(placeDirection)
             if (detect(placeDirection)) then
                 log(debug, "    a  "..currentSlotNum.."  is already present at target location", currentLogIndent);
                 currentLogIndent = currentLogIndent - 1;
-                log (fine, "Exiting private_place()", currentLogIndent);
+                log (fine, "Exiting place()", currentLogIndent);
                 return blockAlreadyPresent;
             else
                 log(debug, "    no anchor blocks present at target location", currentLogIndent);
@@ -194,7 +194,7 @@ function private_place(placeDirection)
         end;
     else
         currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting private_place()", currentLogIndent);
+        log (fine, "Exiting place()", currentLogIndent);
         return blockPlaced;
     end;
 end;
@@ -205,23 +205,23 @@ function placeWithOverflow(placeDirection, slot)
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     slot = selectWithOverflow(slot);
-    local successCode = private_place(placeDirection);
+    local successCode = place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeWithOverflow()", currentLogIndent);
     return successCode;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function place(placeDirection, slot)
+function placeItem(placeDirection, slot)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local slot = slot or currentSlotNum;
     local placeDirection = placeDirection or forward;
-    log (fine, "Entering place("..placeDirection..","..slot..")", currentLogIndent);
+    log (fine, "Entering placeItem("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     if (slot ~= currentSlotNum) then select(slot); end;
-    local successCode = private_place(placeDirection);
+    local successCode = place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting place()", currentLogIndent);
+    log (fine, "Exiting placeItem()", currentLogIndent);
     return successCode;
 end;
 
@@ -267,7 +267,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     currentLogIndent = currentLogIndent + 1;
 
     slot = selectWithOverflow(slot);
-    local successCode = place(direction, slot);
+    local successCode = placeItem(direction, slot);
     log(debug, "    successCode="..successCode, currentLogIndent);
     while ((attempts==0) or (tries<=attempts)) do
         if (successCode==blockPlaced) then
@@ -287,7 +287,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
             replace(direction, slot);
             move(getOppositeDirection(direction));
         end
-        successCode = place(direction);
+        successCode = placeItem(direction);
         log(debug, "    successCode="..successCode.."[retry #"..tries.."]", currentLogIndent);
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
@@ -392,11 +392,11 @@ local function prepareTopOfShaft()
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering prepareTopOfShaft()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    place(forward, redstoneEngineSlot);
+    placeItem(forward, redstoneEngineSlot);
     turn(left);
-    place(forward, smallChestSlot);
+    placeItem(forward, smallChestSlot);
     moveWithDig(down);
-    place(up, woodenPipeSlot);
+    placeItem(up, woodenPipeSlot);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareTopOfShaft()", currentLogIndent);
 end;
@@ -431,18 +431,26 @@ local function prepareShaftLayer()
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering prepareShaftLayer()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
+io.read();
     turn(right);
     move(back);
-    place(forward, ladderSlot);
+    io.read();
+    placeItem(forward, ladderSlot);
+    io.read();
     turn(left);
     move(back);
-    place(forward, redWireSlot);
-    if (currentDarkness >= 6) and (place(forward, torchSlot) == blockPlaced) then
+    io.read();
+    placeItem(forward, redWireSlot);
+    io.read();
+    if (currentDarkness >= 6) and (placeItem(forward, torchSlot) == blockPlaced) then
         currentDarkness = 0;
     end
     turn(left);
+    io.read();
     moveWithDig(down);
-    place(up, stonePipe1Slot);
+    io.read();
+    placeItem(up, stonePipe1Slot);
+    io.read();
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareShaftLayer()", currentLogIndent);
 end;
@@ -465,13 +473,13 @@ local function prepareBottomOfShaft()
     replace(forward, wallFiller4Slot, false);
     turn(left);
     turn(left);
-    place(forward, ladderSlot);
+    placeItem(forward, ladderSlot);
     turn(left);
     move(back);
-    place(forward, redstoneTorchSlot);
+    placeItem(forward, redstoneTorchSlot);
     turn(left);
     move(back);
-    place(forward, smallChestSlot);
+    placeItem(forward, smallChestSlot);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareBottomOfShaft()", currentLogIndent);
 end;
