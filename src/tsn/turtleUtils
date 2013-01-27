@@ -171,7 +171,7 @@ function private_place(placeDirection)
     local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering placeInt("..placeDirection..")");
+    log (fine, "Entering place("..placeDirection..")");
     currentLogIndent = currentLogIndent + 1;
 
     if (placeDirection == forward) then
