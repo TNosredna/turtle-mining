@@ -1,3 +1,23 @@
+-- Slot Assignments
+wallFiller1Slot = 1;     -- digStation (64)
+wallFiller2Slot = 2;     -- digStation (64)
+wallFiller3Slot = 3;     -- digStation (32)
+wallFiller4Slot = 4;     -- digShaft (64)
+floorFillerSlot = 5;     -- digStation (49)
+roofFillerSlot = 6;      -- digStation (49)
+stonePipe1Slot = 7;       -- prepareShaft (64)
+stonePipe2Slot = 8;       -- prepareStation (2-8)
+redWireSlot = 9;         -- prepareShaft (64)
+smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
+redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
+woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
+redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
+torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
+ladderSlot = 15;         -- digShaft (64)
+fuelSlot = 16;           -- digShaft
+
+logFileName = os.computerID()..".log";
+
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
@@ -15,7 +35,6 @@ function log(logLevel, line, currentLogIndent)
 end
 
 function turn(turnDirection, repeatCount)
-    local turnDirection = turnDirection;
     local repeatCount = repeatCount or 1;
 
     for i = 1,repeatCount do
@@ -80,7 +99,6 @@ function attack(attackDirection)
 end;
 
 function select(slot)
-    local slot = slot;
     log (fine, "Entering select("..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -98,7 +116,6 @@ end;
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
     local attempts = attempts or 10
-    local slot = slot;
     log (fine, "Entering selectWithOverflow("..slot..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -125,7 +142,6 @@ end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function private_place(placeDirection)
-    local slot = currentSlotNum;
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
     log (fine, "Entering private_place("..placeDirection..")");
@@ -177,8 +193,6 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
-    local slot = slot;
-    local placeDirection = placeDirection;
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
     selectWithOverflow(slot);
@@ -205,7 +219,6 @@ end;
 function moveWithDig(direction, steps, attempts)
     local steps = steps or 1
     local attempts = attempts or 10
-    local direction = direction;
     log (fine, "Entering moveWithDig("..direction..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -236,8 +249,6 @@ end
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     local attempts = attempts or 10;
     local tries = 1;
-    local direction = direction;
-    local slot = slot;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
     log (fine, "Entering replace("..direction..","..slot..")");
     currentLogIndent = currentLogIndent + 1;
@@ -275,7 +286,6 @@ end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
     local steps = steps or 1;
-    local turnDirection = turnDirection;
     log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -292,26 +302,6 @@ function refuel()
         turtle.refuel(1);
     end
 end
-
--- Slot Assignments
-wallFiller1Slot = 1;     -- digStation (64)
-wallFiller2Slot = 2;     -- digStation (64)
-wallFiller3Slot = 3;     -- digStation (32)
-wallFiller4Slot = 4;     -- digShaft (64)
-floorFillerSlot = 5;     -- digStation (49)
-roofFillerSlot = 6;      -- digStation (49)
-stonePipe1Slot = 7;       -- prepareShaft (64)
-stonePipe2Slot = 8;       -- prepareStation (2-8)
-redWireSlot = 9;         -- prepareShaft (64)
-smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
-redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
-woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
-redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
-torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
-ladderSlot = 15;         -- digShaft (64)
-fuelSlot = 16;           -- digShaft
-
-logFileName = os.computerID()..".log";
 
 ------------------------------------------------------
 ------------------------------------------------------
@@ -347,7 +337,7 @@ currentSlotNum = 1;
 currentLogIndent = 0;
 currentDarkness = 0;
 
-os.loadAPI("turtleUtils");
+--os.loadAPI("turtleUtils");
 
 -- Wall Filler (64) -> Slot 4
 -- Stone Pipe (64) -> Slot 7
