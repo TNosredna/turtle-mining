@@ -61,14 +61,14 @@ function log(logLevel, line, currentLogIndent)
 end
 
 function turn(turnDirection, repeatCount)
-    local turnDirection = turnDirection;
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local repeatCount = repeatCount or 1;
 
     for i = 1,repeatCount do
         if (turnDirection == left) then
-            if (turtle.turnLeft()) then log(fine, "turned: left"); else log(debug, "failed to turn: left"); return failure;  end;
+            if (turtle.turnLeft()) then log(fine, "turned: left", currentLogIndent); else log(debug, "failed to turn: left", currentLogIndent); return failure;  end;
         elseif (turnDirection == right) then
-            if (turtle.turnRight()) then log(fine, "turned: right"); else log(debug, "failed to turn: right"); return failure;  end;
+            if (turtle.turnRight()) then log(fine, "turned: right", currentLogIndent); else log(debug, "failed to turn: right", currentLogIndent); return failure;  end;
         end;
     end;
 
@@ -76,76 +76,80 @@ function turn(turnDirection, repeatCount)
 end;
 
 function move(moveDirection)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
-        if (turtle.forward()) then log(fine, "moved: forward"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: forward"); return failure;  end;
+        if (turtle.forward()) then log(fine, "moved: forward", currentLogIndent); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: forward", currentLogIndent); return failure;  end;
     elseif (moveDirection == back) then
-        if (turtle.back()) then log(fine, "moved: back"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: back"); return failure;  end;
+        if (turtle.back()) then log(fine, "moved: back", currentLogIndent); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: back", currentLogIndent); return failure;  end;
     elseif (moveDirection == up) then
-        if (turtle.up()) then log(fine, "moved: up"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: up"); return failure;  end;
+        if (turtle.up()) then log(fine, "moved: up", currentLogIndent); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: up", currentLogIndent); return failure;  end;
     elseif (moveDirection == down) then
-        if (turtle.down()) then log(fine, "moved: down"); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: down"); return failure;  end;
+        if (turtle.down()) then log(fine, "moved: down", currentLogIndent); currentDarkness = currentDarkness + 1; return success;  else log(debug, "failed to move: down", currentLogIndent); return failure;  end;
     end;
 end;
 
 function dig(digDirection)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local digDirection = digDirection or forward;
 
     if (digDirection == forward) then
-        if (turtle.dig()) then log(fine, "dug: forward"); return success; else log(debug, "failed to dig: forward"); return failure; end;
+        if (turtle.dig()) then log(fine, "dug: forward", currentLogIndent); return success; else log(debug, "failed to dig: forward", currentLogIndent); return failure; end;
     elseif (digDirection == up) then
-        if (turtle.digUp()) then log(fine, "dug: up"); return success;  else log(debug, "failed to dig: up"); return failure;  end;
+        if (turtle.digUp()) then log(fine, "dug: up", currentLogIndent); return success;  else log(debug, "failed to dig: up", currentLogIndent); return failure;  end;
     elseif (digDirection == down) then
-        if (turtle.digDown()) then log(fine, "dug: down"); return success;  else log(debug, "failed to dig: down"); return failure;  end;
+        if (turtle.digDown()) then log(fine, "dug: down", currentLogIndent); return success;  else log(debug, "failed to dig: down", currentLogIndent); return failure;  end;
     end;
 end;
 
 function detect(detectDirection)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local detectDirection = detectDirection or forward;
 
     if (detectDirection == forward) then
-        if (turtle.detect()) then log(fine, "detected: forward"); return success; else log(debug, "failed to detect: forward"); return failure; end;
+        if (turtle.detect()) then log(fine, "detected: forward", currentLogIndent); return success; else log(debug, "failed to detect: forward", currentLogIndent); return failure; end;
     elseif (detectDirection == up) then
-        if (turtle.detectUp()) then log(fine, "detected: up"); return success;  else log(debug, "failed to detect: up"); return failure;  end;
+        if (turtle.detectUp()) then log(fine, "detected: up", currentLogIndent); return success;  else log(debug, "failed to detect: up", currentLogIndent); return failure;  end;
     elseif (detectDirection == down) then
-        if (turtle.detectDown()) then log(fine, "detected: down"); return success;  else log(debug, "failed to detect: down"); return failure;  end;
+        if (turtle.detectDown()) then log(fine, "detected: down", currentLogIndent); return success;  else log(debug, "failed to detect: down", currentLogIndent); return failure;  end;
     end;
 end;
 
 function attack(attackDirection)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attackDirection = attackDirection or forward;
 
     if (attackDirection == forward) then
-        if (turtle.attack()) then log(fine, "attacked: forward"); return success; else log(debug, "failed to atack: forward"); return failure; end;
+        if (turtle.attack()) then log(fine, "attacked: forward", currentLogIndent); return success; else log(debug, "failed to atack: forward", currentLogIndent); return failure; end;
     elseif (attackDirection == up) then
-        if (turtle.attackUp()) then log(fine, "attacked: up"); return success;  else log(debug, "failed to attack: up"); return failure;  end;
+        if (turtle.attackUp()) then log(fine, "attacked: up", currentLogIndent); return success;  else log(debug, "failed to attack: up", currentLogIndent); return failure;  end;
     elseif (attackDirection == down) then
-        if (turtle.attackDown()) then log(fine, "attacked: down"); return success;  else log(debug, "failed to attack: down"); return failure;  end;
+        if (turtle.attackDown()) then log(fine, "attacked: down", currentLogIndent); return success;  else log(debug, "failed to attack: down", currentLogIndent); return failure;  end;
     end;
 end;
 
 function select(slot)
-    local slot = slot;
-    log (fine, "Entering select("..slot..")");
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
+    log (fine, "Entering select("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     turtle.select(slot);
-    log(fine, "selected: "..slot);
+    log(fine, "selected: "..slot, currentLogIndent);
     currentSlotNum = slot;  -- set the global slot value
     if (currentLogLevel == debug) then
-        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)));
+        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
     end;
-    currentLogIndent = currentLogIndent + 1;
-    log (fine, "Exiting select()");
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting select()", currentLogIndent);
 end;
 
 --Todo: fix bug where we need to skip over the currently selected number when evaluating
 -- look in slots 1-12 if selected slot if empty
 function selectWithOverflow(slot, attempts)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attempts = attempts or 10
-    local slot = slot;
-    log (fine, "Entering selectWithOverflow("..slot..")");
+    log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     select(slot);
@@ -156,7 +160,7 @@ function selectWithOverflow(slot, attempts)
                 select(i);
                 if (turtle.compareTo(slot)) then
                     currentSlotNum = slot;
-                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate");
+                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate", currentLogIndent);
                     break;
                 end;
             end
@@ -165,94 +169,97 @@ function selectWithOverflow(slot, attempts)
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting selectWithOverflow()");
+    log (fine, "Exiting selectWithOverflow()", currentLogIndent);
     return slot;
 end
 
-    -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function private_place(placeDirection)
-    local slot = currentSlotNum;
+-- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
+function place(placeDirection, detectFirst)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
-    log (fine, "Entering private_place("..placeDirection..")");
+    local detectFirst = detectFirst or false;
+    log (fine, "Entering place("..placeDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
+    local detected = false;
     if (placeDirection == forward) then
-        if (turtle.place()) then
-            log(fine, "placed: "..slot.." forward");
+        if (detectFirst) then detected = turtle.detect(); end;
+        if (not detected and turtle.place()) then
+            log(fine, "placed: "..currentSlotNum.." forward", currentLogIndent);
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." forward");
+            log(debug, "failed to place "..currentSlotNum.." forward", currentLogIndent);
         end;
     elseif (placeDirection == up) then
-        if (turtle.placeUp()) then
-            log(fine, "placed "..slot.." up");
+        if (detectFirst) then detected = turtle.detect(); end;
+        if (not detected and turtle.placeUp()) then
+            log(fine, "placed "..currentSlotNum.." up", currentLogIndent);
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." up");
+            log(debug, "failed to place "..currentSlotNum.." up", currentLogIndent);
         end;
     elseif (placeDirection == down) then
-        if (turtle.placeDown()) then
-            log(fine, "placed "..slot.." down");
+        if (detectFirst) then detected = turtle.detect(); end;
+        if (not detected and turtle.placeDown()) then
+            log(fine, "placed "..currentSlotNum.." down", currentLogIndent);
         else
             actionFailed = true;
-            log(debug, "failed to place "..slot.." down");
+            log(debug, "failed to place "..currentSlotNum.." down", currentLogIndent);
         end;
     end;
     if (actionFailed) then
-        if (turtle.getItemCount(slot) > 0) then
-            if (detect(placeDirection)) then
-                log(debug, "    a  "..slot.."  is already present at target location");
-                currentLogIndent = currentLogIndent - 1;
-                log (fine, "Exiting private_place()");
-                return blockAlreadyPresent;
-            else
-                log(debug, "    no anchor blocks present at target location");
-                return noAnchorBlocks;
-            end;
+        if (turtle.getItemCount(currentSlotNum) > 0) then
+            log(debug, "    no anchor blocks present at target location", currentLogIndent);
+            currentLogIndent = currentLogIndent - 1;
+            log (fine, "Exiting place()", currentLogIndent);
+            return noAnchorBlocks;
         else
-            log(debug, "    no items left in slot "..slot.." to place");
+            log(debug, "    no items left in slot "..currentSlotNum.." to place", currentLogIndent);
+            currentLogIndent = currentLogIndent - 1;
+            log (fine, "Exiting place()", currentLogIndent);
             return notEnoughInventory;
         end;
     else
         currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting private_place()");
+        log (fine, "Exiting place()", currentLogIndent);
         return blockPlaced;
     end;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
-    local slot = slot;
-    local placeDirection = placeDirection;
-    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")");
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
+    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    selectWithOverflow(slot);
-    local successCode = private_place(placeDirection);
+    slot = selectWithOverflow(slot);
+    local successCode = place(placeDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting placeWithOverflow()");
+    log (fine, "Exiting placeWithOverflow()", currentLogIndent);
     return successCode;
 end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function place(placeDirection, slot)
-    local slot = slot or currentSlotNum;
+function placeItem(placeDirection, slot, detectFirst)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
+    local detectFirst = detectFirst or false;
+    local slot = slot;
     local placeDirection = placeDirection or forward;
-    log (fine, "Entering place("..placeDirection..","..slot..")");
+    log (fine, "Entering placeItem("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if (not slot == currentSlotNum) then select(slot); end;
-    local successCode = private_place(placeDirection);
+    if (slot ~= currentSlotNum) then select(slot); end;
+    local successCode = place(placeDirection, detectFirst);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting place()");
+    log (fine, "Exiting placeItem()", currentLogIndent);
     return successCode;
 end;
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local steps = steps or 1
     local attempts = attempts or 10
-    local direction = direction;
-    log (fine, "Entering moveWithDig("..direction..")");
+    log (fine, "Entering moveWithDig("..direction..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,steps do
@@ -265,10 +272,11 @@ function moveWithDig(direction, steps, attempts)
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveWithDig()");
+    log (fine, "Exiting moveWithDig()", currentLogIndent);
 end
 
 function getOppositeDirection(currentDirection)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local currentDirection = currentDirection;
     if (currentDirection == up) then return down; end;
     if (currentDirection == down) then return up; end;
@@ -280,59 +288,59 @@ end
 
 -- move if can't replace. empty anchor protection
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local attempts = attempts or 10;
     local tries = 1;
-    local direction = direction;
-    local slot = slot;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
-    log (fine, "Entering replace("..direction..","..slot..")");
+    log (fine, "Entering replace("..direction..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    selectWithOverflow(slot);
-    local successCode = place(direction, slot);
-    log(debug, "    successCode="..successCode);
+    slot = selectWithOverflow(slot);
+    local successCode = placeItem(direction, slot);
+    log(debug, "    successCode="..successCode, currentLogIndent);
     while ((attempts==0) or (tries<=attempts)) do
         if (successCode==blockPlaced) then
-            log(debug, "    Block was succesfully placed, continueing on.");
+            log(debug, "    Block was succesfully placed, continueing on.", currentLogIndent);
             break;
         elseif (successCode==blockAlreadyPresent and isAlwaysRemoveAndAdd) then
-            log(debug, "    Block already present.");
+            log(debug, "    Block already present.", currentLogIndent);
             dig(direction);
         elseif (successCode==notEnoughInventory) then
-            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.");
+            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.", currentLogIndent);
             currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting replace()");
+            log (fine, "Exiting replace()", currentLogIndent);
             shell.exit();
         elseif (successCode==noAnchorBlocks) then
-            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.");
+            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.", currentLogIndent);
             move(direction);
-            replace(direction);
+            replace(direction, slot);
             move(getOppositeDirection(direction));
         end
-        successCode = place(direction);
-        log(debug, "    successCode="..successCode.."[retry #"..tries.."]");
+        successCode = placeItem(direction);
+        log(debug, "    successCode="..successCode.."[retry #"..tries.."]", currentLogIndent);
         -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
         tries = math.min(tries+1, attempts+1);
         sleep(0);
     end
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting replace()");
+    log (fine, "Exiting replace()", currentLogIndent);
 end
 
 function transitionOverAnd180Degrees(turnDirection, steps)
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     local steps = steps or 1;
-    local turnDirection = turnDirection;
-    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")");
+    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     turn(turnDirection);
     moveWithDig(forward, steps);
     turn(turnDirection);
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting transitionOverAnd180Degrees()");
+    log (fine, "Exiting transitionOverAnd180Degrees()", currentLogIndent);
 end
 
 function refuel()
+    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     if turtle.getFuelLevel() <= 5 then
         turtle.select(fuelSlot);
         turtle.refuel(1);
