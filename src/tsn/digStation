@@ -1,40 +1,18 @@
 -- Must allow for 1 available block above ceiling and 1 available block below floor
 
-up = "up";
-down = "down";
-forward = "forward";
-right = "right";
-left = "left";
-back = "back";
-
-success = true;
-failure = false;
-
-blockPlaced = 0;
-blockAlreadyPresent = 1;
-notEnoughInventory = 2;
-noAnchorBlocks = 3;
-
-error = 0;
-coarse = 1;
-fine = 2;
-debug = 3;
+-- To avoid dealing with namespaces and imported scripts not
+-- being able to access local variables, I've decided to inject
+-- the source code when it's loaded on the filesystem.
+--INJECT/turtleUtils
 
 
-currentLogLevel = debug;
-currentSlotNum = 1;
-currentLogIndent = 0;
-currentDarkness = 0;
-
-os.loadAPI("turtleUtils");
-
+-- START OF LOCAL SCRIPT
 local args={...};
 local radius = args[1] or 5;
 local height = args[2] or 5;
-local logFileName = os.computerID().."-digStation"..".log";
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
-    turtleUtils.log(fine, "Entering floorAndCeilingColumn()");
+    log(fine, "Entering floorAndCeilingColumn()");
     currentLogIndent = currentLogIndent + 1;
     local numberBlocks = numberBlocks or 5;
     local currentUpDownDirection = currentUpDownDirection;
@@ -49,66 +27,66 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
         endingFillSlot = floorFillerSlot;
     end
 
-    turtleUtils.replace(turtleUtils.getOppositeDirection(currentUpDownDirection), initialFillSlot);
-    turtleUtils.moveWithDig(currentUpDownDirection, numberBlocks-4);
-    turtleUtils.replace(currentUpDownDirection, endingFillSlot);
+    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
+    moveWithDig(currentUpDownDirection, numberBlocks-4);
+    replace(currentUpDownDirection, endingFillSlot);
 
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting floorAndCeilingColumn()");
+    log (fine, "Exiting floorAndCeilingColumn()");
     return currentUpDownDirection;
 end
 
 local function floorAndCeilingRow(currentDirection, numberColumns, height)
-    turtleUtils.log (fine, "Entering floorAndCeilingRow()");
+    log (fine, "Entering floorAndCeilingRow()");
     currentLogIndent = currentLogIndent + 1;
     local numberColumns = numberColumns or 9;
     local height = height or 5;
     local currentDirection = currentDirection;
 
     for i = 1,numberColumns do
-        currentDirection = floorAndCeilingColumn(turtleUtils.getOppositeDirection(currentDirection), height);
+        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection), height);
         if (i < numberColumns) then
-            turtleUtils.moveWithDig(forward, 1)
+            moveWithDig(forward, 1)
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting floorAndCeilingRow()");
+    log (fine, "Exiting floorAndCeilingRow()");
     return currentDirection;
 end
 
 local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows, height)
-    turtleUtils.log (fine, "Entering buildFloorAndCeiling()");
+    log (fine, "Entering buildFloorAndCeiling()");
     currentLogIndent = currentLogIndent + 1;
     local numberRows = numberRows or 9;
     local numberColumns = numberRows;
-    local hieght = height or 5;
+    local height = height or 5;
     local currentUpDownDirection = currentUpDownDirection;
     local currentLeftRightDirection = currentLeftRightDirection;
 
     for i = 1,numberRows do
         currentUpDownDirection = floorAndCeilingRow(currentUpDownDirection, numberColumns, height);
         if (i < numberRows) then
-            currentLeftRightDirection = turtleUtils.getOppositeDirection(currentLeftRightDirection);
-            turtleUtils.transitionOverAnd180Degrees(currentLeftRightDirection);
+            currentLeftRightDirection = getOppositeDirection(currentLeftRightDirection);
+            transitionOverAnd180Degrees(currentLeftRightDirection);
         end
     end
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting buildFloorAndCeiling()");
+    log (fine, "Exiting buildFloorAndCeiling()");
 end
 
 local function moveToStartingPositionForCeilingFloor(turnDirection)
-    turtleUtils.log (fine, "Entering moveToStartingPositionForCeilingFloor()");
+    log (fine, "Entering moveToStartingPositionForCeilingFloor()");
     currentLogIndent = currentLogIndent + 1;
     local turnDirection = turnDirection;
-    turtleUtils.transitionOverAnd180Degrees(turnDirection);
-    turtleUtils.moveWithDig(forward);
-    turtleUtils.moveWithDig(up, 2);
+    transitionOverAnd180Degrees(turnDirection);
+    moveWithDig(forward);
+    moveWithDig(up, 2);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
+    log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
 end;
 
 local function wallColumn(currentDirection, height)
-    turtleUtils.log (fine, "Entering wallColumn()");
+    log (fine, "Entering wallColumn()");
     currentLogIndent = currentLogIndent + 1;
     local height = height or 5;
     height = height - 2;
@@ -126,57 +104,57 @@ local function wallColumn(currentDirection, height)
         endingFillSlot = floorFillerSlot;
     end
 
-    turtleUtils.moveWithDig(currentDirection, 2);
-    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), initialFillSlot);
+    moveWithDig(currentDirection, 2);
+    replace(getOppositeDirection(currentDirection), initialFillSlot);
     for i = 1,height do
-        turtleUtils.moveWithDig(currentDirection, 1);
-        turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), middleFillSlot);
+        moveWithDig(currentDirection, 1);
+        replace(getOppositeDirection(currentDirection), middleFillSlot);
     end
-    turtleUtils.moveWithDig(currentDirection, 1);
-    turtleUtils.replace(turtleUtils.getOppositeDirection(currentDirection), endingFillSlot);
+    moveWithDig(currentDirection, 1);
+    replace(getOppositeDirection(currentDirection), endingFillSlot);
 
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting wallColumn()");
+    log (fine, "Exiting wallColumn()");
     return currentDirection;
 end
 
 local function buildWalls(startingUpDownDirection, numberColumns, height)
-    turtleUtils.log (fine, "Entering buildWalls()");
+    log (fine, "Entering buildWalls()");
     currentLogIndent = currentLogIndent + 1;
-    local currentDirection = turtleUtils.getOppositeDirection(startingUpDownDirection);
+    local currentDirection = getOppositeDirection(startingUpDownDirection);
     local numberColumns = numberColumns - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
     local numberWalls = 4;
 
     for x=1,numberWalls do
         for i=1,numberColumns do
-            currentDirection = wallColumn(turtleUtils.getOppositeDirection(currentDirection), height);
+            currentDirection = wallColumn(getOppositeDirection(currentDirection), height);
             if (i < numberColumns) then
-                turtleUtils.moveWithDig(forward);
+                moveWithDig(forward);
             end;
         end;
         if (x < numberWalls) then
-            turtleUtils.turn(left);
-            turtleUtils.moveWithDig(forward);
+            turn(left);
+            moveWithDig(forward);
         end;
     end;
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting buildWalls()");
+    log (fine, "Exiting buildWalls()");
     return currentDirection;
 end;
 
 local function moveToStartingPositionForWalls(radius, height)
-    turtleUtils.log (fine, "Entering moveToStartingPositionForWalls()");
+    log (fine, "Entering moveToStartingPositionForWalls()");
     currentLogIndent = currentLogIndent + 1;
     local currentDirection = up;
     -- turtle should start at z=13 or higher
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
-    turtleUtils.moveWithDig(down, height + 1);
-    turtleUtils.moveWithDig(forward, radius + 1);
-    turtleUtils.turn(right);
-    turtleUtils.moveWithDig(forward, radius);
-    turtleUtils.turn(right);
+    moveWithDig(down, height + 1);
+    moveWithDig(forward, radius + 1);
+    turn(right);
+    moveWithDig(forward, radius);
+    turn(right);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting moveToStartingPositionForWalls()");
+    log (fine, "Exiting moveToStartingPositionForWalls()");
     return currentDirection;
 end
 
