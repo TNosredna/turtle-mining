@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/testStub" afterPath="$PROJECT_DIR$/src/tsn/testStub" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/update" afterPath="$PROJECT_DIR$/src/tsn/update" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,19 +63,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="1148" selection-end="1237" vertical-scroll-proportion="0.6641001">
+            <state line="19" column="9" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testStub" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="testStub" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="6" column="24" selection-start="227" selection-end="227" vertical-scroll-proportion="0.09146342">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tsn/update">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="42" selection-start="373" selection-end="382" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -118,14 +128,14 @@
         <option value="$PROJECT_DIR$/src/tsn/beginMining" />
         <option value="$PROJECT_DIR$/src/tsn/prepareTurtleStation" />
         <option value="$PROJECT_DIR$/src/tsn/turtleUtils.lua" />
-        <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
         <option value="$PROJECT_DIR$/src/tsn/begin" />
         <option value="$PROJECT_DIR$/src/tsn/digStation" />
         <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
         <option value="$PROJECT_DIR$/src/tsn/digShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/testStub" />
+        <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
+        <option value="$PROJECT_DIR$/src/tsn/testStub" />
       </list>
     </option>
   </component>
@@ -162,18 +172,19 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
+      <pane id="PackagesPane">
+        <subPane>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="turtle-mining" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="turtle-mining" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane />
       </pane>
       <pane id="ProjectPane">
         <subPane>
@@ -223,6 +234,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="tsn" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -916,18 +937,21 @@
       <created>1359272124640</created>
       <updated>1359272124640</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Changed the logic after realizing I could just use a water block at the top of the shaft to protect against lava issues.">
+      <created>1359347995255</created>
+      <updated>1359347995255</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1600" height="1200" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32808155" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -936,15 +960,16 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28822985" sideWeight="0.97039896" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3273196" sideWeight="0.67191845" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3273196" sideWeight="0.67191845" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32808155" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28822985" sideWeight="0.97039896" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -955,7 +980,7 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <value>
         <are-packages-shown value="false" />
@@ -986,7 +1011,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tweaking and testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the logic after realizing I could just use a water block at the top of the shaft to protect against lava issues." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1015,6 +1040,7 @@
     <MESSAGE value="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;" />
     <MESSAGE value="Fixed bug in including external source" />
     <MESSAGE value="Tweaking and testing" />
+    <MESSAGE value="Changed the logic after realizing I could just use a water block at the top of the shaft to protect against lava issues." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1059,58 +1085,48 @@
         <state line="468" column="33" selection-start="15828" selection-end="15828" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/update">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="16" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="29" column="0" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="261" selection-end="261" vertical-scroll-proportion="0.2851711">
-          <folding />
-        </state>
+        <state line="20" column="0" selection-start="261" selection-end="261" vertical-scroll-proportion="0.2851711" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/begin">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="135" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.47641963">
+        <state line="33" column="135" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.47641963" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="10" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="453" column="0" selection-start="22548" selection-end="22548" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="9" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/update">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="42" selection-start="373" selection-end="382" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="10" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="453" column="0" selection-start="22548" selection-end="22548" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1148" selection-end="1237" vertical-scroll-proportion="0.6641001">
+        <state line="6" column="24" selection-start="227" selection-end="227" vertical-scroll-proportion="0.09146342">
           <folding />
         </state>
       </provider>

@@ -5,6 +5,19 @@ local function generateLatestFile(filename)
     local line;
     repeat
         line = content.readLine();
+        if (line.strsub(1,9) == "--INJECT/") then
+            local fileToInject = line.strsub(10);
+            local contentToInject = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. fileToInject);
+            print("Injecting file: " .. fileToInject .. " into file: " .. filename);
+            local lineToInject;
+            repeat
+                lineToInject = contentToInject.readLine();
+                if (lineToInject == nil) then break end;
+                file.writeLine(lineToInject);
+            until false;
+            fileToInject.close();
+
+        end;
         if (line == nil) then break end;
         file.writeLine(line);
     until false;
@@ -12,7 +25,6 @@ local function generateLatestFile(filename)
 end
 
 local function downloadScripts()
-    generateLatestFile("turtleUtils");
     generateLatestFile("testStub");
     generateLatestFile("buildMine");
     generateLatestFile("digShaft");
@@ -24,73 +36,6 @@ local function downloadScripts()
     shell.run("pastebin", "get", "mcEpZDQe", "mlgUpdater");
     shell.run("mlgUpdater");
 end
-
-local function printHelp()
-        print [[Configure the turtle as follows:
-
-    For the Station Room
-     +----------------+
-     | 01  02  03  04 |
-     | 05  06  xx  xx |
-     | xx  xx  xx  xx |
-     | xx  xx  xx  xx |
-     +----------------+
-    01 = Wall Filler (64 stack)
-    02 = Wall Filler (64 stack)
-    03 = Wall Filler (32 stack)
-    04 = Floor Filler (49 stack)
-    05 = Roof Filler (49 stack)
-    ]]
-
-        print("Press any key to continue...");
-        direction = io.read();
-
-        print [[
-    For the Station
-     +----------------+
-     | xx  xx  xx  xx |
-     | xx  xx  07  08 |
-     | 09  10  11  12 |
-     | xx  xx  xx  xx |
-     +----------------+
-    07 = Small Chest (4-16 stack)
-    08 = Large Chest (1 stack)
-    09 = Redstone Engine (1-4 stack)
-    10 = Wooden Pipe (1-4 stack)
-    11 = Stone Pipe (64 stack)
-    12 = Redstone Torch (2-8 stack)
-    ]]
-
-        print("Press any key to continue...");
-        direction = io.read();
-
-        print [[
-    For the Station Shaft
-     +----------------+
-     | xx  xx  xx  xx |
-     | xx  xx  xx  xx |
-     | xx  xx  xx  xx |
-     | 13  14  15  16 |
-     +----------------+
-    13 = Torches (64 stack)
-    14 = Wall Filler (64 stack)
-    15 = Ladders (64 stack)
-    16 = Fuel
-    ]]
-
-        print("Press any key to continue...");
-        direction = io.read();
-
-        print [[
-    Take with you to fill the chest once everything is ready ->
-    * Stone (1)
-    * Cobblestone (1)
-    * Dirt (1)
-    * Gravel (1)
-    * Torches
-    * Fuel
-    ]]
-end;
 
 downloadScripts();
 

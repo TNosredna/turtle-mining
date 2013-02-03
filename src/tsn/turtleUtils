@@ -17,6 +17,7 @@ error = 0;
 coarse = 1;
 fine = 2;
 debug = 3;
+fineDebug = 4;
 
 
 -- Slot Assignments
