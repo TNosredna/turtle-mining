@@ -1,27 +1,11 @@
-up = "up";
-down = "down";
-forward = "forward";
-right = "right";
-left = "left";
-back = "back";
-
-success = true;
-failure = false;
-
-blockPlaced = 0;
-blockAlreadyPresent = 1;
-notEnoughInventory = 2;
-noAnchorBlocks = 3;
-
-error = 0;
-coarse = 1;
-fine = 2;
-debug = 3;
+-- To avoid dealing with namespaces and imported scripts not
+-- being able to access local variables, I've decided to inject
+-- the source code when it's loaded on the filesystem.
+--INJECT/turtleUtils
 
 
-os.loadAPI("turtleUtils");
-
-fs.delete(turtleUtils.logFileName);
+-- START OF LOCAL SCRIPT
+fs.delete(logFileName);
 print ("How many blocks down should the station roof be located? (Z - 13 is normal)");
 z = io.read();
 z = tonumber(z);
