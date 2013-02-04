@@ -41,22 +41,22 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     return currentUpDownDirection;
 end
 
-local function floorAndCeilingRow(currentDirection, numberColumns, height)
+local function floorAndCeilingRow(currentUpDownDirection, numberColumns, height)
     log (fine, "Entering floorAndCeilingRow()");
     currentLogIndent = currentLogIndent + 1;
     local numberColumns = numberColumns or 9;
     local height = height or 5;
-    local currentDirection = currentDirection;
+    local currentUpDownDirection = currentUpDownDirection;
 
     for i = 1,numberColumns do
-        currentDirection = floorAndCeilingColumn(getOppositeDirection(currentDirection), height);
+        currentUpDownDirection = floorAndCeilingColumn(getOppositeDirection(currentUpDownDirection), height);
         if (i < numberColumns) then
             moveWithDig(forward, 1)
         end
     end
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting floorAndCeilingRow()");
-    return currentDirection;
+    return currentUpDownDirection;
 end
 
 local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDirection, numberRows, height)
@@ -90,67 +90,67 @@ local function moveToStartingPositionForCeilingFloor(turnDirection)
     log (fine, "Exiting moveToStartingPositionForCeilingFloor()");
 end;
 
-local function wallColumn(currentDirection, height)
+local function wallColumn(currentUpDownDirection, height)
     log (fine, "Entering wallColumn()");
     currentLogIndent = currentLogIndent + 1;
     local height = height or 5;
     height = height - 2;
-    local currentDirection = currentDirection;
+    local currentUpDownDirection = currentUpDownDirection;
     local initialFillSlot;
     local middleFillSlot = wallFillerSlot;
     local endingFillSlot;
 
-    if currentDirection == up then
+    if currentUpDownDirection == up then
         initialFillSlot = floorFillerSlot;
         endingFillSlot = roofFillerSlot;
     end
-    if currentDirection == down then
+    if currentUpDownDirection == down then
         initialFillSlot = roofFillerSlot;
         endingFillSlot = floorFillerSlot;
     end
 
-    moveWithDig(currentDirection, 2);
-    replace(getOppositeDirection(currentDirection), initialFillSlot);
+    moveWithDig(currentUpDownDirection, 2);
+    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
     for i = 1,height do
-        moveWithDig(currentDirection, 1);
-        replace(getOppositeDirection(currentDirection), middleFillSlot);
+        moveWithDig(currentUpDownDirection, 1);
+        replace(getOppositeDirection(currentUpDownDirection), middleFillSlot);
     end
-    moveWithDig(currentDirection, 1);
-    replace(getOppositeDirection(currentDirection), endingFillSlot);
+    moveWithDig(currentUpDownDirection, 1);
+    replace(getOppositeDirection(currentUpDownDirection), endingFillSlot);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting wallColumn()");
-    return currentDirection;
+    return currentUpDownDirection;
 end
 
 local function buildWalls(startingUpDownDirection, numberColumns, height)
     log (fine, "Entering buildWalls()");
     currentLogIndent = currentLogIndent + 1;
-    local currentDirection = getOppositeDirection(startingUpDownDirection);
+    local currentUpDownDirection = getOppositeDirection(startingUpDownDirection);
     local numberColumns = numberColumns - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
     local numberWalls = 4;
 
     for x=1,numberWalls do
         for i=1,numberColumns do
-            currentDirection = wallColumn(getOppositeDirection(currentDirection), height);
+            currentUpDownDirection = wallColumn(getOppositeDirection(currentUpDownDirection), height);
             if (i < numberColumns) then
                 moveWithDig(forward);
             end;
         end;
         if (x < numberWalls) then
-            turn(left);
+            turn(right);
             moveWithDig(forward);
         end;
     end;
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting buildWalls()");
-    return currentDirection;
+    return currentUpDownDirection;
 end;
 
 local function moveToStartingPositionForWalls(radius, height)
     log (fine, "Entering moveToStartingPositionForWalls()");
     currentLogIndent = currentLogIndent + 1;
-    local currentDirection = up;
+    local currentUpDownDirection = up;
     -- turtle should start at z=13 or higher
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
     moveWithDig(down, height + 1);
@@ -160,7 +160,7 @@ local function moveToStartingPositionForWalls(radius, height)
     turn(right);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPositionForWalls()");
-    return currentDirection;
+    return currentUpDownDirection;
 end
 
 if ((radius == nil or radius==0) or (height == nil or height==0)) then
@@ -175,7 +175,7 @@ if ((radius == nil or radius==0) or (height == nil or height==0)) then
 end;
 
 local diameter = radius * 2;
-local currentDirection = moveToStartingPositionForWalls(radius, height);
-currentDirection = buildWalls(currentDirection, (diameter +1), height);
+local currentUpDownDirection = moveToStartingPositionForWalls(radius, height);
+currentUpDownDirection = buildWalls(currentUpDownDirection, (diameter +1), height);
 moveToStartingPositionForCeilingFloor(left);
 buildFloorAndCeiling(left, down, (diameter - 1), height);

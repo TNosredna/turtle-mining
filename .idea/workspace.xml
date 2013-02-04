@@ -4,7 +4,6 @@
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digStation" afterPath="$PROJECT_DIR$/src/tsn/digStation" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/update" afterPath="$PROJECT_DIR$/src/tsn/update" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,7 +109,7 @@
       <file leaf-file-name="digStation" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="63" selection-start="6057" selection-end="6057" vertical-scroll-proportion="0.67">
+            <state line="140" column="22" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.9853801">
               <folding />
             </state>
           </provider>
@@ -983,7 +982,11 @@
       <created>1359944146577</created>
       <updated>1359944146577</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
+      <created>1359944955691</created>
+      <updated>1359944955691</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1177,7 +1180,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="63" selection-start="6057" selection-end="6057" vertical-scroll-proportion="0.67">
+        <state line="140" column="22" selection-start="5307" selection-end="5307" vertical-scroll-proportion="0.9853801">
           <folding />
         </state>
       </provider>
