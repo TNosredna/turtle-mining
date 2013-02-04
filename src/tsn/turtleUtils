@@ -21,7 +21,7 @@ fineDebug = 4;
 
 logFileName = os.computerID()..".log";
 
-currentLogLevel = debug;
+currentLogLevel = fineDebug;
 currentSlotNum = 1;
 currentLogIndent = 0;
 currentDarkness = 0;
