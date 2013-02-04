@@ -5,10 +5,12 @@ local function generateLatestFile(filename)
     local line;
     repeat
         line = content.readLine();
-        if (line.strsub(1,9) == "--INJECT/") then
-            local fileToInject = line.strsub(10);
-            local contentToInject = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. fileToInject);
-            print("Injecting file: " .. fileToInject .. " into file: " .. filename);
+        if (line ~= nil and string.len(line) > 9 and string.sub(line,1,9) == "--INJECT/") then
+            line = content.readLine();
+            local filenameToInject = string.sub(line,10);
+            local fileToInject = fs.open(filenameToInject, "w"); -- opens file, all previous data is erased
+            local contentToInject = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. filenameToInject);
+            print("Injecting file: " .. filenameToInject .. " into file: " .. filename);
             local lineToInject;
             repeat
                 lineToInject = contentToInject.readLine();
@@ -16,7 +18,6 @@ local function generateLatestFile(filename)
                 file.writeLine(lineToInject);
             until false;
             fileToInject.close();
-
         end;
         if (line == nil) then break end;
         file.writeLine(line);
