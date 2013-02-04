@@ -19,25 +19,6 @@ fine = 2;
 debug = 3;
 fineDebug = 4;
 
-
--- Slot Assignments
-wallFiller1Slot = 1;     -- digStation (64)
-wallFiller2Slot = 2;     -- digStation (64)
-wallFiller3Slot = 3;     -- digStation (32)
-wallFiller4Slot = 4;     -- digShaft (64)
-floorFillerSlot = 5;     -- digStation (49)
-roofFillerSlot = 6;      -- digStation (49)
-stonePipe1Slot = 7;       -- prepareShaft (64)
-stonePipe2Slot = 8;       -- prepareStation (2-8)
-redWireSlot = 9;         -- prepareShaft (64)
-smallChestSlot = 10;     -- prepareStation (4-16) / prepareShaft (2)
-redstoneEngineSlot = 11; -- prepareStation (1-4) / prepareShaft (1)
-woodenPipeSlot = 12;     -- prepareStation (1-4) / prepareShaft (1)
-redstoneTorchSlot = 13;  -- prepareStation (1-4) / prepareShaft (1)
-torchSlot = 14;          -- prepareStation (10) / prepareShaft (11)
-ladderSlot = 15;         -- digShaft (64)
-fuelSlot = 16;           -- digShaft
-
 logFileName = os.computerID()..".log";
 
 currentLogLevel = debug;
