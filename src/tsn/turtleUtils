@@ -284,9 +284,14 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
         if (successCode==blockPlaced) then
             log(debug, "    Block was succesfully placed, continueing on.", currentLogIndent);
             break;
-        elseif (successCode==blockAlreadyPresent and isAlwaysRemoveAndAdd) then
-            log(debug, "    Block already present.", currentLogIndent);
-            dig(direction);
+        elseif (successCode==blockAlreadyPresent) then
+            if (isAlwaysRemoveAndAdd) then
+                log(debug, "    Block already present. Digging and trying again.", currentLogIndent);
+                dig(direction);
+            else
+                log(debug, "    Block already present, declaring success.", currentLogIndent);
+                break;
+            end;
         elseif (successCode==notEnoughInventory) then
             log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.", currentLogIndent);
             currentLogIndent = currentLogIndent - 1;

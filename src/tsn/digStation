@@ -110,7 +110,7 @@ local function wallColumn(currentUpDownDirection, height)
     end
 
     moveWithDig(currentUpDownDirection, 2);
-    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
+    replace(getOppositeDirection(currentUpDownDirection), initialFillSlot, false);
     for i = 1,height do
         moveWithDig(currentUpDownDirection, 1);
         replace(getOppositeDirection(currentUpDownDirection), middleFillSlot);
