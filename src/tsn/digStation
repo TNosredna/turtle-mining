@@ -13,8 +13,8 @@ local floorFillerSlot = 2;     -- digStation (49)
 local roofFillerSlot = 3;      -- digStation (49)
 
 local args={...};
-local radius = args[1] or 5;
-local height = args[2] or 5;
+local radius = args[1] or 0;
+local height = args[2] or 0;
 
 local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     log(fine, "Entering floorAndCeilingColumn()");
@@ -163,7 +163,7 @@ local function moveToStartingPositionForWalls(radius, height)
     return currentDirection;
 end
 
-if ((radius == nil or radius=="") or (height == nil or height=="")) then
+if ((radius == nil or radius==0) or (height == nil or height==0)) then
     fs.delete(logFileName);
     print ("What is the desired radius of the station? (5 is normal)");
     radius = io.read();
