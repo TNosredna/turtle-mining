@@ -73,7 +73,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="22" selection-start="248" selection-end="250" vertical-scroll-proportion="0.0">
+            <state line="7" column="0" selection-start="0" selection-end="228" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,7 +91,7 @@
       <file leaf-file-name="buildMine" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="8" selection-start="509" selection-end="509" vertical-scroll-proportion="0.29239765">
+            <state line="10" column="41" selection-start="370" selection-end="370" vertical-scroll-proportion="0.14619882">
               <folding />
             </state>
           </provider>
@@ -127,7 +127,7 @@
       <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="33" selection-start="747" selection-end="747" vertical-scroll-proportion="0.0">
+            <state line="35" column="56" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -955,7 +955,11 @@
       <created>1360561711278</created>
       <updated>1360561711279</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360562633724</created>
+      <updated>1360562633725</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1140,11 +1144,6 @@
         <state line="113" column="15" selection-start="6367" selection-end="6373" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
         <state line="110" column="32" selection-start="4080" selection-end="4080" vertical-scroll-proportion="0.0" />
@@ -1155,11 +1154,6 @@
         <state line="157" column="39" selection-start="5914" selection-end="5914" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="22" selection-start="248" selection-end="250" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/update">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="18" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0">
@@ -1167,16 +1161,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="0" selection-end="228" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="33" selection-start="747" selection-end="747" vertical-scroll-proportion="0.0">
+        <state line="35" column="56" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="8" selection-start="509" selection-end="509" vertical-scroll-proportion="0.29239765">
+        <state line="10" column="41" selection-start="370" selection-end="370" vertical-scroll-proportion="0.14619882">
           <folding />
         </state>
       </provider>
