@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/buildMine" afterPath="$PROJECT_DIR$/src/tsn/buildMine" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digShaft" afterPath="$PROJECT_DIR$/src/tsn/digShaft" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareShaft" afterPath="$PROJECT_DIR$/src/tsn/prepareShaft" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="32" selection-start="7362" selection-end="7362" vertical-scroll-proportion="-1.7551826">
+            <state line="133" column="32" selection-start="7362" selection-end="7362" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,16 +118,16 @@
       <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="0" selection-start="7902" selection-end="8003" vertical-scroll-proportion="0.0">
+            <state line="206" column="0" selection-start="7669" selection-end="8063" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="prepareShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="53" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.0">
+            <state line="88" column="53" selection-start="2225" selection-end="2225" vertical-scroll-proportion="0.8538012">
               <folding />
             </state>
           </provider>
@@ -161,10 +158,10 @@
         <option value="$PROJECT_DIR$/src/tsn/begin" />
         <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/testStub" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
         <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
         <option value="$PROJECT_DIR$/src/tsn/digShaft" />
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
+        <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
       </list>
     </option>
   </component>
@@ -1061,7 +1058,11 @@
       <created>1360564014920</created>
       <updated>1360564014921</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360566524738</created>
+      <updated>1360566524741</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1099,7 +1100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <value>
@@ -1272,23 +1273,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="32" selection-start="7362" selection-end="7362" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="0" selection-start="7902" selection-end="8003" vertical-scroll-proportion="0.0">
+        <state line="206" column="0" selection-start="7669" selection-end="8063" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="53" selection-start="1863" selection-end="1863" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="32" selection-start="7362" selection-end="7362" vertical-scroll-proportion="-1.7551826">
+        <state line="88" column="53" selection-start="2225" selection-end="2225" vertical-scroll-proportion="0.8538012">
           <folding />
         </state>
       </provider>

@@ -84,4 +84,10 @@ function prepareShaft(height)
     prepareBottomOfShaft();
 end;
 
+if (height == nil or height=="") then
+    fs.delete(turtleUtils.logFileName);
+    print ("What is the height of the shaft? (X - 13 is normal)");
+    height = io.read();
+    height = tonumber(height);
+end;
 prepareShaft(height);
