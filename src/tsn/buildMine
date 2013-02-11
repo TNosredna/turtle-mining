@@ -22,6 +22,7 @@ function moveToTopOfShaft(height)
     for i=1,height do
         turtle.up();
     end;
+    io.read();
     if (math.fmod(height, 2) ~= 0) then
         turtle.turnLeft();
         turtle.turnLeft();

@@ -91,7 +91,7 @@
       <file leaf-file-name="buildMine" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="751" selection-end="751" vertical-scroll-proportion="0.4093567">
+            <state line="24" column="7" selection-start="663" selection-end="663" vertical-scroll-proportion="0.3508772">
               <folding />
             </state>
           </provider>
@@ -939,7 +939,15 @@
       <created>1360555497266</created>
       <updated>1360555497266</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360560531401</created>
+      <updated>1360560531402</updated>
+    </task>
+    <task id="LOCAL-00135" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360560633655</created>
+      <updated>1360560633656</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1160,7 +1168,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="751" selection-end="751" vertical-scroll-proportion="0.4093567">
+        <state line="24" column="7" selection-start="663" selection-end="663" vertical-scroll-proportion="0.3508772">
           <folding />
         </state>
       </provider>
