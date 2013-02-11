@@ -1,10 +1,3 @@
--- To avoid dealing with namespaces and imported scripts not
--- being able to access local variables, I've decided to inject
--- the source code when it's loaded on the filesystem.
---INJECT/turtleUtils
-
-
--- START OF LOCAL SCRIPT
 fs.delete(logFileName);
 print ("How many blocks down should the station roof be located? (Z - 13 is normal)");
 z = io.read();
@@ -23,16 +16,10 @@ function moveToTopOfShaft(height)
         turtle.up();
     end;
     io.read();
-    if (math.fmod(height, 2) == 0) then
+    if (height % 2 == 0) then
         turtle.turnRight();
-    elseif (math.fmod(height, 3) == 0) then
-        turtle.turnRight();
-        turtle.turnRight();
-    elseif (math.fmod(height, 4) == 0) then
-        turtle.turnRight();
-    elseif (math.fmod(height, 5) == 0) then
-        turtle.turnRight();
-        turtle.turnRight();
+    else
+        turtle.turnleft();
     end;
 end;
 
