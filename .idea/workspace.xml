@@ -91,7 +91,7 @@
       <file leaf-file-name="buildMine" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="7" selection-start="663" selection-end="663" vertical-scroll-proportion="0.3508772">
+            <state line="32" column="0" selection-start="911" selection-end="911" vertical-scroll-proportion="0.46783626">
               <folding />
             </state>
           </provider>
@@ -947,7 +947,11 @@
       <created>1360560633655</created>
       <updated>1360560633656</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360560942732</created>
+      <updated>1360560942733</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1168,7 +1172,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="7" selection-start="663" selection-end="663" vertical-scroll-proportion="0.3508772">
+        <state line="32" column="0" selection-start="911" selection-end="911" vertical-scroll-proportion="0.46783626">
           <folding />
         </state>
       </provider>

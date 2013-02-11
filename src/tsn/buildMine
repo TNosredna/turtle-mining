@@ -23,9 +23,16 @@ function moveToTopOfShaft(height)
         turtle.up();
     end;
     io.read();
-    if (math.fmod(height, 2) ~= 0) then
-        turtle.turnLeft();
-        turtle.turnLeft();
+    if (math.fmod(height, 2) == 0) then
+        turtle.turnRight();
+    elseif (math.fmod(height, 3) == 0) then
+        turtle.turnRight();
+        turtle.turnRight();
+    elseif (math.fmod(height, 4) == 0) then
+        turtle.turnRight();
+    elseif (math.fmod(height, 5) == 0) then
+        turtle.turnRight();
+        turtle.turnRight();
     end;
 end;
 
