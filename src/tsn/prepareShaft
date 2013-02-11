@@ -1,0 +1,104 @@
+-- To avoid dealing with namespaces and imported scripts not
+-- being able to access local variables, I've decided to inject
+-- the source code when it's loaded on the filesystem.
+--INJECT/turtleUtils
+
+--    Level 63      Level 62         Level 61-13
+--  |------|---|    |----|-----|    |----|-----|
+--  |   C  |   |    |  S |     |    |    |     |
+--  |------|---|    |----|-----|    |----|-----|
+--  | Tu/W | E |    |  S |  R  |    |  S |  R  |
+--  |------|---|    |----|-----|    |----|-----|
+--  |      |   |    |    |  L  |    |    |  L  |
+--  |------|---|    |----|-----|    |----|-----|
+--  C  = Chest
+--  W  = Wood Pipe
+--  E  = Redstone Engine
+--  Tu = Turtle Starting Position
+--  I  = Iron Pipe
+--  S  = Stone Pipe
+--  Tu = Turtle Shaft
+--  T  = Torches
+--  L  = Ladder
+
+-- START OF LOCAL SCRIPT
+local SMALL_CHEST_SLOT = 2; -- 2 stack
+local REDSTONE_ENGINE_SLOT = 3; -- 1 stack
+local WOODEN_PIPE_SLOT = 4; -- 1 stack
+local STONE_PIPE_SLOT = 5; -- 64 stack
+local REDWIRE_SLOT = 6; -- 64 stack
+local LADDER_SLOT = 7; -- 64 stack
+local REDSTONE_TORCH_SLOT = 8; -- 1 stack
+local TORCH_SLOT = 9; -- 10 stack
+
+local args={...};
+local height = args[1];
+
+-- start while turtle facing East to place Engine
+function prepareTopOfShaft()
+    place(forward, SMALL_CHEST_SLOT);
+    move(back);
+    place(forward, WOODEN_PIPE_SLOT);
+    turn(right);
+    move(forward);
+    turn(left);
+    place(forward, REDSTONE_ENGINE_SLOT);
+
+    move(down);
+    turn(left);
+    move(forward);
+    turn(right);
+    move(forward);
+    dig(forward);
+    place(forward, STONE_PIPE_SLOT);
+    move(back);
+    turn(right);
+end;
+
+function prepareShaftLayer()
+    turn(left);
+    move(forward);
+    turn(left);
+    move(back);
+
+    place(forward, STONE_PIPE_SLOT);
+    turn(right);
+    move(back);
+    place(forward, REDWIRE_SLOT);
+    turn(right);
+    move(back);
+    place(forward, LADDER_SLOT);
+    move(down);
+    if ((darkness >= 6) and (place(up, TORCH_SLOT) == blockPlaced)) then
+        darkness = 0;
+    end
+end;
+
+function prepareBottomOfShaft()
+    turn(left);
+    move(forward);
+    turn(left);
+    move(back);
+
+    place(forward, SMALL_CHEST_SLOT);
+    turn(right);
+    move(back);
+    place(forward, REDSTONE_TORCH_SLOT);
+    turn(right);
+    move(back);
+    place(forward, LADDER_SLOT);
+    move(down);
+    if ((darkness >= 6) and (place(up, TORCH_SLOT) == blockPlaced)) then
+        darkness = 0;
+    end
+end;
+
+function prepareShaft(height)
+    prepareTopOfShaft();
+    for i=1,height do
+        prepareShaftLayer();
+    end;
+    prepareBottomOfShaft();
+end;
+
+prepareShaft(height);
