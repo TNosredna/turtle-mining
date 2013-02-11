@@ -22,8 +22,10 @@ function moveToTopOfShaft(height)
     for i=1,height do
         turtle.up();
     end;
-    turtle.turnLeft();
-    turtle.forward();
+    if (height mod 2 ~= 0) then
+        turtle.turnLeft();
+        turtle.turnLeft();
+    end;
 end;
 
 shell.run("digShaft", z);
