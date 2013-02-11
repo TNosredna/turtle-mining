@@ -5,11 +5,11 @@
 
 
 -- START OF LOCAL SCRIPT
-local bucketSlot = 16;
-local wallFillerSlot = 1;
+local BUCKET_SLOT = 16;
+local WALL_FILLER_SLOT = 1;
 
 local args={...};
-local depth = args[1];
+depth = args[1];
 
 local function digShaftLayer(startingTurnDirection)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
@@ -19,7 +19,7 @@ local function digShaftLayer(startingTurnDirection)
     local detectFirst = true;
 
     for i=1,8 do
-        placeItem(forward, wallFillerSlot, detectFirst);
+        placeItem(forward, WALL_FILLER_SLOT, detectFirst);
         turn(turnDirection);
         moveWithDig(forward)
         if (i==4) then
@@ -41,13 +41,13 @@ local function digMineShaft(depth, startingTurnDirection)
     for i=1,depth do
         turnDirection = digShaftLayer(turnDirection);
         moveWithDig(down);
-        if (i==1) then placeItem(up, bucketSlot); end;
+        if (i==1) then placeItem(up, BUCKET_SLOT); end;
     end;
 
     -- ToDo: figure out logic to get back to box1 in order to do a place(up, bucketSlot);
 
     move(up, depth);
-    placeItem(forward, bucketSlot);
+    placeItem(forward, BUCKET_SLOT);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting digMineShaft()", currentLogIndent);

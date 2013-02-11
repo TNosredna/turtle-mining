@@ -21,19 +21,19 @@ function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
     turtle.select(1)
     local torchSlot=0
     if configuration.placeTorches then
-        turtleUtils.torchSlot=1
+        torchSlot=1
         if dropTorches then
             api_turtleExt.drop(configuration.torchSuckDir)
         end
     end
     -- DROP THE EXTRAS OF THE IGNORE BLOCKS
     api_turtleExt.turnTo(configuration.itemDropDir)
-    for i=1+turtleUtils.torchSlot,turtleUtils.torchSlot+ignoreBlocks do
+    for i=1+torchSlot,torchSlot+ignoreBlocks do
         turtle.select(i)
         api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), math.max(turtle.getItemCount(i)-1, 0))
     end
     -- DROP THE OTHER ITEMS
-    for i=turtleUtils.torchSlot+ignoreBlocks+1,16 do
+    for i=torchSlot+ignoreBlocks+1,16 do
         turtle.select(i)
         api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), turtle.getItemCount(i))
     end
@@ -42,7 +42,7 @@ function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
     -- DROP THE IGNORE BLOCKS
     if dropIgnore then
         api_turtleExt.turnTo(configuration.ignoreDir)
-        for i=1+turtleUtils.torchSlot,turtleUtils.torchSlot+ignoreBlocks do
+        for i=1+torchSlot,torchSlot+ignoreBlocks do
             turtle.select(i)
             api_turtleExt.drop(api_turtleExt.turnedDir(configuration.ignoreDir), 1)
         end
@@ -111,7 +111,7 @@ function restock(configuration, ignoreBlocks, restockIgnore)
     if restockIgnore then
         api_turtleExt.turnTo(configuration.ignoreDir)
         local tDir=api_turtleExt.turnedDir(configuration.ignoreDir)
-        for i=1+turtleUtils.torchSlot,ignoreBlocks+turtleUtils.torchSlot do
+        for i=1+torchSlot,ignoreBlocks+torchSlot do
             turtle.select(i)
             api_turtleExt.suck(tDir)
         end

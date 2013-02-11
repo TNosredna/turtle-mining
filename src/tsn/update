@@ -29,6 +29,7 @@ local function downloadScripts()
     generateLatestFile("testStub");
     generateLatestFile("buildMine");
     generateLatestFile("digShaft");
+    generateLatestFile("prepareShaft");
     generateLatestFile("digStation");
     generateLatestFile("prepareStation");
     generateLatestFile("begin");

@@ -8,9 +8,9 @@
 
 -- START OF LOCAL SCRIPT
 -- Slot Assignments
-local wallFillerSlot = 1;     -- digStation (64)
-local floorFillerSlot = 2;     -- digStation (49)
-local roofFillerSlot = 3;      -- digStation (49)
+local WALL_FILLER_SLOT = 1;     -- digStation (64)
+local FLOOR_FILLER_SLOT = 2;     -- digStation (49)
+local ROOF_FILLER_SLOT = 3;      -- digStation (49)
 
 local args={...};
 local radius = args[1] or 0;
@@ -25,11 +25,11 @@ local function floorAndCeilingColumn(currentUpDownDirection, numberBlocks)
     local endingFillSlot;
 
     if currentUpDownDirection == up then
-        initialFillSlot = floorFillerSlot;
-        endingFillSlot = roofFillerSlot;
+        initialFillSlot = FLOOR_FILLER_SLOT;
+        endingFillSlot = ROOF_FILLER_SLOT;
     else
-        initialFillSlot = roofFillerSlot;
-        endingFillSlot = floorFillerSlot;
+        initialFillSlot = ROOF_FILLER_SLOT;
+        endingFillSlot = FLOOR_FILLER_SLOT;
     end
 
     replace(getOppositeDirection(currentUpDownDirection), initialFillSlot);
@@ -97,16 +97,16 @@ local function wallColumn(currentUpDownDirection, height)
     height = height - 2;
     local currentUpDownDirection = currentUpDownDirection;
     local initialFillSlot;
-    local middleFillSlot = wallFillerSlot;
+    local middleFillSlot = WALL_FILLER_SLOT;
     local endingFillSlot;
 
     if currentUpDownDirection == up then
-        initialFillSlot = floorFillerSlot;
-        endingFillSlot = roofFillerSlot;
+        initialFillSlot = FLOOR_FILLER_SLOT;
+        endingFillSlot = ROOF_FILLER_SLOT;
     end
     if currentUpDownDirection == down then
-        initialFillSlot = roofFillerSlot;
-        endingFillSlot = floorFillerSlot;
+        initialFillSlot = ROOF_FILLER_SLOT;
+        endingFillSlot = FLOOR_FILLER_SLOT;
     end
 
     moveWithDig(currentUpDownDirection, 2);

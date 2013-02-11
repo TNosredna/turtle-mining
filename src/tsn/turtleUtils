@@ -21,7 +21,7 @@ fineDebug = 4;
 
 logFileName = os.computerID()..".log";
 
-currentLogLevel = fineDebug;
+currentLogLevel = debug;
 currentSlotNum = 1;
 currentLogIndent = 0;
 currentDarkness = 0;
@@ -116,43 +116,53 @@ function select(slot)
     log (fine, "Entering select("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    turtle.select(slot);
-    log(fine, "selected: "..slot, currentLogIndent);
-    currentSlotNum = slot;  -- set the global slot value
-    if (currentLogLevel == debug) then
-        log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
+    local selectStatus = turtle.select(slot);
+    if (selectStatus) then
+        log(fine, "selected: "..slot, currentLogIndent);
+        currentSlotNum = slot;  -- set the global slot value
+        if (currentLogLevel == debug) then
+            log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
+        end;
     end;
+
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting select()", currentLogIndent);
+    return selectStatus;
 end;
 
---Todo: fix bug where we need to skip over the currently selected number when evaluating
--- look in slots 1-12 if selected slot if empty
+-- look in slots 1-12 if selected slot is empty
 function selectWithOverflow(slot, attempts)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
-    local attempts = attempts or 10
     log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    select(slot);
-    if turtle.getItemCount(slot) <= 1 then
-        local tries = 1;
-        while (not turtle.compareTo(slot) and ((attempts == 0) or (tries <= attempts))) do
+    if (select(slot)) then
+        if (turtle.getItemCount(slot) > 1) then
+            currentSlotNum = slot;
+            currentLogIndent = currentLogIndent - 1;
+            log (fine, "Exiting selectWithOverflow()", currentLogIndent);
+            return success;
+        else
             for i = 1,12 do
-                select(i);
-                if (turtle.compareTo(slot)) then
+                if (select(i) and turtle.compareTo(slot) and turtle.getItemCount(slot) > 1) then
                     currentSlotNum = slot;
-                    log(debug, "Ran down to 1 resource in slot "..slot.." stealing from slot "..i.." to compensate", currentLogIndent);
-                    break;
+                    log(debug, "Ran down to 1 resource in slot "..slot..". Using items from slot "..i.." to compensate", currentLogIndent);
+                    currentLogIndent = currentLogIndent - 1;
+                    log (fine, "Exiting selectWithOverflow()", currentLogIndent);
+                    return success;
                 end;
             end
-            -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-            tries = math.min(tries + 1, attempts + 1)
-        end
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-    return slot;
+            log(error, "    Critical Error: No items left in inventory with the same materials as the specified slot ("..slot.."). Stopping operation.");
+            currentLogIndent = currentLogIndent - 1;
+            log (fine, "Exiting selectWithOverflow()", currentLogIndent);
+            return notEnoughInventory;
+        end;
+    else
+        log(error, "    Critical Error: No items left in specified slot ("..slot..") with which to compare against in order to perform overflow selection. Stopping operation.");
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting selectWithOverflow()", currentLogIndent);
+        return notEnoughInventory;
+    end;
 end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
