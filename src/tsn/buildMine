@@ -18,11 +18,17 @@ print ("What height of station should be built? (3 is normal)");
 h = io.read();
 h = tonumber(h);
 
-function moveToTopOfShaft()
-
+function moveToTopOfShaft(height)
+    for i=1,height do
+        turtle.up();
+    end;
+    turtle.turnLeft();
+    turtle.forward();
 end;
 
 shell.run("digShaft", z);
+moveToTopOfShaft(z);
+io.read();
 shell.run("prepareShaft", z);
 --shell.run("digStation", d, h);
 --shell.run("prepareStation", d, h);
