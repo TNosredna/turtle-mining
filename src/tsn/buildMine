@@ -14,7 +14,7 @@ print ("What diameter of station should be built? (5 is normal)");
 d = io.read();
 d = tonumber(d);
 
-print ("What height of station should be built? (3 is normal)");
+print ("What height of station should be built? (5 is normal)");
 h = io.read();
 h = tonumber(h);
 

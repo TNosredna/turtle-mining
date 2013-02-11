@@ -131,7 +131,7 @@ function select(slot)
 end;
 
 -- look in slots 1-12 if selected slot is empty
-function selectWithOverflow(slot, attempts)
+function selectWithOverflow(slot)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
@@ -224,8 +224,12 @@ function placeWithOverflow(placeDirection, slot)
     log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDarkness="..currentDarkness);
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    slot = selectWithOverflow(slot);
-    local successCode = place(placeDirection);
+
+    local successCode = selectWithOverflow(slot);
+    if (successCode == success) then
+        successCode = place(placeDirection);
+    end;
+
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeWithOverflow()", currentLogIndent);
     return successCode;

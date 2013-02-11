@@ -44,8 +44,6 @@ local function digMineShaft(depth, startingTurnDirection)
         if (i==1) then placeItem(up, BUCKET_SLOT); end;
     end;
 
-    -- ToDo: figure out logic to get back to box1 in order to do a place(up, bucketSlot);
-
     move(up, depth);
     placeItem(forward, BUCKET_SLOT);
 
