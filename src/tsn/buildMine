@@ -20,10 +20,10 @@ h = tonumber(h);
 
 function moveToTopOfShaft(height)
     for i=1,height do
-        turtle.up();
+        move(up);
     end;
     if (height % 2 ~= 0) then
-        turtle.turnRight();
+        turn(right);
     end;
 end;
 

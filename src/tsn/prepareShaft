@@ -52,9 +52,7 @@ function prepareShaftLayer()
     move(back);
     placeWithOverflow(forward, LADDER_SLOT);
     move(down);
-    if ((currentDarkness >= 6) and (placeWithOverflow(up, TORCH_SLOT) == blockPlaced)) then
-        currentDarkness = 0;
-    end
+    placeLight(TORCH_SLOT);
 end;
 
 function prepareBottomOfShaft()
@@ -71,9 +69,7 @@ function prepareBottomOfShaft()
     move(back);
     placeWithOverflow(forward, LADDER_SLOT);
     move(down);
-    if ((currentDarkness >= 6) and (placeWithOverflow(up, TORCH_SLOT) == blockPlaced)) then
-        currentDarkness = 0;
-    end
+    placeLight(TORCH_SLOT);
 end;
 
 function prepareShaft(height)

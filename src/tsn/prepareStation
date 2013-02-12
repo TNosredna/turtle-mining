@@ -104,7 +104,7 @@ function restock(configuration, ignoreBlocks, restockIgnore)
     local torchSlot=0
     -- RESTOCK THE TORCHES
     if configuration.placeTorches then
-        turtleUtils.torchSlot=1
+        torchSlot=1
         restockTorches(configuration)
     end
     -- RESTOCK THE IGNORE BLOCKS
@@ -121,81 +121,81 @@ function restock(configuration, ignoreBlocks, restockIgnore)
 end
 
 local function waitForInventoryToArriveInChest()
-    --detect chest turtleUtils.up
+    --detect chest up
     --drop off excess inv
     --wait until desired inv is present then take
 end;
 
 local function prepareStation()
-    turtleUtils.turn(turtleUtils.right);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.moveWithDig(turtleUtils.up, 2); -- destroy redstone signal powering woodenpipe, then one wire
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.dig(turtleUtils.forward); -- destroy woodenpipe
-    turtleUtils.place(turtleUtils.forward, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- plenum
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- in ceiling
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot); -- in ceiling
-    turtleUtils.move(turtleUtils.forward);
-    turtleUtils.dig(turtleUtils.up);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.down);
-    turtleUtils.place(turtleUtils.up, turtleUtils.stonePipe1Slot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.stonePipe1Slot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.stonePipe1Slot);
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.down, turtleUtils.woodenPipeSlot);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.smallChestSlot);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.dig(turtleUtils.forward);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
-    turtleUtils.dig(turtleUtils.up);
-    turtleUtils.place(turtleUtils.up, turtleUtils.smallChestSlot);
-    turtleUtils.turn(turtleUtils.right, 2);
-    turtleUtils.moveWithDig(turtleUtils.forward);
-    turtleUtils.turn(turtleUtils.left);
+    turn(right);
+    moveWithDig(forward);
+    moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
+    turn(right, 2);
+    dig(forward); -- destroy woodenpipe
+    place(forward, stonePipe1Slot);
+    move(down);
+    place(up, stonePipe1Slot); -- plenum
+    move(down);
+    place(up, stonePipe1Slot); -- in ceiling
+    move(down);
+    place(up, stonePipe1Slot); -- in ceiling
+    move(forward);
+    dig(up);
+    place(up, stonePipe1Slot);
+    move(down);
+    place(up, stonePipe1Slot);
+    move(down);
+    place(up, stonePipe1Slot);
+    dig(down);
+    place(down, stonePipe1Slot);
+    move(back);
+    place(forward, stonePipe1Slot);
+    dig(down);
+    place(down, stonePipe1Slot);
+    move(back);
+    place(down, stonePipe1Slot);
+    move(back);
+    place(down, stonePipe1Slot);
+    move(back);
+    place(down, woodenPipeSlot);
+    turn(right, 2);
+    moveWithDig(forward);
+    dig(down);
+    place(down, smallChestSlot);
+    turn(left);
+    dig(forward);
+    place(forward, smallChestSlot);
+    dig(up);
+    place(up, smallChestSlot);
+    turn(right, 2);
+    moveWithDig(forward);
+    turn(left);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.redstoneTorchSlot);
+    dig(down);
+    place(down, redstoneTorchSlot);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    turtleUtils.move(turtleUtils.back);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.smallChestSlot);
-    turtleUtils.dig(turtleUtils.down);
-    turtleUtils.place(turtleUtils.down, turtleUtils.redstoneEngineSlot);
-    turtleUtils.place(turtleUtils.forward, turtleUtils.redstoneTorchSlot);
+    move(back);
+    place(forward, smallChestSlot);
+    dig(down);
+    place(down, redstoneEngineSlot);
+    place(forward, redstoneTorchSlot);
 end;
 
 local function moveToStartingPosition(radius)
     local radius = radius;
-    turtleUtils.log (fine, "Entering moveToStartingPosition()");
+    log (fine, "Entering moveToStartingPosition()");
     currentLogIndent = currentLogIndent + 1;
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(radius - 1);
-    turtleUtils.turn(turtleUtils.left);
-    turtleUtils.move(radius - 1);
-    turtleUtils.moveWithDig(turtleUtils.up);
+    turn(left);
+    move(radius - 1);
+    turn(left);
+    move(radius - 1);
+    moveWithDig(up);
     currentLogIndent = currentLogIndent - 1;
-    turtleUtils.log (fine, "Exiting moveToStartingPositionForWalls()");
+    log (fine, "Exiting moveToStartingPositionForWalls()");
 end
 
 if ((radius == nil or radius=="") or (height == nil or height=="")) then
-    fs.delete(turtleUtils.logFileName);
+    fs.delete(logFileName);
     print ("What is the radius of the station? (5 is normal)");
     radius = io.read();
     radius = tonumber(radius);
