@@ -241,7 +241,7 @@ function placeItem(placeDirection, slot, overflow, detectFirst)
     local slot = slot or currentSlotNum;
     local detectFirst = detectFirst or false;
     local overflow = overflow or false;
-    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..overflow..", "..detectFirst..")", currentLogIndent);
+    log (fine, "Entering placeItem("..placeDirection..", "..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     if (overflow) then
         selectWithOverflow(slot);
