@@ -16,6 +16,7 @@ TORCH_SLOT = 9; -- 10 stack
 
 local args={...};
 local height = args[1];
+local overflow = true;
 
 -- start while turtle facing East to place Engine
 function prepareTopOfShaft()
@@ -33,7 +34,7 @@ function prepareTopOfShaft()
     turn(right);
     move(forward);
     dig(forward);
-    placeItem(forward, STONE_PIPE_SLOT, true);
+    placeItem(forward, STONE_PIPE_SLOT, overflow);
     move(back);
     turn(right);
 end;
@@ -44,13 +45,13 @@ function prepareShaftLayer()
     turn(left);
     move(back);
 
-    placeItem(forward, STONE_PIPE_SLOT, true);
+    placeItem(forward, STONE_PIPE_SLOT, overflow);
     turn(right);
     move(back);
     placeItem(forward, REDWIRE_SLOT);
     turn(right);
     move(back);
-    placeItem(forward, LADDER_SLOT, true);
+    placeItem(forward, LADDER_SLOT, overflow);
     move(down);
     placeLight(TORCH_SLOT);
 end;
@@ -67,7 +68,7 @@ function prepareBottomOfShaft()
     placeItem(forward, REDSTONE_TORCH_SLOT);
     turn(right);
     move(back);
-    placeItem(forward, LADDER_SLOT, true);
+    placeItem(forward, LADDER_SLOT, overflow);
     move(down);
     placeLight(TORCH_SLOT);
 end;

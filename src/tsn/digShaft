@@ -15,11 +15,12 @@ local function digShaftLayer(startingTurnDirection)
     log (fine, "Entering digShaftLayer("..startingTurnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     local turnDirection = startingTurnDirection or right;
-    local detectFirst = true;
+    local detect = true;
     local overflow = true;
+    local no_compare = false;
 
     for i=1,8 do
-        placeItem(forward, WALL_FILLER_SLOT, overflow, detectFirst);
+        placeItem(forward, WALL_FILLER_SLOT, overflow, no_compare, detect);
         turn(turnDirection);
         moveWithDig(forward)
         if (i==4) then

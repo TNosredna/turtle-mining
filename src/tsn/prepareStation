@@ -132,7 +132,7 @@ local function prepareStation()
     moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
     turn(right, 2);
     dig(forward); -- destroy woodenpipe
-    placeItem(forward, stonePipe1Slot, true);
+    placeItem(forward, stonePipeSlot, true);
     move(down);
     placeItem(up, stonePipeSlot, true); -- plenum
     move(down);
@@ -151,7 +151,7 @@ local function prepareStation()
     move(back);
     placeItem(forward, stonePipeSlot, true);
     dig(down);
-    placeItem(down, stonePipe1Slot, true);
+    placeItem(down, stonePipeSlot, true);
     move(back);
     placeItem(down, stonePipeSlot, true);
     move(back);

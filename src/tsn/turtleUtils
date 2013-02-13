@@ -19,10 +19,8 @@ noMoving = 0;
 success = true;
 failure = false;
 
-blockPlaced = 0;
 blockAlreadyPresent = 1;
 notEnoughInventory = 2;
-noAnchorBlocks = 3;
 
 error = 0;
 coarse = 1;
@@ -160,11 +158,23 @@ function detect(detectDirection)
     local detectDirection = detectDirection or forward;
 
     if (detectDirection == forward) then
-        if (turtle.detect()) then log(fine, "detected: forward", currentLogIndent); return success; else log(debug, "failed to detect: forward", currentLogIndent); return failure; end;
+        if (turtle.detect()) then log(fine, "detected: item exists forward", currentLogIndent); return success; else log(debug, "detected: no item exists forward", currentLogIndent); return failure; end;
     elseif (detectDirection == up) then
-        if (turtle.detectUp()) then log(fine, "detected: up", currentLogIndent); return success;  else log(debug, "failed to detect: up", currentLogIndent); return failure;  end;
+        if (turtle.detectUp()) then log(fine, "detected: item exists up", currentLogIndent); return success;  else log(debug, "detected: no item exists up", currentLogIndent); return failure;  end;
     elseif (detectDirection == down) then
-        if (turtle.detectDown()) then log(fine, "detected: down", currentLogIndent); return success;  else log(debug, "failed to detect: down", currentLogIndent); return failure;  end;
+        if (turtle.detectDown()) then log(fine, "detected  item exists down", currentLogIndent); return success;  else log(debug, "detected: no item exists down", currentLogIndent); return failure;  end;
+    end;
+end;
+
+function compare(direction)
+    local direction = direction or forward;
+
+    if (direction == forward) then
+        if (turtle.compare()) then log(fine, "compared: forward item same as slot ("..currentSlotNum..")", currentLogIndent); return success; else log(debug, "compared: forward item not same as a slot ("..currentSlotNum..")", currentLogIndent); return failure; end;
+    elseif (direction == up) then
+        if (turtle.compareUp()) then log(fine, "compared: up item same as slot ("..currentSlotNum..")", currentLogIndent); return success;  else log(debug, "compared: up item not same as a slot ("..currentSlotNum..")", currentLogIndent); return failure;  end;
+    elseif (direction == down) then
+        if (turtle.compareDown()) then log(fine, "compared: down item same as slot ("..currentSlotNum..")", currentLogIndent); return success;  else log(debug, "compared: down item not same as a slot ("..currentSlotNum..")", currentLogIndent); return failure;  end;
     end;
 end;
 
@@ -193,6 +203,7 @@ function place(placeDirection)
 end;
 
 function select(slot)
+    local slot = slot or currentSlotNum;
     log (fine, "Entering select("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
@@ -200,9 +211,13 @@ function select(slot)
     if (selectStatus) then
         log(fine, "selected: "..slot, currentLogIndent);
         currentSlotNum = slot;  -- set the global slot value
-        if (currentLogLevel == debug) then
-            log(debug, "    items left in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
-        end;
+    else
+        log(fine, "failed to select: "..slot, currentLogIndent);
+    end;
+    if (currentLogLevel == debug) then
+        currentLogIndent = currentLogIndent + 1;
+        log(debug, "items remaining in slot "..slot..": "..tostring(turtle.getItemCount(slot)), currentLogIndent);
+        currentLogIndent = currentLogIndent - 1;
     end;
 
     currentLogIndent = currentLogIndent - 1;
@@ -210,75 +225,97 @@ function select(slot)
     return selectStatus;
 end;
 
--- look in slots 1-12 if selected slot is empty
-function selectWithOverflow(slot)
-    log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
+function selectItem(slot, isOverflow)
+    local slot = slot or currentSlotNum;
+    local isOverflow = isOverflow or false;
+    log (fine, "Entering selectItem("..slot..","..isOverflow..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    if (select(slot)) then
-        if (turtle.getItemCount(slot) > 1) then
-            currentSlotNum = slot;
-            currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-            return success;
-        else
-            for i = 1,12 do
-                if (select(i) and turtle.compareTo(slot) and turtle.getItemCount(slot) > 1) then
-                    currentSlotNum = slot;
-                    log(debug, "Ran down to 1 resource in slot "..slot..". Using items from slot "..i.." to compensate", currentLogIndent);
-                    currentLogIndent = currentLogIndent - 1;
-                    log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-                    return success;
+    local isSuccess = select(slot);
+    if (isOverflow) then
+        if (isSuccess) then
+            if (turtle.getItemCount(slot) > 1) then
+                currentLogIndent = currentLogIndent - 1;
+                log (fine, "Exiting selectItem()", currentLogIndent);
+                return isSuccess;
+            else
+                for i = 1,16 do
+                    if (i ~= slot and turtle.compareTo(i) and turtle.getItemCount(i) > 1 and select(i)) then
+                        if (turtle.transferTo(slot, turtle.getItemCount(i) - 1) and select(slot)) then
+                            log(debug, "Ran down to 1 resource in slot "..slot..". Using items from slot "..i.." to compensate.", currentLogIndent);
+                            currentLogIndent = currentLogIndent - 1;
+                            log (fine, "Exiting selectItem()", currentLogIndent);
+                            return isSuccess;
+                        end;
+                    end;
                 end;
-            end
-            log(error, "    Critical Error: No items left in inventory with the same materials as the specified slot ("..slot.."). Stopping operation.");
+                log (fine, "Overflow requested, but no remaining items exist in inventory. Using last item from slot ("..slot..").");
+                currentLogIndent = currentLogIndent - 1;
+                log (fine, "Exiting selectItem()", currentLogIndent);
+                return isSuccess;
+            end;
+        else
+            log(error, "    Critical Error: No items found in slot ("..slot..") with which to compare against in order to perform overflow selection. Stopping operation.");
             currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting selectWithOverflow()", currentLogIndent);
+            log (fine, "Exiting selectItem()", currentLogIndent);
             shell.exit();
         end;
     else
-        log(error, "    Critical Error: No items left in specified slot ("..slot..") with which to compare against in order to perform overflow selection. Stopping operation.");
         currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-        shell.exit();
+        log (fine, "Exiting selectItem()", currentLogIndent);
+        return isSuccess;
     end;
+
 end
 
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function placeItem(placeDirection, slot, overflow, detectFirst)
+function placeItem(placeDirection, slot, overflow, compare, detect, anchorProtection)
     local placeDirection = placeDirection or forward;
     local slot = slot or currentSlotNum;
-    local detectFirst = detectFirst or false;
     local overflow = overflow or false;
-    log (fine, "Entering placeItem("..placeDirection..", "..slot..")", currentLogIndent);
+    local detect = detect or false;
+    local compare = compare or false;
+    local anchorProtection = anchorProtection or false;
+    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..tostring(overflow)..", "..tostring(compare)..", "..tostring(detect)..", "..tostring(anchorProtection)..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if (overflow) then
-        selectWithOverflow(slot);
-    else
-        select(slot);
-    end;
 
-    local actionFailed = false;
-    if (detectFirst and detect(placeDirection)) then
+    if (detect and detect(placeDirection)) then
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return success;
-    elseif (place(placeDirection)) then
+    end;
+
+    if (not selectItem(slot, overflow)) then
         currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting place()", currentLogIndent);
-        return blockPlaced;
-    else
-        if (turtle.getItemCount(currentSlotNum) > 0) then
-            log(debug, "    no anchor blocks present at target location", currentLogIndent);
+        log (fine, "Exiting placeItem()", currentLogIndent);
+        return notEnoughInventory;
+    end;
+
+    if (compare) then
+        if (compare(placeDirection)) then
             currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting place()", currentLogIndent);
-            return noAnchorBlocks;
+            log (fine, "Exiting placeItem()", currentLogIndent);
+            return success;
         else
-            log(debug, "    no items left in slot "..currentSlotNum.." to place", currentLogIndent);
-            currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting place()", currentLogIndent);
-            return notEnoughInventory;
+            while (detect(placeDirection)) do
+                dig(placeDirection);
+            end;
         end;
+    end;
+
+    if (place(placeDirection)) then
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting placeItem()", currentLogIndent);
+        return success;
+    elseif (anchorProtection) then
+        log(fine, "Moving forward in an attempt to find an anchor block.", currentLogIndent);
+        move(direction);
+        placeItem(placeDirection, slot, overflow, false, false, true);
+        move(getOppositeDirection(placeDirection));
+    else
+        log(fine, "Failed: Item already present at target ("..placeDirection..").", currentLogIndent);
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting placeItem()", currentLogIndent);
+        return blockAlreadyPresent;
     end;
 end;
 
@@ -310,14 +347,6 @@ function distanceBetweenTwoPoints(x1, y1, z1, x2, y2, z2)
     return dist;
 end;
 
-function distanceFromLastLight()
-    local xDistance = currentX - lastLightX;  --horizontal difference
-    local yDistance = currentY - lastLightY;  --vertical difference
-    local zDistance = currentZ - lastLightZ;  --outward difference
-    local dist = math.sqrt( (xDistance*xDistance) + (yDistance*yDistance) + (zDistance*zDistance) );    -- distance using Pythagoras theorem
-    return dist;
-end;
-
 function getOppositeDirection(currentDirection)
     local currentDirection = currentDirection;
     if (currentDirection == up) then return down; end;
@@ -328,53 +357,10 @@ function getOppositeDirection(currentDirection)
     if (currentDirection == back) then return forward; end;
 end
 
--- move if can't replace. empty anchor protection
-function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
-    local attempts = attempts or 10;
-    local tries = 1;
-    local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
-    log (fine, "Entering replace("..direction..","..slot..")", currentLogIndent);
-    currentLogIndent = currentLogIndent + 1;
-
-    local successCode = placeItem(direction, slot, true);
-    log(debug, "    successCode="..successCode, currentLogIndent);
-    while ((attempts==0) or (tries<=attempts)) do
-        if (successCode==blockPlaced) then
-            log(debug, "    Block was succesfully placed, continueing on.", currentLogIndent);
-            break;
-        elseif (successCode==blockAlreadyPresent) then
-            if (isAlwaysRemoveAndAdd) then
-                log(debug, "    Block already present. Digging and trying again.", currentLogIndent);
-                dig(direction);
-            else
-                log(debug, "    Block already present, declaring success.", currentLogIndent);
-                break;
-            end;
-        elseif (successCode==notEnoughInventory) then
-            log(error, "    Critical Error - Didn't have enough inventory remaining to place block, exiting program to avoid running amuck.", currentLogIndent);
-            currentLogIndent = currentLogIndent - 1;
-            log (fine, "Exiting replace()", currentLogIndent);
-            shell.exit();
-        elseif (successCode==noAnchorBlocks) then
-            log(debug, "    No anchor blocks found to attach to, moving forward one in an attempt to find one.", currentLogIndent);
-            move(direction);
-            replace(direction, slot);
-            move(getOppositeDirection(direction));
-        end
-        successCode = placeItem(direction);
-        log(debug, "    successCode="..successCode.."[retry #"..tries.."]", currentLogIndent);
-        -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
-        tries = math.min(tries+1, attempts+1);
-        sleep(0);
-    end
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting replace()", currentLogIndent);
-end
-
 function placeLight(lightSlot)
     log (fine, "Entering placeLight()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if ((distanceFromLastLight() >= lightThreshold) and (placeItem(up, lightSlot, true) == blockPlaced)) then
+    if ((distanceBetweenTwoPoints(currentX, currentY, currentZ, lastLightX, lastLightY, lastLightZ) >= lightThreshold) and (placeItem(up, lightSlot, true))) then
         lastLightX = currentX;
         lastLightY = currentY;
         lastLightZ = currentZ;
