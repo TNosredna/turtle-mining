@@ -5,21 +5,21 @@
 
 
 -- START OF LOCAL SCRIPT
-local BUCKET_SLOT = 16;
 local WALL_FILLER_SLOT = 1;
+local BUCKET_SLOT = 16;
 
 local args={...};
 depth = args[1];
 
 local function digShaftLayer(startingTurnDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
-    log (fine, "Entering digShaftLayer()", currentLogIndent);
+    log (fine, "Entering digShaftLayer("..startingTurnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     local turnDirection = startingTurnDirection or right;
     local detectFirst = true;
+    local overflow = true;
 
     for i=1,8 do
-        placeItem(forward, WALL_FILLER_SLOT, detectFirst);
+        placeItem(forward, WALL_FILLER_SLOT, overflow, detectFirst);
         turn(turnDirection);
         moveWithDig(forward)
         if (i==4) then
@@ -34,8 +34,7 @@ local function digShaftLayer(startingTurnDirection)
 end;
 
 local function digMineShaft(depth, startingTurnDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
-    log (fine, "Entering digMineShaft()", currentLogIndent);
+    log (fine, "Entering digMineShaft("..depth..","..startingTurnDirection..")", currentLogIndent);
     local turnDirection = startingTurnDirection or right;
     moveWithDig(down)
     for i=1,depth do
