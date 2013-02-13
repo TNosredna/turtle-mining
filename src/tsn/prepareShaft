@@ -19,13 +19,13 @@ local height = args[1];
 
 -- start while turtle facing East to place Engine
 function prepareTopOfShaft()
-    place(forward, SMALL_CHEST_SLOT);
+    placeItem(forward, SMALL_CHEST_SLOT);
     move(back);
-    place(forward, WOODEN_PIPE_SLOT);
+    placeItem(forward, WOODEN_PIPE_SLOT);
     turn(right);
     move(forward);
     turn(left);
-    place(forward, REDSTONE_ENGINE_SLOT);
+    placeItem(forward, REDSTONE_ENGINE_SLOT);
 
     move(down);
     turn(left);
@@ -33,7 +33,7 @@ function prepareTopOfShaft()
     turn(right);
     move(forward);
     dig(forward);
-    placeWithOverflow(forward, STONE_PIPE_SLOT);
+    placeItem(forward, STONE_PIPE_SLOT, true);
     move(back);
     turn(right);
 end;
@@ -44,13 +44,13 @@ function prepareShaftLayer()
     turn(left);
     move(back);
 
-    placeWithOverflow(forward, STONE_PIPE_SLOT);
+    placeItem(forward, STONE_PIPE_SLOT, true);
     turn(right);
     move(back);
-    placeWithOverflow(forward, REDWIRE_SLOT);
+    placeItem(forward, REDWIRE_SLOT);
     turn(right);
     move(back);
-    placeWithOverflow(forward, LADDER_SLOT);
+    placeItem(forward, LADDER_SLOT, true);
     move(down);
     placeLight(TORCH_SLOT);
 end;
@@ -61,13 +61,13 @@ function prepareBottomOfShaft()
     turn(left);
     move(back);
 
-    place(forward, SMALL_CHEST_SLOT);
+    placeItem(forward, SMALL_CHEST_SLOT);
     turn(right);
     move(back);
-    place(forward, REDSTONE_TORCH_SLOT);
+    placeItem(forward, REDSTONE_TORCH_SLOT);
     turn(right);
     move(back);
-    placeWithOverflow(forward, LADDER_SLOT);
+    placeItem(forward, LADDER_SLOT, true);
     move(down);
     placeLight(TORCH_SLOT);
 end;

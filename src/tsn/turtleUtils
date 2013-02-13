@@ -171,6 +171,18 @@ function attack(attackDirection)
     end;
 end;
 
+function place(placeDirection)
+    local placeDirection = placeDirection or forward;
+
+    if (placeDirection == forward) then
+        if (turtle.place()) then log(fine, "placed: forward", currentLogIndent); return success; else log(debug, "failed to place: forward", currentLogIndent); return failure; end;
+    elseif (placeDirection == up) then
+        if (turtle.placetUp()) then log(fine, "placed: up", currentLogIndent); return success;  else log(debug, "failed to place: up", currentLogIndent); return failure;  end;
+    elseif (placeDirection == down) then
+        if (turtle.placeDown()) then log(fine, "placed: down", currentLogIndent); return success;  else log(debug, "failed to place: down", currentLogIndent); return failure;  end;
+    end;
+end;
+
 function select(slot)
     log (fine, "Entering select("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
@@ -224,40 +236,29 @@ function selectWithOverflow(slot)
 end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function place(placeDirection, detectFirst)
+function placeItem(placeDirection, slot, overflow, detectFirst)
     local placeDirection = placeDirection or forward;
-    local actionFailed = false;
+    local slot = slot or currentSlotNum;
     local detectFirst = detectFirst or false;
-    log (fine, "Entering place("..placeDirection..")", currentLogIndent);
+    local overflow = overflow or false;
+    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..overflow..", "..detectFirst..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-
-    local detected = false;
-    if (placeDirection == forward) then
-        if (detectFirst) then detected = turtle.detect(); end;
-        if (not detected and turtle.place()) then
-            log(fine, "placed: "..currentSlotNum.." forward", currentLogIndent);
-        else
-            actionFailed = true;
-            log(debug, "failed to place "..currentSlotNum.." forward", currentLogIndent);
-        end;
-    elseif (placeDirection == up) then
-        if (detectFirst) then detected = turtle.detect(); end;
-        if (not detected and turtle.placeUp()) then
-            log(fine, "placed "..currentSlotNum.." up", currentLogIndent);
-        else
-            actionFailed = true;
-            log(debug, "failed to place "..currentSlotNum.." up", currentLogIndent);
-        end;
-    elseif (placeDirection == down) then
-        if (detectFirst) then detected = turtle.detect(); end;
-        if (not detected and turtle.placeDown()) then
-            log(fine, "placed "..currentSlotNum.." down", currentLogIndent);
-        else
-            actionFailed = true;
-            log(debug, "failed to place "..currentSlotNum.." down", currentLogIndent);
-        end;
+    if (overflow) then
+        selectWithOverflow(slot);
+    else
+        select(slot);
     end;
-    if (actionFailed) then
+
+    local actionFailed = false;
+    if (detectFirst and detect(placeDirection)) then
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting placeItem()", currentLogIndent);
+        return success;
+    elseif (place(placeDirection)) then
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting place()", currentLogIndent);
+        return blockPlaced;
+    else
         if (turtle.getItemCount(currentSlotNum) > 0) then
             log(debug, "    no anchor blocks present at target location", currentLogIndent);
             currentLogIndent = currentLogIndent - 1;
@@ -269,40 +270,7 @@ function place(placeDirection, detectFirst)
             log (fine, "Exiting place()", currentLogIndent);
             return notEnoughInventory;
         end;
-    else
-        currentLogIndent = currentLogIndent - 1;
-        log (fine, "Exiting place()", currentLogIndent);
-        return blockPlaced;
     end;
-end;
-
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function placeWithOverflow(placeDirection, slot)
-    log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
-    currentLogIndent = currentLogIndent + 1;
-
-    local successCode = selectWithOverflow(slot);
-    if (successCode == success) then
-        successCode = place(placeDirection);
-    end;
-
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting placeWithOverflow()", currentLogIndent);
-    return successCode;
-end;
-
--- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
-function placeItem(placeDirection, slot, detectFirst)
-    local detectFirst = detectFirst or false;
-    local slot = slot;
-    local placeDirection = placeDirection or forward;
-    log (fine, "Entering placeItem("..placeDirection..","..slot..")", currentLogIndent);
-    currentLogIndent = currentLogIndent + 1;
-    if (slot ~= currentSlotNum) then select(slot); end;
-    local successCode = place(placeDirection, detectFirst);
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting placeItem()", currentLogIndent);
-    return successCode;
 end;
 
 -- dig if can't move
@@ -359,8 +327,7 @@ function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
     log (fine, "Entering replace("..direction..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    slot = selectWithOverflow(slot);
-    local successCode = placeItem(direction, slot);
+    local successCode = placeItem(direction, slot, true);
     log(debug, "    successCode="..successCode, currentLogIndent);
     while ((attempts==0) or (tries<=attempts)) do
         if (successCode==blockPlaced) then
@@ -398,7 +365,7 @@ end
 function placeLight(lightSlot)
     log (fine, "Entering placeLight()", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if ((distanceFromLastLight() >= lightThreshold) and (placeWithOverflow(up, lightSlot) == blockPlaced)) then
+    if ((distanceFromLastLight() >= lightThreshold) and (placeItem(up, lightSlot, true) == blockPlaced)) then
         lastLightX = currentX;
         lastLightY = currentY;
         lastLightZ = currentZ;

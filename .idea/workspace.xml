@@ -4,6 +4,7 @@
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareShaft" afterPath="$PROJECT_DIR$/src/tsn/prepareShaft" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareStation" afterPath="$PROJECT_DIR$/src/tsn/prepareStation" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
     <ignored path="turtle-mining.iws" />
@@ -62,10 +63,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="380" column="18" selection-start="15653" selection-end="15659" vertical-scroll-proportion="0.54058725">
+            <state line="354" column="41" selection-start="14808" selection-end="14808" vertical-scroll-proportion="-18.384615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="digStation" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -74,7 +84,7 @@
       <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="53" selection-start="3948" selection-end="3948" vertical-scroll-proportion="0.0">
+            <state line="180" column="13" selection-start="5813" selection-end="5813" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,10 +126,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="prepareShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="24" selection-start="1587" selection-end="1587" vertical-scroll-proportion="-37.76923">
+            <state line="46" column="44" selection-start="1141" selection-end="1141" vertical-scroll-proportion="1.0675676">
               <folding />
             </state>
           </provider>
@@ -150,9 +160,9 @@
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/src/tsn/digShaft" />
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
         <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
+        <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
         <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
       </list>
     </option>
@@ -214,6 +224,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="update" />
+              <option name="myItemType" value="com.sylvanaar.idea.Lua.projectView.nodes.LuaFileTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="turtle-mining" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tsn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="turtleUtils" />
               <option name="myItemType" value="com.sylvanaar.idea.Lua.projectView.nodes.LuaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1047,7 +1075,11 @@
       <created>1360729361004</created>
       <updated>1360729361004</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360729781888</created>
+      <updated>1360729781888</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1227,11 +1259,6 @@
         <state line="7" column="0" selection-start="228" selection-end="228" vertical-scroll-proportion="0.10233918" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="32" selection-start="4080" selection-end="4080" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="119" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1260,28 +1287,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="53" selection-start="3948" selection-end="3948" vertical-scroll-proportion="0.0">
+        <state line="180" column="13" selection-start="5813" selection-end="5813" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="354" column="41" selection-start="14808" selection-end="14808" vertical-scroll-proportion="-18.384615">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="24" selection-start="1587" selection-end="1587" vertical-scroll-proportion="-37.76923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="380" column="18" selection-start="15653" selection-end="15659" vertical-scroll-proportion="0.54058725">
+        <state line="46" column="44" selection-start="1141" selection-end="1141" vertical-scroll-proportion="1.0675676">
           <folding />
         </state>
       </provider>

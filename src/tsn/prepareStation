@@ -132,53 +132,53 @@ local function prepareStation()
     moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
     turn(right, 2);
     dig(forward); -- destroy woodenpipe
-    place(forward, stonePipe1Slot);
+    placeItem(forward, stonePipe1Slot, true);
     move(down);
-    place(up, stonePipe1Slot); -- plenum
+    placeItem(up, stonePipeSlot, true); -- plenum
     move(down);
-    place(up, stonePipe1Slot); -- in ceiling
+    placeItem(up, stonePipeSlot, true); -- in ceiling
     move(down);
-    place(up, stonePipe1Slot); -- in ceiling
+    placeItem(up, stonePipeSlot, true); -- in ceiling
     move(forward);
     dig(up);
-    place(up, stonePipe1Slot);
+    placeItem(up, stonePipeSlot, true);
     move(down);
-    place(up, stonePipe1Slot);
+    placeItem(up, stonePipeSlot, true);
     move(down);
-    place(up, stonePipe1Slot);
+    placeItem(up, stonePipeSlot, true);
     dig(down);
-    place(down, stonePipe1Slot);
+    placeItem(down, stonePipeSlot, true);
     move(back);
-    place(forward, stonePipe1Slot);
+    placeItem(forward, stonePipeSlot, true);
     dig(down);
-    place(down, stonePipe1Slot);
+    placeItem(down, stonePipe1Slot, true);
     move(back);
-    place(down, stonePipe1Slot);
+    placeItem(down, stonePipeSlot, true);
     move(back);
-    place(down, stonePipe1Slot);
+    placeItem(down, stonePipeSlot, true);
     move(back);
-    place(down, woodenPipeSlot);
+    placeItem(down, woodenPipeSlot);
     turn(right, 2);
     moveWithDig(forward);
     dig(down);
-    place(down, smallChestSlot);
+    placeItem(down, smallChestSlot);
     turn(left);
     dig(forward);
-    place(forward, smallChestSlot);
+    placeItem(forward, smallChestSlot);
     dig(up);
-    place(up, smallChestSlot);
+    placeItem(up, smallChestSlot);
     turn(right, 2);
     moveWithDig(forward);
     turn(left);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
     dig(down);
-    place(down, redstoneTorchSlot);
+    placeItem(down, redstoneTorchSlot);
     --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
     move(back);
-    place(forward, smallChestSlot);
+    placeItem(forward, smallChestSlot);
     dig(down);
-    place(down, redstoneEngineSlot);
-    place(forward, redstoneTorchSlot);
+    placeItem(down, redstoneEngineSlot);
+    placeItem(forward, redstoneTorchSlot);
 end;
 
 local function moveToStartingPosition(radius)
