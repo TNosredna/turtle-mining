@@ -177,7 +177,7 @@ function place(placeDirection)
     if (placeDirection == forward) then
         if (turtle.place()) then log(fine, "placed: forward", currentLogIndent); return success; else log(debug, "failed to place: forward", currentLogIndent); return failure; end;
     elseif (placeDirection == up) then
-        if (turtle.placetUp()) then log(fine, "placed: up", currentLogIndent); return success;  else log(debug, "failed to place: up", currentLogIndent); return failure;  end;
+        if (turtle.placeUp()) then log(fine, "placed: up", currentLogIndent); return success;  else log(debug, "failed to place: up", currentLogIndent); return failure;  end;
     elseif (placeDirection == down) then
         if (turtle.placeDown()) then log(fine, "placed: down", currentLogIndent); return success;  else log(debug, "failed to place: down", currentLogIndent); return failure;  end;
     end;

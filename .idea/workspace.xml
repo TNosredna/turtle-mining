@@ -61,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="66" selection-start="9883" selection-end="9883" vertical-scroll-proportion="0.41105354">
+            <state line="179" column="24" selection-start="6785" selection-end="6785" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="prepareShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="-11.615385">
+            <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="0.25675675">
               <folding />
             </state>
           </provider>
@@ -166,8 +166,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2003" />
-    <option name="y" value="83" />
+    <option name="x" value="1903" />
+    <option name="y" value="22" />
     <option name="width" value="1600" />
     <option name="height" value="1080" />
   </component>
@@ -1081,11 +1081,15 @@
       <created>1360733837364</created>
       <updated>1360733837365</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360734058905</created>
+      <updated>1360734058906</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2003" y="83" width="1600" height="1080" extended-state="0" />
+    <frame x="1903" y="22" width="1600" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1308,16 +1312,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="-11.615385">
+        <state line="179" column="24" selection-start="6785" selection-end="6785" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="66" selection-start="9883" selection-end="9883" vertical-scroll-proportion="0.41105354">
+        <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="0.25675675">
           <folding />
         </state>
       </provider>
