@@ -23,8 +23,8 @@ fine = 2;
 debug = 3;
 fineDebug = 4;
 
-logFileName = os.computerID()..".log";
-xyzFileName = os.computerID().."-xyz.txt";
+logFileName = os.getComputerLabel()..".log";
+xyzFileName = os.getComputerLabel().."-xyz.txt";
 
 currentLogLevel = debug;
 currentSlotNum = 1;
