@@ -19,13 +19,13 @@ local height = args[1];
 
 -- start while turtle facing East to place Engine
 function prepareTopOfShaft()
-    placeWithOverflow(forward, SMALL_CHEST_SLOT);
+    place(forward, SMALL_CHEST_SLOT);
     move(back);
-    placeWithOverflow(forward, WOODEN_PIPE_SLOT);
+    place(forward, WOODEN_PIPE_SLOT);
     turn(right);
     move(forward);
     turn(left);
-    placeWithOverflow(forward, REDSTONE_ENGINE_SLOT);
+    place(forward, REDSTONE_ENGINE_SLOT);
 
     move(down);
     turn(left);
@@ -61,10 +61,10 @@ function prepareBottomOfShaft()
     turn(left);
     move(back);
 
-    placeWithOverflow(forward, SMALL_CHEST_SLOT);
+    place(forward, SMALL_CHEST_SLOT);
     turn(right);
     move(back);
-    placeWithOverflow(forward, REDSTONE_TORCH_SLOT);
+    place(forward, REDSTONE_TORCH_SLOT);
     turn(right);
     move(back);
     placeWithOverflow(forward, LADDER_SLOT);

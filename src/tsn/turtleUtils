@@ -213,13 +213,13 @@ function selectWithOverflow(slot)
             log(error, "    Critical Error: No items left in inventory with the same materials as the specified slot ("..slot.."). Stopping operation.");
             currentLogIndent = currentLogIndent - 1;
             log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-            return notEnoughInventory;
+            shell.exit();
         end;
     else
         log(error, "    Critical Error: No items left in specified slot ("..slot..") with which to compare against in order to perform overflow selection. Stopping operation.");
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting selectWithOverflow()", currentLogIndent);
-        return notEnoughInventory;
+        shell.exit();
     end;
 end
 
