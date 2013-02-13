@@ -71,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digStation" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="digStation" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0">
+            <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.4854369">
               <folding />
             </state>
           </provider>
@@ -92,7 +92,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1103" selection-end="1203" vertical-scroll-proportion="0.0">
+            <state line="36" column="48" selection-start="1151" selection-end="1151" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -107,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="buildMine" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="buildMine" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="6" selection-start="552" selection-end="552" vertical-scroll-proportion="0.46116504">
+            <state line="31" column="0" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,7 +128,7 @@
       <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="-5.8461537">
+            <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="12.115385">
               <folding />
             </state>
           </provider>
@@ -167,8 +167,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1903" />
-    <option name="y" value="22" />
+    <option name="x" value="2027" />
+    <option name="y" value="31" />
     <option name="width" value="1600" />
     <option name="height" value="1080" />
   </component>
@@ -1094,11 +1094,15 @@
       <created>1360735675682</created>
       <updated>1360735675682</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360735974330</created>
+      <updated>1360735974330</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1903" y="22" width="1600" height="1080" extended-state="0" />
+    <frame x="2027" y="31" width="1600" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1293,20 +1297,6 @@
         <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="-5.8461537">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
         <state line="180" column="13" selection-start="5813" selection-end="5813" vertical-scroll-proportion="0.0">
@@ -1316,7 +1306,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1103" selection-end="1203" vertical-scroll-proportion="0.0">
+        <state line="36" column="48" selection-start="1151" selection-end="1151" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1330,7 +1320,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="6" selection-start="552" selection-end="552" vertical-scroll-proportion="0.46116504">
+        <state line="31" column="0" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="42" selection-start="726" selection-end="726" vertical-scroll-proportion="12.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="6" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.4854369">
           <folding />
         </state>
       </provider>

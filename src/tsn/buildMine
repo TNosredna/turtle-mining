@@ -26,11 +26,8 @@ local function moveToTopOfShaft(height)
     end;
 end;
 
-log(debug, "1");
 shell.run("digShaft", z);
-log(debug, "2");
 moveToTopOfShaft(z);
-log(debug, "3");
 shell.run("prepareShaft", z);
---shell.run("digStation", d, h);
+shell.run("digStation", d, h);
 --shell.run("prepareStation", d, h);
