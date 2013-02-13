@@ -228,7 +228,7 @@ end;
 function selectItem(slot, isOverflow)
     local slot = slot or currentSlotNum;
     local isOverflow = isOverflow or false;
-    log (fine, "Entering selectItem("..slot..","..isOverflow..")", currentLogIndent);
+    log (fine, "Entering selectItem("..slot..","..tostring(isOverflow)..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     local isSuccess = select(slot);
@@ -319,11 +319,11 @@ function placeItem(placeDirection, slot, overflow, compare, detect, anchorProtec
     end;
 end;
 
--- dig if can't move
 function moveWithDig(direction, steps, attempts)
+    local direction = direction or forward;
     local steps = steps or 1
     local attempts = attempts or 10
-    log (fine, "Entering moveWithDig("..direction..")", currentLogIndent);
+    log (fine, "Entering moveWithDig("..direction..","..steps..","..attempts..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,steps do
@@ -358,13 +358,13 @@ function getOppositeDirection(currentDirection)
 end
 
 function placeLight(lightSlot)
-    log (fine, "Entering placeLight()", currentLogIndent);
+    log (fine, "Entering placeLight("..lightSlot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     if ((distanceBetweenTwoPoints(currentX, currentY, currentZ, lastLightX, lastLightY, lastLightZ) >= lightThreshold) and (placeItem(up, lightSlot, true))) then
         lastLightX = currentX;
         lastLightY = currentY;
         lastLightZ = currentZ;
-        log (fine, "Placed light()", currentLogIndent);
+        log (fine, "Placed light", currentLogIndent);
     end;
     currentLogIndent = currentLogIndent + 1;
     log (fine, "Exiting placeLight()", currentLogIndent);

@@ -35,8 +35,8 @@ local function digShaftLayer(startingTurnDirection)
 end;
 
 local function digMineShaft(depth, startingTurnDirection)
-    log (fine, "Entering digMineShaft("..depth..")", currentLogIndent);
     local turnDirection = startingTurnDirection or right;
+    log (fine, "Entering digMineShaft("..depth..", "..turnDirection..")", currentLogIndent);
     moveWithDig(down)
     for i=1,depth do
         turnDirection = digShaftLayer(turnDirection);
