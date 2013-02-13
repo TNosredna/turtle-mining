@@ -4,10 +4,17 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
-north = 0;
-east = 90;
-south = 180;
-west = 270;
+northFacing = 0;
+eastFacing = 90;
+southFacing = 180;
+westFacing = 270;
+rightFacing = 90;
+leftFacing = -90;
+forwardMoving = 1;
+backwardsMoving = -1;
+upMoving = 1;
+downMoving = -1;
+noMoving = 0;
 
 success = true;
 failure = false;
@@ -23,16 +30,20 @@ fine = 2;
 debug = 3;
 fineDebug = 4;
 
+FUEL_SLOT = 16;
+currentSlotNum = 1;
+
 logFileName = os.getComputerLabel()..".log";
 xyzFileName = os.getComputerLabel().."-xyz.txt";
 
 currentLogLevel = debug;
-currentSlotNum = 1;
 currentLogIndent = 0;
+
 currentX = 0;
 currentY = 0;
 currentZ = 0;
 currentFacing = north;
+
 lightThreshold = 6;
 lastLightX = 0;
 lastLightY = 0;
@@ -55,8 +66,7 @@ function log(logLevel, line, currentLogIndent)
 end;
 
 function writeXYZ()
-    local filename = xyzFileName;
-    local file = fs.open(filename, "w"); -- "w" opens the file, erasing all existing contents
+    local file = fs.open(xyzFileName, "w"); -- "w" opens the file, erasing all existing contents
     file.writeLine(currentX);
     file.writeLine(currentY);
     file.writeLine(currentZ);
@@ -65,15 +75,20 @@ function writeXYZ()
 end;
 
 function updateXY(xy)
-    if (currentFacing == north) then
+    if (currentFacing == northFacing) then
         currentY = currentY + xy;
-    elseif (currentFacing == south) then
+    elseif (currentFacing == southFacing) then
         currentY = currentY - xy;
-    elseif (currentFacing == east) then
+    elseif (currentFacing == eastFacing) then
         currentX = currentX + xy;
-    else
+    elseif (currentFacing == westFacing) then
         currentX = currentX - xy;
     end;
+    writeXYZ();
+end;
+
+function updateZ(z)
+    currentZ = currentZ + z;
     writeXYZ();
 end;
 
@@ -84,20 +99,14 @@ function updateFacing(degrees)
     elseif (currentFacing <= -360) then
         currentFacing = currentFacing + 360;
     end;
-
-    writeXYZ();
-end;
-
-function updateZ(z)
-    currentZ = currentZ + z;
     writeXYZ();
 end;
 
 function readXYZ()
-    local filename = xyzFileName;
-    local file = fs.open(filename, "r"); -- "r" opens the file for reading
-    if file == nil then
-        writeXYZ(currentX, currentY, currentZ);
+    local file = fs.open(xyzFileName, "r"); -- "r" opens the file for reading
+    if (file == nil) then
+        file.close();
+        writeXYZ();
         return;
     end;
     currentX = file.readLine();
@@ -112,9 +121,9 @@ function turn(turnDirection, repeatCount)
 
     for i = 1,repeatCount do
         if (turnDirection == left) then
-            if (turtle.turnLeft()) then updateFacing(-90); log(fine, "turned: left", currentLogIndent); else log(debug, "failed to turn: left", currentLogIndent); return failure;  end;
+            if (turtle.turnLeft()) then updateFacing(leftFacing); log(fine, "turned: left", currentLogIndent); else log(debug, "failed to turn: left", currentLogIndent); return failure;  end;
         elseif (turnDirection == right) then
-            if (turtle.turnRight()) then updateFacing(90); log(fine, "turned: right", currentLogIndent); else log(debug, "failed to turn: right", currentLogIndent); return failure;  end;
+            if (turtle.turnRight()) then updateFacing(rightFacing); log(fine, "turned: right", currentLogIndent); else log(debug, "failed to turn: right", currentLogIndent); return failure;  end;
         end;
     end;
 
@@ -125,13 +134,13 @@ function move(moveDirection)
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
-        if (turtle.forward()) then updateXY(1); log(fine, "moved: forward", currentLogIndent); return success;  else log(debug, "failed to move: forward", currentLogIndent); return failure;  end;
+        if (turtle.forward()) then updateXY(forwardMoving); log(fine, "moved: forward", currentLogIndent); return success;  else log(debug, "failed to move: forward", currentLogIndent); return failure;  end;
     elseif (moveDirection == back) then
-        if (turtle.back()) then updateXY(-1); log(fine, "moved: back", currentLogIndent); return success;  else log(debug, "failed to move: back", currentLogIndent); return failure;  end;
+        if (turtle.back()) then updateXY(backwardsMoving); log(fine, "moved: back", currentLogIndent); return success;  else log(debug, "failed to move: back", currentLogIndent); return failure;  end;
     elseif (moveDirection == up) then
-        if (turtle.up()) then updateZ(1); log(fine, "moved: up", currentLogIndent); return success;  else log(debug, "failed to move: up", currentLogIndent); return failure;  end;
+        if (turtle.up()) then updateZ(upMoving); log(fine, "moved: up", currentLogIndent); return success;  else log(debug, "failed to move: up", currentLogIndent); return failure;  end;
     elseif (moveDirection == down) then
-        if (turtle.down()) then updateZ(-1); log(fine, "moved: down", currentLogIndent); return success;  else log(debug, "failed to move: down", currentLogIndent); return failure;  end;
+        if (turtle.down()) then updateZ(downMoving); log(fine, "moved: down", currentLogIndent); return success;  else log(debug, "failed to move: down", currentLogIndent); return failure;  end;
     end;
 end;
 
@@ -375,22 +384,13 @@ function placeLight(lightSlot)
     log (fine, "Exiting placeLight()", currentLogIndent);
 end;
 
-function transitionOverAnd180Degrees(turnDirection, steps)
-    local steps = steps or 1;
-    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")", currentLogIndent);
-    currentLogIndent = currentLogIndent + 1;
-
-    turn(turnDirection);
-    moveWithDig(forward, steps);
-    turn(turnDirection);
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting transitionOverAnd180Degrees()", currentLogIndent);
-end
-
-function refuel()
-    if turtle.getFuelLevel() <= 5 then
-        turtle.select(fuelSlot);
-        turtle.refuel(1);
+function refuel(fuelSlot, amount, threshold)
+    local fuelSlot = fuelSlot or FUEL_SLOT;
+    local amount = amount or 1;
+    local threshold = threshold or 5;
+    if turtle.getFuelLevel() <= threshold then
+        select(fuelSlot);
+        turtle.refuel(amount);
     end
 end
 
