@@ -57,4 +57,4 @@ if (depth==nil or depth=="") then
     tonumber(depth);
 end;
 
-digMineShaft(depth);
+digMineShaft(depth, right);
