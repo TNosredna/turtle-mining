@@ -17,10 +17,11 @@ local function digShaftLayer(startingTurnDirection)
     local turnDirection = startingTurnDirection or right;
     local detect = true;
     local overflow = true;
-    local no_compare = false;
+    local noCompare = false;
+    local anchorProtection = true;
 
     for i=1,8 do
-        placeItem(forward, WALL_FILLER_SLOT, overflow, no_compare, detect);
+        placeItem(forward, WALL_FILLER_SLOT, overflow, noCompare, detect, anchorProtection);
         turn(turnDirection);
         moveWithDig(forward)
         if (i==4) then

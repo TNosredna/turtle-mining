@@ -40,7 +40,7 @@ currentLogIndent = 0;
 currentX = 0;
 currentY = 0;
 currentZ = 0;
-currentFacing = north;
+currentFacing = 0;
 
 lightThreshold = 6;
 lastLightX = 0;
@@ -268,29 +268,29 @@ function selectItem(slot, isOverflow)
 
 end
 
-function placeItem(placeDirection, slot, overflow, compare, detect, anchorProtection)
+function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
     local placeDirection = placeDirection or forward;
     local slot = slot or currentSlotNum;
-    local overflow = overflow or false;
-    local detect = detect or false;
-    local compare = compare or false;
-    local anchorProtection = anchorProtection or false;
-    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..tostring(overflow)..", "..tostring(compare)..", "..tostring(detect)..", "..tostring(anchorProtection)..")", currentLogIndent);
+    local isOverflow = isOverflow or false;
+    local isDetect = isDetect or false;
+    local isCompare = isCompare or false;
+    local isAnchorProtection = isAnchorProtection or false;
+    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..tostring(isOverflow)..", "..tostring(isCompare)..", "..tostring(isDetect)..", "..tostring(isAnchorProtection)..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    if (detect and detect(placeDirection)) then
+    if (isDetect and detect(placeDirection)) then
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return success;
     end;
 
-    if (not selectItem(slot, overflow)) then
+    if (not selectItem(slot, isOverflow)) then
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return notEnoughInventory;
     end;
 
-    if (compare) then
+    if (isCompare) then
         if (compare(placeDirection)) then
             currentLogIndent = currentLogIndent - 1;
             log (fine, "Exiting placeItem()", currentLogIndent);
@@ -306,10 +306,10 @@ function placeItem(placeDirection, slot, overflow, compare, detect, anchorProtec
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return success;
-    elseif (anchorProtection) then
+    elseif (isAnchorProtection) then
         log(fine, "Moving forward in an attempt to find an anchor block.", currentLogIndent);
         move(direction);
-        placeItem(placeDirection, slot, overflow, false, false, true);
+        placeItem(placeDirection, slot, isOverflow, false, false, true);
         move(getOppositeDirection(placeDirection));
     else
         log(fine, "Failed: Item already present at target ("..placeDirection..").", currentLogIndent);

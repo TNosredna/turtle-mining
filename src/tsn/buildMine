@@ -9,7 +9,7 @@ print ("How many blocks down should the station roof be located? (Z - 13 is norm
 z = io.read();
 z = tonumber(z);
 
-print ("What diameter of station should be built? (5 is normal)");
+print ("What radius of station should be built? (5 is normal)");
 d = io.read();
 d = tonumber(d);
 
