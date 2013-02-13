@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+    <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/update" afterPath="$PROJECT_DIR$/src/tsn/update" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,7 +65,7 @@
       <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="33" selection-start="401" selection-end="401" vertical-scroll-proportion="0.43673012">
+            <state line="110" column="0" selection-start="2556" selection-end="2556" vertical-scroll-proportion="2.849741">
               <folding />
             </state>
           </provider>
@@ -109,7 +110,7 @@
       <file leaf-file-name="update" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/update">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="33" selection-start="2512" selection-end="2528" vertical-scroll-proportion="0.0">
+            <state line="48" column="15" selection-start="1989" selection-end="1989" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -118,7 +119,7 @@
       <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="0" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-22.153847">
+            <state line="88" column="31" selection-start="2106" selection-end="2106" vertical-scroll-proportion="-50.76923">
               <folding />
             </state>
           </provider>
@@ -1038,7 +1039,11 @@
       <created>1360713128545</created>
       <updated>1360713128546</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360722407599</created>
+      <updated>1360722407599</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1049,7 +1054,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3274244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3274244" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1235,23 +1240,9 @@
         <state line="32" column="104" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="53" selection-start="3948" selection-end="3948" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="277" selection-start="1620" selection-end="1620" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-22.153847">
           <folding />
         </state>
       </provider>
@@ -1265,14 +1256,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/update">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="33" selection-start="2512" selection-end="2528" vertical-scroll-proportion="0.0">
+        <state line="48" column="15" selection-start="1989" selection-end="1989" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="53" selection-start="3948" selection-end="3948" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="31" selection-start="2106" selection-end="2106" vertical-scroll-proportion="-50.76923">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="33" selection-start="401" selection-end="401" vertical-scroll-proportion="0.43673012">
+        <state line="110" column="0" selection-start="2556" selection-end="2556" vertical-scroll-proportion="2.849741">
           <folding />
         </state>
       </provider>

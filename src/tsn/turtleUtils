@@ -108,7 +108,6 @@ function readXYZ()
 end;
 
 function turn(turnDirection, repeatCount)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local repeatCount = repeatCount or 1;
 
     for i = 1,repeatCount do
@@ -123,7 +122,6 @@ function turn(turnDirection, repeatCount)
 end;
 
 function move(moveDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
@@ -138,7 +136,6 @@ function move(moveDirection)
 end;
 
 function dig(digDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local digDirection = digDirection or forward;
 
     if (digDirection == forward) then
@@ -151,7 +148,6 @@ function dig(digDirection)
 end;
 
 function detect(detectDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local detectDirection = detectDirection or forward;
 
     if (detectDirection == forward) then
@@ -164,7 +160,6 @@ function detect(detectDirection)
 end;
 
 function attack(attackDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local attackDirection = attackDirection or forward;
 
     if (attackDirection == forward) then
@@ -177,7 +172,6 @@ function attack(attackDirection)
 end;
 
 function select(slot)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     log (fine, "Entering select("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
@@ -197,7 +191,6 @@ end;
 
 -- look in slots 1-12 if selected slot is empty
 function selectWithOverflow(slot)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     log (fine, "Entering selectWithOverflow("..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
@@ -232,7 +225,6 @@ end
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function place(placeDirection, detectFirst)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local placeDirection = placeDirection or forward;
     local actionFailed = false;
     local detectFirst = detectFirst or false;
@@ -286,7 +278,6 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeWithOverflow(placeDirection, slot)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     log (fine, "Entering placeWithOverflow("..placeDirection..","..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
@@ -302,7 +293,6 @@ end;
 
 -- returns 0 on success, 1 on block already present, and 2 on not enough inventory in slot
 function placeItem(placeDirection, slot, detectFirst)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local detectFirst = detectFirst or false;
     local slot = slot;
     local placeDirection = placeDirection or forward;
@@ -317,7 +307,6 @@ end;
 
 -- dig if can't move
 function moveWithDig(direction, steps, attempts)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local steps = steps or 1
     local attempts = attempts or 10
     log (fine, "Entering moveWithDig("..direction..")", currentLogIndent);
@@ -353,7 +342,6 @@ function distanceFromLastLight()
 end;
 
 function getOppositeDirection(currentDirection)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local currentDirection = currentDirection;
     if (currentDirection == up) then return down; end;
     if (currentDirection == down) then return up; end;
@@ -365,7 +353,6 @@ end
 
 -- move if can't replace. empty anchor protection
 function replace(direction, slot, isAlwaysRemoveAndAdd, attempts)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local attempts = attempts or 10;
     local tries = 1;
     local isAlwaysRemoveAndAdd = isAlwaysRemoveAndAdd or true;
@@ -422,7 +409,6 @@ function placeLight(lightSlot)
 end;
 
 function transitionOverAnd180Degrees(turnDirection, steps)
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     local steps = steps or 1;
     log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
@@ -435,7 +421,6 @@ function transitionOverAnd180Degrees(turnDirection, steps)
 end
 
 function refuel()
-    log (fineDebug, "\n\t\t\t\t\t\t\tCurrent Variable Values: \n\t\t\t\t\t\t\t\t currentLogLevel="..currentLogLevel.."\n\t\t\t\t\t\t\t\t currentSlotNum="..currentSlotNum.."\n\t\t\t\t\t\t\t\t currentLogIndent="..currentLogIndent.."\n\t\t\t\t\t\t\t\t currentDistanceFromLight="..currentDistanceFromLight);
     if turtle.getFuelLevel() <= 5 then
         turtle.select(fuelSlot);
         turtle.refuel(1);
