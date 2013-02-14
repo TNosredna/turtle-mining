@@ -5,8 +5,8 @@
 
 
 -- START OF LOCAL SCRIPT
-local WALL_FILLER_SLOT = 1;
-local BUCKET_SLOT = 16;
+local WALL_FILLER_SLOT = 1; -- 64 stack Cobblestone
+local BUCKET_SLOT = 16;     -- 1 stack Water Bucket
 
 local args={...};
 depth = args[1];

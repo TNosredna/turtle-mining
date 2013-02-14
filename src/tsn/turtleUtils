@@ -4,10 +4,10 @@ forward = "forward";
 right = "right";
 left = "left";
 back = "back";
-northFacing = 0;
-eastFacing = 90;
-southFacing = 180;
-westFacing = 270;
+southFacing = 0;
+westFacing = 90;
+northFacing = 180;
+eastFacing = 270;
 rightFacing = 90;
 leftFacing = -90;
 forwardMoving = 1;
@@ -32,20 +32,20 @@ FUEL_SLOT = 16;
 currentSlotNum = 1;
 
 logFileName = os.getComputerLabel()..".log";
-xyzFileName = os.getComputerLabel().."-xyz.txt";
+xzyFileName = os.getComputerLabel().."-xzy.txt";
 
 currentLogLevel = debug;
 currentLogIndent = 0;
 
 currentX = 0;
-currentY = 0;
 currentZ = 0;
+currentY = 0;
 currentFacing = 0;
 
 lightThreshold = 6;
 lastLightX = 0;
-lastLightY = 0;
 lastLightZ = 0;
+lastLightY = 0;
 
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
@@ -63,31 +63,31 @@ function log(logLevel, line, currentLogIndent)
     end;
 end;
 
-function writeXYZ()
-    local file = fs.open(xyzFileName, "w"); -- "w" opens the file, erasing all existing contents
+function writeXZY()
+    local file = fs.open(xzyFileName, "w"); -- "w" opens the file, erasing all existing contents
     file.writeLine(currentX);
-    file.writeLine(currentY);
     file.writeLine(currentZ);
+    file.writeLine(currentY);
     file.writeLine(currentFacing);
     file.close();
 end;
 
-function updateXY(xy)
+function updateXZ(xz)
     if (currentFacing == northFacing) then
-        currentY = currentY + xy;
+        currentZ = currentZ - xz;
     elseif (currentFacing == southFacing) then
-        currentY = currentY - xy;
+        currentZ = currentZ + xz;
     elseif (currentFacing == eastFacing) then
-        currentX = currentX + xy;
+        currentX = currentX + xz;
     elseif (currentFacing == westFacing) then
-        currentX = currentX - xy;
+        currentX = currentX - xz;
     end;
-    writeXYZ();
+    writeXZY();
 end;
 
-function updateZ(z)
-    currentZ = currentZ + z;
-    writeXYZ();
+function updateY(y)
+    currentY = currentY + y;
+    writeXZY();
 end;
 
 function updateFacing(degrees)
@@ -97,19 +97,19 @@ function updateFacing(degrees)
     elseif (currentFacing <= -360) then
         currentFacing = currentFacing + 360;
     end;
-    writeXYZ();
+    writeXZY();
 end;
 
-function readXYZ()
-    local file = fs.open(xyzFileName, "r"); -- "r" opens the file for reading
+function readXZY()
+    local file = fs.open(xzyFileName, "r"); -- "r" opens the file for reading
     if (file == nil) then
         file.close();
-        writeXYZ();
+        writeXZY();
         return;
     end;
     currentX = file.readLine();
-    currentY = file.readLine();
     currentZ = file.readLine();
+    currentY = file.readLine();
     currentFacing = file.readLine();
     file.close();
 end;
@@ -132,13 +132,13 @@ function move(moveDirection)
     local moveDirection = moveDirection or forward;
 
     if (moveDirection == forward) then
-        if (turtle.forward()) then updateXY(forwardMoving); log(fine, "moved: forward", currentLogIndent); return success;  else log(debug, "failed to move: forward", currentLogIndent); return failure;  end;
+        if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "moved: forward", currentLogIndent); return success;  else log(debug, "failed to move: forward", currentLogIndent); return failure;  end;
     elseif (moveDirection == back) then
-        if (turtle.back()) then updateXY(backwardsMoving); log(fine, "moved: back", currentLogIndent); return success;  else log(debug, "failed to move: back", currentLogIndent); return failure;  end;
+        if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "moved: back", currentLogIndent); return success;  else log(debug, "failed to move: back", currentLogIndent); return failure;  end;
     elseif (moveDirection == up) then
-        if (turtle.up()) then updateZ(upMoving); log(fine, "moved: up", currentLogIndent); return success;  else log(debug, "failed to move: up", currentLogIndent); return failure;  end;
+        if (turtle.up()) then updateY(upMoving); log(fine, "moved: up", currentLogIndent); return success;  else log(debug, "failed to move: up", currentLogIndent); return failure;  end;
     elseif (moveDirection == down) then
-        if (turtle.down()) then updateZ(downMoving); log(fine, "moved: down", currentLogIndent); return success;  else log(debug, "failed to move: down", currentLogIndent); return failure;  end;
+        if (turtle.down()) then updateY(downMoving); log(fine, "moved: down", currentLogIndent); return success;  else log(debug, "failed to move: down", currentLogIndent); return failure;  end;
     end;
 end;
 
@@ -268,6 +268,10 @@ function selectItem(slot, isOverflow)
 
 end
 
+-- If overflow is TRUE, then it will take the same item from another slot if the current slot doesn't have more than one.  It will then use the one if all other slots are down to one.
+-- If compare is TRUE, then it will perform a replace by digging and place if the item isn't already there
+-- If detect is TRUE, then it will return success if ANYTHING is detected to already be in the target location
+-- If anchorProtection is TRUE, then it will move forward until it finds a block it can attach to and build an anchor back to the target location. CAUTION, this has the potential to empty your inventory.
 function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
     local placeDirection = placeDirection or forward;
     local slot = slot or currentSlotNum;
@@ -343,11 +347,11 @@ function moveWithDig(direction, steps, attempts)
     log (fine, "Exiting moveWithDig()", currentLogIndent);
 end;
 
-function distanceBetweenTwoPoints(x1, y1, z1, x2, y2, z2)
+function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
     local xDistance = x2 - x1;  --horizontal difference
-    local yDistance = y2 - y1;  --vertical difference
-    local zDistance = z2 - z1;  --outward difference
-    local dist = math.sqrt( (xDistance*xDistance) + (yDistance*yDistance) + (zDistance*zDistance) );    -- distance using Pythagoras theorem
+    local zDistance = z2 - z1;  --vertical difference
+    local yDistance = y2 - y1;  --outward difference
+    local dist = math.sqrt( (xDistance*xDistance) + (zDistance*zDistance) + (yDistance*yDistance) );    -- distance using Pythagoras theorem
     return dist;
 end;
 
@@ -364,10 +368,10 @@ end;
 function placeLight(lightSlot)
     log (fine, "Entering placeLight("..lightSlot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    if ((distanceBetweenTwoPoints(currentX, currentY, currentZ, lastLightX, lastLightY, lastLightZ) >= lightThreshold) and (placeItem(up, lightSlot, true))) then
+    if ((distanceBetweenTwoPoints(currentX, currentZ, currentY, lastLightX, lastLightZ, lastLightY) >= lightThreshold) and (placeItem(up, lightSlot, true))) then
         lastLightX = currentX;
-        lastLightY = currentY;
         lastLightZ = currentZ;
+        lastLightY = currentY;
         log (fine, "Placed light", currentLogIndent);
     end;
     currentLogIndent = currentLogIndent - 1;
@@ -384,4 +388,4 @@ function refuel(fuelSlot, amount, threshold)
     end;
 end;
 
-readXYZ();
+readXZY();

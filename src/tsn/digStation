@@ -7,10 +7,26 @@
 
 
 -- START OF LOCAL SCRIPT
--- Slot Assignments
-local WALL_FILLER_SLOT = 10;     -- digStation (64)
-local FLOOR_FILLER_SLOT = 11;     -- digStation (49)
-local ROOF_FILLER_SLOT = 12;      -- digStation (49)
+--WALL_FILLER_SLOT = 1;     -- 64 stack Cobblestone
+--EXTRA_SLOT = 2;           -- 64 stack Cobblestone
+--REDWIRE_SLOT = 3;         -- 64 stack Redstone Wire (ONLY FOR SHAFT)
+--ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
+--WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
+--FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
+--ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
+--LADDER_SLOT = 8;          -- 64 stack Wood Ladder
+--TORCH_SLOT = 9;           -- 64 stack Torch
+--TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
+--CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
+--DOOR_SLOT = 12;           -- 4 stack Wood Door
+--CHEST_SLOT = 13;          -- 14 stack Chest
+--REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
+--ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
+--BUCKET_SLOT = 16;         -- 1 stack Water Bucket
+
+local WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
+local FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
+local ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
 
 local args={...};
 local radius = args[1] or nil;
@@ -173,7 +189,7 @@ local function moveToStartingPositionForWalls(radius, height)
     return currentUpDownDirection;
 end
 
-if ((radius == nil or radius==0) or (height == nil or height==0)) then
+if ((radius == nil) or (height == nil)) then
     fs.delete(logFileName);
     print ("What is the desired radius of the station? (5 is normal)");
     radius = io.read();

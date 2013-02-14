@@ -6,205 +6,136 @@
 
 -- START OF LOCAL SCRIPT
 local args={...};
-local radius = args[1] or 5;
-local height = args[2] or 5;
+local radius = args[1] or nil;
+local height = args[2] or nil;
 
-function dropoffAndRestock(configuration, ignoreBlocks, restockIgnore, dropTorches, dropIgnore)
-    dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
-    restock(configuration, ignoreBlocks, restockIgnore)
-end
+--WALL_FILLER_SLOT = 1;     -- 64 stack Cobblestone
+--EXTRA_SLOT = 2;           -- 64 stack Cobblestone
+--REDWIRE_SLOT = 3;         -- 64 stack Redstone Wire (ONLY FOR SHAFT)
+--ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
+--WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
+--FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
+--ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
+--LADDER_SLOT = 8;          -- 64 stack Wood Ladder
+--TORCH_SLOT = 9;           -- 64 stack Torch
+--TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
+--CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
+--DOOR_SLOT = 12;           -- 4 stack Wood Door
+--CHEST_SLOT = 13;          -- 14 stack Chest
+--REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
+--ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
+--BUCKET_SLOT = 16;         -- 1 stack Water Bucket
 
+local WALL_FILLER_SLOT = 1;     -- 4 stack Cobblestone
+local LADDER_SLOT = 8;          -- 64 stack Wood Ladder  (MAY NOT BE ENOUGH)
+local TORCH_SLOT = 9;           -- 4 stack Torch
+local TRANSPORT_PIPE_SLOT = 10; -- 11 stack Stone Transport Pipe
+local CONNECTOR_PIPE_SLOT = 11; -- 4 stack Wood Transport Pipe
+local ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
+local DOOR_SLOT = 12;           -- 4 stack Wood Door
+local CHEST_SLOT = 13;          -- 12 stack Chest
+local REDSTONE_TORCH_SLOT = 14; -- 4 stack Redstone Torch
+local ENGINE_SLOT = 15;         -- 4 stack Redstone Engine
 
--- EMPTIES THE INVENTORY
-function dropoff(configuration, ignoreBlocks, dropTorches, dropIgnore)
-    -- DROP THE TORCHES
-    turtle.select(1)
-    local torchSlot=0
-    if configuration.placeTorches then
-        torchSlot=1
-        if dropTorches then
-            api_turtleExt.drop(configuration.torchSuckDir)
-        end
-    end
-    -- DROP THE EXTRAS OF THE IGNORE BLOCKS
-    api_turtleExt.turnTo(configuration.itemDropDir)
-    for i=1+torchSlot,torchSlot+ignoreBlocks do
-        turtle.select(i)
-        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), math.max(turtle.getItemCount(i)-1, 0))
-    end
-    -- DROP THE OTHER ITEMS
-    for i=torchSlot+ignoreBlocks+1,16 do
-        turtle.select(i)
-        api_turtleExt.drop(api_turtleExt.turnedDir(configuration.itemDropDir), turtle.getItemCount(i))
-    end
-    api_turtleExt.turnFrom(configuration.itemDropDir)
-    turtle.select(1)
-    -- DROP THE IGNORE BLOCKS
-    if dropIgnore then
-        api_turtleExt.turnTo(configuration.ignoreDir)
-        for i=1+torchSlot,torchSlot+ignoreBlocks do
-            turtle.select(i)
-            api_turtleExt.drop(api_turtleExt.turnedDir(configuration.ignoreDir), 1)
-        end
-        api_turtleExt.turnFrom(configuration.ignoreDir)
-    end
-end
-
-
--- RESTOCKS THE TORCHES
-function restockTorches(configuration)
-    turtle.select(1)
-    local dispMsg=true
-    local firstEmpty=2
-    -- CALCULATE THE FIRST EMPTY SLOT
-    while ((turtle.getItemCount(firstEmpty)>0) and (firstEmpty<16)) do
-        firstEmpty = firstEmpty+1
-    end
-    -- ALIGN WITH THE TORCH CHEST AND SUCK A STACK
-    api_turtleExt.turnTo(configuration.torchSuckDir)
-    local tDir=api_turtleExt.turnedDir(configuration.torchSuckDir)
-    while turtle.getItemCount(firstEmpty)==0 do
-        if not api_turtleExt.suck(tDir) then
-            if dispMsg then
-                term.clear()
-                term.setCursorPos(1,1)
-                print("---------------------------------")
-                print("Please place some torches in a chest")
-                print("Chest Direction:  "..configuration.torchSuckDir)
-                print("Torches Required: "..(turtle.getItemSpace(1)+1))
-                print("---------------------------------")
-                dispMsg=false
-            end
-        else
-            dispMsg=true
-        end
-        sleep(0)
-    end
-    term.clear()
-    -- CHECK IF THERE ARE ACTUALLY TORCHES IN SLOT 1 AND DUMP ANY EXCESS TORCHES
-    if turtle.compareTo(firstEmpty) then
-        turtle.select(firstEmpty)
-        api_turtleExt.drop(tDir)
-        api_turtleExt.turnFrom(configuration.torchSuckDir)
-    else
-        turtle.select(firstEmpty)
-        api_turtleExt.drop(tDir)
-        turtle.select(1)
-        api_turtleExt.turnFrom(configuration.torchSuckDir)
-        api_turtleExt.drop(configuration.itemDropDir)
-        restockTorches(configuration)
-    end
-    turtle.select(1)
-end
-
-
--- RESTOCKS THE INVENTORY
-function restock(configuration, ignoreBlocks, restockIgnore)
-    turtle.select(1)
-    local torchSlot=0
-    -- RESTOCK THE TORCHES
-    if configuration.placeTorches then
-        torchSlot=1
-        restockTorches(configuration)
-    end
-    -- RESTOCK THE IGNORE BLOCKS
-    if restockIgnore then
-        api_turtleExt.turnTo(configuration.ignoreDir)
-        local tDir=api_turtleExt.turnedDir(configuration.ignoreDir)
-        for i=1+torchSlot,ignoreBlocks+torchSlot do
-            turtle.select(i)
-            api_turtleExt.suck(tDir)
-        end
-        api_turtleExt.turnFrom(configuration.ignoreDir)
-    end
-    turtle.select(1)
-end
-
-local function waitForInventoryToArriveInChest()
-    --detect chest up
-    --drop off excess inv
-    --wait until desired inv is present then take
-end;
+local OVERFLOW = true;
+local NO_OVERFLOW = false;
+local COMPARE = true;
+local NO_COMPARE = false;
+local DETECT = true;
+local NO_DETECT = false;
+local ANCHOR_PROTECTION = true;
+local NO_ANCHOR_PROTECTION = false;
 
 local function prepareStation()
+    for i = 1,(radius - 2) do
+        move(forward);
+        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    end;
+
+    for i = 1, 4 do
+        move(forward);
+        moveWithDig(down);
+        placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        turn(right);
+        move(forward);
+        turn(left);
+        placeItem(forward, REDSTONE_TORCH_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        turn(left);
+        placeItem(forward, CONNECTOR_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        move(up);
+        placeItem(down, ENGINE_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        turn(right);
+        placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        turn(right);
+        move(forward, 2);
+        turn(left);
+        moveWithDig(forward);
+        dig(up);
+        move(back);
+        placeItem(forward, DOOR_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        turn(left);
+        move(forward, 4);
+        turn(right);
+        placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        move(up);
+        turn(left);
+        move(forward);
+        turn(right);
+        placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        move(back);
+        placeItem(forward, TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+
+        move(back, 2);
+        turn(right);
+        move(forward, 2);
+        move(down);
+    end;
+    placeItem(down, ONE_WAY_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    for i = 1,(height - 3) do
+        move(up);
+        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    end;
+    placeItem(up, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    move(back);
+    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+
     turn(right);
-    moveWithDig(forward);
-    moveWithDig(up, 2); -- destroy redstone signal powering woodenpipe, then one wire
-    turn(right, 2);
-    dig(forward); -- destroy woodenpipe
-    placeItem(forward, stonePipeSlot, true);
-    move(down);
-    placeItem(up, stonePipeSlot, true); -- plenum
-    move(down);
-    placeItem(up, stonePipeSlot, true); -- in ceiling
-    move(down);
-    placeItem(up, stonePipeSlot, true); -- in ceiling
     move(forward);
-    dig(up);
-    placeItem(up, stonePipeSlot, true);
-    move(down);
-    placeItem(up, stonePipeSlot, true);
-    move(down);
-    placeItem(up, stonePipeSlot, true);
-    dig(down);
-    placeItem(down, stonePipeSlot, true);
+    moveWithDig(up);
+    for i = 1,(height - 2) do
+        placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        move(down);
+        placeItem(up, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    end;
+    placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
-    placeItem(forward, stonePipeSlot, true);
-    dig(down);
-    placeItem(down, stonePipeSlot, true);
-    move(back);
-    placeItem(down, stonePipeSlot, true);
-    move(back);
-    placeItem(down, stonePipeSlot, true);
-    move(back);
-    placeItem(down, woodenPipeSlot);
-    turn(right, 2);
-    moveWithDig(forward);
-    dig(down);
-    placeItem(down, smallChestSlot);
-    turn(left);
-    dig(forward);
-    placeItem(forward, smallChestSlot);
-    dig(up);
-    placeItem(up, smallChestSlot);
-    turn(right, 2);
-    moveWithDig(forward);
-    turn(left);
-    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    dig(down);
-    placeItem(down, redstoneTorchSlot);
-    --IF PLACING THE TORCH ON CHEST DOESN'T WORK THEN
-    move(back);
-    placeItem(forward, smallChestSlot);
-    dig(down);
-    placeItem(down, redstoneEngineSlot);
-    placeItem(forward, redstoneTorchSlot);
+    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 end;
 
 local function moveToStartingPosition(radius)
     local radius = radius;
-    log (fine, "Entering moveToStartingPosition()");
+    log (fine, "Entering moveToStartingPosition("..radius..")");
     currentLogIndent = currentLogIndent + 1;
-    turn(left);
+    move(back, radius - 1);
+    turn(right);
     move(radius - 1);
     turn(left);
-    move(radius - 1);
-    moveWithDig(up);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPositionForWalls()");
 end
 
-if ((radius == nil or radius=="") or (height == nil or height=="")) then
+if ((radius == nil) or (height == nil)) then
     fs.delete(logFileName);
-    print ("What is the radius of the station? (5 is normal)");
+    print ("What is the desired radius of the station? (4 is normal)");
     radius = io.read();
     radius = tonumber(radius);
 
-    print ("What is the height, including floor and ceiling layers, of the station? (5 is normal)");
+    print ("What is the desired height, including floor and ceiling layers, of the station? (4 is normal)");
     height = io.read();
     height = tonumber(height);
 end;
 
-moveToStartingPosition(radius);
-waitForInventoryToArriveInChest();
+local diameterWithWalls = (radius * 2) + 1;
+local diameterWithoutWalls = (radius * 2) - 1;
+
 prepareStation();

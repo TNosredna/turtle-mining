@@ -5,15 +5,15 @@
 
 
 -- START OF LOCAL SCRIPT
-print ("How many blocks down should the station roof be located? (Z - 13 is normal)");
-z = io.read();
-z = tonumber(z);
+print ("How many blocks down should the station roof be located? (Y - 13 is normal)");
+y = io.read();
+y = tonumber(y);
 
-print ("What radius of station should be built? (5 is normal)");
+print ("What radius of station should be built? (4 is normal)");
 d = io.read();
 d = tonumber(d);
 
-print ("What height of station should be built? (5 is normal)");
+print ("What height of station should be built? (4 is normal)");
 h = io.read();
 h = tonumber(h);
 
@@ -26,8 +26,25 @@ local function moveToTopOfShaft(height)
     end;
 end;
 
-shell.run("digShaft", z);
-moveToTopOfShaft(z);
-shell.run("prepareShaft", z);
+--WALL_FILLER_SLOT = 1;     -- 64 stack Cobblestone
+--EXTRA_SLOT = 2;           -- 64 stack Cobblestone
+--REDWIRE_SLOT = 3;         -- 64 stack Redstone Wire (ONLY FOR SHAFT)
+--ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
+--WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
+--FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
+--ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
+--LADDER_SLOT = 8;          -- 64 stack Wood Ladder   (MAY NOT BE ENOUGH)
+--TORCH_SLOT = 9;           -- 64 stack Torch
+--TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
+--CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
+--DOOR_SLOT = 12;           -- 4 stack Wood Door
+--CHEST_SLOT = 13;          -- 14 stack Chest
+--REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
+--ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
+--BUCKET_SLOT = 16;         -- 1 stack Water Bucket
+
+shell.run("digShaft", y);
+moveToTopOfShaft(y);
+shell.run("prepareShaft", y);
 shell.run("digStation", d, h);
 --shell.run("prepareStation", d, h);

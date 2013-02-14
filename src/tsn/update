@@ -47,22 +47,22 @@ if (os.getComputerLabel() == nil or os.getComputerLabel() == "") then
     os.setComputerLabel(label);
 end;
 
-print ("What direction is " .. os.getComputerLabel() .. " facing right now? (0, 90, 180, 270");
+print ("What direction is " .. os.getComputerLabel() .. " facing right now? (South=0, West=90, North=180, East=270");
 local currentFacing = io.read();
 print ("What is " .. os.getComputerLabel() .. "'s X coordinate right now? (Whole number only)");
 local currentX = io.read();
-print ("What is " .. os.getComputerLabel() .. "'s Y coordinate right now? (Whole number only)");
-local currentY = io.read();
 print ("What is " .. os.getComputerLabel() .. "'s Z coordinate right now? (Whole number only)");
 local currentZ = io.read();
+print ("What is " .. os.getComputerLabel() .. "'s Y coordinate right now? (Display's Y - 1 (Whole number only))");
+local currentY = io.read();
 
-xyzFileName = os.getComputerLabel().."-xyz.txt";
-function writeXYZ()
-    local filename = xyzFileName;
+xzyFileName = os.getComputerLabel().."-xzy.txt";
+function writeXZY()
+    local filename = xzyFileName;
     local file = fs.open(filename, "w"); -- "w" opens the file, erasing all existing contents
     file.writeLine(currentX);
-    file.writeLine(currentY);
     file.writeLine(currentZ);
+    file.writeLine(currentY);
     file.writeLine(currentFacing);
     file.close();
 end;
@@ -70,4 +70,4 @@ end;
 term.clear();
 term.setCursorPos(1, 1);
 
-writeXYZ();
+writeXZY();
