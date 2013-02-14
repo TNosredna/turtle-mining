@@ -8,9 +8,9 @@
 
 -- START OF LOCAL SCRIPT
 -- Slot Assignments
-local WALL_FILLER_SLOT = 1;     -- digStation (64)
-local FLOOR_FILLER_SLOT = 2;     -- digStation (49)
-local ROOF_FILLER_SLOT = 3;      -- digStation (49)
+local WALL_FILLER_SLOT = 10;     -- digStation (64)
+local FLOOR_FILLER_SLOT = 11;     -- digStation (49)
+local ROOF_FILLER_SLOT = 12;      -- digStation (49)
 
 local args={...};
 local radius = args[1] or nil;
