@@ -134,17 +134,17 @@ local function wallColumn(currentUpDownDirection, height)
     return currentUpDownDirection;
 end
 
-local function buildWalls(startingUpDownDirection, numberColumns, height)
+local function buildWalls(startingUpDownDirection, diameterWithWalls, height)
     local currentUpDownDirection = getOppositeDirection(startingUpDownDirection);
-    local numberColumns = numberColumns - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
-    log (fine, "Entering buildWalls("..currentUpDownDirection..","..numberColumns..","..height..")");
+    local numberColumns = diameterWithWalls - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
+    log (fine, "Entering buildWalls("..currentUpDownDirection..","..diameterWithWalls..","..height..")");
     currentLogIndent = currentLogIndent + 1;
     local numberWalls = 4;
 
     for x=1,numberWalls do
-        for i=1,numberColumns do
+        for i=1,diameterWithWalls do
             currentUpDownDirection = wallColumn(getOppositeDirection(currentUpDownDirection), height);
-            if (i < numberColumns) then
+            if (i < diameterWithWalls) then
                 moveWithDig(forward);
             end;
         end;
@@ -164,9 +164,9 @@ local function moveToStartingPositionForWalls(radius, height)
     -- turtle MUST start at (height + 8) or higher for
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
     moveWithDig(down, height + 1);
-    moveWithDig(forward, radius + 1);
-    turn(right);
     moveWithDig(forward, radius);
+    turn(right);
+    moveWithDig(forward, radius - 1);
     turn(right);
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPositionForWalls()");
