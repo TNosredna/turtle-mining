@@ -51,7 +51,7 @@ function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local entry = os.clock().." \t - ";
+        local entry = string.format("%.2f", os.clock()).."\t - ";
         for i=1,currentLogIndent do
             entry = entry.."  ";
         end;

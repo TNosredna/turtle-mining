@@ -61,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="314" column="65" selection-start="13171" selection-end="13171" vertical-scroll-proportion="0.0">
+            <state line="53" column="37" selection-start="962" selection-end="962" vertical-scroll-proportion="0.6785371">
               <folding />
             </state>
           </provider>
@@ -124,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepareShaft" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="100" selection-start="1856" selection-end="1856" vertical-scroll-proportion="1.0836502">
+            <state line="76" column="100" selection-start="1856" selection-end="1856" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -1138,7 +1138,11 @@
       <created>1360810860765</created>
       <updated>1360810860766</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360815070739</created>
+      <updated>1360815070740</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1361,16 +1365,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="314" column="65" selection-start="13171" selection-end="13171" vertical-scroll-proportion="0.0">
+        <state line="76" column="100" selection-start="1856" selection-end="1856" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="100" selection-start="1856" selection-end="1856" vertical-scroll-proportion="1.0836502">
+        <state line="53" column="37" selection-start="962" selection-end="962" vertical-scroll-proportion="0.6785371">
           <folding />
         </state>
       </provider>
