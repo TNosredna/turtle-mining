@@ -74,8 +74,9 @@ function prepareBottomOfShaft()
 end;
 
 function prepareShaft(height)
+    local height = height - 1; -- stop one from the bottom and give it space for the bottom of shaft
     prepareTopOfShaft();
-    for i=1,height do
+    for i=1,(height) do
         prepareShaftLayer();
     end;
     prepareBottomOfShaft();

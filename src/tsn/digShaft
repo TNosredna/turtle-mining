@@ -11,10 +11,10 @@ local BUCKET_SLOT = 16;
 local args={...};
 depth = args[1];
 
-local function digShaftLayer(startingTurnDirection)
-    log (fine, "Entering digShaftLayer("..startingTurnDirection..")", currentLogIndent);
+local function digShaftLayer(turnDirection)
+    local turnDirection = turnDirection or right;
+    log (fine, "Entering digShaftLayer("..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-    local turnDirection = startingTurnDirection or right;
     local detect = true;
     local overflow = true;
     local noCompare = false;
@@ -35,8 +35,8 @@ local function digShaftLayer(startingTurnDirection)
     return turnDirection;
 end;
 
-local function digMineShaft(depth, startingTurnDirection)
-    local turnDirection = startingTurnDirection or right;
+local function digMineShaft(depth, turnDirection)
+    local turnDirection = turnDirection or right;
     log (fine, "Entering digMineShaft("..depth..", "..turnDirection..")", currentLogIndent);
     moveWithDig(down)
     for i=1,depth do

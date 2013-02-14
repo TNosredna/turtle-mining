@@ -51,7 +51,7 @@ function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local entry = os.time().." \t["..logLevel.."] - ";
+        local entry = os.clock().." \t["..logLevel.."] - ";
         for i=1,currentLogIndent do
             entry = entry.."  ";
         end;
@@ -366,7 +366,7 @@ function placeLight(lightSlot)
         lastLightZ = currentZ;
         log (fine, "Placed light", currentLogIndent);
     end;
-    currentLogIndent = currentLogIndent + 1;
+    currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeLight()", currentLogIndent);
 end;
 
