@@ -51,7 +51,7 @@ function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local entry = os.clock().." \t["..logLevel.."] - ";
+        local entry = os.clock().." \t - ";
         for i=1,currentLogIndent do
             entry = entry.."  ";
         end;
@@ -312,7 +312,7 @@ function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnch
         placeItem(placeDirection, slot, isOverflow, false, false, true);
         move(getOppositeDirection(placeDirection));
     else
-        log(fine, "Failed: Item already present at target ("..placeDirection..").", currentLogIndent);
+        log(fine, "Failed: A block is already present at location ("..placeDirection..").", currentLogIndent);
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return blockAlreadyPresent;
