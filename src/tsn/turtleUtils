@@ -309,8 +309,12 @@ function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnch
     elseif (isAnchorProtection) then
         log(fine, "Moving forward in an attempt to find an anchor block.", currentLogIndent);
         move(direction);
-        placeItem(placeDirection, slot, isOverflow, false, false, true);
+        local placeStatus = placeItem(placeDirection, slot, isOverflow, false, false, true);
+        log(fine, "Moving backward after finding an anchor block.", currentLogIndent);
         move(getOppositeDirection(placeDirection));
+        currentLogIndent = currentLogIndent - 1;
+        log (fine, "Exiting placeItem()", currentLogIndent);
+        return placeStatus;
     else
         log(fine, "Failed: A block is already present at location ("..placeDirection..").", currentLogIndent);
         currentLogIndent = currentLogIndent - 1;
@@ -333,11 +337,11 @@ function moveWithDig(direction, steps, attempts)
             -- THIS CONSTRUCTION IS USED SO TRIES WON'T OVERFLOW WHEN ATTEMPTS==0
             tries = math.min(tries + 1, attempts + 1)
             sleep(0)
-        end
-    end
+        end;
+    end;
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveWithDig()", currentLogIndent);
-end
+end;
 
 function distanceBetweenTwoPoints(x1, y1, z1, x2, y2, z2)
     local xDistance = x2 - x1;  --horizontal difference
@@ -355,7 +359,7 @@ function getOppositeDirection(currentDirection)
     if (currentDirection == right) then return left; end;
     if (currentDirection == forward) then return back; end;
     if (currentDirection == back) then return forward; end;
-end
+end;
 
 function placeLight(lightSlot)
     log (fine, "Entering placeLight("..lightSlot..")", currentLogIndent);
@@ -377,7 +381,7 @@ function refuel(fuelSlot, amount, threshold)
     if turtle.getFuelLevel() <= threshold then
         select(fuelSlot);
         turtle.refuel(amount);
-    end
-end
+    end;
+end;
 
 readXYZ();

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digStation" afterPath="$PROJECT_DIR$/src/tsn/digStation" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,19 +61,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="37" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
+            <state line="343" column="4" selection-start="14398" selection-end="14398" vertical-scroll-proportion="5.0789733">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digStation" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="digStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="13" selection-start="5162" selection-end="5162" vertical-scroll-proportion="0.42105263">
+            <state line="40" column="10" selection-start="1473" selection-end="1479" vertical-scroll-proportion="51.692307">
               <folding />
             </state>
           </provider>
@@ -160,8 +160,8 @@
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
         <option value="$PROJECT_DIR$/src/tsn/digShaft" />
         <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
         <option value="$PROJECT_DIR$/src/tsn/digStation" />
+        <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
       </list>
     </option>
   </component>
@@ -1154,7 +1154,11 @@
       <created>1360817023331</created>
       <updated>1360817023332</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1360818311405</created>
+      <updated>1360818311405</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1377,16 +1381,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="37" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0">
+        <state line="40" column="10" selection-start="1473" selection-end="1479" vertical-scroll-proportion="51.692307">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="13" selection-start="5162" selection-end="5162" vertical-scroll-proportion="0.42105263">
+        <state line="343" column="4" selection-start="14398" selection-end="14398" vertical-scroll-proportion="5.0789733">
           <folding />
         </state>
       </provider>
