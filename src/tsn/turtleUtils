@@ -1,79 +1,79 @@
-up = "up";
-down = "down";
-forward = "forward";
-right = "right";
-left = "left";
-back = "back";
-southFacing = 0;
-westFacing = 90;
-northFacing = 180;
-eastFacing = 270;
-rightFacing = 90;
-leftFacing = -90;
-forwardMoving = 1;
-backwardsMoving = -1;
-upMoving = 1;
-downMoving = -1;
-noMoving = 0;
+local up = "up";
+local down = "down";
+local forward = "forward";
+local right = "right";
+local left = "left";
+local back = "back";
+local southFacing = 0;
+local westFacing = 90;
+local northFacing = 180;
+local eastFacing = 270;
+local rightFacing = 90;
+local leftFacing = -90;
+local forwardMoving = 1;
+local backwardsMoving = -1;
+local upMoving = 1;
+local downMoving = -1;
+local noMoving = 0;
 
-OVERFLOW = true;
-NO_OVERFLOW = false;
-COMPARE = true;
-NO_COMPARE = false;
-DETECT = true;
-NO_DETECT = false;
-ANCHOR_PROTECTION = true;
-NO_ANCHOR_PROTECTION = false;
-SUCCESS = true;
-FAILURE = false;
+local OVERFLOW = true;
+local NO_OVERFLOW = false;
+local COMPARE = true;
+local NO_COMPARE = false;
+local DETECT = true;
+local NO_DETECT = false;
+local ANCHOR_PROTECTION = true;
+local NO_ANCHOR_PROTECTION = false;
+local SUCCESS = true;
+local FAILURE = false;
 
-blockAlreadyPresent = 1;
-notEnoughInventory = 2;
+local blockAlreadyPresent = 1;
+local notEnoughInventory = 2;
 
-error = 0;
-coarse = 1;
-fine = 2;
-debug = 3;
-fineDebug = 4;
+local error = 0;
+local coarse = 1;
+local fine = 2;
+local debug = 3;
+local fineDebug = 4;
 
-currentSlotNum = 1;
+local currentSlotNum = 1;
 
-logFileName = os.getComputerLabel()..".log";
-xzyFileName = os.getComputerLabel().."-xzy.txt";
+local logFileName = os.getComputerLabel()..".log";
+local xzyFileName = os.getComputerLabel().."-xzy.txt";
 
-currentLogLevel = debug;
-currentLogIndent = 0;
+local currentLogLevel = debug;
+local currentLogIndent = 0;
 
-currentX = 0;
-currentZ = 0;
-currentY = 0;
-currentFacing = 0;
+local currentX = 0;
+local currentZ = 0;
+local currentY = 0;
+local currentFacing = 0;
 
-lightThreshold = 6;
-lastLightX = 0;
-lastLightZ = 0;
-lastLightY = 0;
+local lightThreshold = 6;
+local lastLightX = 0;
+local lastLightZ = 0;
+local lastLightY = 0;
 
---WALL_FILLER_SLOT=1    -- 64 stack Cobblestone (id=4) [EXTRA]
---TRANSPORT_PIPE_SLOT=2 -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
---LADDER_SLOT=3         -- 64 stack Wood Ladder (id=65)  [EXTRA]
-WALL_FILLER_SLOT=4;      -- 64 stack Cobblestone (id=4)
-TRANSPORT_PIPE_SLOT=5;   -- 64 stack Stone Transport Pipe (id=4308)
-LADDER_SLOT=6;           -- 64 stack Wood Ladder (id=65)
-ONE_WAY_PIPE_SLOT=7;     -- 1 stack Iron Transport Pipe (id=4309)
-WALL_FILLER_SLOT=8;      -- 64 stack Glass (id=20)
-FLOOR_FILLER_SLOT=9;     -- 64 stack Glass (id=20)
-ROOF_FILLER_SLOT=10;     -- 64 stack Glass (id=20)
-TORCH_SLOT=11;           -- 64 stack Torch (id=50)
-CONNECTOR_PIPE_SLOT=12;  -- 4 stack Wood Transport Pipe (id=4306)
-CHEST_SLOT=13;           -- 13 stack Chest (id=54)
-REDSTONE_TORCH_SLOT=14;  -- 4 stack Redstone Torch (id=76)
-ENGINE_SLOT=15;          -- 4 stack Redstone Engine (id=506)
-BUCKET_SLOT=16;          -- 1 stack Water Bucket (id=326)
+--WALL_FILLER_SLOT=1            -- 64 stack Cobblestone (id=4) [EXTRA]
+--TRANSPORT_PIPE_SLOT=2         -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
+--STATION_WALL_FILLER_SLOT=3    -- 64 stack Glass (id=20)  [EXTRA]
+local WALL_FILLER_SLOT=4;             -- 64 stack Cobblestone (id=4)
+local TRANSPORT_PIPE_SLOT=5;          -- 64 stack Stone Transport Pipe (id=4308)
+local LADDER_SLOT=6;                  -- 64 stack Wood Ladder (id=65)
+local ONE_WAY_PIPE_SLOT=7;            -- 1 stack Iron Transport Pipe (id=4309)
+local STATION_WALL_FILLER_SLOT=8;     -- 64 stack Glass (id=20)
+local STATION_FLOOR_FILLER_SLOT=9;    -- 64 stack Glass (id=20)
+local STATION_ROOF_FILLER_SLOT=10;    -- 64 stack Glass (id=20)
+local TORCH_SLOT=11;                  -- 64 stack Torch (id=50)
+local CONNECTOR_PIPE_SLOT=12;         -- 4 stack Wood Transport Pipe (id=4306)
+local CHEST_SLOT=13;                  -- 13 stack Chest (id=54)
+local REDSTONE_TORCH_SLOT=14;         -- 4 stack Redstone Torch (id=76)
+local ENGINE_SLOT=15;                 -- 4 stack Redstone Engine (id=506)
+local BUCKET_SLOT=16;                 -- 1 stack Water Bucket (id=326)
 
-FUEL_SLOT=16;
+local FUEL_SLOT=16;
 
-function log(logLevel, line, currentLogIndent)
+local function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
@@ -90,7 +90,7 @@ function log(logLevel, line, currentLogIndent)
     end;
 end;
 
-function writeXZY()
+local function writeXZY()
     local file = fs.open(xzyFileName, "w"); -- "w" opens the file, erasing all existing contents
     file.writeLine(currentX);
     file.writeLine(currentZ);
@@ -99,7 +99,7 @@ function writeXZY()
     file.close();
 end;
 
-function updateXZ(xz)
+local function updateXZ(xz)
     if (currentFacing == northFacing) then
         currentZ = currentZ - xz;
     elseif (currentFacing == southFacing) then
@@ -112,12 +112,12 @@ function updateXZ(xz)
     writeXZY();
 end;
 
-function updateY(y)
+local function updateY(y)
     currentY = currentY + y;
     writeXZY();
 end;
 
-function updateFacing(degrees)
+local function updateFacing(degrees)
     currentFacing = currentFacing + degrees;
     if (currentFacing >= 360) then
         currentFacing = currentFacing - 360;
@@ -127,7 +127,7 @@ function updateFacing(degrees)
     writeXZY();
 end;
 
-function readXZY()
+local function readXZY()
     local file = fs.open(xzyFileName, "r"); -- "r" opens the file for reading
     if (file == nil) then
         file.close();
@@ -141,7 +141,7 @@ function readXZY()
     file.close();
 end;
 
-function turn(direction, repeatCount)
+local function turn(direction, repeatCount)
     local repeatCount = repeatCount or 1;
     local direction = direction;
 
@@ -156,7 +156,7 @@ function turn(direction, repeatCount)
     return SUCCESS;
 end;
 
-function move(direction)
+local function move(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -170,7 +170,7 @@ function move(direction)
     end;
 end;
 
-function dig(direction)
+local function dig(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -182,7 +182,7 @@ function dig(direction)
     end;
 end;
 
-function detect(direction)
+local function detect(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -194,7 +194,7 @@ function detect(direction)
     end;
 end;
 
-function compare(direction)
+local function compare(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -206,7 +206,7 @@ function compare(direction)
     end;
 end;
 
-function attack(direction)
+local function attack(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -218,7 +218,7 @@ function attack(direction)
     end;
 end;
 
-function place(direction)
+local function place(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
@@ -230,7 +230,7 @@ function place(direction)
     end;
 end;
 
-function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
+local function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
     local xDistance = x2 - x1;  --horizontal difference
     local zDistance = z2 - z1;  --vertical difference
     local yDistance = y2 - y1;  --outward difference
@@ -238,7 +238,7 @@ function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
     return dist;
 end;
 
-function getOppositeDirection(direction)
+local function getOppositeDirection(direction)
     local direction = direction;
     if (direction == up) then return down; end;
     if (direction == down) then return up; end;
@@ -248,7 +248,7 @@ function getOppositeDirection(direction)
     if (direction == back) then return forward; end;
 end;
 
-function refuel(fuelSlot, amount, threshold)
+local function refuel(fuelSlot, amount, threshold)
     local fuelSlot = fuelSlot or FUEL_SLOT;
     local amount = amount or 1;
     local threshold = threshold or 5;
@@ -259,7 +259,7 @@ function refuel(fuelSlot, amount, threshold)
     end;
 end;
 
-function select(slot)
+local function select(slot)
     local slot = slot or currentSlotNum;
     log (fine, "Entering select(slot="..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
@@ -282,7 +282,7 @@ function select(slot)
     return selectStatus;
 end;
 
-function selectItem(slot, isOverflow)
+local function selectItem(slot, isOverflow)
     local slot = slot or currentSlotNum;
     local isOverflow = isOverflow or false;
     log (fine, "Entering selectItem(slot="..slot..", overflow="..tostring(isOverflow)..")", currentLogIndent);
@@ -329,7 +329,7 @@ end
 -- If compare is TRUE, then it will perform a replace by digging and place if the item isn't already there
 -- If detect is TRUE, then it will return success if ANYTHING is detected to already be in the target location
 -- If anchorProtection is TRUE, then it will move forward until it finds a block it can attach to and build an anchor back to the target location. CAUTION, this has the potential to empty your inventory.
-function placeItem(direction, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
+local function placeItem(direction, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
     local direction = direction or forward;
     local slot = slot or currentSlotNum;
     local isOverflow = isOverflow or false;
@@ -384,7 +384,7 @@ function placeItem(direction, slot, isOverflow, isCompare, isDetect, isAnchorPro
     end;
 end;
 
-function moveWithDig(direction, steps, attempts)
+local function moveWithDig(direction, steps, attempts)
     local direction = direction or forward;
     local steps = steps or 1
     local attempts = attempts or 10
@@ -404,7 +404,7 @@ function moveWithDig(direction, steps, attempts)
     log (fine, "Exiting moveWithDig()", currentLogIndent);
 end;
 
-function placeLight(lightSlot, direction)
+local function placeLight(lightSlot, direction)
     local direction = direction or up;
     log (fine, "Entering placeLight(slot="..lightSlot..", direction="..direction..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;

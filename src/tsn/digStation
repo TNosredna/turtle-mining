@@ -21,11 +21,11 @@ local function floorAndCeilingColumn(currentUpDownDirection, height)
     local endingFillSlot;
 
     if (currentUpDownDirection == up) then
-        initialFillSlot = FLOOR_FILLER_SLOT;
-        endingFillSlot = ROOF_FILLER_SLOT;
+        initialFillSlot = STATION_FLOOR_FILLER_SLOT;
+        endingFillSlot = STATION_ROOF_FILLER_SLOT;
     else
-        initialFillSlot = ROOF_FILLER_SLOT;
-        endingFillSlot = FLOOR_FILLER_SLOT;
+        initialFillSlot = STATION_ROOF_FILLER_SLOT;
+        endingFillSlot = STATION_FLOOR_FILLER_SLOT;
     end;
 
     placeItem(getOppositeDirection(currentUpDownDirection), initialFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
@@ -109,16 +109,16 @@ local function wallColumn(currentUpDownDirection, height)
     currentLogIndent = currentLogIndent + 1;
 
     local initialFillSlot;
-    local middleFillSlot = WALL_FILLER_SLOT;
+    local middleFillSlot = STATION_WALL_FILLER_SLOT;
     local endingFillSlot;
 
     if currentUpDownDirection == up then
-        initialFillSlot = FLOOR_FILLER_SLOT;
-        endingFillSlot = ROOF_FILLER_SLOT;
+        initialFillSlot = STATION_FLOOR_FILLER_SLOT;
+        endingFillSlot = STATION_ROOF_FILLER_SLOT;
     end;
     if currentUpDownDirection == down then
-        initialFillSlot = ROOF_FILLER_SLOT;
-        endingFillSlot = FLOOR_FILLER_SLOT;
+        initialFillSlot = STATION_ROOF_FILLER_SLOT;
+        endingFillSlot = STATION_FLOOR_FILLER_SLOT;
     end;
 
     moveWithDig(currentUpDownDirection, 2);

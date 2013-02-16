@@ -47,7 +47,7 @@ local function prepareStation(radius, height)
         move(back);
         placeItem(forward, TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
-        move(back, radius - 2);
+        move(back, (radius - 2));
         turn(right);
         move(forward, 2);
         move(down);
@@ -82,9 +82,9 @@ local function moveToStartingPosition(radius)
     log (fine, "Entering moveToStartingPosition(radius="..radius..")");
     currentLogIndent = currentLogIndent + 1;
 
-    move(back, radius - 1);
+    move(back, (radius - 1));
     turn(right);
-    move(radius - 1);
+    move(forward, (radius - 1));
     turn(left);
 
     currentLogIndent = currentLogIndent - 1;
