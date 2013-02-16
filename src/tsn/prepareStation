@@ -77,9 +77,10 @@ local function prepareStation(radius, height)
     log (fine, "Exiting prepareStation()", currentLogIndent);
 end;
 
-local function moveToStartingPosition(radius)
+local function moveToStartingPosition(radius, height)
     local radius = radius;
-    log (fine, "Entering moveToStartingPosition(radius="..radius..")");
+    local height = height;
+    log (fine, "Entering moveToStartingPosition(radius="..radius..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     move(back, (radius - 1));
@@ -105,7 +106,7 @@ end;
 log (fine, "Entering PREPARE_STATION(radius="..radius..", height="..height..")");
 currentLogIndent = currentLogIndent + 1;
 
-moveToStartingPosition(radius);
+moveToStartingPosition(radius, height);
 prepareStation(radius, height);
 
 currentLogIndent = currentLogIndent - 1;
