@@ -79,10 +79,10 @@ function log(logLevel, line, currentLogIndent)
     if (logLevel <= currentLogLevel) then
         local entry = "";
         for i=1,currentLogIndent do
-            entry = entry.."  ";
+            entry = entry.."    ";
         end;
         entry = entry..line;
-        entry = entry.."\t\t - "..string.format("%.2f", os.clock());
+        entry = entry.."\t\t\t\t\t - "..string.format("%.2f", os.clock());
         local filename = logFileName;
         local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
         file.writeLine(entry);
@@ -141,55 +141,56 @@ function readXZY()
     file.close();
 end;
 
-function turn(turnDirection, repeatCount)
+function turn(direction, repeatCount)
     local repeatCount = repeatCount or 1;
+    local direction = direction;
 
     for i = 1,repeatCount do
-        if (turnDirection == left) then
-            if (turtle.turnLeft()) then updateFacing(leftFacing); log(fine, "turned: left", currentLogIndent); else log(debug, "failed to turn: left", currentLogIndent); return FAILURE;  end;
-        elseif (turnDirection == right) then
-            if (turtle.turnRight()) then updateFacing(rightFacing); log(fine, "turned: right", currentLogIndent); else log(debug, "failed to turn: right", currentLogIndent); return FAILURE;  end;
+        if (direction == left) then
+            if (turtle.turnLeft()) then updateFacing(leftFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+        elseif (direction == right) then
+            if (turtle.turnRight()) then updateFacing(rightFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
         end;
     end;
 
     return SUCCESS;
 end;
 
-function move(moveDirection)
-    local moveDirection = moveDirection or forward;
+function move(direction)
+    local direction = direction or forward;
 
-    if (moveDirection == forward) then
-        if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "moved: forward", currentLogIndent); return SUCCESS;  else log(debug, "failed to move: forward", currentLogIndent); return FAILURE;  end;
-    elseif (moveDirection == back) then
-        if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "moved: back", currentLogIndent); return SUCCESS;  else log(debug, "failed to move: back", currentLogIndent); return FAILURE;  end;
-    elseif (moveDirection == up) then
-        if (turtle.up()) then updateY(upMoving); log(fine, "moved: up", currentLogIndent); return SUCCESS;  else log(debug, "failed to move: up", currentLogIndent); return FAILURE;  end;
-    elseif (moveDirection == down) then
-        if (turtle.down()) then updateY(downMoving); log(fine, "moved: down", currentLogIndent); return SUCCESS;  else log(debug, "failed to move: down", currentLogIndent); return FAILURE;  end;
+    if (direction == forward) then
+        if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    elseif (direction == back) then
+        if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    elseif (direction == up) then
+        if (turtle.up()) then updateY(upMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    elseif (direction == down) then
+        if (turtle.down()) then updateY(downMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
     end;
 end;
 
-function dig(digDirection)
-    local digDirection = digDirection or forward;
+function dig(direction)
+    local direction = direction or forward;
 
-    if (digDirection == forward) then
-        if (turtle.dig()) then log(fine, "dug: forward", currentLogIndent); return SUCCESS; else log(debug, "failed to dig: forward", currentLogIndent); return FAILURE; end;
-    elseif (digDirection == up) then
-        if (turtle.digUp()) then log(fine, "dug: up", currentLogIndent); return SUCCESS;  else log(debug, "failed to dig: up", currentLogIndent); return FAILURE;  end;
-    elseif (digDirection == down) then
-        if (turtle.digDown()) then log(fine, "dug: down", currentLogIndent); return SUCCESS;  else log(debug, "failed to dig: down", currentLogIndent); return FAILURE;  end;
+    if (direction == forward) then
+        if (turtle.dig()) then log(fine, "dig (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS; else log(debug, "dig (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE; end;
+    elseif (direction == up) then
+        if (turtle.digUp()) then log(fine, "dig (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "dig (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    elseif (direction == down) then
+        if (turtle.digDown()) then log(fine, "dig (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "dig (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
     end;
 end;
 
-function detect(detectDirection)
-    local detectDirection = detectDirection or forward;
+function detect(direction)
+    local direction = direction or forward;
 
-    if (detectDirection == forward) then
-        if (turtle.detect()) then log(fine, "detected: item exists forward", currentLogIndent); return SUCCESS; else log(debug, "detected: no item exists forward", currentLogIndent); return FAILURE; end;
-    elseif (detectDirection == up) then
-        if (turtle.detectUp()) then log(fine, "detected: item exists up", currentLogIndent); return SUCCESS;  else log(debug, "detected: no item exists up", currentLogIndent); return FAILURE;  end;
-    elseif (detectDirection == down) then
-        if (turtle.detectDown()) then log(fine, "detected  item exists down", currentLogIndent); return SUCCESS;  else log(debug, "detected: no item exists down", currentLogIndent); return FAILURE;  end;
+    if (direction == forward) then
+        if (turtle.detect()) then log(fine, "detect (".. direction ..") -> BLOCK PRESENT", currentLogIndent); return SUCCESS; else log(debug, "detect (".. direction ..") -> NO BLOCK PRESENT", currentLogIndent); return FAILURE; end;
+    elseif (direction == up) then
+        if (turtle.detectUp()) then log(fine, "detect (".. direction ..") -> BLOCK PRESENT", currentLogIndent); return SUCCESS;  else log(debug, "detect (".. direction ..") -> NO BLOCK PRESENT", currentLogIndent); return FAILURE;  end;
+    elseif (direction == down) then
+        if (turtle.detectDown()) then log(fine, "detect (".. direction ..") -> BLOCK PRESENT", currentLogIndent); return SUCCESS;  else log(debug, "detect (".. direction ..") -> NO BLOCK PRESENT", currentLogIndent); return FAILURE;  end;
     end;
 end;
 
@@ -197,41 +198,70 @@ function compare(direction)
     local direction = direction or forward;
 
     if (direction == forward) then
-        if (turtle.compare()) then log(fine, "compared: forward item same as slot ("..currentSlotNum..")", currentLogIndent); return SUCCESS; else log(debug, "compared: forward item not same as a slot ("..currentSlotNum..")", currentLogIndent); return FAILURE; end;
+        if (turtle.compare()) then log(fine, "compare (".. direction ..") -> ITEM EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return SUCCESS; else log(debug, "compare (".. direction ..") -> ITEM NOT EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return FAILURE; end;
     elseif (direction == up) then
-        if (turtle.compareUp()) then log(fine, "compared: up item same as slot ("..currentSlotNum..")", currentLogIndent); return SUCCESS;  else log(debug, "compared: up item not same as a slot ("..currentSlotNum..")", currentLogIndent); return FAILURE;  end;
+        if (turtle.compareUp()) then log(fine, "compare (".. direction ..") -> ITEM EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return SUCCESS;  else log(debug, "compare (".. direction ..") -> ITEM NOT EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return FAILURE;  end;
     elseif (direction == down) then
-        if (turtle.compareDown()) then log(fine, "compared: down item same as slot ("..currentSlotNum..")", currentLogIndent); return SUCCESS;  else log(debug, "compared: down item not same as a slot ("..currentSlotNum..")", currentLogIndent); return FAILURE;  end;
+        if (turtle.compareDown()) then log(fine, "compare (".. direction ..") -> ITEM EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return SUCCESS;  else log(debug, "compare (".. direction ..") -> ITEM NOT EQUAL TO SLOT ("..currentSlotNum..")", currentLogIndent); return FAILURE;  end;
     end;
 end;
 
-function attack(attackDirection)
-    local attackDirection = attackDirection or forward;
+function attack(direction)
+    local direction = direction or forward;
 
-    if (attackDirection == forward) then
-        if (turtle.attack()) then log(fine, "attacked: forward", currentLogIndent); return SUCCESS; else log(debug, "failed to atack: forward", currentLogIndent); return FAILURE; end;
-    elseif (attackDirection == up) then
-        if (turtle.attackUp()) then log(fine, "attacked: up", currentLogIndent); return SUCCESS;  else log(debug, "failed to attack: up", currentLogIndent); return FAILURE;  end;
-    elseif (attackDirection == down) then
-        if (turtle.attackDown()) then log(fine, "attacked: down", currentLogIndent); return SUCCESS;  else log(debug, "failed to attack: down", currentLogIndent); return FAILURE;  end;
+    if (direction == forward) then
+        if (turtle.attack()) then log(fine, "attack (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS; else log(debug, "attack (".. direction ..") -> FAILED", currentLogIndent); return FAILURE; end;
+    elseif (direction == up) then
+        if (turtle.attackUp()) then log(fine, "attack (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "attack (".. direction ..") -> FAILED", currentLogIndent); return FAILURE;  end;
+    elseif (direction == down) then
+        if (turtle.attackDown()) then log(fine, "attack (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "attack (".. direction ..") -> FAILED", currentLogIndent); return FAILURE;  end;
     end;
 end;
 
-function place(placeDirection)
-    local placeDirection = placeDirection or forward;
+function place(direction)
+    local direction = direction or forward;
 
-    if (placeDirection == forward) then
-        if (turtle.place()) then log(fine, "placed: forward", currentLogIndent); return SUCCESS; else log(debug, "failed to place: forward", currentLogIndent); return FAILURE; end;
-    elseif (placeDirection == up) then
-        if (turtle.placeUp()) then log(fine, "placed: up", currentLogIndent); return SUCCESS;  else log(debug, "failed to place: up", currentLogIndent); return FAILURE;  end;
-    elseif (placeDirection == down) then
-        if (turtle.placeDown()) then log(fine, "placed: down", currentLogIndent); return SUCCESS;  else log(debug, "failed to place: down", currentLogIndent); return FAILURE;  end;
+    if (direction == forward) then
+        if (turtle.place()) then log(fine, "place (".. direction ..") -> SUCCESS", currentLogIndent); return SUCCESS; else log(debug, "place (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE; end;
+    elseif (direction == up) then
+        if (turtle.placeUp()) then log(fine, "place (".. direction ..") -> SUCCESS", currentLogIndent); return SUCCESS;  else log(debug, "place (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    elseif (direction == down) then
+        if (turtle.placeDown()) then log(fine, "place (".. direction ..") -> SUCCESS", currentLogIndent); return SUCCESS;  else log(debug, "place (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    end;
+end;
+
+function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
+    local xDistance = x2 - x1;  --horizontal difference
+    local zDistance = z2 - z1;  --vertical difference
+    local yDistance = y2 - y1;  --outward difference
+    local dist = math.sqrt( (xDistance*xDistance) + (zDistance*zDistance) + (yDistance*yDistance) );    -- distance using Pythagoras theorem
+    return dist;
+end;
+
+function getOppositeDirection(direction)
+    local direction = direction;
+    if (direction == up) then return down; end;
+    if (direction == down) then return up; end;
+    if (direction == left) then return right; end;
+    if (direction == right) then return left; end;
+    if (direction == forward) then return back; end;
+    if (direction == back) then return forward; end;
+end;
+
+function refuel(fuelSlot, amount, threshold)
+    local fuelSlot = fuelSlot or FUEL_SLOT;
+    local amount = amount or 1;
+    local threshold = threshold or 5;
+    if turtle.getFuelLevel() <= threshold then
+        select(fuelSlot);
+        turtle.refuel(amount);
+        log(fine, "refuel(slot="..fuelSlot..", amount="..amount..", threshold="..threshold..") - SUCCESS", currentLogIndent);
     end;
 end;
 
 function select(slot)
     local slot = slot or currentSlotNum;
-    log (fine, "Entering select("..slot..")", currentLogIndent);
+    log (fine, "Entering select(slot="..slot..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     local selectStatus = turtle.select(slot);
@@ -255,7 +285,7 @@ end;
 function selectItem(slot, isOverflow)
     local slot = slot or currentSlotNum;
     local isOverflow = isOverflow or false;
-    log (fine, "Entering selectItem("..slot..","..tostring(isOverflow)..")", currentLogIndent);
+    log (fine, "Entering selectItem(slot="..slot..", overflow="..tostring(isOverflow)..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     local isSuccess = select(slot);
@@ -299,17 +329,17 @@ end
 -- If compare is TRUE, then it will perform a replace by digging and place if the item isn't already there
 -- If detect is TRUE, then it will return success if ANYTHING is detected to already be in the target location
 -- If anchorProtection is TRUE, then it will move forward until it finds a block it can attach to and build an anchor back to the target location. CAUTION, this has the potential to empty your inventory.
-function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
-    local placeDirection = placeDirection or forward;
+function placeItem(direction, slot, isOverflow, isCompare, isDetect, isAnchorProtection)
+    local direction = direction or forward;
     local slot = slot or currentSlotNum;
     local isOverflow = isOverflow or false;
     local isDetect = isDetect or false;
     local isCompare = isCompare or false;
     local isAnchorProtection = isAnchorProtection or false;
-    log (fine, "Entering placeItem("..placeDirection..", "..slot..", "..tostring(isOverflow)..", "..tostring(isCompare)..", "..tostring(isDetect)..", "..tostring(isAnchorProtection)..")", currentLogIndent);
+    log (fine, "Entering placeItem(direction=".. direction ..", slot="..slot..", overflow="..tostring(isOverflow)..", compare="..tostring(isCompare)..", detect="..tostring(isDetect)..", anchorProtection="..tostring(isAnchorProtection)..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    if (isDetect and detect(placeDirection)) then
+    if (isDetect and detect(direction)) then
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return SUCCESS;
@@ -322,32 +352,32 @@ function placeItem(placeDirection, slot, isOverflow, isCompare, isDetect, isAnch
     end;
 
     if (isCompare) then
-        if (compare(placeDirection)) then
+        if (compare(direction)) then
             currentLogIndent = currentLogIndent - 1;
             log (fine, "Exiting placeItem()", currentLogIndent);
             return SUCCESS;
         else
-            while (detect(placeDirection)) do
-                dig(placeDirection);
+            while (detect(direction)) do
+                dig(direction);
             end;
         end;
     end;
 
-    if (place(placeDirection)) then
+    if (place(direction)) then
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return SUCCESS;
     elseif (isAnchorProtection) then
-        log(fine, "Moving forward in an attempt to find an anchor block.", currentLogIndent);
+        log(fine, "Moving "..direction.." forward in an attempt to find an anchor block.", currentLogIndent);
         move(direction);
-        local placeStatus = placeItem(placeDirection, slot, isOverflow, false, false, true);
-        log(fine, "Moving backward after finding an anchor block.", currentLogIndent);
-        move(getOppositeDirection(placeDirection));
+        local placeStatus = placeItem(direction, slot, isOverflow, NO_COMPARE, NO_DETECT, ANCHOR_PROTECTION);
+        log(fine, "Moving "..getOppositeDirection(direction).." after finding an anchor block.", currentLogIndent);
+        move(getOppositeDirection(direction));
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return placeStatus;
     else
-        log(fine, "Failed: A block is already present at location ("..placeDirection..").", currentLogIndent);
+        log(fine, "Failed: A block is already present at location (".. direction ..").", currentLogIndent);
         currentLogIndent = currentLogIndent - 1;
         log (fine, "Exiting placeItem()", currentLogIndent);
         return blockAlreadyPresent;
@@ -358,7 +388,7 @@ function moveWithDig(direction, steps, attempts)
     local direction = direction or forward;
     local steps = steps or 1
     local attempts = attempts or 10
-    log (fine, "Entering moveWithDig("..direction..","..steps..","..attempts..")", currentLogIndent);
+    log (fine, "Entering moveWithDig(direction="..direction..", steps="..steps..", attempts="..attempts..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,steps do
@@ -374,27 +404,9 @@ function moveWithDig(direction, steps, attempts)
     log (fine, "Exiting moveWithDig()", currentLogIndent);
 end;
 
-function distanceBetweenTwoPoints(x1, z1, y1, x2, z2, y2)
-    local xDistance = x2 - x1;  --horizontal difference
-    local zDistance = z2 - z1;  --vertical difference
-    local yDistance = y2 - y1;  --outward difference
-    local dist = math.sqrt( (xDistance*xDistance) + (zDistance*zDistance) + (yDistance*yDistance) );    -- distance using Pythagoras theorem
-    return dist;
-end;
-
-function getOppositeDirection(currentDirection)
-    local currentDirection = currentDirection;
-    if (currentDirection == up) then return down; end;
-    if (currentDirection == down) then return up; end;
-    if (currentDirection == left) then return right; end;
-    if (currentDirection == right) then return left; end;
-    if (currentDirection == forward) then return back; end;
-    if (currentDirection == back) then return forward; end;
-end;
-
 function placeLight(lightSlot, direction)
     local direction = direction or up;
-    log (fine, "Entering placeLight("..lightSlot..","..direction..")", currentLogIndent);
+    log (fine, "Entering placeLight(slot="..lightSlot..", direction="..direction..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
     if ((distanceBetweenTwoPoints(currentX, currentZ, currentY, lastLightX, lastLightZ, lastLightY) >= lightThreshold) and (placeItem(up, lightSlot, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION))) then
         lastLightX = currentX;
@@ -404,16 +416,6 @@ function placeLight(lightSlot, direction)
     end;
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting placeLight()", currentLogIndent);
-end;
-
-function refuel(fuelSlot, amount, threshold)
-    local fuelSlot = fuelSlot or FUEL_SLOT;
-    local amount = amount or 1;
-    local threshold = threshold or 5;
-    if turtle.getFuelLevel() <= threshold then
-        select(fuelSlot);
-        turtle.refuel(amount);
-    end;
 end;
 
 readXZY();

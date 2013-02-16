@@ -14,7 +14,7 @@ local height = args[2] or nil;
 local function floorAndCeilingColumn(currentUpDownDirection, height)
     local currentUpDownDirection = currentUpDownDirection;
     local height = height or 5;
-    log(fine, "Entering floorAndCeilingColumn("..currentUpDownDirection..","..height..")");
+    log(fine, "Entering floorAndCeilingColumn(currentUpDownDirection="..currentUpDownDirection..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     local initialFillSlot;
@@ -41,7 +41,7 @@ local function floorAndCeilingRow(currentUpDownDirection, length, height)
     local currentUpDownDirection = currentUpDownDirection;
     local length = length or 9;
     local height = height or 5;
-    log (fine, "Entering floorAndCeilingRow("..currentUpDownDirection..","..length..","..height..")");
+    log (fine, "Entering floorAndCeilingRow(currentUpDownDirection="..currentUpDownDirection..", length="..length..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,length do
@@ -58,7 +58,7 @@ end;
 
 local function transitionOverAnd180Degrees(turnDirection, steps)
     local steps = steps or 1;
-    log (fine, "Entering transitionOverAnd180Degrees("..turnDirection..","..steps..")", currentLogIndent);
+    log (fine, "Entering transitionOverAnd180Degrees(turnDirection="..turnDirection..", steps="..steps..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     turn(turnDirection);
@@ -74,7 +74,7 @@ local function buildFloorAndCeiling(currentLeftRightDirection, currentUpDownDire
     local currentLeftRightDirection = currentLeftRightDirection;
     local diameterWithoutWalls = diameterWithoutWalls or 9;
     local height = height or 5;
-    log (fine, "Entering buildFloorAndCeiling("..currentUpDownDirection..","..currentLeftRightDirection..","..diameterWithoutWalls..","..height..")");
+    log (fine, "Entering buildFloorAndCeiling(currentUpDownDirection="..currentUpDownDirection..", currentLeftRightDirection="..currentLeftRightDirection..", diameterWithoutWalls="..diameterWithoutWalls..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1,diameterWithoutWalls do
@@ -91,7 +91,7 @@ end;
 
 local function moveToStartingPositionForCeilingFloor(turnDirection)
     local turnDirection = turnDirection;
-    log (fine, "Entering moveToStartingPositionForCeilingFloor("..turnDirection..")");
+    log (fine, "Entering moveToStartingPositionForCeilingFloor(turnDirection="..turnDirection..")");
     currentLogIndent = currentLogIndent + 1;
 
     transitionOverAnd180Degrees(turnDirection);
@@ -105,7 +105,7 @@ local function wallColumn(currentUpDownDirection, height)
     local height = height or 5;
     height = height - 2;
     local currentUpDownDirection = currentUpDownDirection;
-    log (fine, "Entering wallColumn("..currentUpDownDirection..","..height..")");
+    log (fine, "Entering wallColumn(currentUpDownDirection="..currentUpDownDirection..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     local initialFillSlot;
@@ -136,9 +136,10 @@ local function wallColumn(currentUpDownDirection, height)
 end
 
 local function buildWalls(startingUpDownDirection, diameterWithWalls, height)
+    local height = height;
     local currentUpDownDirection = getOppositeDirection(startingUpDownDirection);
     local diameterWithWalls = diameterWithWalls - 1;     -- difficult to communicate this number. misleading -> 10 leaves 9 inner spaces
-    log (fine, "Entering buildWalls("..currentUpDownDirection..","..diameterWithWalls..","..height..")");
+    log (fine, "Entering buildWalls(currentUpDownDirection="..currentUpDownDirection..", diameterWithWalls="..diameterWithWalls..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     local numberWalls = 4;
@@ -160,11 +161,11 @@ local function buildWalls(startingUpDownDirection, diameterWithWalls, height)
     log (fine, "Exiting buildWalls()");
 end;
 
-local function moveToStartingPositionForWalls(radius, height)
-    log (fine, "Entering moveToStartingPositionForWalls("..radius..","..height..")");
+local function moveToStartingPositionForWalls(currentUpDownDirection, radius, height)
+    log (fine, "Entering moveToStartingPositionForWalls(currentUpDownDirection="..currentUpDownDirection..", radius="..radius..", height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
-    local currentUpDownDirection = up;
+    local currentUpDownDirection = currentUpDownDirection or up;
     -- turtle MUST start at (height + 8) or higher for
     -- this moves turtle from starting position to corner of room where the room anchor column will be built
     moveWithDig(down, height + 1);
@@ -191,7 +192,16 @@ end;
 
 local diameterWithWalls = (radius * 2) + 1;
 local diameterWithoutWalls = (radius * 2) - 1;
-local currentUpDownDirection = moveToStartingPositionForWalls(radius, height);
+local startingUpDownDirection = up;
+local startingLeftRightDirection = right;
+
+log (fine, "Entering DIG_STATION(startingUpDownDirection="..startingUpDownDirection..", startingLeftRightDirection="..startingLeftRightDirection..", radius="..radius..", height="..height..", diameterWithWalls="..diameterWithWalls..", diameterWithoutWalls="..diameterWithoutWalls..")");
+currentLogIndent = currentLogIndent + 1;
+
+currentUpDownDirection = moveToStartingPositionForWalls(startingUpDownDirection, radius, height);
 buildWalls(currentUpDownDirection, diameterWithWalls, height);
-moveToStartingPositionForCeilingFloor(right);
+moveToStartingPositionForCeilingFloor(startingLeftRightDirection);
 buildFloorAndCeiling(left, down, diameterWithoutWalls, height);
+
+currentLogIndent = currentLogIndent - 1;
+log (fine, "Exiting DIG_STATION()");

@@ -6,17 +6,12 @@
 
 -- START OF LOCAL SCRIPT
 local args={...};
-depth = args[1];
+local depth = args[1];
 
 local function digShaftLayer(turnDirection)
     local turnDirection = turnDirection or right;
-    log (fine, "Entering digShaftLayer("..turnDirection..")", currentLogIndent);
+    log (fine, "Entering digShaftLayer(turnDirection="..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
-
-    local detect = true;
-    local overflow = true;
-    local noCompare = false;
-    local anchorProtection = true;
 
     for i=1,8 do
         placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, NO_COMPARE, DETECT, NO_ANCHOR_PROTECTION);
@@ -35,7 +30,8 @@ end;
 
 local function digMineShaft(depth, turnDirection)
     local turnDirection = turnDirection or right;
-    log (fine, "Entering digMineShaft("..depth..", "..turnDirection..")", currentLogIndent);
+    local depth = depth;
+    log (fine, "Entering digMineShaft(depth="..depth..", turnDirection="..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     moveWithDig(down)
@@ -59,4 +55,10 @@ if (depth==nil or depth=="") then
     tonumber(depth);
 end;
 
+log (fine, "Entering DIG_SHAFT(depth="..depth..")");
+currentLogIndent = currentLogIndent + 1;
+
 digMineShaft(depth, right);
+
+currentLogIndent = currentLogIndent - 1;
+log (fine, "Exiting DIG_SHAFT()");

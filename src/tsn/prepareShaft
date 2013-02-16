@@ -7,10 +7,8 @@
 -- START OF LOCAL SCRIPT
 local args={...};
 local height = args[1];
-local overflow = true;
 
--- start in upper-left quadrant
-function prepareTopOfShaft()
+local function prepareTopOfShaft()
     log (fine, "Entering prepareTopOfShaft()");
     currentLogIndent = currentLogIndent + 1;
 
@@ -24,7 +22,7 @@ function prepareTopOfShaft()
     log (fine, "Exiting prepareTopOfShaft()");
 end;
 
-function prepareShaftLayer()
+local function prepareShaftLayer()
     log (fine, "Entering prepareShaftLayer()");
     currentLogIndent = currentLogIndent + 1;
 
@@ -47,39 +45,15 @@ function prepareShaftLayer()
     log (fine, "Exiting prepareShaftLayer()");
 end;
 
-function prepareBottomOfShaft()
-    log (fine, "Entering prepareBottomOfShaft()");
+local function prepareShaft(height)
+    local height = height;
+    log (fine, "Entering prepareShaft(height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
-    turn(left);
-    move(forward);
-    turn(left);
-    move(back);
-
-    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);    --    placeItem(forward, CHEST_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    turn(right);
-    move(back);
---    placeItem(forward, REDSTONE_TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    turn(right);
-    move(back);
-    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    move(down);
-    placeLight(TORCH_SLOT);
-
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting prepareBottomOfShaft()");
-end;
-
-function prepareShaft(height)
-    log (fine, "Entering prepareShaft("..height..")");
-    currentLogIndent = currentLogIndent + 1;
-
-    local height = height; -- stop one from the bottom and give it space for the bottom of shaft
     prepareTopOfShaft();
     for i=1,(height) do
         prepareShaftLayer();
     end;
---    prepareBottomOfShaft();
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareShaft()");
@@ -91,4 +65,11 @@ if (height == nil or height=="") then
     height = io.read();
     height = tonumber(height);
 end;
+
+log (fine, "Entering PREPARE_SHAFT(height="..height..")");
+currentLogIndent = currentLogIndent + 1;
+
 prepareShaft(height);
+
+currentLogIndent = currentLogIndent - 1;
+log (fine, "Exiting PREPARE_SHAFT()");

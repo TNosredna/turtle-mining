@@ -5,20 +5,8 @@
 
 
 -- START OF LOCAL SCRIPT
-print ("How many blocks down should the station roof be located? (Y - 13 is normal)");
-y = io.read();
-y = tonumber(y);
-
-print ("What radius of station should be built? (4 is normal)");
-d = io.read();
-d = tonumber(d);
-
-print ("What height of station should be built? (4 is normal)");
-h = io.read();
-h = tonumber(h);
-
 local function moveToTopOfShaft(height)
-    log (fine, "Entering moveToTopOfShaft("..height..")");
+    log (fine, "Entering moveToTopOfShaft(height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     for i=1,height do
@@ -32,25 +20,26 @@ local function moveToTopOfShaft(height)
     log (fine, "Exiting moveToTopOfShaft()");
 end;
 
---1  -> --WALL_FILLER_SLOT=1    -- 64 stack Cobblestone (id=4) [EXTRA]
---2  -> --TRANSPORT_PIPE_SLOT=2 -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
---3  -> --LADDER_SLOT=3         -- 64 stack Wood Ladder (id=65)  [EXTRA]
---4  -> WALL_FILLER_SLOT=4      -- 64 stack Cobblestone (id=4)
---5  -> TRANSPORT_PIPE_SLOT=5   -- 64 stack Stone Transport Pipe (id=4308)
---6  -> LADDER_SLOT=6           -- 64 stack Wood Ladder (id=65)
---7  -> ONE_WAY_PIPE_SLOT=7     -- 1 stack Iron Transport Pipe (id=4309)
---8  -> WALL_FILLER_SLOT=8      -- 64 stack Glass (id=20)
---9  -> FLOOR_FILLER_SLOT=9     -- 64 stack Glass (id=20)
---10 -> ROOF_FILLER_SLOT=10     -- 64 stack Glass (id=20)
---11 -> TORCH_SLOT=11           -- 64 stack Torch (id=50)
---12 -> CONNECTOR_PIPE_SLOT=12  -- 4 stack Wood Transport Pipe (id=4306)
---13 -> CHEST_SLOT=13           -- 13 stack Chest (id=54)
---14 -> REDSTONE_TORCH_SLOT=14  -- 4 stack Redstone Torch (id=76)
---15 -> ENGINE_SLOT=15          -- 4 stack Redstone Engine (id=506)
---16 -> BUCKET_SLOT=16          -- 1 stack Water Bucket (id=326)
+print ("How many blocks down should the station roof be located? (Y - 13 is normal)");
+local y = io.read();
+y = tonumber(y);
+
+print ("What radius of station should be built? (4 is normal)");
+local d = io.read();
+d = tonumber(d);
+
+print ("What height of station should be built? (4 is normal)");
+local h = io.read();
+h = tonumber(h);
+
+log (fine, "Entering BUILD_MINE(shaftDepth="..y..", stationRadius"..d..", stationHeight="..h..")");
+currentLogIndent = currentLogIndent + 1;
 
 shell.run("digShaft", y);
 moveToTopOfShaft(y);
 shell.run("prepareShaft", y);
 shell.run("digStation", d, h);
 shell.run("prepareStation", d, h);
+
+currentLogIndent = currentLogIndent - 1;
+log (fine, "Exiting BUILD_MINE()");

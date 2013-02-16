@@ -9,8 +9,11 @@ local args={...};
 local radius = args[1] or nil;
 local height = args[2] or nil;
 
-local function prepareStation()
-    log (fine, "Entering prepareStation()", currentLogIndent);
+local function prepareStation(radius, height)
+    local radius = radius;
+    local height = height;
+
+    log (fine, "Entering prepareStation(radius="..radius..", height="..height..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
     for i = 1, 4 do
@@ -76,7 +79,7 @@ end;
 
 local function moveToStartingPosition(radius)
     local radius = radius;
-    log (fine, "Entering moveToStartingPosition("..radius..")");
+    log (fine, "Entering moveToStartingPosition(radius="..radius..")");
     currentLogIndent = currentLogIndent + 1;
 
     move(back, radius - 1);
@@ -99,5 +102,11 @@ if ((radius == nil) or (height == nil)) then
     height = tonumber(height);
 end;
 
-moveToStartingPosition();
-prepareStation();
+log (fine, "Entering PREPARE_STATION(radius="..radius..", height="..height..")");
+currentLogIndent = currentLogIndent + 1;
+
+moveToStartingPosition(radius);
+prepareStation(radius, height);
+
+currentLogIndent = currentLogIndent - 1;
+log (fine, "Exiting PREPARE_STATION()");
