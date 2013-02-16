@@ -74,12 +74,12 @@ function prepareShaft(height)
     log (fine, "Entering prepareShaft("..height..")");
     currentLogIndent = currentLogIndent + 1;
 
-    local height = height - 1; -- stop one from the bottom and give it space for the bottom of shaft
+    local height = height; -- stop one from the bottom and give it space for the bottom of shaft
     prepareTopOfShaft();
     for i=1,(height) do
         prepareShaftLayer();
     end;
-    prepareBottomOfShaft();
+--    prepareBottomOfShaft();
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareShaft()");
