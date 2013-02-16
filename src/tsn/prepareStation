@@ -86,7 +86,7 @@ local function moveToStartingPosition(radius)
     turn(right);
     move(forward, (radius - 1));
     turn(left);
-
+    move(down, (height - 3));
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPosition()", currentLogIndent);
 end
