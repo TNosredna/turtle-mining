@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/turtleUtils" afterPath="$PROJECT_DIR$/src/tsn/turtleUtils" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareStation" afterPath="$PROJECT_DIR$/src/tsn/prepareStation" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="prepareStation" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="47" selection-start="2757" selection-end="2757" vertical-scroll-proportion="0.0">
+            <state line="38" column="17" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.42982456">
               <folding />
             </state>
           </provider>
@@ -106,10 +106,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="-1.1246201">
+            <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="42.692307">
               <folding />
             </state>
           </provider>
@@ -160,8 +160,8 @@
         <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
         <option value="$PROJECT_DIR$/src/tsn/buildMine" />
         <option value="$PROJECT_DIR$/src/tsn/digStation" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
         <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
+        <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
       </list>
     </option>
   </component>
@@ -1184,7 +1184,11 @@
       <created>1361044587490</created>
       <updated>1361044587491</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361044941014</created>
+      <updated>1361044941015</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1411,16 +1415,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="47" selection-start="2757" selection-end="2757" vertical-scroll-proportion="0.0">
+        <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="42.692307">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="-1.1246201">
+        <state line="38" column="17" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.42982456">
           <folding />
         </state>
       </provider>
