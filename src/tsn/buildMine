@@ -18,30 +18,36 @@ h = io.read();
 h = tonumber(h);
 
 local function moveToTopOfShaft(height)
+    log (fine, "Entering moveToTopOfShaft("..height..")");
+    currentLogIndent = currentLogIndent + 1;
+
     for i=1,height do
         move(up);
     end;
     if (height % 2 ~= 0) then
         turn(right);
     end;
+
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting moveToTopOfShaft()");
 end;
 
---WALL_FILLER_SLOT = 1;     -- 64 stack Cobblestone
---EXTRA_SLOT = 2;           -- 64 stack Cobblestone
---REDWIRE_SLOT = 3;         -- 64 stack Redstone Wire (ONLY FOR SHAFT)
---ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
---WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
---FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
---ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
---LADDER_SLOT = 8;          -- 64 stack Wood Ladder   (MAY NOT BE ENOUGH)
---TORCH_SLOT = 9;           -- 64 stack Torch
---TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
---CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
---DOOR_SLOT = 12;           -- 4 stack Wood Door
---CHEST_SLOT = 13;          -- 14 stack Chest
---REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
---ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
---BUCKET_SLOT = 16;         -- 1 stack Water Bucket
+--1  -> --WALL_FILLER_SLOT=1    -- 64 stack Cobblestone (id=4) [EXTRA]
+--2  -> --TRANSPORT_PIPE_SLOT=2 -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
+--3  -> --LADDER_SLOT=3         -- 64 stack Wood Ladder (id=65)  [EXTRA]
+--4  -> WALL_FILLER_SLOT=4      -- 64 stack Cobblestone (id=4)
+--5  -> TRANSPORT_PIPE_SLOT=5   -- 64 stack Stone Transport Pipe (id=4308)
+--6  -> LADDER_SLOT=6           -- 64 stack Wood Ladder (id=65)
+--7  -> ONE_WAY_PIPE_SLOT=7     -- 1 stack Iron Transport Pipe (id=4309)
+--8  -> WALL_FILLER_SLOT=8      -- 64 stack Glass (id=20)
+--9  -> FLOOR_FILLER_SLOT=9     -- 64 stack Glass (id=20)
+--10 -> ROOF_FILLER_SLOT=10     -- 64 stack Glass (id=20)
+--11 -> TORCH_SLOT=11           -- 64 stack Torch (id=50)
+--12 -> CONNECTOR_PIPE_SLOT=12  -- 4 stack Wood Transport Pipe (id=4306)
+--13 -> CHEST_SLOT=13           -- 13 stack Chest (id=54)
+--14 -> REDSTONE_TORCH_SLOT=14  -- 4 stack Redstone Torch (id=76)
+--15 -> ENGINE_SLOT=15          -- 4 stack Redstone Engine (id=506)
+--16 -> BUCKET_SLOT=16          -- 1 stack Water Bucket (id=326)
 
 shell.run("digShaft", y);
 moveToTopOfShaft(y);

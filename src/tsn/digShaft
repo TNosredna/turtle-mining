@@ -5,9 +5,6 @@
 
 
 -- START OF LOCAL SCRIPT
-local WALL_FILLER_SLOT = 1; -- 64 stack Cobblestone
-local BUCKET_SLOT = 16;     -- 1 stack Water Bucket
-
 local args={...};
 depth = args[1];
 
@@ -15,6 +12,7 @@ local function digShaftLayer(turnDirection)
     local turnDirection = turnDirection or right;
     log (fine, "Entering digShaftLayer("..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
+
     local detect = true;
     local overflow = true;
     local noCompare = false;
@@ -38,6 +36,8 @@ end;
 local function digMineShaft(depth, turnDirection)
     local turnDirection = turnDirection or right;
     log (fine, "Entering digMineShaft("..depth..", "..turnDirection..")", currentLogIndent);
+    currentLogIndent = currentLogIndent + 1;
+
     moveWithDig(down)
     for i=1,depth do
         turnDirection = digShaftLayer(turnDirection);

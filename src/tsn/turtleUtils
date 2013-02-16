@@ -36,7 +36,6 @@ fine = 2;
 debug = 3;
 fineDebug = 4;
 
-FUEL_SLOT = 16;
 currentSlotNum = 1;
 
 logFileName = os.getComputerLabel()..".log";
@@ -55,15 +54,35 @@ lastLightX = 0;
 lastLightZ = 0;
 lastLightY = 0;
 
+--WALL_FILLER_SLOT=1    -- 64 stack Cobblestone (id=4) [EXTRA]
+--TRANSPORT_PIPE_SLOT=2 -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
+--LADDER_SLOT=3         -- 64 stack Wood Ladder (id=65)  [EXTRA]
+WALL_FILLER_SLOT=4;      -- 64 stack Cobblestone (id=4)
+TRANSPORT_PIPE_SLOT=5;   -- 64 stack Stone Transport Pipe (id=4308)
+LADDER_SLOT=6;           -- 64 stack Wood Ladder (id=65)
+ONE_WAY_PIPE_SLOT=7;     -- 1 stack Iron Transport Pipe (id=4309)
+WALL_FILLER_SLOT=8;      -- 64 stack Glass (id=20)
+FLOOR_FILLER_SLOT=9;     -- 64 stack Glass (id=20)
+ROOF_FILLER_SLOT=10;     -- 64 stack Glass (id=20)
+TORCH_SLOT=11;           -- 64 stack Torch (id=50)
+CONNECTOR_PIPE_SLOT=12;  -- 4 stack Wood Transport Pipe (id=4306)
+CHEST_SLOT=13;           -- 13 stack Chest (id=54)
+REDSTONE_TORCH_SLOT=14;  -- 4 stack Redstone Torch (id=76)
+ENGINE_SLOT=15;          -- 4 stack Redstone Engine (id=506)
+BUCKET_SLOT=16;          -- 1 stack Water Bucket (id=326)
+
+FUEL_SLOT = 16;
+
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local entry = string.format("%.2f", os.clock()).."\t - ";
+        local entry;
         for i=1,currentLogIndent do
             entry = entry.."  ";
         end;
         entry = entry..line;
+        entry = entry.."\t\t - "..string.format("%.2f", os.clock());
         local filename = logFileName;
         local file = fs.open(filename, "a"); -- "w" opens the file, erasing all existing contents
         file.writeLine(entry);

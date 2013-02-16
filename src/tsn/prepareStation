@@ -9,40 +9,16 @@ local args={...};
 local radius = args[1] or nil;
 local height = args[2] or nil;
 
---WALL_FILLER_SLOT = 1;     -- 64 stack Cobblestone
---EXTRA_SLOT = 2;           -- 64 stack Cobblestone
---REDWIRE_SLOT = 3;         -- 64 stack Redstone Wire (ONLY FOR SHAFT)
---ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
---WALL_FILLER_SLOT = 5;     -- 64 stack Glass (id=20)
---FLOOR_FILLER_SLOT = 6;    -- 64 stack Glass (id=20)
---ROOF_FILLER_SLOT = 7;     -- 64 stack Glass (id=20)
---LADDER_SLOT = 8;          -- 64 stack Wood Ladder
---TORCH_SLOT = 9;           -- 64 stack Torch
---TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
---CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
---DOOR_SLOT = 12;           -- 4 stack Wood Door
---CHEST_SLOT = 13;          -- 14 stack Chest
---REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
---ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
---BUCKET_SLOT = 16;         -- 1 stack Water Bucket
-
-local WALL_FILLER_SLOT = 1;     -- 4 stack Cobblestone
-local ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
-local LADDER_SLOT = 8;          -- 64 stack Wood Ladder
-local TORCH_SLOT = 9;           -- 4 stack Torch
-local TRANSPORT_PIPE_SLOT = 10; -- 11 stack Stone Transport Pipe
-local CONNECTOR_PIPE_SLOT = 11; -- 4 stack Wood Transport Pipe
-local CHEST_SLOT = 13;          -- 12 stack Chest
-local REDSTONE_TORCH_SLOT = 14; -- 4 stack Redstone Torch
-local ENGINE_SLOT = 15;         -- 4 stack Redstone Engine
-
 local function prepareStation()
-    for i = 1,(radius - 2) do
-        move(forward);
-        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    end;
+    log (fine, "Entering prepareStation()", currentLogIndent);
+    currentLogIndent = currentLogIndent + 1;
 
     for i = 1, 4 do
+        for i = 1,(radius - 2) do
+            move(forward);
+            placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        end;
+
         move(forward);
         moveWithDig(down);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
@@ -68,7 +44,7 @@ local function prepareStation()
         move(back);
         placeItem(forward, TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
-        move(back, 2);
+        move(back, radius - 2);
         turn(right);
         move(forward, 2);
         move(down);
@@ -93,18 +69,23 @@ local function prepareStation()
     placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
     placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting prepareStation()", currentLogIndent);
 end;
 
 local function moveToStartingPosition(radius)
     local radius = radius;
     log (fine, "Entering moveToStartingPosition("..radius..")");
     currentLogIndent = currentLogIndent + 1;
+
     move(back, radius - 1);
     turn(right);
     move(radius - 1);
     turn(left);
+
     currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveToStartingPositionForWalls()");
+    log (fine, "Exiting moveToStartingPosition()", currentLogIndent);
 end
 
 if ((radius == nil) or (height == nil)) then
@@ -118,7 +99,5 @@ if ((radius == nil) or (height == nil)) then
     height = tonumber(height);
 end;
 
-local diameterWithWalls = (radius * 2) + 1;
-local diameterWithoutWalls = (radius * 2) - 1;
-
+moveToStartingPosition();
 prepareStation();
