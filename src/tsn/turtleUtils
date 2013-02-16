@@ -71,13 +71,13 @@ REDSTONE_TORCH_SLOT=14;  -- 4 stack Redstone Torch (id=76)
 ENGINE_SLOT=15;          -- 4 stack Redstone Engine (id=506)
 BUCKET_SLOT=16;          -- 1 stack Water Bucket (id=326)
 
-FUEL_SLOT = 16;
+FUEL_SLOT=16;
 
 function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
     local logLevel = logLevel or coarse;
     if (logLevel <= currentLogLevel) then
-        local entry;
+        local entry = "";
         for i=1,currentLogIndent do
             entry = entry.."  ";
         end;
