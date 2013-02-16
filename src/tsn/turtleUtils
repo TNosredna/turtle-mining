@@ -144,33 +144,37 @@ end;
 local function turn(direction, repeatCount)
     local direction = direction;
     local repeatCount = repeatCount or 1;
+    local returnCode = SUCCESS;
 
     for i = 1,repeatCount do
         if (direction == left) then
-            if (turtle.turnLeft()) then updateFacing(leftFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.turnLeft()) then updateFacing(leftFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         elseif (direction == right) then
-            if (turtle.turnRight()) then updateFacing(rightFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.turnRight()) then updateFacing(rightFacing); log(fine, "turn (".. direction ..") -> SUCESS", currentLogIndent); else log(debug, "turn (".. direction ..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         end;
     end;
 
-    return SUCCESS;
+    return returnCode;
 end;
 
 local function move(direction, repeatCount)
     local direction = direction or forward;
     local repeatCount = repeatCount or 1;
+    local returnCode = SUCCESS;
 
     for i = 1,repeatCount do
         if (direction == forward) then
-            if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); returnCode=SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         elseif (direction == back) then
-            if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); returnCode=SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         elseif (direction == up) then
-            if (turtle.up()) then updateY(upMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.up()) then updateY(upMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); returnCode=SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         elseif (direction == down) then
-            if (turtle.down()) then updateY(downMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+            if (turtle.down()) then updateY(downMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); returnCode=SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); returnCode=FAILURE;  end;
         end;
     end;
+
+    return returnCode;
 end;
 
 local function dig(direction)

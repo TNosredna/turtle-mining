@@ -64,7 +64,7 @@
       <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="43" selection-start="2509" selection-end="2509" vertical-scroll-proportion="0.0">
+            <state line="70" column="47" selection-start="2757" selection-end="2757" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -109,7 +109,7 @@
       <file leaf-file-name="turtleUtils" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="0" selection-start="4413" selection-end="4413" vertical-scroll-proportion="0.3799392">
+            <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="-1.1246201">
               <folding />
             </state>
           </provider>
@@ -1180,7 +1180,11 @@
       <created>1361043995817</created>
       <updated>1361043995818</updated>
     </task>
-    <option name="localTasksCounter" value="173" />
+    <task id="LOCAL-00173" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361044587490</created>
+      <updated>1361044587491</updated>
+    </task>
+    <option name="localTasksCounter" value="174" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1386,13 +1390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="43" selection-start="2509" selection-end="2509" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="0" selection-start="1207" selection-end="1207" vertical-scroll-proportion="0.0">
@@ -1414,9 +1411,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="47" selection-start="2757" selection-end="2757" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="4413" selection-end="4413" vertical-scroll-proportion="0.3799392">
+        <state line="175" column="4" selection-start="6560" selection-end="6560" vertical-scroll-proportion="-1.1246201">
           <folding />
         </state>
       </provider>
