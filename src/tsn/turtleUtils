@@ -142,8 +142,8 @@ local function readXZY()
 end;
 
 local function turn(direction, repeatCount)
-    local repeatCount = repeatCount or 1;
     local direction = direction;
+    local repeatCount = repeatCount or 1;
 
     for i = 1,repeatCount do
         if (direction == left) then
@@ -156,17 +156,20 @@ local function turn(direction, repeatCount)
     return SUCCESS;
 end;
 
-local function move(direction)
+local function move(direction, repeatCount)
     local direction = direction or forward;
+    local repeatCount = repeatCount or 1;
 
-    if (direction == forward) then
-        if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
-    elseif (direction == back) then
-        if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
-    elseif (direction == up) then
-        if (turtle.up()) then updateY(upMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
-    elseif (direction == down) then
-        if (turtle.down()) then updateY(downMoving); log(fine, "move (".. direction ..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move (".. direction ..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+    for i = 1,repeatCount do
+        if (direction == forward) then
+            if (turtle.forward()) then updateXZ(forwardMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+        elseif (direction == back) then
+            if (turtle.back()) then updateXZ(backwardsMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+        elseif (direction == up) then
+            if (turtle.up()) then updateY(upMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+        elseif (direction == down) then
+            if (turtle.down()) then updateY(downMoving); log(fine, "move ("..direction..","..repeatCount..") -> SUCESS", currentLogIndent); return SUCCESS;  else log(debug, "move ("..direction..","..repeatCount..") -> FAILURE", currentLogIndent); return FAILURE;  end;
+        end;
     end;
 end;
 
