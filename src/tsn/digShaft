@@ -21,7 +21,7 @@ local function digShaftLayer(turnDirection)
     local anchorProtection = true;
 
     for i=1,8 do
-        placeItem(forward, WALL_FILLER_SLOT, overflow, noCompare, detect, anchorProtection);
+        placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, NO_COMPARE, DETECT, NO_ANCHOR_PROTECTION);
         turn(turnDirection);
         moveWithDig(forward)
         if (i==4) then
@@ -42,11 +42,11 @@ local function digMineShaft(depth, turnDirection)
     for i=1,depth do
         turnDirection = digShaftLayer(turnDirection);
         moveWithDig(down);
-        if (i==1) then placeItem(up, BUCKET_SLOT); end;
+        if (i==1) then placeItem(up, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION); end;
     end;
 
     move(up, depth);
-    placeItem(forward, BUCKET_SLOT);
+    placeItem(forward, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting digMineShaft()", currentLogIndent);

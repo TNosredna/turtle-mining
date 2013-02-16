@@ -48,9 +48,9 @@ local function floorAndCeilingColumn(currentUpDownDirection, height)
         endingFillSlot = FLOOR_FILLER_SLOT;
     end;
 
-    placeItem(getOppositeDirection(currentUpDownDirection), initialFillSlot, true, true);
+    placeItem(getOppositeDirection(currentUpDownDirection), initialFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     moveWithDig(currentUpDownDirection, height - 3);
-    placeItem(currentUpDownDirection, endingFillSlot, true, true);
+    placeItem(currentUpDownDirection, endingFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting floorAndCeilingColumn()");
@@ -137,13 +137,13 @@ local function wallColumn(currentUpDownDirection, height)
     end;
 
     moveWithDig(currentUpDownDirection, 2);
-    placeItem(getOppositeDirection(currentUpDownDirection), initialFillSlot, true, true);
+    placeItem(getOppositeDirection(currentUpDownDirection), initialFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     for i = 1,height do
         moveWithDig(currentUpDownDirection, 1);
-        placeItem(getOppositeDirection(currentUpDownDirection), middleFillSlot, true, true);
+        placeItem(getOppositeDirection(currentUpDownDirection), middleFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     end
     moveWithDig(currentUpDownDirection, 1);
-    placeItem(getOppositeDirection(currentUpDownDirection), endingFillSlot, true, true);
+    placeItem(getOppositeDirection(currentUpDownDirection), endingFillSlot, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting wallColumn()");

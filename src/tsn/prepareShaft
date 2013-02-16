@@ -15,44 +15,28 @@
 --LADDER_SLOT = 8;          -- 64 stack Wood Ladder
 --TORCH_SLOT = 9;           -- 64 stack Torch
 --TRANSPORT_PIPE_SLOT = 10; -- 64 stack Stone Transport Pipe (MAY NOT BE ENOUGH)
---CONNECTOR_PIPE_SLOT = 11; -- 5 stack Wood Transport Pipe
+--CONNECTOR_PIPE_SLOT = 11; -- 4 stack Wood Transport Pipe
 --DOOR_SLOT = 12;           -- 4 stack Wood Door
 --CHEST_SLOT = 13;          -- 14 stack Chest
---REDSTONE_TORCH_SLOT = 14; -- 5 stack Redstone Torch
---ENGINE_SLOT = 15;         -- 5 stack Redstone Engine
+--REDSTONE_TORCH_SLOT = 14; -- 4 stack Redstone Torch
+--ENGINE_SLOT = 15;         -- 4 stack Redstone Engine
 --BUCKET_SLOT = 16;         -- 1 stack Water Bucket
 
-local REDWIRE_SLOT = 3;           -- 64 stack Redstone Wire
 local LADDER_SLOT = 8;            -- 64 stack Wood Ladder
 local TORCH_SLOT = 9;             -- 10 stack Torch
-local TRANSPORT_PIPE_SLOT = 10;    -- 64 stack Stone Transport Pipe
-local CONNECTOR_PIPE_SLOT = 11;   -- 1 stack Wood Pipe
+local TRANSPORT_PIPE_SLOT = 10;   -- 64 stack Stone Transport Pipe
 local CHEST_SLOT = 13;            -- 2 stack Wood Chest
-local REDSTONE_TORCH_SLOT = 14;   -- 1 stack Redstone Torch
-local ENGINE_SLOT = 15;           -- 1 stack Redstone Engine
 
 local args={...};
 local height = args[1];
 local overflow = true;
 
--- start while turtle facing East to place Engine
+-- start in upper-left quadrant
 function prepareTopOfShaft()
-    placeItem(forward, CHEST_SLOT);
+    placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
-    placeItem(forward, CONNECTOR_PIPE_SLOT);
-    turn(right);
-    move(forward);
-    turn(left);
-    placeItem(forward, ENGINE_SLOT);
-
+    placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(down);
-    turn(left);
-    move(forward);
-    turn(right);
-    move(forward);
-    dig(forward);
-    placeItem(forward, TRANSPORT_PIPE_SLOT, overflow);
-    move(back);
     turn(right);
 end;
 
@@ -62,13 +46,13 @@ function prepareShaftLayer()
     turn(left);
     move(back);
 
-    placeItem(forward, TRANSPORT_PIPE_SLOT, overflow);
+    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
-    placeItem(forward, REDWIRE_SLOT);
+--    placeItem(forward, REDWIRE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
-    placeItem(forward, LADDER_SLOT, overflow);
+    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(down);
     placeLight(TORCH_SLOT);
 end;
@@ -79,13 +63,13 @@ function prepareBottomOfShaft()
     turn(left);
     move(back);
 
-    placeItem(forward, CHEST_SLOT);
+    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);    --    placeItem(forward, CHEST_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
-    placeItem(forward, REDSTONE_TORCH_SLOT);
+--    placeItem(forward, REDSTONE_TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
-    placeItem(forward, LADDER_SLOT, overflow);
+    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(down);
     placeLight(TORCH_SLOT);
 end;

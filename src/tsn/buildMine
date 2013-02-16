@@ -47,4 +47,4 @@ shell.run("digShaft", y);
 moveToTopOfShaft(y);
 shell.run("prepareShaft", y);
 shell.run("digStation", d, h);
---shell.run("prepareStation", d, h);
+shell.run("prepareStation", d, h);

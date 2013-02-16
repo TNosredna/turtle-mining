@@ -27,24 +27,14 @@ local height = args[2] or nil;
 --BUCKET_SLOT = 16;         -- 1 stack Water Bucket
 
 local WALL_FILLER_SLOT = 1;     -- 4 stack Cobblestone
-local LADDER_SLOT = 8;          -- 64 stack Wood Ladder  (MAY NOT BE ENOUGH)
+local ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
+local LADDER_SLOT = 8;          -- 64 stack Wood Ladder
 local TORCH_SLOT = 9;           -- 4 stack Torch
 local TRANSPORT_PIPE_SLOT = 10; -- 11 stack Stone Transport Pipe
 local CONNECTOR_PIPE_SLOT = 11; -- 4 stack Wood Transport Pipe
-local ONE_WAY_PIPE_SLOT = 4;    -- 1 stack Iron Transport Pipe
-local DOOR_SLOT = 12;           -- 4 stack Wood Door
 local CHEST_SLOT = 13;          -- 12 stack Chest
 local REDSTONE_TORCH_SLOT = 14; -- 4 stack Redstone Torch
 local ENGINE_SLOT = 15;         -- 4 stack Redstone Engine
-
-local OVERFLOW = true;
-local NO_OVERFLOW = false;
-local COMPARE = true;
-local NO_COMPARE = false;
-local DETECT = true;
-local NO_DETECT = false;
-local ANCHOR_PROTECTION = true;
-local NO_ANCHOR_PROTECTION = false;
 
 local function prepareStation()
     for i = 1,(radius - 2) do
@@ -66,15 +56,8 @@ local function prepareStation()
         placeItem(down, ENGINE_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(right);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-        turn(right);
+        turn(left);
         move(forward, 2);
-        turn(left);
-        moveWithDig(forward);
-        dig(up);
-        move(back);
-        placeItem(forward, DOOR_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-        turn(left);
-        move(forward, 4);
         turn(right);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         move(up);
