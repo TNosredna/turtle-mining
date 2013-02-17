@@ -47,7 +47,7 @@ local function prepareShaftLayer()
 end;
 
 local function prepareShaft(height)
-    local height = height;
+    local height = height - 1;
     log (fine, "Entering prepareShaft(height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
@@ -62,7 +62,7 @@ end;
 
 if (height == nil or height=="") then
     fs.delete(logFileName);
-    print ("What is the height of the shaft? (X - 13 is normal)");
+    print ("What is the height of the shaft? (X - 14 is normal)");
     height = io.read();
     height = tonumber(height);
 end;

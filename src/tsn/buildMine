@@ -21,7 +21,7 @@ local function moveToTopOfShaft(depth)
 end;
 
 fs.delete(logFileName);
-print ("How many blocks down should the station roof be located? (Y - 13 is normal)");
+print ("How many blocks down should the station roof be located? (Y - 14 is normal)");
 local depth = io.read();
 depth = tonumber(depth);
 
