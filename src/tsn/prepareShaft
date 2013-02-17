@@ -15,7 +15,7 @@ local function prepareTopOfShaft()
     placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
     placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    move(down);
+    moveWithDig(down);
     turn(right);
 
     currentLogIndent = currentLogIndent - 1;
@@ -27,18 +27,18 @@ local function prepareShaftLayer()
     currentLogIndent = currentLogIndent + 1;
 
     turn(left);
-    move(forward);
+    moveWithDig(forward);
     turn(left);
     move(back);
 
-    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
 --    placeItem(forward, REDWIRE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     move(back);
-    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    move(down);
+    placeItem(forward, LADDER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    moveWithDig(down);
     placeLight(TORCH_SLOT);
 
     currentLogIndent = currentLogIndent - 1;

@@ -18,11 +18,11 @@ local function prepareStation(radius, height)
 
     for i = 1, 4 do
         for i = 1,(radius - 2) do
-            move(forward);
+            moveWithDig(forward);
             placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         end;
 
-        move(forward);
+        moveWithDig(forward);
         moveWithDig(down);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(right);
@@ -31,47 +31,47 @@ local function prepareStation(radius, height)
         placeItem(forward, REDSTONE_TORCH_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(left);
         placeItem(forward, CONNECTOR_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-        move(up);
-        placeItem(down, ENGINE_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        moveWithDig(up);
+        placeItem(down, ENGINE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(right);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(left);
-        move(forward, 2);
+        moveWithDig(forward, 2);
         turn(right);
         placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-        move(up);
+        moveWithDig(up);
         turn(left);
-        move(forward);
+        moveWithDig(forward);
         turn(right);
         placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         move(back);
-        placeItem(forward, TORCH_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        placeItem(forward, TORCH_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
         move(back, (radius - 2));
         turn(right);
-        move(forward, 2);
-        move(down);
+        moveWithDig(forward, 2);
+        moveWithDig(down);
     end;
     placeItem(down, ONE_WAY_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     for i = 1,(height - 3) do
-        move(up);
-        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        moveWithDig(up);
+        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     end;
     placeItem(up, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
-    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     turn(right);
-    move(forward);
+    moveWithDig(forward);
     moveWithDig(up);
     for i = 1,(height - 2) do
         placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-        move(down);
-        placeItem(up, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        moveWithDig(down);
+        placeItem(up, LADDER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     end;
     placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
-    placeItem(forward, LADDER_SLOT, OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    placeItem(forward, LADDER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareStation()", currentLogIndent);
@@ -85,9 +85,9 @@ local function moveToStartingPosition(radius, height)
 
     move(back, (radius - 1));
     turn(right);
-    move(forward, (radius - 1));
+    moveWithDig(forward, (radius - 1));
     turn(left);
-    move(down, (height - 3));
+    moveWithDig(down, (height - 3));
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToStartingPosition()", currentLogIndent);
 end
