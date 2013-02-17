@@ -35,10 +35,10 @@ height = tonumber(height);
 log (fine, "Entering BUILD_MINE(shaftDepth=".. depth ..", stationRadius".. radius ..", stationHeight=".. height ..")");
 currentLogIndent = currentLogIndent + 1;
 
-shell.run("digShaft", depth);
-shell.run("prepareShaft", depth);
-shell.run("digStation", radius, height);
-shell.run("prepareStation", radius, height);
+shell.run({}, "digShaft", depth);
+shell.run({}, "prepareShaft", depth);
+shell.run({}, "digStation", radius, height);
+shell.run({}, "prepareStation", radius, height);
 
 currentLogIndent = currentLogIndent - 1;
 log (fine, "Exiting BUILD_MINE()");
