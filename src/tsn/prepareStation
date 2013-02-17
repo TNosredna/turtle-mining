@@ -29,7 +29,10 @@ local function prepareStation(radius, height)
         turn(right);
         moveWithDig(forward);
         turn(left);
-        placeItem(forward, REDSTONE_TORCH_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+        moveWithDig(forward, 1);
+        dig(forward);
+        moveWithDig(back, 1);
+        placeItem(forward, REDSTONE_TORCH_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         turn(left);
         placeItem(forward, CONNECTOR_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         moveWithDig(up);

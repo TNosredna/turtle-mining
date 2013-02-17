@@ -64,7 +64,7 @@
       <file leaf-file-name="prepareStation" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="25" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.51754385">
+            <state line="33" column="27" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.48245615">
               <folding />
             </state>
           </provider>
@@ -118,7 +118,7 @@
       <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="156" selection-start="3119" selection-end="3119" vertical-scroll-proportion="-23.807692">
+            <state line="64" column="61" selection-start="1818" selection-end="1818" vertical-scroll-proportion="-5.923077">
               <folding />
             </state>
           </provider>
@@ -1241,7 +1241,11 @@
       <created>1361082436753</created>
       <updated>1361082436754</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361083442674</created>
+      <updated>1361083442674</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1472,14 +1476,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="156" selection-start="3119" selection-end="3119" vertical-scroll-proportion="-23.807692">
+        <state line="64" column="61" selection-start="1818" selection-end="1818" vertical-scroll-proportion="-5.923077">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="25" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.51754385">
+        <state line="33" column="27" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.48245615">
           <folding />
         </state>
       </provider>
