@@ -54,18 +54,18 @@ local function prepareStation(radius, height)
         moveWithDig(down);
     end;
     placeItem(down, ONE_WAY_PIPE_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    for i = 1,(height - 3) do
-        moveWithDig(up);
-        placeItem(down, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    moveWithDig(up, height - 2);
+    for i = 1,(height - 2) do
+        move(down);
+        placeItem(up, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     end;
-    placeItem(up, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
     placeItem(forward, TRANSPORT_PIPE_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
 
     turn(right);
     moveWithDig(forward);
-    moveWithDig(up);
-    for i = 1,(height - 2) do
+    moveWithDig(up, height - 1);
+    for i = 1,(height - 1) do
         placeItem(forward, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
         moveWithDig(down);
         placeItem(up, LADDER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);

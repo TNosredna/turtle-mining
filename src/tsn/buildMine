@@ -5,21 +5,6 @@
 
 
 -- START OF LOCAL SCRIPT
-local function moveToTopOfShaft(depth)
-    log (fine, "Entering moveToTopOfShaft(depth=".. depth ..")");
-    currentLogIndent = currentLogIndent + 1;
-
-    for i=1, depth do
-        move(up);
-    end;
-    if (depth % 2 ~= 0) then
-        turn(right);
-    end;
-
-    currentLogIndent = currentLogIndent - 1;
-    log (fine, "Exiting moveToTopOfShaft()");
-end;
-
 fs.delete(logFileName);
 print ("How many blocks down should the station roof be located? (Y - 14 is normal)");
 local depth = io.read();

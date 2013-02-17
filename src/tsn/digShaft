@@ -42,9 +42,6 @@ local function digMineShaft(depth, turnDirection)
         if (i==1) then placeItem(up, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION); end;
     end;
 
-    move(up, depth);
-    placeItem(forward, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting digMineShaft()", currentLogIndent);
 end;

@@ -60,6 +60,22 @@ local function prepareShaft(height)
     log (fine, "Exiting prepareShaft()");
 end;
 
+local function moveToTopOfShaft(height)
+    log (fine, "Entering moveToTopOfShaft(depth=".. height ..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    move(up, height);
+
+    if (height % 2 ~= 0) then
+        turn(right);
+    end;
+
+    placeItem(forward, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting moveToTopOfShaft()");
+end;
+
 if (height == nil or height=="") then
     fs.delete(logFileName);
     print ("What is the height of the shaft? (X - 14 is normal)");
@@ -70,6 +86,7 @@ end;
 log (fine, "Entering PREPARE_SHAFT(height="..height..")");
 currentLogIndent = currentLogIndent + 1;
 
+moveToTopOfShaft(height);
 prepareShaft(height);
 
 currentLogIndent = currentLogIndent - 1;
