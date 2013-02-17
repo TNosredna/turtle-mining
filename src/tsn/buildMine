@@ -37,7 +37,7 @@ log (fine, "Entering BUILD_MINE(shaftDepth=".. depth ..", stationRadius".. radiu
 currentLogIndent = currentLogIndent + 1;
 
 shell.run("digShaft", depth, currentLogIndent);
-shell.run("prepareShaft", depth), currentLogIndent;
+shell.run("prepareShaft", depth, currentLogIndent);
 shell.run("digStation", radius, height, currentLogIndent);
 shell.run("prepareStation", radius, height, currentLogIndent);
 
