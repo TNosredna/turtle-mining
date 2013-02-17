@@ -8,6 +8,7 @@
 local args={...};
 local radius = args[1] or nil;
 local height = args[2] or nil;
+local currentLogIndent = args[3] or nil;
 
 local function prepareStation(radius, height)
     local radius = radius;
