@@ -100,7 +100,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="12" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.44444445">
+            <state line="58" column="16" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.6052632">
               <folding />
             </state>
           </provider>
@@ -1285,7 +1285,11 @@
       <created>1361229367079</created>
       <updated>1361229367079</updated>
     </task>
-    <option name="localTasksCounter" value="199" />
+    <task id="LOCAL-00199" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361229852976</created>
+      <updated>1361229852976</updated>
+    </task>
+    <option name="localTasksCounter" value="200" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1525,7 +1529,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="12" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.44444445">
+        <state line="58" column="16" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.6052632">
           <folding />
         </state>
       </provider>
