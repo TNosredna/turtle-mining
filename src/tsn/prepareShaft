@@ -18,7 +18,6 @@ local function prepareTopOfShaft()
     placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     turn(right);
     placeItem(forward, LADDER_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    moveWithDig(down);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareTopOfShaft()");
@@ -28,6 +27,8 @@ local function prepareShaftLayer()
     log (fine, "Entering prepareShaftLayer()");
     currentLogIndent = currentLogIndent + 1;
 
+    placeLight(TORCH_SLOT);
+    moveWithDig(down);
     turn(left);
     moveWithDig(forward);
     turn(left);
@@ -40,15 +41,13 @@ local function prepareShaftLayer()
     turn(right);
     move(back);
     placeItem(forward, LADDER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    moveWithDig(down);
-    placeLight(TORCH_SLOT);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareShaftLayer()");
 end;
 
 local function prepareShaft(height)
-    local height = height - 1;
+    local height = height;
     log (fine, "Entering prepareShaft(height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
