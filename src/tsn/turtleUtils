@@ -1,77 +1,77 @@
-local up = "up";
-local down = "down";
-local forward = "forward";
-local right = "right";
-local left = "left";
-local back = "back";
-local southFacing = 0;
-local westFacing = 90;
-local northFacing = 180;
-local eastFacing = 270;
-local rightFacing = 90;
-local leftFacing = -90;
-local forwardMoving = 1;
-local backwardsMoving = -1;
-local upMoving = 1;
-local downMoving = -1;
-local noMoving = 0;
+up = "up";
+down = "down";
+forward = "forward";
+right = "right";
+left = "left";
+back = "back";
+southFacing = 0;
+westFacing = 90;
+northFacing = 180;
+eastFacing = 270;
+rightFacing = 90;
+leftFacing = -90;
+forwardMoving = 1;
+backwardsMoving = -1;
+upMoving = 1;
+downMoving = -1;
+noMoving = 0;
 
-local OVERFLOW = true;
-local NO_OVERFLOW = false;
-local COMPARE = true;
-local NO_COMPARE = false;
-local DETECT = true;
-local NO_DETECT = false;
-local ANCHOR_PROTECTION = true;
-local NO_ANCHOR_PROTECTION = false;
-local SUCCESS = true;
-local FAILURE = false;
+OVERFLOW = true;
+NO_OVERFLOW = false;
+COMPARE = true;
+NO_COMPARE = false;
+DETECT = true;
+NO_DETECT = false;
+ANCHOR_PROTECTION = true;
+NO_ANCHOR_PROTECTION = false;
+SUCCESS = true;
+FAILURE = false;
 
-local blockAlreadyPresent = 1;
-local notEnoughInventory = 2;
+blockAlreadyPresent = 1;
+notEnoughInventory = 2;
 
-local error = 0;
-local coarse = 1;
-local fine = 2;
-local debug = 3;
-local fineDebug = 4;
+error = 0;
+coarse = 1;
+fine = 2;
+debug = 3;
+fineDebug = 4;
 
-local currentSlotNum = 1;
+currentSlotNum = 1;
 
-local logFileName = os.getComputerLabel()..".log";
-local xzyFileName = os.getComputerLabel().."-xzy.txt";
+logFileName = os.getComputerLabel()..".log";
+xzyFileName = os.getComputerLabel().."-xzy.txt";
 
-local currentLogLevel = debug;
-local currentLogIndent = 0;
+currentLogLevel = debug;
+currentLogIndent = 0;
 
-local currentX = 0;
-local currentZ = 0;
-local currentY = 0;
-local currentFacing = 0;
+currentX = 0;
+currentZ = 0;
+currentY = 0;
+currentFacing = 0;
 
-local lightThreshold = 6;
-local lastLightX = 0;
-local lastLightZ = 0;
-local lastLightY = 0;
+lightThreshold = 6;
+lastLightX = 0;
+lastLightZ = 0;
+lastLightY = 0;
 
 --WALL_FILLER_SLOT=1            -- 64 stack Cobblestone (id=4) [EXTRA]
 --TRANSPORT_PIPE_SLOT=2         -- 64 stack Stone Transport Pipe (id=4308) [EXTRA]
 --STATION_WALL_FILLER_SLOT=3    -- 64 stack Glass (id=20)  [EXTRA]
-local WALL_FILLER_SLOT=4;             -- 64 stack Cobblestone (id=4)
-local TRANSPORT_PIPE_SLOT=5;          -- 64 stack Stone Transport Pipe (id=4308)
-local LADDER_SLOT=6;                  -- 64 stack Wood Ladder (id=65)
-local ONE_WAY_PIPE_SLOT=7;            -- 1 stack Iron Transport Pipe (id=4309)
-local STATION_WALL_FILLER_SLOT=8;     -- 64 stack Glass (id=20)
-local STATION_FLOOR_FILLER_SLOT=9;    -- 64 stack Glass (id=20)
-local STATION_ROOF_FILLER_SLOT=10;    -- 64 stack Glass (id=20)
-local TORCH_SLOT=11;                  -- 64 stack Torch (id=50)
-local CONNECTOR_PIPE_SLOT=12;         -- 4 stack Wood Transport Pipe (id=4306)
-local CHEST_SLOT=13;                  -- 13 stack Chest (id=54)
-local REDSTONE_TORCH_SLOT=14;         -- 4 stack Redstone Torch (id=76)
-local ENGINE_SLOT=15;                 -- 4 stack Redstone Engine (id=506)
-local BUCKET_SLOT=16;                 -- 1 stack Water Bucket (id=326)
+WALL_FILLER_SLOT=4;             -- 64 stack Cobblestone (id=4)
+TRANSPORT_PIPE_SLOT=5;          -- 64 stack Stone Transport Pipe (id=4308)
+LADDER_SLOT=6;                  -- 64 stack Wood Ladder (id=65)
+ONE_WAY_PIPE_SLOT=7;            -- 1 stack Iron Transport Pipe (id=4309)
+STATION_WALL_FILLER_SLOT=8;     -- 64 stack Glass (id=20)
+STATION_FLOOR_FILLER_SLOT=9;    -- 64 stack Glass (id=20)
+STATION_ROOF_FILLER_SLOT=10;    -- 64 stack Glass (id=20)
+TORCH_SLOT=11;                  -- 64 stack Torch (id=50)
+CONNECTOR_PIPE_SLOT=12;         -- 4 stack Wood Transport Pipe (id=4306)
+CHEST_SLOT=13;                  -- 13 stack Chest (id=54)
+REDSTONE_TORCH_SLOT=14;         -- 4 stack Redstone Torch (id=76)
+ENGINE_SLOT=15;                 -- 4 stack Redstone Engine (id=506)
+BUCKET_SLOT=16;                 -- 1 stack Water Bucket (id=326)
 
-local FUEL_SLOT=16;
+FUEL_SLOT=16;
 
 local function log(logLevel, line, currentLogIndent)
     local currentLogIndent = currentLogIndent or 0;
