@@ -129,7 +129,7 @@ end;
 
 local function readXZY()
     local file = fs.open(xzyFileName, "r"); -- "r" opens the file for reading
-    if (file == nil) then
+    if (not file) then
         file.close();
         writeXZY();
         return;
