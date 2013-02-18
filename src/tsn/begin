@@ -30,7 +30,7 @@ term.clear();
 -- Ignore Material -> left chest -- 1 Stone,1 Cobblestone,1 Dirt,1 Gravel
 -- Mined Material -> down chest
 
---shell.run({}, "digTunnels","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
---shell.run({}, "digShafts","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
---shell.run({}, "digOres","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
-shell.run({}, "digAndExcavate","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+--shell.run("digTunnels","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+--shell.run("digShafts","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+--shell.run("digOres","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");
+shell.run("digAndExcavate","-numT","1","-numS","6","-numL","4","-rad","4","-numIgnore","4","-torchS","right","-ignoreS","left","-itemD","down","-fuelS","up","-sides","-oneChest","-torches");

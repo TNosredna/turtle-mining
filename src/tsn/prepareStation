@@ -30,6 +30,7 @@ local function prepareStation(radius, height)
         moveWithDig(forward);
         turn(left);
         moveWithDig(forward, 1);
+        placeItem(down, WALL_FILLER_SLOT, OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION)
         dig(forward);
         moveWithDig(back, 1);
         placeItem(forward, REDSTONE_TORCH_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
