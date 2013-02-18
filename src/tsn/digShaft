@@ -45,6 +45,24 @@ local function digMineShaft(depth, turnDirection)
     log (fine, "Exiting digMineShaft()", currentLogIndent);
 end;
 
+local function moveToTopOfShaft(height)
+    local height = height;
+    log (fine, "Entering moveToTopOfShaft(depth="..height..")");
+    currentLogIndent = currentLogIndent + 1;
+
+    move(up, height - 1);
+
+    if (height % 2 ~= 0) then
+        turn(right);
+    end;
+
+    placeItem(forward, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    move(up, height);
+
+    currentLogIndent = currentLogIndent - 1;
+    log (fine, "Exiting moveToTopOfShaft()");
+end;
+
 if (depth==nil or depth=="") then
     fs.delete(logFileName);
     print ("How many blocks down should the station roof be located? (depth - 13 is normal)");
@@ -56,6 +74,7 @@ log (fine, "Entering DIG_SHAFT(depth="..depth..")");
 currentLogIndent = currentLogIndent + 1;
 
 digMineShaft(depth, right);
+moveToTopOfShaft(height);
 
 currentLogIndent = currentLogIndent - 1;
 log (fine, "Exiting DIG_SHAFT()");
