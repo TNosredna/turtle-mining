@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareShaft" afterPath="$PROJECT_DIR$/src/tsn/prepareShaft" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digShaft" afterPath="$PROJECT_DIR$/src/tsn/digShaft" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,7 +100,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="16" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.61988306">
+            <state line="59" column="14" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.6052632">
               <folding />
             </state>
           </provider>
@@ -178,8 +178,8 @@
         <option value="$PROJECT_DIR$/src/tsn/update" />
         <option value="$PROJECT_DIR$/src/tsn/downloadScripts" />
         <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
-        <option value="$PROJECT_DIR$/src/tsn/digShaft" />
         <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
+        <option value="$PROJECT_DIR$/src/tsn/digShaft" />
       </list>
     </option>
   </component>
@@ -1293,7 +1293,11 @@
       <created>1361230143879</created>
       <updated>1361230143879</updated>
     </task>
-    <option name="localTasksCounter" value="201" />
+    <task id="LOCAL-00201" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361230539598</created>
+      <updated>1361230539598</updated>
+    </task>
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1533,7 +1537,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="16" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.61988306">
+        <state line="59" column="14" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.6052632">
           <folding />
         </state>
       </provider>

@@ -50,14 +50,14 @@ local function moveToTopOfShaft(depth)
     log (fine, "Entering moveToTopOfShaft(depth=".. depth ..")");
     currentLogIndent = currentLogIndent + 1;
 
-    move(up, depth - 1);
+    move(up, depth - 2);
 
     if (depth % 2 ~= 0) then
         turn(right);
     end;
 
     placeItem(up, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    move(up);
+    move(up, 2);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToTopOfShaft()");
