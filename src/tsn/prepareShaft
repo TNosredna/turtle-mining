@@ -62,7 +62,8 @@ local function prepareShaft(height)
 end;
 
 local function moveToTopOfShaft(height)
-    log (fine, "Entering moveToTopOfShaft(depth=".. height ..")");
+    local height = height;
+    log (fine, "Entering moveToTopOfShaft(depth="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
     move(up, height);

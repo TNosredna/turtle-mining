@@ -35,11 +35,10 @@ local function digMineShaft(depth, turnDirection)
     log (fine, "Entering digMineShaft(depth="..depth..", turnDirection="..turnDirection..")", currentLogIndent);
     currentLogIndent = currentLogIndent + 1;
 
-    moveWithDig(down)
     for i=1,depth do
-        turnDirection = digShaftLayer(turnDirection);
         moveWithDig(down);
-        if (i==1) then placeItem(up, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION); end;
+        turnDirection = digShaftLayer(turnDirection);
+        if (i==2) then placeItem(up, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION); end;
     end;
 
     currentLogIndent = currentLogIndent - 1;
