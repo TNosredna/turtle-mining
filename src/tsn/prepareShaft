@@ -47,7 +47,7 @@ local function prepareShaftLayer()
 end;
 
 local function prepareShaft(height)
-    local height = height;
+    local height = height - 1;    -- it places the ladder on the wall to the right if it's at floor level, so we stop one before
     log (fine, "Entering prepareShaft(height="..height..")");
     currentLogIndent = currentLogIndent + 1;
 
