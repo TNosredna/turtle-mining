@@ -15,33 +15,6 @@ local function generateLatestFile(filename)
                 lineToInject = contentToInject.readLine();
                 if (lineToInject == nil) then break end;
                 file.writeLine(lineToInject);
-            until false;
-            fileToInject.close();
-            line = content.readLine();
-        end;
-        if (line == nil) then break end;
-        file.writeLine(line);
-    until false;
-    file.close();
-end
-
-local function generateLatestFile(filename)
-    local content = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. filename);
-    print("Creating file: " .. filename);
-    local file = fs.open(filename, "w"); -- opens file, all previous data is erased
-    local line;
-    repeat
-        line = content.readLine();
-        if (line ~= nil and string.len(line) > 9 and string.sub(line,1,9) == "--INJECT/") then
-            local filenameToInject = string.sub(line,10);
-            local fileToInject = fs.open(filenameToInject, "w"); -- opens file, all previous data is erased
-            local contentToInject = http.get("https://raw.github.com/TNosredna/turtle-mining/master/src/tsn/" .. filenameToInject);
-            print("Injecting file: " .. filenameToInject .. " into file: " .. filename);
-            local lineToInject;
-            repeat
-                lineToInject = contentToInject.readLine();
-                if (lineToInject == nil) then break end;
-                file.writeLine(lineToInject);
                 until false;
             fileToInject.close();
             line = content.readLine();
@@ -53,6 +26,8 @@ local function generateLatestFile(filename)
 end
 
 local function downloadScripts()
+    generateLatestFile("update");
+    generateLatestFile("updateTurtle");
     generateLatestFile("testStub");
     generateLatestFile("buildMine");
     generateLatestFile("digShaft");
@@ -68,33 +43,6 @@ end
 
 downloadScripts();
 
-if (os.getComputerLabel() == nil or os.getComputerLabel() == "") then
-    print ("What should we name our adorable little elf?");
-    local label = io.read();
-    os.setComputerLabel(label);
-end;
-
-print ("What direction is " .. os.getComputerLabel() .. " facing right now? (South=0, West=90, North=180, East=270");
-local currentFacing = io.read();
-print ("What is " .. os.getComputerLabel() .. "'s X coordinate right now? (Whole number only)");
-local currentX = io.read();
-print ("What is " .. os.getComputerLabel() .. "'s Z coordinate right now? (Whole number only)");
-local currentZ = io.read();
-print ("What is " .. os.getComputerLabel() .. "'s Y coordinate right now? (Display's Y - 1 (Whole number only))");
-local currentY = io.read();
-
-xzyFileName = os.getComputerLabel().."-xzy.txt";
-function writeXZY()
-    local filename = xzyFileName;
-    local file = fs.open(filename, "w"); -- "w" opens the file, erasing all existing contents
-    file.writeLine(currentX);
-    file.writeLine(currentZ);
-    file.writeLine(currentY);
-    file.writeLine(currentFacing);
-    file.close();
-end;
-
 term.clear();
 term.setCursorPos(1, 1);
-
-writeXZY();
+shell.run("updateTurtle");
