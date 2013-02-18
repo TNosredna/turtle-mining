@@ -7,7 +7,7 @@
 -- START OF LOCAL SCRIPT
 local args={...};
 local height = args[1] or nil;
-currentLogIndent = args[2];
+currentLogIndent = args[2] or 0;
 
 local function prepareTopOfShaft()
     log (fine, "Entering prepareTopOfShaft()");

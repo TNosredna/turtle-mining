@@ -7,7 +7,7 @@
 -- START OF LOCAL SCRIPT
 local args={...};
 local depth = args[1] or nil;
-currentLogIndent = args[2];
+currentLogIndent = args[2] or 0;
 
 local function digShaftLayer(turnDirection)
     local turnDirection = turnDirection or right;
