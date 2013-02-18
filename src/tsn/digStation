@@ -10,7 +10,7 @@
 local args={...};
 local radius = args[1] or nil;
 local height = args[2] or nil;
-currentLogIndent = args[3];
+currentLogIndent = args[3] or 0;
 
 local function floorAndCeilingColumn(currentUpDownDirection, height)
     local currentUpDownDirection = currentUpDownDirection;
