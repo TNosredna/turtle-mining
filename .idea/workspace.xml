@@ -61,10 +61,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="prepareStation" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="31" selection-start="339" selection-end="339" vertical-scroll-proportion="0.14619882">
+            <state line="101" column="57" selection-start="3938" selection-end="3938" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -88,10 +88,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digStation" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="digStation" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="31" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+            <state line="184" column="57" selection-start="7659" selection-end="7659" vertical-scroll-proportion="0.57058245">
               <folding />
             </state>
           </provider>
@@ -1305,7 +1305,11 @@
       <created>1361231286652</created>
       <updated>1361231286652</updated>
     </task>
-    <option name="localTasksCounter" value="204" />
+    <task id="LOCAL-00204" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361231342504</created>
+      <updated>1361231342505</updated>
+    </task>
+    <option name="localTasksCounter" value="205" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1536,16 +1540,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="31" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+        <state line="101" column="57" selection-start="3938" selection-end="3938" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="31" selection-start="339" selection-end="339" vertical-scroll-proportion="0.14619882">
+        <state line="184" column="57" selection-start="7659" selection-end="7659" vertical-scroll-proportion="0.57058245">
           <folding />
         </state>
       </provider>
