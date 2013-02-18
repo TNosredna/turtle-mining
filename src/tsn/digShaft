@@ -45,19 +45,19 @@ local function digMineShaft(depth, turnDirection)
     log (fine, "Exiting digMineShaft()", currentLogIndent);
 end;
 
-local function moveToTopOfShaft(height)
-    local height = height;
-    log (fine, "Entering moveToTopOfShaft(depth="..height..")");
+local function moveToTopOfShaft(depth)
+    local depth = depth;
+    log (fine, "Entering moveToTopOfShaft(depth=".. depth ..")");
     currentLogIndent = currentLogIndent + 1;
 
-    move(up, height - 1);
+    move(up, depth - 1);
 
-    if (height % 2 ~= 0) then
+    if (depth % 2 ~= 0) then
         turn(right);
     end;
 
     placeItem(forward, BUCKET_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    move(up, height);
+    move(up, depth);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting moveToTopOfShaft()");
@@ -74,7 +74,7 @@ log (fine, "Entering DIG_SHAFT(depth="..depth..")");
 currentLogIndent = currentLogIndent + 1;
 
 digMineShaft(depth, right);
-moveToTopOfShaft(height);
+moveToTopOfShaft(depth);
 
 currentLogIndent = currentLogIndent - 1;
 log (fine, "Exiting DIG_SHAFT()");

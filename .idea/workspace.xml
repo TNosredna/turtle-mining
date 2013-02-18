@@ -4,7 +4,6 @@
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digShaft" afterPath="$PROJECT_DIR$/src/tsn/digShaft" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareShaft" afterPath="$PROJECT_DIR$/src/tsn/prepareShaft" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,7 +100,7 @@
       <file leaf-file-name="digShaft" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="0" selection-start="2458" selection-end="2458" vertical-scroll-proportion="0.88304096">
+            <state line="48" column="12" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.44444445">
               <folding />
             </state>
           </provider>
@@ -1282,7 +1281,11 @@
       <created>1361229086185</created>
       <updated>1361229086185</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
+      <created>1361229367079</created>
+      <updated>1361229367079</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1522,7 +1525,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="2458" selection-end="2458" vertical-scroll-proportion="0.88304096">
+        <state line="48" column="12" selection-start="1672" selection-end="1672" vertical-scroll-proportion="0.44444445">
           <folding />
         </state>
       </provider>
