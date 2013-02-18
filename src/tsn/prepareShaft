@@ -16,8 +16,9 @@ local function prepareTopOfShaft()
     placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
     move(back);
     placeItem(forward, CHEST_SLOT, NO_OVERFLOW, COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
-    moveWithDig(down);
     turn(right);
+    placeItem(forward, LADDER_SLOT, NO_OVERFLOW, NO_COMPARE, NO_DETECT, NO_ANCHOR_PROTECTION);
+    moveWithDig(down);
 
     currentLogIndent = currentLogIndent - 1;
     log (fine, "Exiting prepareTopOfShaft()");
