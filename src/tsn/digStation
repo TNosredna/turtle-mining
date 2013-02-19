@@ -182,7 +182,7 @@ end
 
 if ((radius == nil) or (height == nil)) then
     fs.delete(logFileName);
-    print ("What is the desired radius of the station? (4 is normal)");
+    print ("What is the desired radius of the station? (3 is normal)");
     radius = io.read();
     radius = tonumber(radius);
 

@@ -10,7 +10,7 @@ print ("How many blocks down should the station roof be located? (Y - 14 is norm
 local depth = io.read();
 depth = tonumber(depth);
 
-print ("What radius of station should be built? (4 is normal)");
+print ("What radius of station should be built? (3 is normal)");
 local radius = io.read();
 radius = tonumber(radius);
 
