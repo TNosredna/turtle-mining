@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/begin" afterPath="$PROJECT_DIR$/src/tsn/begin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/buildMine" afterPath="$PROJECT_DIR$/src/tsn/buildMine" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/digStation" afterPath="$PROJECT_DIR$/src/tsn/digStation" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tsn/prepareStation" afterPath="$PROJECT_DIR$/src/tsn/prepareStation" />
     </list>
     <ignored path="turtle-mining.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="bcae6e89-dd34-40e8-b28c-6459112096f4" time="1362509587632" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +23,8 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -32,6 +32,7 @@
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -47,6 +48,7 @@
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -59,102 +61,12 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="turtle-mining" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="prepareStation" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="57" selection-start="3938" selection-end="3938" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prepareShaft" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="128" selection-start="1714" selection-end="1714" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="buildMine" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="50" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="digStation" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="57" selection-start="7659" selection-end="7659" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="digShaft" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="14" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="turtleUtils" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="427" column="22" selection-start="19419" selection-end="19419" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="begin" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/tsn/begin">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="72" selection-start="1784" selection-end="1784" vertical-scroll-proportion="0.5116959">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="downloadScripts" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/downloadScripts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="updateTurtle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/updateTurtle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tsn/update">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="201" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -164,35 +76,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="changedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/src/tsn/beginMining" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareTurtleStation" />
-        <option value="$PROJECT_DIR$/src/tsn/turtleUtils.lua" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareFullShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/testStub" />
-        <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/src/tsn/turtleUtils" />
-        <option value="$PROJECT_DIR$/src/tsn/updateTurtle" />
-        <option value="$PROJECT_DIR$/src/tsn/update" />
-        <option value="$PROJECT_DIR$/src/tsn/downloadScripts" />
-        <option value="$PROJECT_DIR$/src/tsn/digShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareShaft" />
-        <option value="$PROJECT_DIR$/src/tsn/prepareStation" />
-        <option value="$PROJECT_DIR$/src/tsn/digStation" />
-        <option value="$PROJECT_DIR$/src/tsn/buildMine" />
-        <option value="$PROJECT_DIR$/src/tsn/begin" />
-      </list>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="2" />
-    <option name="y" value="23" />
+    <option name="y" value="22" />
     <option name="width" value="1920" />
     <option name="height" value="1174" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -210,30 +105,16 @@
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
-      <showMembers ProjectPane="true" />
+      <showMembers />
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource ProjectPane="true" />
-      <autoscrollFromSource ProjectPane="false" />
+      <autoscrollFromSource />
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="turtle-mining" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="turtle-mining" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -256,24 +137,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="turtle-mining" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tsn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="digStation" />
-              <option name="myItemType" value="com.sylvanaar.idea.Lua.projectView.nodes.LuaFileTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -286,58 +149,28 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="179" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="180" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="179" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/sample/mlg" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="185" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="978" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="978" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="185" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="180" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FullScreen" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="preferences.fileTypes" />
+    <property name="FullScreen" value="false" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.searchVisible" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/tsn" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
       <option name="PROGRAM_PARAMETERS" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -345,29 +178,7 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -395,12 +206,20 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -415,12 +234,7 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -441,12 +255,7 @@
       </option>
       <envs />
       <patterns />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="#com.sylvanaar.idea.Lua.run.LuaConfigurationType" factoryName="Lua Script">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -458,12 +267,7 @@
       <module name="turtle-mining" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <list size="0" />
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -493,863 +297,39 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="bcae6e89-dd34-40e8-b28c-6459112096f4" name="Default" comment="" />
-      <created>1358367957242</created>
-      <updated>1358367957242</updated>
+      <created>1362452858727</created>
+      <updated>1362452858727</updated>
     </task>
-    <task id="LOCAL-00001" summary="cleaning up old cruft">
-      <created>1358368008734</created>
-      <updated>1358368008734</updated>
-    </task>
-    <task id="LOCAL-00002" summary="cleaning up old cruft">
-      <created>1358368170474</created>
-      <updated>1358368170474</updated>
-    </task>
-    <task id="LOCAL-00003" summary="cleaning up old cruft">
-      <created>1358368180415</created>
-      <updated>1358368180415</updated>
-    </task>
-    <task id="LOCAL-00004" summary="cleaning up old cruft">
-      <created>1358368201662</created>
-      <updated>1358368201662</updated>
-    </task>
-    <task id="LOCAL-00005" summary="cleaning up old cruft">
-      <created>1358368215592</created>
-      <updated>1358368215592</updated>
-    </task>
-    <task id="LOCAL-00006" summary="cleaning up old cruft">
-      <created>1358368221847</created>
-      <updated>1358368221847</updated>
-    </task>
-    <task id="LOCAL-00007" summary="cleaning up old cruft">
-      <created>1358368229048</created>
-      <updated>1358368229048</updated>
-    </task>
-    <task id="LOCAL-00008" summary="cleaning up old cruft">
-      <created>1358368233963</created>
-      <updated>1358368233963</updated>
-    </task>
-    <task id="LOCAL-00009" summary="cleaning up old cruft">
-      <created>1358368276770</created>
-      <updated>1358368276770</updated>
-    </task>
-    <task id="LOCAL-00010" summary="cleaning up old cruft">
-      <created>1358368322138</created>
-      <updated>1358368322138</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Improved the update process so it gets the code from GitHub instead of pastebin.">
-      <created>1358372871681</created>
-      <updated>1358372871681</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Testing script">
-      <created>1358393625016</created>
-      <updated>1358393625016</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Fixed bugs in torch placement and logic">
-      <created>1358407374025</created>
-      <updated>1358407374025</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Fixed bugs in torch placement and logic">
-      <created>1358411219808</created>
-      <updated>1358411219808</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Fixed bugs in torch placement and logic">
-      <created>1358411646471</created>
-      <updated>1358411646471</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Fixed bugs in torch placement and logic">
-      <created>1358492821396</created>
-      <updated>1358492821396</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Fixed bugs in torch placement and logic">
-      <created>1358524598779</created>
-      <updated>1358524598779</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Created draft 1 of digTurtleStation">
-      <created>1358551621579</created>
-      <updated>1358551621579</updated>
-    </task>
-    <task id="LOCAL-00019" summary="adding debug file to help">
-      <created>1358633485697</created>
-      <updated>1358633485697</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Fixed a logic bug in the retry logic">
-      <created>1358635794899</created>
-      <updated>1358635794899</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Fixed a logic bug in the retry logic">
-      <created>1358637681798</created>
-      <updated>1358637681798</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Fixed a logic bug in the retry logic">
-      <created>1358640782166</created>
-      <updated>1358640782166</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Fixed a logic bug in the retry logic">
-      <created>1358723230962</created>
-      <updated>1358723230962</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Fixed a logic bug in the retry logic">
-      <created>1358723423918</created>
-      <updated>1358723423918</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Fixed a logic bug in the retry logic">
-      <created>1358738387304</created>
-      <updated>1358738387304</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Fixed a logic bug in the retry logic">
-      <created>1358739966794</created>
-      <updated>1358739966794</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Fixed a logic bug in the retry logic">
-      <created>1358740529687</created>
-      <updated>1358740529687</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Fixed a logic bug in the retry logic">
-      <created>1358740646330</created>
-      <updated>1358740646330</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Fixed a logic bug in the retry logic">
-      <created>1358742009718</created>
-      <updated>1358742009718</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Testing various logic errors">
-      <created>1358744200345</created>
-      <updated>1358744200345</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Testing various logic errors">
-      <created>1358745788909</created>
-      <updated>1358745788909</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Testing various logic errors">
-      <created>1358746079439</created>
-      <updated>1358746079439</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Testing various logic errors">
-      <created>1358746615792</created>
-      <updated>1358746615792</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Testing various logic errors">
-      <created>1358747525054</created>
-      <updated>1358747525054</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Testing various logic errors">
-      <created>1358749014186</created>
-      <updated>1358749014186</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Testing various logic errors">
-      <created>1358752608571</created>
-      <updated>1358752608571</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Testing various logic errors">
-      <created>1358752970533</created>
-      <updated>1358752970533</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Testing various logic errors">
-      <created>1358753381742</created>
-      <updated>1358753381742</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Testing various logic errors">
-      <created>1358753477923</created>
-      <updated>1358753477923</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Testing various logic errors">
-      <created>1358753649704</created>
-      <updated>1358753649704</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Testing various logic errors">
-      <created>1358753835283</created>
-      <updated>1358753835283</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Testing various logic errors">
-      <created>1358754776285</created>
-      <updated>1358754776285</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Testing various logic errors">
-      <created>1358756062322</created>
-      <updated>1358756062322</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Testing various logic errors">
-      <created>1358756218360</created>
-      <updated>1358756218361</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Testing various logic errors">
-      <created>1358756312520</created>
-      <updated>1358756312520</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Testing various logic errors">
-      <created>1358756651874</created>
-      <updated>1358756651874</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Testing various logic errors">
-      <created>1358756739324</created>
-      <updated>1358756739324</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Testing various logic errors">
-      <created>1358756930196</created>
-      <updated>1358756930196</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Testing various logic errors">
-      <created>1358757376100</created>
-      <updated>1358757376100</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Testing various logic errors">
-      <created>1358757681334</created>
-      <updated>1358757681334</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Ironed out the bugs in digStation">
-      <created>1358758078206</created>
-      <updated>1358758078206</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Ironed out the bugs in digStation">
-      <created>1358758268703</created>
-      <updated>1358758268703</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Ironed out the bugs in digStation">
-      <created>1358804622749</created>
-      <updated>1358804622750</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Ironed out the bugs in digStation">
-      <created>1358804898554</created>
-      <updated>1358804898554</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Ironed out the bugs in digStation">
-      <created>1358804971429</created>
-      <updated>1358804971429</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Ironed out the bugs in digStation">
-      <created>1358805040538</created>
-      <updated>1358805040539</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Ironed out the bugs in digStation">
-      <created>1358805166122</created>
-      <updated>1358805166123</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Ironed out the bugs in digStation">
-      <created>1358805251839</created>
-      <updated>1358805251840</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Ironed out the bugs in digStation">
-      <created>1358805433019</created>
-      <updated>1358805433019</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Ironed out the bugs in digStation">
-      <created>1358805788778</created>
-      <updated>1358805788778</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Debugging">
-      <created>1358806412463</created>
-      <updated>1358806412463</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Debugging">
-      <created>1358807245414</created>
-      <updated>1358807245415</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Debugging">
-      <created>1358808337205</created>
-      <updated>1358808337205</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Debugging">
-      <created>1358808981680</created>
-      <updated>1358808981680</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Debugging">
-      <created>1358809627050</created>
-      <updated>1358809627051</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Debugging">
-      <created>1358809969633</created>
-      <updated>1358809969634</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Debugging">
-      <created>1358810142037</created>
-      <updated>1358810142038</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Debugging">
-      <created>1358810620278</created>
-      <updated>1358810620278</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Debugging">
-      <created>1358811199184</created>
-      <updated>1358811199184</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Debugging">
-      <created>1358811550500</created>
-      <updated>1358811550500</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Debugging">
-      <created>1358812322549</created>
-      <updated>1358812322549</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Debugging">
-      <created>1358813225974</created>
-      <updated>1358813225974</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Debugging">
-      <created>1358815297682</created>
-      <updated>1358815297682</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Debugging">
-      <created>1358815615684</created>
-      <updated>1358815615685</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Debugging">
-      <created>1358816064320</created>
-      <updated>1358816064320</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Debugging">
-      <created>1358835120100</created>
-      <updated>1358835120100</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Debugging">
-      <created>1358836407711</created>
-      <updated>1358836407711</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Debugging">
-      <created>1358836552381</created>
-      <updated>1358836552382</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Debugging">
-      <created>1358838024437</created>
-      <updated>1358838024438</updated>
-    </task>
-    <task id="LOCAL-00080" summary="Debugging">
-      <created>1358838211557</created>
-      <updated>1358838211558</updated>
-    </task>
-    <task id="LOCAL-00081" summary="Debugging">
-      <created>1358838476188</created>
-      <updated>1358838476189</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Debugging">
-      <created>1358839232768</created>
-      <updated>1358839232769</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Worked from end to end">
-      <created>1358841084394</created>
-      <updated>1358841084394</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Refactoring the code">
-      <created>1359156282893</created>
-      <updated>1359156282893</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Refactoring the code">
-      <created>1359160247886</created>
-      <updated>1359160247886</updated>
-    </task>
-    <task id="LOCAL-00086" summary="Finished engineering digShaft, not tested&#10;Added prepare station&#10;">
-      <created>1359181685346</created>
-      <updated>1359181685346</updated>
-    </task>
-    <task id="LOCAL-00087" summary="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;">
-      <created>1359232396222</created>
-      <updated>1359232396222</updated>
-    </task>
-    <task id="LOCAL-00088" summary="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;">
-      <created>1359237958739</created>
-      <updated>1359237958739</updated>
-    </task>
-    <task id="LOCAL-00089" summary="Fixed bug in including external source">
-      <created>1359239191095</created>
-      <updated>1359239191095</updated>
-    </task>
-    <task id="LOCAL-00090" summary="Tweaking and testing">
-      <created>1359239320114</created>
-      <updated>1359239320114</updated>
-    </task>
-    <task id="LOCAL-00091" summary="Tweaking and testing">
-      <created>1359240212498</created>
-      <updated>1359240212499</updated>
-    </task>
-    <task id="LOCAL-00092" summary="Tweaking and testing">
-      <created>1359241431394</created>
-      <updated>1359241431394</updated>
-    </task>
-    <task id="LOCAL-00093" summary="Tweaking and testing">
-      <created>1359241549850</created>
-      <updated>1359241549850</updated>
-    </task>
-    <task id="LOCAL-00094" summary="Tweaking and testing">
-      <created>1359241860913</created>
-      <updated>1359241860913</updated>
-    </task>
-    <task id="LOCAL-00095" summary="Tweaking and testing">
-      <created>1359242060463</created>
-      <updated>1359242060463</updated>
-    </task>
-    <task id="LOCAL-00096" summary="Tweaking and testing">
-      <created>1359243211772</created>
-      <updated>1359243211772</updated>
-    </task>
-    <task id="LOCAL-00097" summary="Tweaking and testing">
-      <created>1359243482724</created>
-      <updated>1359243482725</updated>
-    </task>
-    <task id="LOCAL-00098" summary="Tweaking and testing">
-      <created>1359243805821</created>
-      <updated>1359243805821</updated>
-    </task>
-    <task id="LOCAL-00099" summary="Tweaking and testing">
-      <created>1359244106465</created>
-      <updated>1359244106466</updated>
-    </task>
-    <task id="LOCAL-00100" summary="Tweaking and testing">
-      <created>1359244202471</created>
-      <updated>1359244202471</updated>
-    </task>
-    <task id="LOCAL-00101" summary="Tweaking and testing">
-      <created>1359244769655</created>
-      <updated>1359244769655</updated>
-    </task>
-    <task id="LOCAL-00102" summary="Tweaking and testing">
-      <created>1359245376328</created>
-      <updated>1359245376328</updated>
-    </task>
-    <task id="LOCAL-00103" summary="Tweaking and testing">
-      <created>1359246110237</created>
-      <updated>1359246110237</updated>
-    </task>
-    <task id="LOCAL-00104" summary="Tweaking and testing">
-      <created>1359247367505</created>
-      <updated>1359247367505</updated>
-    </task>
-    <task id="LOCAL-00105" summary="Tweaking and testing">
-      <created>1359248531537</created>
-      <updated>1359248531537</updated>
-    </task>
-    <task id="LOCAL-00106" summary="Tweaking and testing">
-      <created>1359249664825</created>
-      <updated>1359249664825</updated>
-    </task>
-    <task id="LOCAL-00107" summary="Tweaking and testing">
-      <created>1359251549894</created>
-      <updated>1359251549894</updated>
-    </task>
-    <task id="LOCAL-00108" summary="Tweaking and testing">
-      <created>1359251720661</created>
-      <updated>1359251720662</updated>
-    </task>
-    <task id="LOCAL-00109" summary="Tweaking and testing">
-      <created>1359252008947</created>
-      <updated>1359252008947</updated>
-    </task>
-    <task id="LOCAL-00110" summary="Tweaking and testing">
-      <created>1359252117508</created>
-      <updated>1359252117508</updated>
-    </task>
-    <task id="LOCAL-00111" summary="Tweaking and testing">
-      <created>1359252646387</created>
-      <updated>1359252646387</updated>
-    </task>
-    <task id="LOCAL-00112" summary="Tweaking and testing">
-      <created>1359253014721</created>
-      <updated>1359253014721</updated>
-    </task>
-    <task id="LOCAL-00113" summary="Tweaking and testing">
-      <created>1359253144125</created>
-      <updated>1359253144126</updated>
-    </task>
-    <task id="LOCAL-00114" summary="Tweaking and testing">
-      <created>1359253458751</created>
-      <updated>1359253458751</updated>
-    </task>
-    <task id="LOCAL-00115" summary="Tweaking and testing">
-      <created>1359255571942</created>
-      <updated>1359255571942</updated>
-    </task>
-    <task id="LOCAL-00116" summary="Tweaking and testing">
-      <created>1359256304525</created>
-      <updated>1359256304525</updated>
-    </task>
-    <task id="LOCAL-00117" summary="Tweaking and testing">
-      <created>1359257104170</created>
-      <updated>1359257104170</updated>
-    </task>
-    <task id="LOCAL-00118" summary="Tweaking and testing">
-      <created>1359257239236</created>
-      <updated>1359257239236</updated>
-    </task>
-    <task id="LOCAL-00119" summary="Tweaking and testing">
-      <created>1359267405210</created>
-      <updated>1359267405210</updated>
-    </task>
-    <task id="LOCAL-00120" summary="Tweaking and testing">
-      <created>1359272124640</created>
-      <updated>1359272124640</updated>
-    </task>
-    <task id="LOCAL-00121" summary="Changed the logic after realizing I could just use a water block at the top of the shaft to protect against lava issues.">
-      <created>1359347995255</created>
-      <updated>1359347995255</updated>
-    </task>
-    <task id="LOCAL-00122" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359933610865</created>
-      <updated>1359933610866</updated>
-    </task>
-    <task id="LOCAL-00123" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359933955293</created>
-      <updated>1359933955293</updated>
-    </task>
-    <task id="LOCAL-00124" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359936422644</created>
-      <updated>1359936422645</updated>
-    </task>
-    <task id="LOCAL-00125" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359936717204</created>
-      <updated>1359936717204</updated>
-    </task>
-    <task id="LOCAL-00126" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359943479268</created>
-      <updated>1359943479269</updated>
-    </task>
-    <task id="LOCAL-00127" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359944146577</created>
-      <updated>1359944146577</updated>
-    </task>
-    <task id="LOCAL-00128" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359944955691</created>
-      <updated>1359944955691</updated>
-    </task>
-    <task id="LOCAL-00129" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359946985058</created>
-      <updated>1359946985059</updated>
-    </task>
-    <task id="LOCAL-00130" summary="changing direction so it injects the util class in order to gain access to local variables like log level etc.">
-      <created>1359950219673</created>
-      <updated>1359950219674</updated>
-    </task>
-    <task id="LOCAL-00131" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360551470744</created>
-      <updated>1360551470744</updated>
-    </task>
-    <task id="LOCAL-00132" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360552587487</created>
-      <updated>1360552587488</updated>
-    </task>
-    <task id="LOCAL-00133" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360555497266</created>
-      <updated>1360555497266</updated>
-    </task>
-    <task id="LOCAL-00134" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360560531401</created>
-      <updated>1360560531402</updated>
-    </task>
-    <task id="LOCAL-00135" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360560633655</created>
-      <updated>1360560633656</updated>
-    </task>
-    <task id="LOCAL-00136" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360560942732</created>
-      <updated>1360560942733</updated>
-    </task>
-    <task id="LOCAL-00137" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360561711278</created>
-      <updated>1360561711279</updated>
-    </task>
-    <task id="LOCAL-00138" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360562633724</created>
-      <updated>1360562633725</updated>
-    </task>
-    <task id="LOCAL-00139" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360564014920</created>
-      <updated>1360564014921</updated>
-    </task>
-    <task id="LOCAL-00140" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360566524738</created>
-      <updated>1360566524741</updated>
-    </task>
-    <task id="LOCAL-00141" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360566912336</created>
-      <updated>1360566912336</updated>
-    </task>
-    <task id="LOCAL-00142" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360700428604</created>
-      <updated>1360700428604</updated>
-    </task>
-    <task id="LOCAL-00143" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360713128545</created>
-      <updated>1360713128546</updated>
-    </task>
-    <task id="LOCAL-00144" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360722407599</created>
-      <updated>1360722407599</updated>
-    </task>
-    <task id="LOCAL-00145" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360729361004</created>
-      <updated>1360729361004</updated>
-    </task>
-    <task id="LOCAL-00146" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360729781888</created>
-      <updated>1360729781888</updated>
-    </task>
-    <task id="LOCAL-00147" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360733837364</created>
-      <updated>1360733837365</updated>
-    </task>
-    <task id="LOCAL-00148" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360734058905</created>
-      <updated>1360734058906</updated>
-    </task>
-    <task id="LOCAL-00149" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360734341660</created>
-      <updated>1360734341661</updated>
-    </task>
-    <task id="LOCAL-00150" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360735675682</created>
-      <updated>1360735675682</updated>
-    </task>
-    <task id="LOCAL-00151" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360735974330</created>
-      <updated>1360735974330</updated>
-    </task>
-    <task id="LOCAL-00152" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360738152573</created>
-      <updated>1360738152573</updated>
-    </task>
-    <task id="LOCAL-00153" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360781962012</created>
-      <updated>1360781962013</updated>
-    </task>
-    <task id="LOCAL-00154" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360797974257</created>
-      <updated>1360797974258</updated>
-    </task>
-    <task id="LOCAL-00155" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360798418538</created>
-      <updated>1360798418538</updated>
-    </task>
-    <task id="LOCAL-00156" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360799903736</created>
-      <updated>1360799903737</updated>
-    </task>
-    <task id="LOCAL-00157" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360810860765</created>
-      <updated>1360810860766</updated>
-    </task>
-    <task id="LOCAL-00158" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360815070739</created>
-      <updated>1360815070740</updated>
-    </task>
-    <task id="LOCAL-00159" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360816169227</created>
-      <updated>1360816169227</updated>
-    </task>
-    <task id="LOCAL-00160" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360816823192</created>
-      <updated>1360816823193</updated>
-    </task>
-    <task id="LOCAL-00161" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360817023331</created>
-      <updated>1360817023332</updated>
-    </task>
-    <task id="LOCAL-00162" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360818311405</created>
-      <updated>1360818311405</updated>
-    </task>
-    <task id="LOCAL-00163" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360818758137</created>
-      <updated>1360818758138</updated>
-    </task>
-    <task id="LOCAL-00164" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360869160815</created>
-      <updated>1360869160815</updated>
-    </task>
-    <task id="LOCAL-00165" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1360989158510</created>
-      <updated>1360989158510</updated>
-    </task>
-    <task id="LOCAL-00166" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361000358382</created>
-      <updated>1361000358383</updated>
-    </task>
-    <task id="LOCAL-00167" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361001040085</created>
-      <updated>1361001040086</updated>
-    </task>
-    <task id="LOCAL-00168" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361002205173</created>
-      <updated>1361002205173</updated>
-    </task>
-    <task id="LOCAL-00169" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361033669530</created>
-      <updated>1361033669531</updated>
-    </task>
-    <task id="LOCAL-00170" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361043498501</created>
-      <updated>1361043498502</updated>
-    </task>
-    <task id="LOCAL-00171" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361043934684</created>
-      <updated>1361043934685</updated>
-    </task>
-    <task id="LOCAL-00172" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361043995817</created>
-      <updated>1361043995818</updated>
-    </task>
-    <task id="LOCAL-00173" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361044587490</created>
-      <updated>1361044587491</updated>
-    </task>
-    <task id="LOCAL-00174" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361044941014</created>
-      <updated>1361044941015</updated>
-    </task>
-    <task id="LOCAL-00175" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361045404020</created>
-      <updated>1361045404020</updated>
-    </task>
-    <task id="LOCAL-00176" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361069484969</created>
-      <updated>1361069484969</updated>
-    </task>
-    <task id="LOCAL-00177" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361075119891</created>
-      <updated>1361075119891</updated>
-    </task>
-    <task id="LOCAL-00178" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361076984038</created>
-      <updated>1361076984038</updated>
-    </task>
-    <task id="LOCAL-00179" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361077443837</created>
-      <updated>1361077443837</updated>
-    </task>
-    <task id="LOCAL-00180" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361077744310</created>
-      <updated>1361077744311</updated>
-    </task>
-    <task id="LOCAL-00181" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361077873588</created>
-      <updated>1361077873588</updated>
-    </task>
-    <task id="LOCAL-00182" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361077929475</created>
-      <updated>1361077929476</updated>
-    </task>
-    <task id="LOCAL-00183" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361078076678</created>
-      <updated>1361078076678</updated>
-    </task>
-    <task id="LOCAL-00184" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361079425352</created>
-      <updated>1361079425352</updated>
-    </task>
-    <task id="LOCAL-00185" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361082436753</created>
-      <updated>1361082436754</updated>
-    </task>
-    <task id="LOCAL-00186" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361083442674</created>
-      <updated>1361083442674</updated>
-    </task>
-    <task id="LOCAL-00187" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361084724406</created>
-      <updated>1361084724407</updated>
-    </task>
-    <task id="LOCAL-00188" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361166345157</created>
-      <updated>1361166345158</updated>
-    </task>
-    <task id="LOCAL-00189" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361166713008</created>
-      <updated>1361166713009</updated>
-    </task>
-    <task id="LOCAL-00190" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361222472726</created>
-      <updated>1361222472726</updated>
-    </task>
-    <task id="LOCAL-00191" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361222737333</created>
-      <updated>1361222737334</updated>
-    </task>
-    <task id="LOCAL-00192" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361223623797</created>
-      <updated>1361223623797</updated>
-    </task>
-    <task id="LOCAL-00193" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361224213024</created>
-      <updated>1361224213024</updated>
-    </task>
-    <task id="LOCAL-00194" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361226208527</created>
-      <updated>1361226208527</updated>
-    </task>
-    <task id="LOCAL-00195" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361227745025</created>
-      <updated>1361227745025</updated>
-    </task>
-    <task id="LOCAL-00196" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361228847995</created>
-      <updated>1361228847995</updated>
-    </task>
-    <task id="LOCAL-00197" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361229086185</created>
-      <updated>1361229086185</updated>
-    </task>
-    <task id="LOCAL-00198" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361229367079</created>
-      <updated>1361229367079</updated>
-    </task>
-    <task id="LOCAL-00199" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361229852976</created>
-      <updated>1361229852976</updated>
-    </task>
-    <task id="LOCAL-00200" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361230143879</created>
-      <updated>1361230143879</updated>
-    </task>
-    <task id="LOCAL-00201" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361230539598</created>
-      <updated>1361230539598</updated>
-    </task>
-    <task id="LOCAL-00202" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361230654944</created>
-      <updated>1361230654944</updated>
-    </task>
-    <task id="LOCAL-00203" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361231286652</created>
-      <updated>1361231286652</updated>
-    </task>
-    <task id="LOCAL-00204" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361231342504</created>
-      <updated>1361231342505</updated>
-    </task>
-    <task id="LOCAL-00205" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361231387252</created>
-      <updated>1361231387252</updated>
-    </task>
-    <task id="LOCAL-00206" summary="adding shaft prep.  had a big issue with recursion or memory leak or something.">
-      <created>1361231989816</created>
-      <updated>1361231989816</updated>
-    </task>
-    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="23" width="1920" height="1174" extended-state="0" />
-    <editor active="true" />
+    <frame x="2" y="22" width="1920" height="1174" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.67236465" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28822985" sideWeight="0.97039896" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1693376" sideWeight="0.7150997" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3004269" sideWeight="0.9962929" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28490028" sideWeight="0.96260685" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1358,8 +338,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
       <value>
         <are-packages-shown value="false" />
@@ -1375,7 +355,6 @@
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
-    <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
@@ -1385,12 +364,14 @@
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding shaft prep.  had a big issue with recursion or memory leak or something." />
+    <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1403,106 +384,59 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="cleaning up old cruft" />
-    <MESSAGE value="Improved the update process so it gets the code from GitHub instead of pastebin." />
-    <MESSAGE value="Testing script" />
-    <MESSAGE value="Fixed bugs in torch placement and logic" />
-    <MESSAGE value="Created draft 1 of digTurtleStation" />
-    <MESSAGE value="adding debug file to help" />
-    <MESSAGE value="Fixed a logic bug in the retry logic" />
-    <MESSAGE value="Testing various logic errors" />
-    <MESSAGE value="Ironed out the bugs in digStation" />
-    <MESSAGE value="Debugging" />
-    <MESSAGE value="Worked from end to end" />
-    <MESSAGE value="Refactoring the code" />
-    <MESSAGE value="Finished engineering digShaft, not tested&#10;Added prepare station&#10;" />
-    <MESSAGE value="Added more testing code to remaining scripts&#10;Added a little logic around prompting for variable values&#10;" />
-    <MESSAGE value="Fixed bug in including external source" />
-    <MESSAGE value="Tweaking and testing" />
-    <MESSAGE value="Changed the logic after realizing I could just use a water block at the top of the shaft to protect against lava issues." />
-    <MESSAGE value="changing direction so it injects the util class in order to gain access to local variables like log level etc." />
-    <MESSAGE value="adding shaft prep.  had a big issue with recursion or memory leak or something." />
-  </component>
-  <component name="VssConfiguration">
-    <option name="CLIENT_PATH" value="" />
-    <option name="SRCSAFEINI_PATH" value="" />
-    <option name="USER_NAME" value="" />
-    <option name="PWD" value="" />
-    <CheckoutOptions>
-      <option name="COMMENT" value="" />
-      <option name="DO_NOT_GET_LATEST_VERSION" value="false" />
-      <option name="REPLACE_WRITABLE" value="false" />
-      <option name="RECURSIVE" value="false" />
-    </CheckoutOptions>
-    <CheckinOptions>
-      <option name="COMMENT" value="" />
-      <option name="KEEP_CHECKED_OUT" value="false" />
-      <option name="RECURSIVE" value="false" />
-    </CheckinOptions>
-    <AddOptions>
-      <option name="STORE_ONLY_LATEST_VERSION" value="false" />
-      <option name="CHECK_OUT_IMMEDIATELY" value="false" />
-    </AddOptions>
-    <UndocheckoutOptions>
-      <option name="MAKE_WRITABLE" value="false" />
-      <option name="REPLACE_LOCAL_COPY" value="2" />
-      <option name="RECURSIVE" value="false" />
-    </UndocheckoutOptions>
-    <GetOptions>
-      <option name="REPLACE_WRITABLE" value="0" />
-      <option name="MAKE_WRITABLE" value="false" />
-      <option name="ANSWER_NEGATIVELY" value="false" />
-      <option name="ANSWER_POSITIVELY" value="false" />
-      <option name="RECURSIVE" value="false" />
-      <option name="VERSION" />
-    </GetOptions>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Desktop/sample/digvertshaft">
+    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="7" column="31" selection-start="233" selection-end="233" vertical-scroll-proportion="0.103652515" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/sample/9x9">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/sample/mlg/api_digOres">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="194" selection-end="228" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/sample/mlg/api_sharedFunctions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="468" column="33" selection-start="15828" selection-end="15828" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="119" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="30" selection-start="228" selection-end="228" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/updateTurtle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/downloadScripts">
+    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/testStub">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleListen">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtlePing">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tsn/updateTurtle">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -1511,56 +445,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tsn/update">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="201" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digShaft">
+    <entry file="file://$PROJECT_DIR$/turtle-mining.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="14" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareShaft">
+    <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="128" selection-start="1714" selection-end="1714" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/turtleUtils">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="427" column="22" selection-start="19419" selection-end="19419" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/prepareStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="57" selection-start="3938" selection-end="3938" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/digStation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="57" selection-start="7659" selection-end="7659" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/buildMine">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="50" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsn/begin">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="72" selection-start="1784" selection-end="1784" vertical-scroll-proportion="0.5116959">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1594,7 +493,6 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>groovy-2.0.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1606,7 +504,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Lua 5.1.5</last-edited>
+          <last-edited>LuaJ</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1619,19 +517,6 @@
       <state key="ModuleStructureConfigurable.UI">
         <settings>
           <last-edited>turtle-mining</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

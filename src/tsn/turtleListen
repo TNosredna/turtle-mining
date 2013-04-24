@@ -1,0 +1,4 @@
+rednet.open("right")
+local id = rednet.receive() --Wait for a message
+local x,y,z = gps.locate(1)
+rednet.send(id, "I am at: "..x..","..y..","..z)

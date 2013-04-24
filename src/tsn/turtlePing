@@ -1,0 +1,16 @@
+local args={...};
+local modemSide = args[1] or "top";
+
+rednet.open(modemSide)
+rednet.broadcast(" ")
+repeat
+  local id, message,distance = rednet.receive(2)
+  if (id==nil) then id="nil"; end;
+  if (message==nil) then message="nil"; end;
+  if (distance==nil) then distance="nil"; end;
+  local filename = "turtleMessage.log";
+  local file = fs.open(filename, "a");
+  file.writeLine("turtleId="..id..", message="..message..", from="..distance);
+  file.close();
+  print(id,": ",message,", from ",distance)
+until not id

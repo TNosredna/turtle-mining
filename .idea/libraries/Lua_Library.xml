@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Lua Library">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/tsn/turtleUtils" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
